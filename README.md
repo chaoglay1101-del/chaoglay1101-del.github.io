@@ -232,6 +232,12 @@ and `og:url` values point at `https://chaoglay1101-del.github.io/` rather than a
 sub-path. Every tracked file in this folder is published, including `tools/`,
 `README.md` and the portrait, so nothing private belongs here.
 
+One trap worth remembering: **`git subtree` only publishes tracked files**, and
+`.gitignore` can silently swallow a site file. That is exactly what happened to
+`robots.txt`, which the blanket `*.txt` rule excluded until a negation rule was
+added. `git ls-tree -r site-publish --name-only` before the push is the check
+that catches it, and it also caught nothing else, so keep running it.
+
 ## Social sharing
 
 Each page carries Open Graph and Twitter meta tags so link previews render a
@@ -244,6 +250,28 @@ shared link always shows the English title, description, and image even though
 the page itself switches to Chinese in the browser. That is why the share card
 and its `og:image:alt` text stay in English.
 
-After changing anything that affects the preview, re-run the LinkedIn
-[Post Inspector](https://www.linkedin.com/post-inspector/) on the URL so the
-cached card is refreshed.
+### Search engines
+
+Three files support discovery, and all three are verified live:
+
+| File | Purpose |
+| --- | --- |
+| `robots.txt` | Allows crawling, points to the sitemap, and keeps `/tools/` and the README out of search results. |
+| `sitemap.xml` | Lists the four content pages with a `lastmod` date. |
+| `404.html` | A branded not-found page with links back to the content. Uses absolute asset paths because a 404 is served for URLs at any depth. |
+
+The site is indexable by default: there is no `noindex` on the content pages (the
+404 page sets it deliberately), and the canonical URLs already point at the live
+origin.
+
+Two things are outside this repository and speed indexing up:
+
+1. **Google Search Console** — verify ownership of
+   `https://chaoglay1101-del.github.io/` and submit `sitemap.xml`. Without a
+   submission, a brand-new site waits for Google to find it, which can take weeks.
+2. **Inbound links** — a link from a LinkedIn profile or post is the strongest
+   discovery signal available here.
+
+Request re-crawling in Search Console after changing titles or descriptions, and
+use the LinkedIn [Post Inspector](https://www.linkedin.com/post-inspector/) after
+changing anything that affects the preview card.
