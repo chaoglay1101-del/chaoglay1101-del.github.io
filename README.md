@@ -86,25 +86,26 @@ uv run python 10_Personal_Website/tools/_list_i18n.py     # every key in documen
 `_check_i18n.py` and `_preview_zh.py` write reports into `tools/` (ignored by
 git) and exit non-zero when something needs attention.
 
-## Still to fill in
+## Personal details
 
-The pages carry visible placeholders for personal details, styled with the
-`.todo` class. Replace each one and delete its `class="todo"` (and its `title`
-tooltip) so the accent styling disappears:
+Personal details are filled in, and anything that reads as a sentence rather
+than a proper noun is wired into the translation workflow:
 
-| Page | Placeholder | Where |
-| --- | --- | --- |
-| `cv.html` | city and country | hero contact line |
-| `cv.html` | email address | hero contact line |
-| `cv.html` | degree dates, classification, average | Education card |
-| `cv.html` | internship dates, office location | Professional experience |
-| `cv.html` | one measurable internship outcome | Professional experience (`cv.exp.b3`) |
-| `index.html` | internship dates, one or two deliverables | Experience timeline (`home.exp.e3b2`) |
-| `index.html` | degree dates, classification, average | Education card |
-| `index.html` | email link | Contact card, see the `TODO` comment for the `mailto:` pattern |
+| Detail | Where |
+| --- | --- |
+| Location: New Taipei City, Taiwan | `cv.html` hero, key `cv.contact.location` |
+| Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `cv.html` hero and the `index.html` contact card |
+| Degree: September 2024 – July 2026, Upper Second-Class Honours (2:1), GPA 3.25, ceremony November 2026 | `cv.html` (`cv.edu.meta`), `index.html` (`home.edu.dates`, `home.edu.record`) |
+| Internship: Tax Advisory Intern, Evershine CPAs Firm, Philippines tax incentive applications, SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
 
-If any of those lines should also read in Chinese, move the text into a
-`data-i18n-*` attribute and follow the workflow above.
+One placeholder is outstanding: the **internship dates**, still marked with the
+`.todo` class in `cv.html` and `index.html`. Once the dates are known, replace
+`dates to add`, then delete `class="todo"` and its `title` tooltip so the accent
+styling disappears. If the dates should read in Chinese as well, move them into
+a `data-i18n-*` attribute and follow the workflow above.
+
+The firm's office location was not supplied, so both pages list the firm name
+only rather than guessing a city.
 
 ## Publishing
 
