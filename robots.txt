@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Maintenance scripts and the repository README are public but are not part of
+# the website, so keep them out of search results.
+Disallow: /tools/
+Disallow: /README.md
+
+Sitemap: https://chaoglay1101-del.github.io/sitemap.xml
