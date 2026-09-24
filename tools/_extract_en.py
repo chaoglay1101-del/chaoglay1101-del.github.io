@@ -9,7 +9,7 @@ import pathlib
 import re
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html")
+PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
 
 # Regexes that capture opening tag + its inner text up to the matching close.
 TEXT_RE = re.compile(r'<(?P<tag>\w+)(?P<attrs>[^>]*?)\bdata-i18n="(?P<key>[^"]+)"(?P<rest>[^>]*)>(?P<inner>.*?)</(?P=tag)>', re.DOTALL)

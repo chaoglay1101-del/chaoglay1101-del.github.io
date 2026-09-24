@@ -16,7 +16,7 @@ import pathlib
 import re
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html")
+PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
 
 REF_RE = re.compile(r'(?:href|src)="([^"]+)"')
 EXTERNAL_RE = re.compile(r"^(?:[a-zA-Z][a-zA-Z0-9+.-]*:|//|#)")
@@ -115,6 +115,10 @@ for name in PAGES:
         if EXTERNAL_RE.match(ref):
             continue
         target = ref.split("#", 1)[0].split("?", 1)[0]
+        # A leading slash means "relative to the site root", which is how the
+        # 404 page has to reference its assets at any URL depth.
+        if target.startswith("/"):
+            target = target.lstrip("/")
         if target and not (SITE / target).exists():
             missing.append(ref)
     print("  local files missing:", missing or "none")
@@ -129,7 +133,10 @@ for name in PAGES:
         if url.startswith(SITE_ORIGIN) and not (SITE / url[len(SITE_ORIGIN) :]).exists()
     ]
     wrong_origin = [url for url in social if not url.startswith(SITE_ORIGIN)]
-    print("  social image:", ", ".join(sorted(set(social))) or "MISSING")
+    # Shareable pages advertise themselves with og:title; the 404 page sets
+    # noindex instead and deliberately has no preview card.
+    shareable = 'property="og:title"' in text
+    print("  social image:", ", ".join(sorted(set(social))) or ("MISSING" if shareable else "n/a (noindex page)"))
     if broken_social:
         print("  social image not on disk:", broken_social)
     if wrong_origin:
@@ -140,7 +147,7 @@ for name in PAGES:
         or unclosed
         or text.count("??")
         or missing
-        or not social
+        or (shareable and not social)
         or broken_social
         or wrong_origin
         or absent
