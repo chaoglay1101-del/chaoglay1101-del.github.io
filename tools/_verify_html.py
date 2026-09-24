@@ -15,6 +15,24 @@ PAGES = ("index.html", "research.html", "cv.html")
 REF_RE = re.compile(r'(?:href|src)="([^"]+)"')
 EXTERNAL_RE = re.compile(r"^(?:[a-zA-Z][a-zA-Z0-9+.-]*:|//|#)")
 
+# Social-sharing images are absolute URLs, so they need a separate check: the
+# path after the site origin must resolve to a file, or link previews break
+# silently (social scrapers never report the error to anyone).
+META_TAG_RE = re.compile(r"<meta\b[^>]*>")
+SOCIAL_IMAGE_RE = re.compile(r'(?:property="og:image"|name="twitter:image")')
+CONTENT_RE = re.compile(r'content="([^"]*)"')
+SITE_ORIGIN = "https://chaoglay1101-del.github.io/"
+
+
+def social_images(text: str) -> list[str]:
+    found = []
+    for tag in META_TAG_RE.findall(text):
+        if SOCIAL_IMAGE_RE.search(tag):
+            match = CONTENT_RE.search(tag)
+            if match:
+                found.append(match.group(1))
+    return found
+
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input",
         "link", "meta", "param", "source", "track", "wbr"}
 
@@ -66,7 +84,28 @@ for name in PAGES:
             missing.append(ref)
     print("  local files missing:", missing or "none")
 
-    if parser.errors or unclosed or text.count("??") or missing:
+    social = social_images(text)
+    broken_social = [
+        url
+        for url in social
+        if url.startswith(SITE_ORIGIN) and not (SITE / url[len(SITE_ORIGIN) :]).exists()
+    ]
+    wrong_origin = [url for url in social if not url.startswith(SITE_ORIGIN)]
+    print("  social image:", ", ".join(sorted(set(social))) or "MISSING")
+    if broken_social:
+        print("  social image not on disk:", broken_social)
+    if wrong_origin:
+        print("  social image on an unexpected origin:", wrong_origin)
+
+    if (
+        parser.errors
+        or unclosed
+        or text.count("??")
+        or missing
+        or not social
+        or broken_social
+        or wrong_origin
+    ):
         problems += 1
 
 print("\nRESULT:", "ALL GOOD" if problems == 0 else f"{problems} page(s) with issues")

@@ -126,3 +126,19 @@ percentile or rank is ever obtained, use that figure and reword the line.
 The pages use canonical URLs on `https://chaoglay1101-del.github.io/`, so this
 folder is published as the root of that site rather than from a sub-path.
 `.nojekyll` is already present, which keeps GitHub Pages from running Jekyll.
+
+## Social sharing
+
+Each page carries Open Graph and Twitter meta tags so link previews render a
+card rather than a bare URL. `assets/img/og-image.png` is the 1200×630 share
+card; `_verify_html.py` checks that the `og:image` URL still resolves to a file
+on disk, because a broken preview fails silently everywhere.
+
+Note that social scrapers (LinkedIn, Slack, X) do **not** run JavaScript, so a
+shared link always shows the English title, description, and image even though
+the page itself switches to Chinese in the browser. That is why the share card
+and its `og:image:alt` text stay in English.
+
+After changing anything that affects the preview, re-run the LinkedIn
+[Post Inspector](https://www.linkedin.com/post-inspector/) on the URL so the
+cached card is refreshed.
