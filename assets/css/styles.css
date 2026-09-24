@@ -574,6 +574,18 @@ html[data-theme="dark"] .btn-primary {
   color: var(--ink);
 }
 
+/* --- External links ----------------------------------------------------- */
+
+/* Links that leave the site open in a new tab, so warn the reader instead of
+   letting the change of context come as a surprise. Suppressed when printing,
+   where the CV's own link handling takes over. */
+a[target="_blank"]::after {
+  content: "\2197";
+  margin-left: 0.18em;
+  font-size: 0.82em;
+  color: var(--muted);
+}
+
 /* --- Tables ------------------------------------------------------------- */
 
 .table-wrap {
@@ -992,6 +1004,10 @@ figcaption {
     content: " (" attr(href) ")";
     font-size: 0.82em;
     color: #333;
+  }
+
+  a[target="_blank"]::after {
+    content: none;
   }
 
   .grid {

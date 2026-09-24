@@ -20,7 +20,7 @@ import re
 import sys
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "research.html", "cv.html")
+PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html")
 SCRIPT = SITE / "assets" / "js" / "i18n.js"
 OUT = SITE / "tools" / "_zh_preview.txt"
 

@@ -15,11 +15,13 @@ follows the operating-system preference until the visitor chooses otherwise.
 ```text
 index.html                Home: about, research summary, results table, skills, work, education, contact
 research.html             Research: question, data, method, results, limitations, reproducibility, sources
-cv.html                   CV: profile, education, research, skills, experience, projects, notes
-assets/css/styles.css     Single stylesheet, light and dark themes, print styles for the CV
+cv.html                   CV: the complete record, profile through to notes
+cv-onepage.html           One-page CV for applications, built to print on a single A4 sheet
+assets/css/styles.css     Main stylesheet: light and dark themes, print styles
+assets/css/cv-print.css   Document layout and print geometry for cv-onepage.html
 assets/js/main.js         Theme toggle, language toggle, mobile navigation, print button, current year
 assets/js/i18n.js         Chinese strings (see "Editing copy" below)
-assets/img/               Favicon and the research-design diagram
+assets/img/               Favicon, the research-design diagram, and the social share card
 tools/                    Maintenance and validation scripts (not part of the published page)
 ```
 
@@ -120,6 +122,37 @@ range between the reported minimum and maximum, so it assumes marks are spread
 evenly across that range; it is not an observed cohort percentile rank. The copy
 says "of the … range" rather than "of the cohort" for that reason. If an actual
 percentile or rank is ever obtained, use that figure and reword the line.
+
+## The one-page CV
+
+`cv-onepage.html` is the version to send with an application. It is a separate
+page rather than a second print stylesheet because the two documents make
+opposite trade-offs: `cv.html` is the complete record, whereas this one has to
+fit on one sheet.
+
+The constraints are deliberate:
+
+- **One A4 page.** The content is sized to leave roughly 40 mm of slack, so
+  ordinary differences in printer margins or font metrics cannot push it onto a
+  second page. Confirm with Ctrl+P, keeping the scale at 100% and the margins at
+  their default.
+- **Applicant-tracking-system friendly.** Single column, no tables, no icons and
+  no artwork, because automated parsers read the text layer and some handle
+  layout badly.
+- **English by default.** Multinational employers normally expect an English CV,
+  so the HTML source is English, and the 中文 button still translates the page.
+- **Fixed light colours**, defined in `cv-print.css`, so a dark browser theme
+  cannot produce a dark CV.
+- **Share the PDF, not the URL.** Use "Save as PDF" on that page.
+
+## Linking
+
+Internal links (between the pages of this site) open in the same tab. Every
+external link carries `target="_blank"` and `rel="noopener noreferrer"`, so
+GitHub, LinkedIn and Tableau open in a new tab, and `styles.css` appends a small
+arrow marker so the change of context is not a surprise. `_verify_html.py`
+enforces both attributes, so a newly added external link cannot quietly regress.
+The arrow is suppressed in print.
 
 ## Publishing
 

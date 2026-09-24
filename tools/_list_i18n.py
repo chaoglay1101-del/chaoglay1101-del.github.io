@@ -5,7 +5,7 @@ import pathlib
 import re
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "research.html", "cv.html")
+PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html")
 
 key_re = re.compile(r'data-i18n(?:-html|-meta)?="([^"]+)"')
 attr_re = re.compile(r'data-i18n-attr="([^"]+)"')

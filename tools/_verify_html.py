@@ -1,8 +1,14 @@
-"""Validate the repaired pages: UTF-8, tags balanced, local files present.
+"""Validate the pages: UTF-8, tags balanced, local files present, links sane.
 
-Also checks the critical markup (the three header control buttons) and, since a
-missing ``assets/js/i18n.js`` once left the language toggle silently broken,
-that every local ``href``/``src`` reference resolves to a file on disk.
+Checks that matter for this site:
+
+* every local ``href``/``src`` resolves to a file on disk (a missing
+  ``assets/js/i18n.js`` once left the language toggle silently broken);
+* the ``og:image`` share card resolves, because a broken link preview fails
+  silently everywhere;
+* external links open in a new tab with ``rel="noopener"``;
+* the language and theme controls are present, and the navigation toggle is
+  present on pages that actually have a navigation menu.
 """
 
 import html.parser
@@ -10,10 +16,33 @@ import pathlib
 import re
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "research.html", "cv.html")
+PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html")
 
 REF_RE = re.compile(r'(?:href|src)="([^"]+)"')
 EXTERNAL_RE = re.compile(r"^(?:[a-zA-Z][a-zA-Z0-9+.-]*:|//|#)")
+ANCHOR_RE = re.compile(r"<a\b[^>]*>")
+LINK_TAG_RE = re.compile(r"<link\b[^>]*>")
+HREF_RE = re.compile(r'\bhref="([^"]*)"')
+NAV_RE = re.compile(r'<nav\b[^>]*class="[^"]*primary-nav')
+
+
+def external_link_problems(text: str) -> list[str]:
+    """External anchors must open in a new tab and drop the referrer."""
+    found = []
+    for tag in ANCHOR_RE.findall(text):
+        href = HREF_RE.search(tag)
+        if not href or not href.group(1).lower().startswith(("http://", "https://")):
+            continue
+        if 'target="_blank"' not in tag:
+            found.append(f"missing target=_blank: {href.group(1)}")
+        if not re.search(r'\brel="[^"]*\bnoopener\b', tag):
+            found.append(f"missing rel=noopener: {href.group(1)}")
+    return found
+
+
+def stray_target_problems(text: str) -> list[str]:
+    """target= belongs on anchors, never on <link> elements."""
+    return [tag for tag in LINK_TAG_RE.findall(text) if "target=" in tag]
 
 # Social-sharing images are absolute URLs, so they need a separate check: the
 # path after the site origin must resolve to a file, or link previews break
@@ -67,9 +96,15 @@ for name in PAGES:
     parser.feed(text)
     unclosed = [t for t in parser.stack if t not in ("html", "body")]
 
+    has_nav = bool(NAV_RE.search(text))
+    needed = ["toggle-lang", "toggle-theme"] + (["toggle-nav"] if has_nav else [])
+    absent = [action for action in needed if f'data-action="{action}"' not in text]
+    external = external_link_problems(text)
+    stray = stray_target_problems(text)
+
     print("=" * 60, name)
     print("  valid utf-8:", "yes")
-    print("  3 header buttons:", text.count('data-action="toggle-') == 3)
+    print("  header controls present:", not absent, f"({len(needed)} checked)")
     print("  '??' remaining:", text.count("??"))
     print("  parser errors:", parser.errors or "none")
     print("  unclosed tags:", unclosed or "none")
@@ -83,6 +118,9 @@ for name in PAGES:
         if target and not (SITE / target).exists():
             missing.append(ref)
     print("  local files missing:", missing or "none")
+    print("  external links:", f"{len(ANCHOR_RE.findall(text))} anchors, problems: {external or 'none'}")
+    if stray:
+        print("  <link> tags carrying target=:", stray)
 
     social = social_images(text)
     broken_social = [
@@ -105,6 +143,9 @@ for name in PAGES:
         or not social
         or broken_social
         or wrong_origin
+        or absent
+        or external
+        or stray
     ):
         problems += 1
 
