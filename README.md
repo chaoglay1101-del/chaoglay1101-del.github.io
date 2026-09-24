@@ -127,6 +127,25 @@ The pages use canonical URLs on `https://chaoglay1101-del.github.io/`, so this
 folder is published as the root of that site rather than from a sub-path.
 `.nojekyll` is already present, which keeps GitHub Pages from running Jekyll.
 
+### Deploying to the user site
+
+`https://chaoglay1101-del.github.io/` is the root of a separate repository named
+`chaoglay1101-del.github.io`. `git subtree` pushes this folder there without
+duplicating the source, so this repository stays the single source of truth:
+
+```powershell
+# one-off: point a remote at the published site repository
+git remote add site https://github.com/chaoglay1101-del/chaoglay1101-del.github.io.git
+
+# publish (and repeat for every update)
+git subtree push --prefix=10_Personal_Website site main
+```
+
+The folder has to land at the root of the user site, which is why the canonical
+and `og:url` values point at `https://chaoglay1101-del.github.io/` rather than a
+sub-path. Every tracked file in this folder is published, including `tools/` and
+this README; both are already public in the research repository.
+
 ## Social sharing
 
 Each page carries Open Graph and Twitter meta tags so link previews render a
