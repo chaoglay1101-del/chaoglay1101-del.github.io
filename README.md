@@ -96,16 +96,13 @@ than a proper noun is wired into the translation workflow:
 | Location: New Taipei City, Taiwan | `cv.html` hero, key `cv.contact.location` |
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `cv.html` hero and the `index.html` contact card |
 | Degree: September 2024 – July 2026, Upper Second-Class Honours (2:1), GPA 3.25, ceremony November 2026 | `cv.html` (`cv.edu.meta`), `index.html` (`home.edu.dates`, `home.edu.record`) |
-| Internship: Tax Advisory Intern, Evershine CPAs Firm, Philippines tax incentive applications, SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
+| Internship: Tax Advisory Intern, Evershine CPAs Firm, July – August 2025, Philippines tax incentive applications and SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
 
-One placeholder is outstanding: the **internship dates**, still marked with the
-`.todo` class in `cv.html` and `index.html`. Once the dates are known, replace
-`dates to add`, then delete `class="todo"` and its `title` tooltip so the accent
-styling disappears. If the dates should read in Chinese as well, move them into
-a `data-i18n-*` attribute and follow the workflow above.
-
-The firm's office location was not supplied, so both pages list the firm name
-only rather than guessing a city.
+Every placeholder has been filled, so the `.todo` marker class and its CSS have
+been removed. The firm's office location was not supplied, so both pages list the
+firm name only rather than guessing a city. If any of these details should change,
+edit the English text in the HTML and update the matching key in
+`assets/js/i18n.js`.
 
 ## Publishing
 

@@ -574,17 +574,6 @@ html[data-theme="dark"] .btn-primary {
   color: var(--ink);
 }
 
-/* --- Placeholder markers (remove the class once filled in) -------------- */
-
-.todo {
-  border-bottom: 2px dashed var(--warn);
-  background: var(--warn-soft);
-  border-radius: 3px;
-  padding: 0 0.22rem;
-  color: var(--ink);
-  cursor: help;
-}
-
 /* --- Tables ------------------------------------------------------------- */
 
 .table-wrap {
@@ -991,12 +980,6 @@ figcaption {
     content: " (" attr(href) ")";
     font-size: 0.82em;
     color: #333;
-  }
-
-  .todo {
-    border-bottom: 1px dashed #000;
-    background: none;
-    padding: 0;
   }
 
   .grid {
