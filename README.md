@@ -104,6 +104,23 @@ firm name only rather than guessing a city. If any of these details should chang
 edit the English text in the HTML and update the matching key in
 `assets/js/i18n.js`.
 
+### Assessed project marks
+
+Both assessed projects carry a highlighted mark line (`.timeline-grade` in
+`styles.css`), giving the score, the UK classification, the gap to the class
+average, and the position within the class mark range:
+
+| Project | Mark | Class average | Position in the class range |
+| --- | --- | --- | --- |
+| Research Project (Research Report) | 80/100 · First Class (1st) | 67, so +13 | top 8.6% of the 37.5–84 range |
+| Business Analytics (Singapore) | 70/100 · First Class (1st) | 63.7, so +6.3 | top 15.4% of the 37–76 range |
+
+Note what the position figure is and is not. It is the mark's place inside the
+range between the reported minimum and maximum, so it assumes marks are spread
+evenly across that range; it is not an observed cohort percentile rank. The copy
+says "of the … range" rather than "of the cohort" for that reason. If an actual
+percentile or rank is ever obtained, use that figure and reword the line.
+
 ## Publishing
 
 The pages use canonical URLs on `https://chaoglay1101-del.github.io/`, so this

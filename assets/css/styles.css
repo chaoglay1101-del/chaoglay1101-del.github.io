@@ -707,6 +707,18 @@ th.num {
   margin-bottom: 0.5rem;
 }
 
+/* Course mark and cohort context for an assessed project. */
+.timeline .timeline-grade {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+
+.timeline .timeline-grade strong {
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+
 /* --- Figures ------------------------------------------------------------ */
 
 figure {

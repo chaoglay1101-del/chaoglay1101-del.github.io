@@ -38,6 +38,9 @@ HTML_RE = re.compile(r'data-i18n-html="([^"]+)"')
 META_RE = re.compile(r'data-i18n-meta="([^"]+)"')
 ATTR_RE = re.compile(r'data-i18n-attr="([^"]+)"')
 ENTITY_RE = re.compile(r"&(?:[a-zA-Z]+|#\d+);")
+# Inline markup allowed inside data-i18n-html values; each tag must be balanced.
+INLINE_TAGS = ("code", "strong", "em", "span", "sub", "sup")
+MARKUP_RE = re.compile(r"</?[a-zA-Z][^>]*>")
 LOOKUP_RE = re.compile(r"\blookup\(([^)]*)\)")
 KEY_LITERAL_RE = re.compile(r'"([A-Za-z][\w.-]*)"')
 
@@ -124,13 +127,16 @@ def main() -> int:
         hazards = []
         for key, value in sorted(pack.items()):
             modes = kinds.get(key, set())
+            mode_label = "+".join(sorted(modes)) or "unused"
             entity = ENTITY_RE.search(value)
             if entity and (modes & {"text", "attribute", "javascript"}):
-                hazards.append(f"    {key}  [{'+'.join(sorted(modes))}] entity {entity.group(0)} would render literally")
-            if "html" in modes and value.count("<code>") != value.count("</code>"):
-                hazards.append(f"    {key}  [html] unbalanced <code> tags")
-            if "html" not in modes and "<code>" in value:
-                hazards.append(f"    {key}  [text] contains <code> markup that would be shown as text")
+                hazards.append(f"    {key}  [{mode_label}] entity {entity.group(0)} would render literally")
+            if "html" in modes:
+                for tag in INLINE_TAGS:
+                    if value.count(f"<{tag}>") != value.count(f"</{tag}>"):
+                        hazards.append(f"    {key}  [html] unbalanced <{tag}> tags")
+            elif MARKUP_RE.search(value):
+                hazards.append(f"    {key}  [{mode_label}] contains markup that would be shown as text")
         if hazards:
             problems += 1
             lines.append("  HAZARDS:")
