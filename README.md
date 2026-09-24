@@ -190,22 +190,31 @@ folder is published as the root of that site rather than from a sub-path.
 
 ### Deploying to the user site
 
+**Live at <https://chaoglay1101-del.github.io/>.** GitHub Pages activates itself
+for a repository named after the account, so no settings change is needed.
+
 `https://chaoglay1101-del.github.io/` is the root of a separate repository named
-`chaoglay1101-del.github.io`. `git subtree` pushes this folder there without
+`chaoglay1101-del.github.io`. `git subtree` publishes this folder there without
 duplicating the source, so this repository stays the single source of truth:
 
 ```powershell
 # one-off: point a remote at the published site repository
 git remote add site https://github.com/chaoglay1101-del/chaoglay1101-del.github.io.git
 
-# publish (and repeat for every update)
-git subtree push --prefix=10_Personal_Website site main
+# publish. The split is a separate step so the exact file list can be checked
+# before it becomes public.
+git subtree split --prefix=10_Personal_Website -b site-publish
+git ls-tree -r site-publish --name-only
+git push site site-publish:main
+
+# afterwards, check the live result
+#   https://chaoglay1101-del.github.io/
 ```
 
 The folder has to land at the root of the user site, which is why the canonical
 and `og:url` values point at `https://chaoglay1101-del.github.io/` rather than a
-sub-path. Every tracked file in this folder is published, including `tools/` and
-this README; both are already public in the research repository.
+sub-path. Every tracked file in this folder is published, including `tools/`,
+`README.md` and the portrait, so nothing private belongs here.
 
 ## Social sharing
 
