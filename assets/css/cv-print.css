@@ -69,6 +69,28 @@
 
 /* --- Document typography ------------------------------------------------ */
 
+/* Name block on the left, portrait on the right. The photo is fixed in length
+   units so it prints at the same physical size everywhere. */
+.cv-head {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cv-head-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cv-photo {
+  flex: 0 0 auto;
+  width: 27mm;
+  height: auto;
+  border-radius: 2px;
+  border: 1px solid var(--cv-line);
+}
+
 .cv-name {
   margin: 0;
   font-size: 20pt;

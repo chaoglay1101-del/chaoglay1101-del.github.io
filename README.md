@@ -21,7 +21,7 @@ assets/css/styles.css     Main stylesheet: light and dark themes, print styles
 assets/css/cv-print.css   Document layout and print geometry for cv-onepage.html
 assets/js/main.js         Theme toggle, language toggle, mobile navigation, print button, current year
 assets/js/i18n.js         Chinese strings (see "Editing copy" below)
-assets/img/               Favicon, the research-design diagram, and the social share card
+assets/img/               Favicon, the research-design diagram, social share card, and the CV portrait
 tools/                    Maintenance and validation scripts (not part of the published page)
 ```
 
@@ -144,6 +144,34 @@ The constraints are deliberate:
 - **Fixed light colours**, defined in `cv-print.css`, so a dark browser theme
   cannot produce a dark CV.
 - **Share the PDF, not the URL.** Use "Save as PDF" on that page.
+- **Portrait included.** `assets/img/profile.jpg` is a 4:5 crop (640×800) shown
+  at 27 mm wide on the printed sheet and beside the name block. It is a local
+  file, never a stock image or a placeholder.
+
+### Copy it into Word instead
+
+Some employers insist on `.docx`. For those, paste the one-page CV into Word and
+rebuild it as a plain document:
+
+| CV element | Word style |
+| --- | --- |
+| Section headings (PROFILE, EXPERIENCE, …) | Heading 1, 9–10 pt, small caps |
+| Job title, degree name | Heading 2, bold |
+| Body text and bullets | Normal, 10–11 pt |
+| Page setup | A4, 1.5–2 cm margins, single column, no text boxes |
+
+Keep every link as a real hyperlink, avoid tables and text boxes, and name the
+file `Yu-Chen-Chao-CV-Tax.docx` so it is unambiguous in an application inbox.
+
+### A note on photos in a CV
+
+Photographs are expected in Taiwan, most of Asia, the Middle East and continental
+Europe, but recruiters in the United Kingdom and the United States frequently
+treat them as a red flag: many employers discard CVs with photos outright to
+comply with anti-discrimination rules, and applicant tracking systems do not
+expect them. The photo is easy to drop for those markets, either delete the
+`<img class="cv-photo" …>` element in `cv-onepage.html` or print without it, and
+the layout closes up on its own.
 
 ## Linking
 

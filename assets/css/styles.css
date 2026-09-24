@@ -429,6 +429,29 @@ html[data-theme="dark"] .btn-primary {
   max-width: 68ch;
 }
 
+.hero-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.hero-layout .hero-text {
+  flex: 1 1 30rem;
+}
+
+/* Portrait on the web CV pages. The one-page CV sizes its own copy in
+   cv-print.css so the printed width stays a fixed number of millimetres. */
+.cv-photo-page {
+  flex: 0 0 auto;
+  width: clamp(9rem, 20vw, 12rem);
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
 .hero-name {
   font-family: var(--font-sans);
   font-size: 0.8rem;
@@ -974,6 +997,7 @@ figcaption {
 
   .card,
   .table-wrap,
+  .cv-photo-page,
   figure img,
   figure svg {
     box-shadow: none;
