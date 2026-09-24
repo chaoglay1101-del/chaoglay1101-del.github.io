@@ -173,6 +173,22 @@ expect them. The photo is easy to drop for those markets, either delete the
 `<img class="cv-photo" …>` element in `cv-onepage.html` or print without it, and
 the layout closes up on its own.
 
+### The name
+
+The name is identity rather than copy, so it is handled by three keys instead of
+being sprinkled through the markup:
+
+| Key | Used for | English | Chinese |
+| --- | --- | --- | --- |
+| `name.full` | the CV headings, i.e. the documents | Yu-Chen Chao (趙于楨) | 趙于楨 (Yu-Chen Chao) |
+| `name.short` | header brand, home hero eyebrow, footer, copyright | Yu-Chen Chao | 趙于楨 |
+| `name.monogram` | the square mark beside the brand | YC | 趙 |
+
+Each language leads with its own script, and both CVs carry both names so an
+applicant tracking system and a human can match the Chinese name to the
+romanised one. `index.html` also exposes the Chinese name to search engines via
+`alternateName` in its JSON-LD `Person` block.
+
 ## Linking
 
 Internal links (between the pages of this site) open in the same tab. Every
