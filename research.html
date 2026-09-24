@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.research.title">Research — Digital payment pressure and bank net fee margins</title>
+<meta name="description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand." data-i18n-meta="meta.research.description">
+<link rel="canonical" href="https://chaoglay1101-del.github.io/research.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Research — Digital payment pressure and bank net fee margins" data-i18n-meta="meta.research.title">
+<meta property="og:description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in an ASEAN-3 bank panel." data-i18n-meta="meta.research.description">
+<meta property="og:url" content="https://chaoglay1101-del.github.io/research.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="ui.skip">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">YC</span>
+      <span>Yu-Chen Chao
+        <span class="brand-role" data-i18n="brand.role">Accounting · Finance · Empirical research</span>
+      </span>
+    </a>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-i18n-attr="aria-label:nav.primary">
+      <ul class="nav-list">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="research.html" aria-current="page" data-i18n="nav.research">Research</a></li>
+        <li><a href="cv.html" data-i18n="nav.cv">CV</a></li>
+        <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </nav>
+            <div class="header-tools">
+      <button class="icon-btn" type="button" data-action="toggle-lang" lang="zh-Hant-TW" aria-label="將本頁切換為繁體中文" title="將本頁切換為繁體中文">中文</button>
+      <button class="icon-btn" type="button" data-action="toggle-theme" aria-pressed="false" aria-label="Switch to dark theme" title="Switch to dark theme" data-label-dark="Switch to dark theme" data-label-light="Switch to light theme">☾</button>
+      <button class="icon-btn nav-toggle" type="button" data-action="toggle-nav" aria-controls="primary-nav" aria-expanded="false" aria-label="Show navigation" data-i18n-attr="aria-label:nav.toggle">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <p class="hero-name" data-i18n="research.eyebrow">Research</p>
+        <h1 data-i18n="research.title">Digital payment pressure and bank net fee margins</h1>
+        <p class="hero-role" data-i18n="research.subtitle">Evidence from an ASEAN-3 bank panel, 2014–2022</p>
+        <p class="lede" data-i18n="research.lede">This page is the readable version of my undergraduate research. It states the question, how the panel was built, what the fixed-effects models show, and — at the same length — what the design cannot tell you.</p>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins" rel="noopener" data-i18n="research.ctaRepo">Open the repository</a>
+          <a class="btn" href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/docs/public-research-report.md" rel="noopener" data-i18n="research.ctaReport">Full public research report</a>
+          <a class="btn" href="cv.html" data-i18n="research.ctaCv">CV and methods summary</a>
+        </div>
+      </div>
+      <ul class="fact-strip">
+        <li>
+          <span class="fact-value">344</span>
+          <span class="fact-label" data-i18n="research.facts.observations">bank-year observations</span>
+        </li>
+        <li>
+          <span class="fact-value">39</span>
+          <span class="fact-label" data-i18n="research.facts.banks">commercial banks</span>
+        </li>
+        <li>
+          <span class="fact-value">ASEAN-3</span>
+          <span class="fact-label" data-i18n="research.facts.countries">Indonesia, Malaysia, Thailand</span>
+        </li>
+        <li>
+          <span class="fact-value">2014–2022</span>
+          <span class="fact-label" data-i18n="research.facts.period">annual observations</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="question">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.q.eyebrow">Question</span>
+        <h2 data-i18n="research.q.heading">Why the direction of the relationship is not obvious</h2>
+      </div>
+      <div class="callout">
+        <p data-i18n="research.q.question">Is digital payment pressure associated with bank net fee margins in Indonesia, Malaysia, and Thailand?</p>
+      </div>
+      <p data-i18n="research.q.body">The study does not assume that digital payments help or hurt banks. Digitalisation can affect fee income through several channels at once, and they push in different directions:</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="card-tag" data-i18n="research.q.c1tag">Channel 1</span>
+          <h3 data-i18n="research.q.c1title">Transaction and service expansion</h3>
+          <p data-i18n="research.q.c1body">Digital channels lower friction, increase usage, and can support new payment or merchant services.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag" data-i18n="research.q.c2tag">Channel 2</span>
+          <h3 data-i18n="research.q.c2title">Competitive pressure</h3>
+          <p data-i18n="research.q.c2body">FinTech firms, payment networks, and digital-first competitors may compress prices or reallocate payment-related revenue.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag" data-i18n="research.q.c3tag">Channel 3</span>
+          <h3 data-i18n="research.q.c3title">Customer relationships and cross-selling</h3>
+          <p data-i18n="research.q.c3body">Frequent digital engagement and transaction data can create opportunities in deposits, lending, insurance, or wealth management.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag" data-i18n="research.q.c4tag">Channel 4</span>
+          <h3 data-i18n="research.q.c4title">Institutional and market differences</h3>
+          <p data-i18n="research.q.c4body">Payment infrastructure, regulation, financial inclusion, and bank business models differ substantially across countries.</p>
+        </div>
+      </div>
+      <p class="small muted" data-i18n="research.q.caution">Because these channels can offset each other, a negative coefficient would not by itself show that digital payments reduce bank income. It could reflect market composition, country-specific institutions, or omitted factors that move together with both payment activity and bank outcomes.</p>
+    </div>
+  </section>
+
+  <section class="section" id="data">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.data.eyebrow">Data</span>
+        <h2 data-i18n="research.data.heading">Two data levels joined into one panel</h2>
+        <p data-i18n="research.data.lede">Bank-year financial variables form the outcome and controls; a country-year indicator measures digital payment activity.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption data-i18n="research.data.sampleCaption">Final analysis sample.</caption>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="research.data.item">Item</th>
+              <th scope="col" data-i18n="research.data.value">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" data-i18n="research.data.s1">Countries</th>
+              <td data-i18n="research.data.s1v">Indonesia, Malaysia, Thailand</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.data.s2">Banks</th>
+              <td>39</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.data.s3">Bank-year observations</th>
+              <td>344</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.data.s4">Period</th>
+              <td>2014–2022</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.data.s5">Study design</th>
+              <td data-i18n="research.data.s5v">ASEAN-5 was originally planned; the selected indicator was not consistently available for the Philippines and Singapore</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="card-tag" data-i18n="research.data.c1tag">Outcome and controls</span>
+          <h3 data-i18n="research.data.c1title">Bank-year variables</h3>
+          <ul class="card-list">
+            <li><code>Net_Fee_Margin</code> — <span data-i18n="research.data.c1v1">net fee income relative to total assets.</span></li>
+            <li><code>Size_USD</code> — <span data-i18n="research.data.c1v2">bank scale.</span></li>
+            <li><code>Capital_Adequacy_Proxy</code> — <span data-i18n="research.data.c1v3">equity relative to total assets.</span></li>
+            <li><code>Credit_Risk</code> — <span data-i18n="research.data.c1v4">asset-quality exposure.</span></li>
+            <li><code>Interest_Expense_Ratio</code> — <span data-i18n="research.data.c1v5">funding cost.</span></li>
+            <li><code>Deposit_Ratio</code> — <span data-i18n="research.data.c1v6">funding structure.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-tag" data-i18n="research.data.c2tag">Explanatory measure</span>
+          <h3 data-i18n="research.data.c2title">Country-year digital payment pressure</h3>
+          <p data-i18n-html="research.data.c2body">The explanatory variable comes from the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, used with the unit <code>PT_GDP</code>: mobile and internet banking transactions as a percentage of GDP.</p>
+          <ul class="card-list">
+            <li data-i18n="research.data.c2v1">The indicator source is public; generated extraction files are not committed to the repository.</li>
+            <li data-i18n="research.data.c2v2">Availability, definitions, and reuse terms can change, so the workflow documents how the indicator was discovered and selected instead of treating it as a black box.</li>
+          </ul>
+          <a class="btn" href="https://data360.worldbank.org/en/dataset/IMF_FAS" rel="noopener" data-i18n="research.data.c2link">IMF Financial Access Survey</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.method.eyebrow">Method</span>
+        <h2 data-i18n="research.method.heading">Fixed effects, clustered inference, and explicit cleaning rules</h2>
+        <p data-i18n="research.method.lede">The workflow separates panel preparation, indicator extraction, merging, estimation, and robustness checks, so each decision can be inspected on its own.</p>
+      </div>
+
+      <figure>
+        <img src="assets/img/research-design.svg" width="1400" height="600" loading="lazy" alt="Flow diagram: restricted bank panel data and the public IMF Financial Access Survey indicator enter variable construction, then country-year merging, fixed-effects estimation, association results, and limitations." data-i18n-attr="alt:research.method.figureAlt">
+        <figcaption data-i18n="research.method.figureCaption">Research design: restricted bank data and the public country-year indicator are constructed separately, then merged and estimated with bank and year fixed effects. The final stage records interpretation limits rather than causal claims.</figcaption>
+      </figure>
+
+      <h3 data-i18n="research.method.modelHeading">Specification</h3>
+      <div class="formula">NFM<sub>it</sub> = &beta; DPP<sub>ct</sub> + &gamma;&prime;X<sub>it</sub> + &alpha;<sub>i</sub> + &lambda;<sub>t</sub> + &epsilon;<sub>it</sub></div>
+      <ul class="card-list">
+        <li data-i18n="research.method.f1">NFM is bank i's net fee margin in year t.</li>
+        <li data-i18n="research.method.f2">DPP is the digital-payment-pressure measure for country c in year t.</li>
+        <li data-i18n="research.method.f3">X is a vector of bank-level controls.</li>
+        <li data-i18n="research.method.f4">&alpha; is a bank fixed effect and &lambda; is a year fixed effect, which absorb persistent bank differences and common time shocks.</li>
+        <li data-i18n="research.method.f5">The coefficient &beta; is a conditional association inside the stated model, not an automatically causal effect.</li>
+      </ul>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="card-tag" data-i18n="research.method.c1tag">Estimation choices</span>
+          <h3 data-i18n="research.method.c1title">How the models were run</h3>
+          <ul class="card-list">
+            <li data-i18n="research.method.c1v1">A complete-case sample is formed on the required outcome, explanatory variable, and controls so specifications are comparable.</li>
+            <li data-i18n="research.method.c1v2">Continuous variables are winsorised at the 1st and 99th percentiles within the analysis sample.</li>
+            <li data-i18n="research.method.c1v3">Standard errors are clustered at the bank level to account for dependence within bank histories.</li>
+            <li data-i18n="research.method.c1v4">Country subsamples keep bank fixed effects and drop year effects, because a country-year explanatory variable would otherwise be absorbed in a single-country model.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-tag" data-i18n="research.method.c2tag">Specifications tested</span>
+          <h3 data-i18n="research.method.c2title">From baseline to robustness</h3>
+          <ul class="card-list">
+            <li data-i18n-html="research.method.c2v1">Scaled digital-payment pressure (<code>DPP_10pct_GDP</code>).</li>
+            <li data-i18n="research.method.c2v2">Scaled pressure with additional financial controls, then a full-controls specification.</li>
+            <li data-i18n-html="research.method.c2v3">A logarithmic baseline (<code>Log_Digital_Payment_Pressure</code>).</li>
+            <li data-i18n-html="research.method.c2v4">A bank-size interaction (<code>Digital_x_LargeBank</code>).</li>
+            <li data-i18n="research.method.c2v5">A centred nonlinear specification with a squared log term.</li>
+            <li data-i18n="research.method.c2v6">Country-subsample estimates of the log specification.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="results">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.results.eyebrow">Results</span>
+        <h2 data-i18n="research.results.heading">Limited linear evidence, a significant logarithmic association</h2>
+        <p data-i18n="research.results.lede">All models use the same 344 bank-year observations, so the specifications are directly comparable.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption data-i18n="research.results.caption">Digital-payment coefficient by specification. * p &lt; 0.10, ** p &lt; 0.05.</caption>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="research.results.spec">Specification</th>
+              <th scope="col" class="num" data-i18n="research.results.coef">Coefficient</th>
+              <th scope="col" class="num" data-i18n="research.results.obs">Observations</th>
+              <th scope="col" data-i18n="research.results.interp">Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" data-i18n="research.results.r1spec">Main model, scaled measure</th>
+              <td class="num">−0.00292*</td>
+              <td class="num">344</td>
+              <td><span class="badge badge-sig" data-i18n="research.results.badgeMarginal">Marginal</span> <span data-i18n="research.results.r1">Negative association with marginal statistical evidence.</span></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.results.r2spec">Main model with controls</th>
+              <td class="num">−0.00264</td>
+              <td class="num">344</td>
+              <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r2">Negative sign but no statistical evidence.</span></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.results.r3spec">Full controls model</th>
+              <td class="num">−0.00208</td>
+              <td class="num">344</td>
+              <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r3">Negative sign but no statistical evidence.</span></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.results.r4spec">Log baseline model</th>
+              <td class="num">−0.10171**</td>
+              <td class="num">344</td>
+              <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r4">Negative, statistically significant pooled association.</span></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.results.r5spec">Nonlinear model</th>
+              <td class="num">−0.10829**</td>
+              <td class="num">344</td>
+              <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r5">Negative linear term; the squared term is not significant.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-note">
+        <h3 data-i18n="research.results.readHeading">How to read this table</h3>
+        <ul class="card-list">
+          <li data-i18n="research.results.read1">The scaled and log models use different units, so the coefficient sizes are not comparable across rows; only the sign and significance are.</li>
+          <li data-i18n="research.results.read2">The pooled log association is statistically significant, but country subsamples are heterogeneous, and decomposition suggests the pooled result may substantially reflect differences between countries rather than a shared within-country mechanism.</li>
+          <li data-i18n="research.results.read3">Statistical significance is not the same as economic importance, and neither is the same as causality.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="limitations">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.limits.eyebrow">Limitations</span>
+        <h2 data-i18n="research.limits.heading">What this study cannot claim</h2>
+        <p data-i18n="research.limits.lede">The results are conditional associations, not causal estimates. Six constraints explain why.</p>
+      </div>
+      <ol class="card-list">
+        <li data-i18n="research.limits.l1">Interpretation: a coefficient describes an association under a model, not an identified causal effect.</li>
+        <li data-i18n="research.limits.l2">Data level: the explanatory measure varies at the country-year level while the outcome is bank-level, which limits available within-country variation.</li>
+        <li data-i18n="research.limits.l3">Coverage: three countries are included, so the study should not be generalised to ASEAN-5 or all banking markets.</li>
+        <li data-i18n="research.limits.l4">Omitted variables: regulation, payment infrastructure, macroeconomic conditions, and market concentration may affect both digital payments and fee margins.</li>
+        <li data-i18n="research.limits.l5">Income aggregation: net fee margin does not separate payments, cards, merchant services, wealth management, or other non-interest income.</li>
+        <li data-i18n="research.limits.l6">Data access: the underlying bank panel cannot be redistributed, so the thesis regressions are inspectable but not publicly rerunnable.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="reproducibility">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.repro.eyebrow">Reproducibility</span>
+        <h2 data-i18n="research.repro.heading">Method transparency without data redistribution</h2>
+        <p data-i18n="research.repro.lede">The repository separates what can be rerun from what can only be inspected.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="research.repro.component">Component</th>
+              <th scope="col" data-i18n="research.repro.public">Publicly reproducible?</th>
+              <th scope="col" data-i18n="research.repro.notes">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" data-i18n="research.repro.r1">Synthetic fixed-effects demonstration</th>
+              <td><span class="badge badge-yes" data-i18n="research.repro.yes">Yes</span></td>
+              <td data-i18n-html="research.repro.r1note">Self-contained in <code>examples/run_example.py</code>, with a deterministic synthetic panel.</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.repro.r2">IMF FAS retrieval and indicator extraction</th>
+              <td><span class="badge badge-partial" data-i18n="research.repro.partly">Partly</span></td>
+              <td data-i18n="research.repro.r2note">The source is public, but availability and terms can change; generated outputs are not committed.</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.repro.r3">Bank-panel construction and thesis regressions</th>
+              <td><span class="badge badge-no" data-i18n="research.repro.no">No</span></td>
+              <td data-i18n="research.repro.r3note">Required WRDS-derived data and intermediate files are restricted and excluded.</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.repro.r4">Reported thesis findings</th>
+              <td><span class="badge badge-no" data-i18n="research.repro.inspect">Inspectable only</span></td>
+              <td data-i18n="research.repro.r4note">The results are documented, but public files cannot regenerate them without the restricted inputs.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="card-tag" data-i18n="research.repro.c1tag">Run it yourself</span>
+          <h3 data-i18n="research.repro.c1title">Public demonstration in three commands</h3>
+          <div class="formula">uv sync --group dev
+uv run python examples/run_example.py
+uv run pytest</div>
+          <p class="small muted" data-i18n-html="research.repro.c1note">The example uses deterministic synthetic data. It demonstrates the Python and <code>linearmodels</code> workflow; it is not evidence for the thesis.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag" data-i18n="research.repro.c2tag">Next steps</span>
+          <h3 data-i18n="research.repro.c2title">Where the research should go next</h3>
+          <ul class="card-list">
+            <li data-i18n="research.repro.c2v1">Disaggregate non-interest income into payments, cards, merchant services, and wealth management.</li>
+            <li data-i18n="research.repro.c2v2">Broaden country coverage to restore the ASEAN-5 design.</li>
+            <li data-i18n="research.repro.c2v3">Move towards identification: payment infrastructure or licensing changes, difference-in-differences or event designs, lagged explanatory variables, and dynamic panel methods.</li>
+            <li data-i18n="research.repro.c2v4">Consider cross-sectional dependence in inference, for example Driscoll–Kraay standard errors.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sources">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.sources.eyebrow">Sources</span>
+        <h2 data-i18n="research.sources.heading">Documentation behind this page</h2>
+        <p data-i18n="research.sources.lede">Everything below lives in the public repository. Restricted data, course submissions, and row-level outputs are deliberately excluded.</p>
+      </div>
+      <ul class="link-list">
+        <li>
+          <a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/docs/public-research-report.md" rel="noopener" data-i18n="research.sources.l1">Public research report</a>
+          <span class="link-note" data-i18n="research.sources.l1n">Design, results, limitations, and data-access boundaries.</span>
+        </li>
+        <li>
+          <a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/docs/variable-definitions.md" rel="noopener" data-i18n="research.sources.l2">Variable definitions</a>
+          <span class="link-note" data-i18n="research.sources.l2n">Conceptual definitions without restricted observations.</span>
+        </li>
+        <li>
+          <a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/docs/methodology-appendix.md" rel="noopener" data-i18n="research.sources.l3">Methodology appendix</a>
+          <span class="link-note" data-i18n="research.sources.l3n">Workflow, specification, cleaning, and inference choices.</span>
+        </li>
+        <li>
+          <a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/src/analysis/run_main_regressions.py" rel="noopener" data-i18n="research.sources.l4">Main regression code</a>
+          <span class="link-note" data-i18n="research.sources.l4n">Final specifications, retained for transparency.</span>
+        </li>
+        <li>
+          <a href="https://data360.worldbank.org/en/dataset/IMF_FAS" rel="noopener" data-i18n="research.sources.l5">IMF Financial Access Survey</a>
+          <span class="link-note" data-i18n="research.sources.l5n">Source of the country-year digital payment indicator.</span>
+        </li>
+      </ul>
+      <p class="small muted" data-i18n="research.sources.note">The repository keeps bank identifiers, raw and derived datasets, submission drafts, feedback, and signatures out of the public surface. Check current WRDS, IMF, and university terms before redistributing any data or supporting material.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2 data-i18n="footer.aboutHeading">Yu-Chen Chao</h2>
+        <p class="small" data-i18n="footer.about">Accounting and finance graduate working on digital payments, bank competition, and data-driven finance research.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.exploreHeading">Explore</h2>
+        <ul>
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="research.html" data-i18n="nav.research">Research</a></li>
+          <li><a href="cv.html" data-i18n="nav.cv">CV</a></li>
+          <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.elsewhereHeading">Elsewhere</h2>
+        <ul>
+          <li><a href="https://github.com/chaoglay1101-del" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/yu-chen-chao/" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://public.tableau.com/views/BANALAssignment2/STORY" rel="noopener">Tableau Public</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>© <span data-current-year>2026</span> Yu-Chen Chao. <span data-i18n="footer.rights">Site content is my own; the research code is published under the MIT License.</span></p>
+      <p data-i18n="footer.data">The research uses restricted bank data. No restricted observations, bank identifiers, or third-party datasets are published on this site.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

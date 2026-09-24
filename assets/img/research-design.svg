@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" role="img" aria-labelledby="title desc">
+  <title id="title">Public research design workflow</title>
+  <desc id="desc">A flow diagram showing restricted bank panel data and the public IMF Financial Access Survey indicator entering variable construction, then country-year merging, fixed-effects estimation, association results, and limitations.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e8f1ff"/>
+      <stop offset="1" stop-color="#d8e8ff"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e4f7ee"/>
+      <stop offset="1" stop-color="#cceedd"/>
+    </linearGradient>
+    <linearGradient id="result" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff2d6"/>
+      <stop offset="1" stop-color="#ffe6b0"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1a365d" flood-opacity="0.16"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3c5a78"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="600" rx="28" fill="#f7fafc"/>
+  <text x="70" y="70" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#17324d">Public research design</text>
+  <text x="70" y="105" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#526b82">Digital-payment pressure and bank net fee margins • ASEAN-3 panel</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="160" width="260" height="125" rx="18" fill="url(#panel)" stroke="#8eb4e5" stroke-width="2"/>
+    <rect x="70" y="365" width="260" height="125" rx="18" fill="url(#panel)" stroke="#8eb4e5" stroke-width="2"/>
+    <rect x="410" y="262" width="250" height="125" rx="18" fill="url(#accent)" stroke="#78bf9c" stroke-width="2"/>
+    <rect x="750" y="262" width="250" height="125" rx="18" fill="url(#accent)" stroke="#78bf9c" stroke-width="2"/>
+    <rect x="1090" y="160" width="240" height="125" rx="18" fill="url(#result)" stroke="#dfb65d" stroke-width="2"/>
+    <rect x="1090" y="365" width="240" height="125" rx="18" fill="#f0eafe" stroke="#ad91dc" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#17324d">
+    <text x="200" y="198" text-anchor="middle" font-size="20" font-weight="700">Restricted bank panel</text>
+    <text x="200" y="232" text-anchor="middle" font-size="16">Bank-year financial data</text>
+    <text x="200" y="258" text-anchor="middle" font-size="15" fill="#526b82">Outcome and bank controls</text>
+
+    <text x="200" y="403" text-anchor="middle" font-size="20" font-weight="700">IMF FAS indicator</text>
+    <text x="200" y="437" text-anchor="middle" font-size="16">Country-year measure</text>
+    <text x="200" y="463" text-anchor="middle" font-size="15" fill="#526b82">Digital payments as % of GDP</text>
+
+    <text x="535" y="300" text-anchor="middle" font-size="20" font-weight="700">Variable construction</text>
+    <text x="535" y="334" text-anchor="middle" font-size="16">Definitions, cleaning</text>
+    <text x="535" y="360" text-anchor="middle" font-size="15" fill="#526b82">Transformations and checks</text>
+
+    <text x="875" y="300" text-anchor="middle" font-size="20" font-weight="700">Panel merge</text>
+    <text x="875" y="334" text-anchor="middle" font-size="16">Join by country and year</text>
+    <text x="875" y="360" text-anchor="middle" font-size="15" fill="#526b82">Bank-year analysis sample</text>
+
+    <text x="1210" y="198" text-anchor="middle" font-size="20" font-weight="700">FE estimates</text>
+    <text x="1210" y="232" text-anchor="middle" font-size="16">Bank and year effects</text>
+    <text x="1210" y="258" text-anchor="middle" font-size="15" fill="#526b82">Clustered standard errors</text>
+
+    <text x="1210" y="403" text-anchor="middle" font-size="20" font-weight="700">Interpretation</text>
+    <text x="1210" y="437" text-anchor="middle" font-size="16">Associations, not causality</text>
+    <text x="1210" y="463" text-anchor="middle" font-size="15" fill="#526b82">Heterogeneity and limits</text>
+  </g>
+
+  <g fill="none" stroke="#3c5a78" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M330 222 C365 222, 370 300, 410 300"/>
+    <path d="M330 428 C365 428, 370 350, 410 350"/>
+    <path d="M660 325 L750 325"/>
+    <path d="M1000 300 C1040 300, 1050 222, 1090 222"/>
+    <path d="M1210 285 L1210 365"/>
+  </g>
+
+  <text x="70" y="550" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#526b82">Public repository: workflow and reported findings are inspectable; restricted inputs and row-level outputs are not redistributed.</text>
+</svg>
