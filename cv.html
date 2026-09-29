@@ -38,8 +38,8 @@
     <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-i18n-attr="aria-label:nav.primary">
       <ul class="nav-list">
         <li><a href="index.html" data-i18n="nav.home">Home</a></li>
-        <li><a href="research.html" data-i18n="nav.research">Research</a></li>
         <li><a href="cv.html" aria-current="page" data-i18n="nav.cv">CV</a></li>
+        <li><a href="research.html" data-i18n="nav.research">Research</a></li>
         <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
     </nav>
@@ -56,7 +56,9 @@
   <section class="hero">
     <div class="container">
       <div class="btn-group no-print">
-        <button class="btn btn-primary" type="button" data-action="print" data-i18n="cv.print">Print or save as PDF</button>
+        <a class="btn btn-primary" href="assets/pdf/Chao_YuChen_CV_Full_EN.pdf" download data-cv-download="Chao_YuChen_CV_Full" data-i18n="cv.downloadFull">Download the full CV (PDF)</a>
+        <a class="btn" href="assets/pdf/Chao_YuChen_CV_EN.pdf" download data-cv-download="Chao_YuChen_CV" data-i18n="cv.downloadOne">Download the one-page CV (PDF)</a>
+        <button class="btn" type="button" data-action="print" data-i18n="cv.print">Print or save as PDF</button>
         <a class="btn" href="cv-onepage.html" data-i18n="cv.onepage">One-page CV for applications</a>
         <a class="btn" href="research.html" data-i18n="cv.readResearch">Read the research behind this CV</a>
       </div>
@@ -85,6 +87,7 @@
   <section class="section" id="profile">
     <div class="container">
       <h2 data-i18n="cv.profile.heading">Profile</h2>
+      <p data-i18n="cv.profile.target">I am seeking graduate roles in financial data analysis, banking analytics, and FinTech strategy, and master's study in finance or business analytics.</p>
       <p data-i18n="cv.profile.body">Accounting and finance graduate with a completed empirical research project on digital payment pressure and bank net fee margins in an ASEAN-3 bank panel (39 banks, 344 bank-year observations, 2014–2022). Comfortable across the whole research workflow: building a clean panel dataset, documenting variable definitions, estimating fixed-effects models with clustered standard errors, testing robustness, and communicating what the evidence does and does not support. Additional experience in Tableau data storytelling and cross-border tax work.</p>
     </div>
   </section>
@@ -264,8 +267,8 @@
         <h2 data-i18n="footer.exploreHeading">Explore</h2>
         <ul>
           <li><a href="index.html" data-i18n="nav.home">Home</a></li>
-          <li><a href="research.html" data-i18n="nav.research">Research</a></li>
           <li><a href="cv.html" data-i18n="nav.cv">CV</a></li>
+          <li><a href="research.html" data-i18n="nav.research">Research</a></li>
           <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
       </div>

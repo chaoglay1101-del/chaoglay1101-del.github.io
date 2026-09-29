@@ -34,6 +34,23 @@
     }
   }
 
+  function readParam(name) {
+    var match = new RegExp("[?&]" + name + "=([^&#]*)").exec(window.location.search);
+    if (!match) {
+      return null;
+    }
+    try {
+      return window.decodeURIComponent(match[1].replace(/\+/g, " "));
+    } catch (error) {
+      return match[1];
+    }
+  }
+
+  /* Anything that starts with "zh" means Chinese: zh, ZH, zh-Hant, zh-Hant-TW. */
+  function normaliseLang(value) {
+    return value && value.toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+  }
+
   /* --- Translations ------------------------------------------------------ */
 
   function dictionary(lang) {
@@ -128,12 +145,30 @@
       langToggle.setAttribute("title", ariaLabel);
     }
 
+    normaliseCvDownloads();
+
     // The theme button label is language-dependent as well as theme-dependent.
     setThemeLabel(root.getAttribute("data-theme"));
 
     if (persist) {
       writeStore(STORE_KEY.lang, currentLang);
     }
+  }
+
+  /* The CV is published in both languages. Each download link names the document
+     without its language suffix, and the suffix is applied here, so a Chinese
+     visitor downloads the Chinese file. The href written in the HTML already
+     points at the English PDF, which is what a browser without JavaScript gets. */
+  function normaliseCvDownloads() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-cv-download]"), function (link) {
+      var base = link.getAttribute("data-cv-download");
+      if (base) {
+        link.setAttribute(
+          "href",
+          "assets/pdf/" + base + "_" + (currentLang === "zh" ? "ZH" : "EN") + ".pdf"
+        );
+      }
+    });
   }
 
   /* --- Theme ------------------------------------------------------------ */
@@ -187,8 +222,13 @@
     : (systemPrefersDark() ? "dark" : "light");
   applyTheme(initialTheme, false);
 
+  /* ?lang=zh overrides the stored choice for that visit only, so a link to the
+     Chinese page works in a browser that has never opened this site, and the
+     headless render used to build the Chinese CV PDF starts from a clean
+     profile with nothing stored. */
+  var queryLang = readParam("lang");
   var storedLang = readStore(STORE_KEY.lang);
-  applyLanguage(storedLang === "zh" ? "zh" : "en", false);
+  applyLanguage(normaliseLang(queryLang || storedLang), false);
 
   if (themeToggle) {
     themeToggle.addEventListener("click", function () {

@@ -10,19 +10,36 @@ lives in `assets/js/i18n.js`, and the 中文/EN button in the header switches
 between them. The choice is remembered in `localStorage`, and the theme button
 follows the operating-system preference until the visitor chooses otherwise.
 
+## Who the site is for
+
+The site serves two audiences at once, and the page order is arranged for both:
+
+| Audience | What they need first | Where they find it |
+| --- | --- | --- |
+| Recruiters | The credential, then a CV file, within the first screen | The hero credentials strip, the `Download CV (PDF)` button, `cv.html`, `cv-onepage.html`, and the files in `assets/pdf/` |
+| Admissions committees | The written work and the direction of future research | `research.html`, especially the Research agenda section, plus the public research report in the code repository |
+| Either | What the author is looking for | The "What I am looking for" section on the home page (`#targets`) |
+
+Two consequences are deliberate, and both should stay in mind when editing:
+
+- the p-value results table lives on `research.html` only, rather than being
+  repeated on the home page, because a recruiter reads it as noise;
+- `cv.html` comes before `research.html` in every navigation menu.
+
 ## Layout
 
 ```text
-index.html                Home: about, research summary, results table, skills, work, education, contact
-research.html             Research: question, data, method, results, limitations, reproducibility, sources
-cv.html                   CV: the complete record, profile through to notes
-cv-onepage.html           One-page CV for applications, built to print on a single A4 sheet
-assets/css/styles.css     Main stylesheet: light and dark themes, print styles
-assets/css/cv-print.css   Document layout and print geometry for cv-onepage.html
-assets/js/main.js         Theme toggle, language toggle, mobile navigation, print button, current year
-assets/js/i18n.js         Chinese strings (see "Editing copy" below)
-assets/img/               Favicon, the research-design diagram, social share card, and the CV portrait
-tools/                    Maintenance and validation scripts (not part of the published page)
+index.html                     Home: what I am looking for, about, research summary, experience, education, skills, work, contact
+research.html                  Research: question, data, method, results, limitations, research agenda, reproducibility, sources
+cv.html                        CV: the complete record, profile through to notes
+cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
+assets/css/styles.css          Main stylesheet: light and dark themes, print styles
+assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
+assets/js/main.js              Theme toggle, language toggle, mobile navigation, print button, ?lang= deep link, current year
+assets/js/i18n.js              Chinese strings (see "Editing copy" below)
+assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
+assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
+tools/                         Maintenance, validation, and PDF build scripts (published, but kept out of search results)
 ```
 
 ## Local preview
@@ -75,6 +92,11 @@ Rules for `assets/js/i18n.js`:
   coverage is still enforced. English for those two lives in the button's
   `data-label-dark` / `data-label-light` attributes, which double as the
   no-JavaScript fallback.
+- `?lang=zh` switches a page to Chinese for that visit without touching
+  `localStorage`. Any value starting with `zh` works (`zh`, `zh-Hant`,
+  `zh-Hant-TW`); anything else gives English. This is how a Chinese page can be
+  linked to, and how the Chinese PDFs are generated from a browser profile that
+  has never opened the site.
 
 ## Validation
 
@@ -83,6 +105,7 @@ uv run python 10_Personal_Website/tools/_verify_html.py   # UTF-8, tag balance, 
 uv run python 10_Personal_Website/tools/_check_keys.py    # page keys vs the English source list
 uv run python 10_Personal_Website/tools/_check_i18n.py    # Chinese coverage and hazards
 uv run python 10_Personal_Website/tools/_list_i18n.py     # every key in document order
+uv run python 10_Personal_Website/tools/_build_cv_pdfs.py # rebuild assets/pdf/ with headless Chrome
 ```
 
 `_check_i18n.py` and `_preview_zh.py` write reports into `tools/` (ignored by
@@ -143,10 +166,47 @@ The constraints are deliberate:
   so the HTML source is English, and the 中文 button still translates the page.
 - **Fixed light colours**, defined in `cv-print.css`, so a dark browser theme
   cannot produce a dark CV.
-- **Share the PDF, not the URL.** Use "Save as PDF" on that page.
+- **Send the PDF file, not the URL.** The files in `assets/pdf/` are what an
+  application actually sends; see "Downloadable PDFs" below.
 - **Portrait included.** `assets/img/profile.jpg` is a 4:5 crop (640×800) shown
   at 27 mm wide on the printed sheet and beside the name block. It is a local
   file, never a stock image or a placeholder.
+
+### Downloadable PDFs
+
+`assets/pdf/` holds the files an application sends. They are generated from the
+HTML rather than maintained by hand, so they cannot drift away from the pages:
+
+| File | Built from | Length |
+| --- | --- | --- |
+| `Chao_YuChen_CV_EN.pdf` | `cv-onepage.html` | one A4 page |
+| `Chao_YuChen_CV_ZH.pdf` | `cv-onepage.html?lang=zh` | one A4 page |
+| `Chao_YuChen_CV_Full_EN.pdf` | `cv.html` | four pages |
+| `Chao_YuChen_CV_Full_ZH.pdf` | `cv.html?lang=zh` | four pages |
+
+Rebuild them after any copy change:
+
+```powershell
+uv run python 10_Personal_Website/tools/_build_cv_pdfs.py
+```
+
+Four details are load-bearing:
+
+- **The filenames are documents, not web assets.** Name first, with underscores,
+  following the convention used elsewhere in the project, because an applicant
+  tracking system reads the filename it is handed.
+- **The Chinese builds exist because `main.js` honours `?lang=zh`.** The headless
+  run uses a throw-away browser profile, so there is no stored preference to
+  fight with.
+- **The links choose their file at runtime.** A link marked
+  `data-cv-download="Chao_YuChen_CV"` has its `href` rewritten to the `_EN` or
+  `_ZH` file by the active language. The `href` in the HTML points at the English
+  file, which is what a browser without JavaScript fetches.
+- **`*.pdf` is ignored at the repository root** for submission drafts, so the
+  negation rules at the end of `.gitignore` are what keep the CVs in the
+  published site. Without them `git subtree` would publish pages that link to
+  files it left behind. The build also warns if a one-page CV no longer fits on
+  one page, so keep that check.
 
 ### Copy it into Word instead
 
@@ -233,10 +293,13 @@ sub-path. Every tracked file in this folder is published, including `tools/`,
 `README.md` and the portrait, so nothing private belongs here.
 
 One trap worth remembering: **`git subtree` only publishes tracked files**, and
-`.gitignore` can silently swallow a site file. That is exactly what happened to
-`robots.txt`, which the blanket `*.txt` rule excluded until a negation rule was
-added. `git ls-tree -r site-publish --name-only` before the push is the check
-that catches it, and it also caught nothing else, so keep running it.
+`.gitignore` can silently swallow a site file. It has now happened twice:
+`robots.txt` was excluded by the blanket `*.txt` rule, and the CVs in
+`assets/pdf/` would have been excluded by the blanket `*.pdf` rule. Both needed a
+negation rule at the end of `.gitignore`, where a later rule wins.
+`git ls-tree -r site-publish --name-only` before the push is the check that
+catches it, so keep running it and confirm that `robots.txt` and
+`assets/pdf/Chao_YuChen_CV_EN.pdf` are both in the list.
 
 ## Social sharing
 
