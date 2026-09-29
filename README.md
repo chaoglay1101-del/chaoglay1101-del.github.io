@@ -97,6 +97,11 @@ Rules for `assets/js/i18n.js`:
   `zh-Hant-TW`); anything else gives English. This is how a Chinese page can be
   linked to, and how the Chinese PDFs are generated from a browser profile that
   has never opened the site.
+- **Changing English means re-reading the Chinese.** `_check_i18n.py` proves that
+  every key exists; it cannot prove the key still says the right thing. Run
+  `_check_stale.py <last-published-rev>` before publishing: it reports the keys
+  whose English moved while their Chinese stayed put, which is a mistake that has
+  already reached the live site once.
 
 ## Validation
 
@@ -106,10 +111,11 @@ uv run python 10_Personal_Website/tools/_check_keys.py    # page keys vs the Eng
 uv run python 10_Personal_Website/tools/_check_i18n.py    # Chinese coverage and hazards
 uv run python 10_Personal_Website/tools/_list_i18n.py     # every key in document order
 uv run python 10_Personal_Website/tools/_build_cv_pdfs.py # rebuild assets/pdf/ with headless Chrome
+uv run python 10_Personal_Website/tools/_check_stale.py <rev>  # Chinese left behind by a copy rewrite
 ```
 
-`_check_i18n.py` and `_preview_zh.py` write reports into `tools/` (ignored by
-git) and exit non-zero when something needs attention.
+`_check_i18n.py`, `_preview_zh.py`, and `_check_stale.py` write reports into
+`tools/` (ignored by git) and exit non-zero when something needs attention.
 
 ## Personal details
 
@@ -213,6 +219,10 @@ The full CVs run to four or five pages depending on the language, so no page
 count is promised in the copy: only the one-page CV asserts a single sheet, and
 the build is what checks it. Any page count written into a label will go stale
 the next time a bullet is added.
+
+Rebuilding rewrites the PDFs even when nothing changed, because the browser
+stamps a creation date into the file. When the CV pages themselves have not
+changed, discard the rebuilt files rather than committing a metadata-only diff.
 
 Rebuild them after any copy change:
 
