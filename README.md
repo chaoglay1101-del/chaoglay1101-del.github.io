@@ -146,6 +146,31 @@ evenly across that range; it is not an observed cohort percentile rank. The copy
 says "of the … range" rather than "of the cohort" for that reason. If an actual
 percentile or rank is ever obtained, use that figure and reword the line.
 
+### Business analytics project
+
+The Tableau project is described with figures measured from the coursework files
+rather than from memory. Each of these was read off the data and is safe to
+quote:
+
+| Figure | Where it comes from |
+| --- | --- |
+| 437 coded fields, 174 economies, 12 population groups across six survey waves (2011–2024) | `GlobalFindexDatabase2025.csv`, the World Bank Global Findex extract used for the project |
+| 24 business-readable measures | `GlobalFindex_Fintech_Cleaned.xlsx`, the cleaned analysis file the Tableau story reads |
+| 171 economies and four waves (2014, 2017, 2021, 2024) | the same file once the 2011 and 2022 waves are excluded for coverage; the report applies that exclusion as a Tableau filter |
+| Five dashboards: Mobile Money Boom, Leapfrogging the Plastic Era, The Catch-Up, The Usage Paradox, Platform Transformation | the report's contents page and its dashboard sections |
+
+Do not add a figure that cannot be traced to those files. The source document
+also contains a student identifier, the tutor's name, and the assessment cover
+sheet: those must never be published, and none of them appear on the site.
+
+The findings quoted on the site are the ones the report states — mobile money
+adoption leads in Sub-Saharan Africa, digital payment use runs ahead of
+debit-card ownership, savings lag behind payment usage, and mobile money drives
+women's financial participation further than traditional banking does. The
+project's own critical assessments (no transaction-level data, no qualitative
+evidence, and the chart types that would have worked better) are quoted as
+limits, in the same spirit as the research project's limitations.
+
 ## The one-page CV
 
 `cv-onepage.html` is the version to send with an application. It is a separate
@@ -181,8 +206,13 @@ HTML rather than maintained by hand, so they cannot drift away from the pages:
 | --- | --- | --- |
 | `Chao_YuChen_CV_EN.pdf` | `cv-onepage.html` | one A4 page |
 | `Chao_YuChen_CV_ZH.pdf` | `cv-onepage.html?lang=zh` | one A4 page |
-| `Chao_YuChen_CV_Full_EN.pdf` | `cv.html` | four pages |
-| `Chao_YuChen_CV_Full_ZH.pdf` | `cv.html?lang=zh` | four pages |
+| `Chao_YuChen_CV_Full_EN.pdf` | `cv.html` | the complete record |
+| `Chao_YuChen_CV_Full_ZH.pdf` | `cv.html?lang=zh` | the complete record |
+
+The full CVs run to four or five pages depending on the language, so no page
+count is promised in the copy: only the one-page CV asserts a single sheet, and
+the build is what checks it. Any page count written into a label will go stale
+the next time a bullet is added.
 
 Rebuild them after any copy change:
 
