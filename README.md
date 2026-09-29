@@ -26,10 +26,38 @@ Two consequences are deliberate, and both should stay in mind when editing:
   repeated on the home page, because a recruiter reads it as noise;
 - `cv.html` comes before `research.html` in every navigation menu.
 
+## Content conventions
+
+Three rules decide how the copy is written. They were chosen by comparing this
+site with established personal sites in the same position — a graduate site that
+reads well states capability as value, sources every number, and states limits as
+plainly as results.
+
+1. **Capability is written as value, not as a tool list.** The "What I bring"
+   section on the home page (`#contribute`) exists for this reason. The `#skills`
+   section below it is still a tool inventory, and that is fine for keyword
+   matching, but a reader should not have to infer what the author can do from a
+   list of libraries.
+2. **Every number is traceable.** The credentials strip carries a note saying
+   where its figures come from, and the class-relative figures behind the two
+   marks are shown next to the project each belongs to rather than asserted in
+   the hero. If a number cannot be traced to a file or a documented result, it
+   does not go on the site.
+3. **Limits get the same space as results.** Both projects say in writing what
+   the evidence cannot support. This is a differentiator, not a weakness to
+   soften, and it is the reason the research agenda section reads as a plan
+   rather than a set of findings.
+
+What deliberately does **not** appear: service-selling framing ("how I can help
+you"), scale metrics the author does not have, awards and social feeds that would
+be empty, and any test score that has not been obtained. Comparisons with other
+sites are useful for structure, not for claims.
+
+
 ## Layout
 
 ```text
-index.html                     Home: what I am looking for, about, research summary, experience, education, skills, work, contact
+index.html                     Home: what I am looking for, about, what I bring, research summary, experience, education, skills, work, contact
 research.html                  Research: question, data, method, results, limitations, research agenda, reproducibility, sources
 cv.html                        CV: the complete record, profile through to notes
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
