@@ -162,8 +162,8 @@ than a proper noun is wired into the translation workflow:
 | --- | --- |
 | Location: New Taipei City, Taiwan | `cv.html` hero, key `cv.contact.location` |
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `cv.html` hero and the `index.html` contact card |
-| Degree: 30 September 2024 – 22 June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, conferment 12 November 2026 | `cv.html` (`cv.edu.meta`), `index.html` (`home.edu.dates`, `home.edu.record`) |
-| Internship: Tax Advisory Intern, Evershine CPAs Firm, 14 July – 12 September 2025, Philippines tax incentive applications and SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
+| Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree to be conferred 12 November 2026 | `cv.html` (`cv.edu.meta`), `index.html` (`home.edu.dates`, `home.edu.record`) |
+| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, embedded in the home page and CV | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
@@ -175,20 +175,17 @@ edit the English text in the HTML and update the matching key in
 ### Assessed project marks
 
 Project marks are kept separate from the module results printed on the
-transcript. The 77/100 research-project module result and 70/100 Business
-Analytics result below are the official transcript marks; the 80/100 report
-mark is a separate assessment worth 65% of its module:
+transcript. The 77/100 research-project module result is the official transcript
+mark; the 80/100 research-project component is worth 65% of that module. The
+Business Analytics module result is 70/100:
 
 | Transcript module | Transcript result | Separate assessment detail |
 | --- | --- | --- |
-| Accounting and Finance Research Project | 77/100 · Pass | Research report: 80/100 (65% of module); top 8.6% of the 37.5–84 report-mark range |
-| Business Analytics | 70/100 · Pass | Tableau story project |
+| Accounting and Finance Research Project | 77/100 · Pass | Research project component: 80/100 (65% of module); 13 points above the component class average (67); class maximum 84 |
+| Business Analytics | 70/100 · Pass | 6.3 points above the class average (63.7); class maximum 76; Tableau story project |
 
-Note what the position figure is and is not. It is the mark's place inside the
-range between the reported minimum and maximum, so it assumes marks are spread
-evenly across that range; it is not an observed cohort percentile rank. The copy
-says "of the … range" rather than "of the cohort" for that reason. If an actual
-percentile or rank is ever obtained, use that figure and reword the line.
+Class averages and maxima are shown as supplied supplemental coursework data;
+the transcript module totals remain the official recorded results.
 
 ### Business analytics project
 
