@@ -308,7 +308,7 @@
               <th scope="col" class="num" data-i18n="research.results.coef">Coefficient</th>
               <th scope="col" class="num" data-i18n="research.results.se">Std. error</th>
               <th scope="col" class="num" data-i18n="research.results.obs">Observations</th>
-              <th scope="col" class="num" data-i18n="research.results.r2">R²</th>
+              <th scope="col" class="num" data-i18n="research.results.rsq">R²</th>
               <th scope="col" data-i18n="research.results.interp">Interpretation</th>
             </tr>
           </thead>
@@ -385,16 +385,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row" data-i18n="research.robust.t1">Driscoll–Kraay SE (Model 4)</th><td>−0.0102, SE 0.0035, p = 0.004 (bank-clustered p = 0.048)</td><td data-i18n="research.robust.r1">Still significant when cross-sectional dependence is allowed</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t2">Driscoll–Kraay SE (Model 6 linear term)</th><td>−0.0108, SE 0.0032, p = 0.001 (bank-clustered p = 0.047)</td><td data-i18n="research.robust.r2">Same</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t1">Driscoll–Kraay SE (Model 4)</th><td data-i18n="research.robust.e1">−0.0102, SE 0.0035, p = 0.004 (bank-clustered p = 0.048)</td><td data-i18n="research.robust.r1">Still significant when cross-sectional dependence is allowed</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t2">Driscoll–Kraay SE (Model 6 linear term)</th><td data-i18n="research.robust.e2">−0.0108, SE 0.0032, p = 0.001 (bank-clustered p = 0.047)</td><td data-i18n="research.robust.r2">Same</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t3">Mundlak decomposition: within</th><td>−0.0049, SE 0.0079, p = 0.53</td><td data-i18n="research.robust.r3">No within-country association</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t4">Mundlak decomposition: between</th><td>−0.0124, SE 0.0175, p = 0.48</td><td data-i18n="research.robust.r4">Same sign and size as the pooled estimate; imprecise with three countries</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t5">Within-only fixed effects</th><td>−0.0035, SE 0.0083, p = 0.67</td><td data-i18n="research.robust.r5">Not significant</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t6">Country subsamples, no year effects</th><td data-i18n="research.robust.e6">Indonesia −0.001420 (0.014970); Malaysia +0.005521 (0.005378); Thailand +0.001687* (0.000870)</td><td data-i18n="research.robust.r6">Not uniform; Thailand weakly positive</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t7">Exclude 2020</th><td>Model 4 −0.008006 (0.004941), p = 0.106, n = 305</td><td data-i18n="research.robust.r7">Similar size, less precise</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t7">Exclude 2020</th><td data-i18n="research.robust.e7">Model 4 −0.008006 (0.004941), p = 0.106, n = 305</td><td data-i18n="research.robust.r7">Similar size, less precise</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t8">Net interest margin placebo</th><td>0.004125 (0.005450), p = 0.45, n = 335</td><td data-i18n="research.robust.r8">No effect on the lending margin: the pressure shows in the fee channel</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t9">One-year lag of regressor</th><td>−0.015901* (0.008475), p = 0.062, n = 305</td><td data-i18n="research.robust.r9">Larger and negative; eases the reverse-causality concern</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t10">Exclude Islamic and digital-challenger banks</th><td>−0.004328 (0.002631), p = 0.101, n = 273, 31 banks</td><td data-i18n="research.robust.r10">Smaller; part of the pooled size comes from this high-margin segment</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t10">Exclude Islamic and digital-challenger banks</th><td data-i18n="research.robust.e10">−0.004328 (0.002631), p = 0.101, n = 273, 31 banks</td><td data-i18n="research.robust.r10">Smaller; part of the pooled size comes from this high-margin segment</td></tr>
           </tbody>
         </table>
       </div>
