@@ -140,10 +140,18 @@ uv run python 10_Personal_Website/tools/_check_i18n.py    # Chinese coverage and
 uv run python 10_Personal_Website/tools/_list_i18n.py     # every key in document order
 uv run python 10_Personal_Website/tools/_build_cv_pdfs.py # rebuild assets/pdf/ with headless Chrome
 uv run python 10_Personal_Website/tools/_check_stale.py <rev>  # Chinese left behind by a copy rewrite
+uv run python 10_Personal_Website/tools/_publish.py      # run every check above, then audit a publish
 ```
 
 `_check_i18n.py`, `_preview_zh.py`, and `_check_stale.py` write reports into
 `tools/` (ignored by git) and exit non-zero when something needs attention.
+
+`_publish.py` is the one to reach for before publishing, and it is safe to run
+at any time: it validates, refuses to work from a dirty folder, works out which
+revision is live, runs the staleness check against it, splits, and then prints
+exactly which files would become public. **It does not push unless you pass
+`--push`.** The manual sequence in "Deploying to the user site" below is what it
+does, in order.
 
 ## Personal details
 
@@ -154,8 +162,9 @@ than a proper noun is wired into the translation workflow:
 | --- | --- |
 | Location: New Taipei City, Taiwan | `cv.html` hero, key `cv.contact.location` |
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `cv.html` hero and the `index.html` contact card |
-| Degree: September 2024 – July 2026, Upper Second-Class Honours (2:1), GPA 3.25, ceremony November 2026 | `cv.html` (`cv.edu.meta`), `index.html` (`home.edu.dates`, `home.edu.record`) |
-| Internship: Tax Advisory Intern, Evershine CPAs Firm, July – August 2025, Philippines tax incentive applications and SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
+| Degree: 30 September 2024 – 22 June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, conferment 12 November 2026 | `cv.html` (`cv.edu.meta`), `index.html` (`home.edu.dates`, `home.edu.record`) |
+| Internship: Tax Advisory Intern, Evershine CPAs Firm, 14 July – 12 September 2025, Philippines tax incentive applications and SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
+| Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, embedded in the home page and CV | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
 been removed. The firm's office location was not supplied, so both pages list the
@@ -165,14 +174,15 @@ edit the English text in the HTML and update the matching key in
 
 ### Assessed project marks
 
-Both assessed projects carry a highlighted mark line (`.timeline-grade` in
-`styles.css`), giving the score, the UK classification, the gap to the class
-average, and the position within the class mark range:
+Project marks are kept separate from the module results printed on the
+transcript. The 77/100 research-project module result and 70/100 Business
+Analytics result below are the official transcript marks; the 80/100 report
+mark is a separate assessment worth 65% of its module:
 
-| Project | Mark | Class average | Position in the class range |
-| --- | --- | --- | --- |
-| Research Project (Research Report) | 80/100 · First Class (1st) | 67, so +13 | top 8.6% of the 37.5–84 range |
-| Business Analytics (Singapore) | 70/100 · First Class (1st) | 63.7, so +6.3 | top 15.4% of the 37–76 range |
+| Transcript module | Transcript result | Separate assessment detail |
+| --- | --- | --- |
+| Accounting and Finance Research Project | 77/100 · Pass | Research report: 80/100 (65% of module); top 8.6% of the 37.5–84 report-mark range |
+| Business Analytics | 70/100 · Pass | Tableau story project |
 
 Note what the position figure is and is not. It is the mark's place inside the
 range between the reported minimum and maximum, so it assumes marks are spread
@@ -339,12 +349,26 @@ for a repository named after the account, so no settings change is needed.
 
 `https://chaoglay1101-del.github.io/` is the root of a separate repository named
 `chaoglay1101-del.github.io`. `git subtree` publishes this folder there without
-duplicating the source, so this repository stays the single source of truth:
+duplicating the source, so this repository stays the single source of truth.
+
+`tools/_publish.py` runs the whole sequence and stops at the first thing that
+looks wrong. Without `--push` it only reports, which is the useful half: the
+audit names every file that would become public before it becomes public.
 
 ```powershell
 # one-off: point a remote at the published site repository
 git remote add site https://github.com/chaoglay1101-del/chaoglay1101-del.github.io.git
 
+# validate everything, split, and list what would go public. Nothing is pushed.
+uv run python 10_Personal_Website/tools/_publish.py
+
+# publish, then confirm the live pages answer
+uv run python 10_Personal_Website/tools/_publish.py --push --verify-live
+```
+
+The equivalent by hand, which is what that script does in order:
+
+```powershell
 # publish. The split is a separate step so the exact file list can be checked
 # before it becomes public.
 git subtree split --prefix=10_Personal_Website -b site-publish
@@ -365,9 +389,13 @@ One trap worth remembering: **`git subtree` only publishes tracked files**, and
 `robots.txt` was excluded by the blanket `*.txt` rule, and the CVs in
 `assets/pdf/` would have been excluded by the blanket `*.pdf` rule. Both needed a
 negation rule at the end of `.gitignore`, where a later rule wins.
-`git ls-tree -r site-publish --name-only` before the push is the check that
-catches it, so keep running it and confirm that `robots.txt` and
-`assets/pdf/Chao_YuChen_CV_EN.pdf` are both in the list.
+
+`_publish.py` turns that habit into a gate: it fails when a file the pages link
+to is absent from the split, and it fails when a file that should never be public
+is present in it, since the whole folder is published including `tools/`. So the
+third time this happens it stops the push instead of reaching the site.
+`git ls-tree -r site-publish --name-only` is still worth reading, and the script
+prints it as the list of files that would become public.
 
 ## Social sharing
 
