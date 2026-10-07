@@ -58,6 +58,7 @@
       <div class="hero-text">
         <p class="hero-name" data-i18n="research.eyebrow">Research</p>
         <h1 data-i18n="research.title">Digital payment pressure and bank net fee margins</h1>
+        <p class="small" data-i18n="research.formalTitle">Thesis title: The Impact of Digital Payment Pressure on Banks' Fee-Based Income: Evidence from ASEAN Banking Markets</p>
         <p class="hero-role" data-i18n="research.subtitle">Evidence from an ASEAN-3 bank panel, 2014–2022</p>
         <p class="lede" data-i18n="research.lede">This page is the readable version of my undergraduate research. It states the question, how the panel was built, what the fixed-effects models show, and — at the same length — what the design cannot tell you.</p>
         <div class="btn-group">
@@ -97,7 +98,7 @@
       <div class="callout">
         <p data-i18n="research.q.question">Is digital payment pressure associated with bank net fee margins in Indonesia, Malaysia, and Thailand?</p>
       </div>
-      <p data-i18n="research.q.body">The study does not assume that digital payments help or hurt banks. Digitalisation can affect fee income through several channels at once, and they push in different directions:</p>
+      <p data-i18n="research.q.body">The question grew out of my Business Analytics Tableau project (December 2025). The study does not assume that digital payments help or hurt banks. Digitalisation can affect fee income through several channels at once, and they push in different directions:</p>
       <div class="grid grid-2">
         <div class="card">
           <span class="card-tag" data-i18n="research.q.c1tag">Channel 1</span>
@@ -120,6 +121,46 @@
           <p data-i18n="research.q.c4body">Payment infrastructure, regulation, financial inclusion, and bank business models differ substantially across countries.</p>
         </div>
       </div>
+      <h3 data-i18n="research.hyp.heading">Two competing hypotheses, and two refinements</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="research.hyp.col1">Hypothesis</th>
+              <th scope="col" data-i18n="research.hyp.col2">Theory</th>
+              <th scope="col" data-i18n="research.hyp.col3">Prediction</th>
+              <th scope="col" data-i18n="research.hyp.col4">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" data-i18n="research.hyp.h1a">H1a Substitution</th>
+              <td data-i18n="research.hyp.h1atheory">Contestable markets (Baumol, 1982); liquidity adjustment costs (Verdier, 2024)</td>
+              <td>β₁ &lt; 0</td>
+              <td data-i18n="research.hyp.h1aresult">Consistent: negative and significant at 5% in the pooled log model</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.hyp.h1b">H1b Complementarity</th>
+              <td data-i18n="research.hyp.h1btheory">Delegated monitoring (Diamond, 1984); bank–FinTech coexistence (Thakor, 2020); API and B2B alliances (Brandl and Hornuf, 2020)</td>
+              <td>β₁ &gt; 0</td>
+              <td data-i18n="research.hyp.h1bresult">Not supported</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.hyp.h2">H2 Scale heterogeneity</th>
+              <td data-i18n="research.hyp.h2theory">Scale economies in technology (Berger, 2003)</td>
+              <td data-i18n="research.hyp.h2prediction">Larger banks more resilient</td>
+              <td data-i18n="research.hyp.h2result">Not supported: interaction −0.003930 (n.s.)</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.hyp.h3">H3 Non-linear transition</th>
+              <td data-i18n="research.hyp.h3theory">Substitution first, complementarity as markets mature</td>
+              <td data-i18n="research.hyp.h3prediction">U-shape, β₂ &gt; 0</td>
+              <td data-i18n="research.hyp.h3result">Not supported: squared term −0.001988 (n.s.)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" data-i18n="research.hyp.note">H1a and H1b need not be mutually exclusive: competitive pressure may dominate early, while intermediation and platform channels strengthen as infrastructure matures, which is what H3 tests.</p>
       <p class="small muted" data-i18n="research.q.caution">Because these channels can offset each other, a negative coefficient would not by itself show that digital payments reduce bank income. It could reflect market composition, country-specific institutions, or omitted factors that move together with both payment activity and bank outcomes.</p>
     </div>
   </section>
@@ -147,7 +188,7 @@
             </tr>
             <tr>
               <th scope="row" data-i18n="research.data.s2">Banks</th>
-              <td>39</td>
+              <td data-i18n="research.data.s2v">39 publicly traded commercial banks and banking groups (including 3 Islamic and 5 digital-challenger banks)</td>
             </tr>
             <tr>
               <th scope="row" data-i18n="research.data.s3">Bank-year observations</th>
@@ -161,6 +202,14 @@
               <th scope="row" data-i18n="research.data.s5">Study design</th>
               <td data-i18n="research.data.s5v">ASEAN-5 was originally planned; the selected indicator was not consistently available for the Philippines and Singapore</td>
             </tr>
+            <tr>
+              <th scope="row" data-i18n="research.data.s6">Observations by country</th>
+              <td data-i18n="research.data.s6v">Indonesia 200 · Malaysia 81 · Thailand 63</td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.data.s7">Period rationale</th>
+              <td data-i18n="research.data.s7v">2014: 4G roll-out and systematic payment monitoring begin; 2022: last year with complete audited reports for every bank.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -170,18 +219,18 @@
           <span class="card-tag" data-i18n="research.data.c1tag">Outcome and controls</span>
           <h3 data-i18n="research.data.c1title">Bank-year variables</h3>
           <ul class="card-list">
-            <li><code>Net_Fee_Margin</code> — <span data-i18n="research.data.c1v1">net fee income relative to total assets.</span></li>
-            <li><code>Size_USD</code> — <span data-i18n="research.data.c1v2">bank scale.</span></li>
-            <li><code>Capital_Adequacy_Proxy</code> — <span data-i18n="research.data.c1v3">equity relative to total assets.</span></li>
-            <li><code>Credit_Risk</code> — <span data-i18n="research.data.c1v4">asset-quality exposure.</span></li>
-            <li><code>Interest_Expense_Ratio</code> — <span data-i18n="research.data.c1v5">funding cost.</span></li>
-            <li><code>Deposit_Ratio</code> — <span data-i18n="research.data.c1v6">funding structure.</span></li>
+            <li><code>Net_Fee_Margin</code> — <span data-i18n="research.data.c1v1">net fee and commission income relative to total assets, proxied by Compustat Global total non-interest income — the closest series available consistently across the three markets, which also contains trading and other non-interest revenue.</span></li>
+            <li><code>Size_USD</code> — <span data-i18n="research.data.c1v2">natural log of total assets converted into US dollars.</span></li>
+            <li><code>Capital_Adequacy_Proxy</code> — <span data-i18n="research.data.c1v3">equity-to-assets ratio (EQRAT in the thesis): book equity / total assets.</span></li>
+            <li><code>Credit_Risk</code> — <span data-i18n="research.data.c1v4">loan loss provisions / total assets.</span></li>
+            <li><code>Interest_Expense_Ratio</code> — <span data-i18n="research.data.c1v5">interest expense / total assets.</span></li>
+            <li><code>Deposit_Ratio</code> — <span data-i18n="research.data.c1v6">total deposits / total assets.</span></li>
           </ul>
         </div>
         <div class="card">
           <span class="card-tag" data-i18n="research.data.c2tag">Explanatory measure</span>
           <h3 data-i18n="research.data.c2title">Country-year digital payment pressure</h3>
-          <p data-i18n-html="research.data.c2body">The explanatory variable comes from the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, used with the unit <code>PT_GDP</code>: mobile and internet banking transactions as a percentage of GDP.</p>
+          <p data-i18n-html="research.data.c2body">The explanatory variable comes from the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, used with the unit <code>PT_GDP</code>: mobile and internet banking transactions as a percentage of GDP. It counts transactions processed by banks themselves, not by non-bank FinTech platforms. Between 2014 and 2022 it rose from 111% to 268% of GDP in Indonesia, from 366% to 719% in Malaysia and from 124% to 532% in Thailand. In the linear models one unit equals 10 percentage points of GDP (<code>DPP_10pct_GDP</code>); the refined models use ln(1 + DPP).</p>
           <ul class="card-list">
             <li data-i18n="research.data.c2v1">The indicator source is public; generated extraction files are not committed to the repository.</li>
             <li data-i18n="research.data.c2v2">Availability, definitions, and reuse terms can change, so the workflow documents how the indicator was discovered and selected instead of treating it as a black box.</li>
@@ -222,7 +271,7 @@
           <ul class="card-list">
             <li data-i18n="research.method.c1v1">A complete-case sample is formed on the required outcome, explanatory variable, and controls so specifications are comparable.</li>
             <li data-i18n="research.method.c1v2">Continuous variables are winsorised at the 1st and 99th percentiles within the analysis sample.</li>
-            <li data-i18n="research.method.c1v3">Standard errors are clustered at the bank level to account for dependence within bank histories.</li>
+            <li data-i18n="research.method.c1v3">Standard errors are clustered at the bank level to account for dependence within bank histories. Driscoll–Kraay standard errors, robust to cross-sectional dependence, are reported alongside.</li>
             <li data-i18n="research.method.c1v4">Country subsamples keep bank fixed effects and drop year effects, because a country-year explanatory variable would otherwise be absorbed in a single-country model.</li>
           </ul>
         </div>
@@ -236,6 +285,7 @@
             <li data-i18n-html="research.method.c2v4">A bank-size interaction (<code>Digital_x_LargeBank</code>).</li>
             <li data-i18n="research.method.c2v5">A centred nonlinear specification with a squared log term.</li>
             <li data-i18n="research.method.c2v6">Country-subsample estimates of the log specification.</li>
+            <li data-i18n="research.method.c2v7">Robustness: Driscoll–Kraay standard errors, a Mundlak between/within decomposition, excluding 2020, a net-interest-margin placebo, a one-year lag, and excluding Islamic and digital-challenger banks.</li>
           </ul>
         </div>
       </div>
@@ -251,45 +301,65 @@
       </div>
       <div class="table-wrap">
         <table>
-          <caption data-i18n="research.results.caption">Digital-payment coefficient by specification. * p &lt; 0.10, ** p &lt; 0.05.</caption>
+          <caption data-i18n="research.results.caption">Digital-payment coefficient by specification. Bank-clustered standard errors. * p &lt; 0.10, ** p &lt; 0.05.</caption>
           <thead>
             <tr>
               <th scope="col" data-i18n="research.results.spec">Specification</th>
               <th scope="col" class="num" data-i18n="research.results.coef">Coefficient</th>
+              <th scope="col" class="num" data-i18n="research.results.se">Std. error</th>
               <th scope="col" class="num" data-i18n="research.results.obs">Observations</th>
+              <th scope="col" class="num" data-i18n="research.results.r2">R²</th>
               <th scope="col" data-i18n="research.results.interp">Interpretation</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row" data-i18n="research.results.r1spec">Main model, scaled measure</th>
-              <td class="num">−0.00292*</td>
+              <td class="num">−0.000292*</td>
+              <td class="num">(0.000177)</td>
               <td class="num">344</td>
+              <td class="num">0.0065</td>
               <td><span class="badge badge-sig" data-i18n="research.results.badgeMarginal">Marginal</span> <span data-i18n="research.results.r1">Negative association with marginal statistical evidence.</span></td>
             </tr>
             <tr>
               <th scope="row" data-i18n="research.results.r2spec">Main model with controls</th>
-              <td class="num">−0.00264</td>
+              <td class="num">−0.000264</td>
+              <td class="num">(0.000201)</td>
               <td class="num">344</td>
+              <td class="num">0.0241</td>
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r2">Negative sign but no statistical evidence.</span></td>
             </tr>
             <tr>
               <th scope="row" data-i18n="research.results.r3spec">Full controls model</th>
-              <td class="num">−0.00208</td>
+              <td class="num">−0.000208</td>
+              <td class="num">(0.000333)</td>
               <td class="num">344</td>
+              <td class="num">0.0739</td>
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r3">Negative sign but no statistical evidence.</span></td>
             </tr>
             <tr>
               <th scope="row" data-i18n="research.results.r4spec">Log baseline model</th>
-              <td class="num">−0.10171**</td>
+              <td class="num">−0.010171**</td>
+              <td class="num">(0.005116)</td>
               <td class="num">344</td>
+              <td class="num">0.0757</td>
               <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r4">Negative, statistically significant pooled association.</span></td>
             </tr>
             <tr>
-              <th scope="row" data-i18n="research.results.r5spec">Nonlinear model</th>
-              <td class="num">−0.10829**</td>
+              <th scope="row" data-i18n="research.results.r4bspec">Size interaction model</th>
+              <td class="num">−0.006507</td>
+              <td class="num">(0.005227)</td>
               <td class="num">344</td>
-              <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r5">Negative linear term; the squared term is not significant.</span></td>
+              <td class="num">0.0796</td>
+              <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r4b">Neither the Large Bank dummy nor its interaction with log pressure (−0.003930) is significant.</span></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="research.results.r5spec">Nonlinear model</th>
+              <td class="num">−0.010829**</td>
+              <td class="num">(0.005432)</td>
+              <td class="num">344</td>
+              <td class="num">0.0766</td>
+              <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r5">Negative linear term; the squared term (−0.001988) is not significant, so there is no U-shaped recovery.</span></td>
             </tr>
           </tbody>
         </table>
@@ -301,8 +371,34 @@
           <li data-i18n="research.results.read1">The scaled and log models use different units, so the coefficient sizes are not comparable across rows; only the sign and significance are.</li>
           <li data-i18n="research.results.read2">The pooled log association is statistically significant, but country subsamples are heterogeneous, and decomposition suggests the pooled result may substantially reflect differences between countries rather than a shared within-country mechanism.</li>
           <li data-i18n="research.results.read3">Statistical significance is not the same as economic importance, and neither is the same as causality.</li>
+          <li data-i18n="research.results.read4">Economic size: in the log model, doubling digital-payment intensity is associated with a net fee margin about 0.71 percentage points of total assets lower (roughly 70 basis points), about 39% of the sample mean of 1.81%. Against the median (1.10%) the share is larger, so the percentage depends on the base.</li>
         </ul>
       </div>
+      <h3 data-i18n="research.robust.heading">Robustness and diagnostics</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="research.robust.test">Test</th>
+              <th scope="col" data-i18n="research.robust.estimate">Estimate</th>
+              <th scope="col" data-i18n="research.robust.interpretation">Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" data-i18n="research.robust.t1">Driscoll–Kraay SE (Model 4)</th><td>−0.0102, SE 0.0035, p = 0.004 (bank-clustered p = 0.048)</td><td data-i18n="research.robust.r1">Still significant when cross-sectional dependence is allowed</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t2">Driscoll–Kraay SE (Model 6 linear term)</th><td>−0.0108, SE 0.0032, p = 0.001 (bank-clustered p = 0.047)</td><td data-i18n="research.robust.r2">Same</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t3">Mundlak decomposition: within</th><td>−0.0049, SE 0.0079, p = 0.53</td><td data-i18n="research.robust.r3">No within-country association</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t4">Mundlak decomposition: between</th><td>−0.0124, SE 0.0175, p = 0.48</td><td data-i18n="research.robust.r4">Same sign and size as the pooled estimate; imprecise with three countries</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t5">Within-only fixed effects</th><td>−0.0035, SE 0.0083, p = 0.67</td><td data-i18n="research.robust.r5">Not significant</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t6">Country subsamples, no year effects</th><td data-i18n="research.robust.e6">Indonesia −0.001420 (0.014970); Malaysia +0.005521 (0.005378); Thailand +0.001687* (0.000870)</td><td data-i18n="research.robust.r6">Not uniform; Thailand weakly positive</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t7">Exclude 2020</th><td>Model 4 −0.008006 (0.004941), p = 0.106, n = 305</td><td data-i18n="research.robust.r7">Similar size, less precise</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t8">Net interest margin placebo</th><td>0.004125 (0.005450), p = 0.45, n = 335</td><td data-i18n="research.robust.r8">No effect on the lending margin: the pressure shows in the fee channel</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t9">One-year lag of regressor</th><td>−0.015901* (0.008475), p = 0.062, n = 305</td><td data-i18n="research.robust.r9">Larger and negative; eases the reverse-causality concern</td></tr>
+            <tr><th scope="row" data-i18n="research.robust.t10">Exclude Islamic and digital-challenger banks</th><td>−0.004328 (0.002631), p = 0.101, n = 273, 31 banks</td><td data-i18n="research.robust.r10">Smaller; part of the pooled size comes from this high-margin segment</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p data-i18n="research.robust.interp">The pooled negative association comes mainly from differences between countries — Indonesia averages a net fee margin of 0.022 at a digital intensity of 164% of GDP, Thailand 0.012 at 271%, Malaysia 0.012 at 540% — rather than from change within each country over time. That is the pattern contestable-markets theory predicts, because contestability is a property of market structure and entry conditions differ: Indonesia licenses e-money and peer-to-peer providers openly, Malaysia has issued digital-bank licences against mature incumbents, and Thailand's virtual-bank framework is led by incumbents — and it is in Thailand that the coefficient is weakly positive.</p>
     </div>
   </section>
 
@@ -311,15 +407,17 @@
       <div class="section-head">
         <span class="eyebrow" data-i18n="research.limits.eyebrow">Limitations</span>
         <h2 data-i18n="research.limits.heading">What this study cannot claim</h2>
-        <p data-i18n="research.limits.lede">The results are conditional associations, not causal estimates. Six constraints explain why.</p>
+        <p data-i18n="research.limits.lede">The results are conditional associations, not causal estimates. Eight constraints explain why.</p>
       </div>
       <ol class="card-list">
         <li data-i18n="research.limits.l1">Interpretation: a coefficient describes an association under a model, not an identified causal effect.</li>
-        <li data-i18n="research.limits.l2">Data level: the explanatory measure varies at the country-year level while the outcome is bank-level, which limits available within-country variation.</li>
+        <li data-i18n="research.limits.l2">Data level and cluster counts: the explanatory measure varies only at the country-year level (about 27 distinct values across three countries and nine years), so the pooled estimate rests on few macro movements. Bank-level clustering (39 clusters) does not address cross-sectional correlation, which is why Driscoll–Kraay errors are also reported; country subsamples also have few clusters (9 Malaysian and 7 Thai banks).</li>
         <li data-i18n="research.limits.l3">Coverage: three countries are included, so the study should not be generalised to ASEAN-5 or all banking markets.</li>
         <li data-i18n="research.limits.l4">Omitted variables: regulation, payment infrastructure, macroeconomic conditions, and market concentration may affect both digital payments and fee margins.</li>
-        <li data-i18n="research.limits.l5">Income aggregation: net fee margin does not separate payments, cards, merchant services, wealth management, or other non-interest income.</li>
+        <li data-i18n="research.limits.l5">Income aggregation: the outcome is total non-interest income over assets, so it cannot separate payment, card, merchant-service or wealth-management fees, and it also contains trading and other non-interest revenue.</li>
         <li data-i18n="research.limits.l6">Data access: the underlying bank panel cannot be redistributed, so the thesis regressions are inspectable but not publicly rerunnable.</li>
+        <li data-i18n="research.limits.l7">What the pressure measure counts: the IMF indicator records banks' own mobile and internet banking transactions, not activity on non-bank FinTech platforms, so it measures the digital intensity banks operate in rather than direct FinTech competition.</li>
+        <li data-i18n="research.limits.l8">Sample balance and timing: Indonesian banks supply 200 of the 344 observations (58%), weighting the pooled estimate toward that market, and reverse causality cannot be ruled out, although the lagged-regressor test reduces the concern.</li>
       </ol>
     </div>
   </section>
@@ -335,17 +433,17 @@
         <div class="card">
           <span class="card-tag" data-i18n="research.agenda.q1tag">Identification</span>
           <h3 data-i18n="research.agenda.q1title">Separating within-country change from between-country structure</h3>
-          <p data-i18n="research.agenda.q1body">The between-within decomposition is the starting point: how much of the pooled association survives once country structure is set aside, and what data would be needed to identify a within-country effect?</p>
+          <p data-i18n="research.agenda.q1body">The decomposition is the starting point: the within-country coefficient is −0.0049 (p = 0.53) against a between-country −0.0124. The open question is what data would identify a within-country effect.</p>
         </div>
         <div class="card">
           <span class="card-tag" data-i18n="research.agenda.q2tag">Heterogeneity</span>
           <h3 data-i18n="research.agenda.q2title">Which banks, and which business models</h3>
-          <p data-i18n="research.agenda.q2body">Do the relationships differ by size, ownership, or reliance on fee income? The size interaction was one specification; a systematic treatment of bank heterogeneity is the natural next step.</p>
+          <p data-i18n="research.agenda.q2body">Size alone did not explain exposure: neither the Large Bank dummy nor its interaction was significant. Better measures of digital resilience, such as IT expenditure or the depth of platform and API partnerships, are the next step, alongside ownership and reliance on fee income.</p>
         </div>
         <div class="card">
           <span class="card-tag" data-i18n="research.agenda.q3tag">Design</span>
           <h3 data-i18n="research.agenda.q3title">Designs that can identify a policy event</h3>
-          <p data-i18n="research.agenda.q3body">Payment infrastructure changes, licensing decisions, and open-banking rules are candidate events. A difference-in-differences or event-study design would have to pass parallel-trends and treatment-definition tests first, and the inference would need to allow for cross-sectional dependence.</p>
+          <p data-i18n="research.agenda.q3body">Staggered payment-licensing reforms are candidate events: Indonesia's e-money and peer-to-peer licensing, Malaysia's digital-bank licences (2020) and Thailand's virtual-bank framework (2024). A difference-in-differences or event-study design would first have to pass parallel-trends and treatment-definition tests, with inference suited to few clusters, such as a wild-cluster bootstrap.</p>
         </div>
         <div class="card">
           <span class="card-tag" data-i18n="research.agenda.q4tag">Measurement</span>
@@ -413,11 +511,30 @@ uv run pytest</div>
           <ul class="card-list">
             <li data-i18n="research.repro.c2v1">Disaggregate non-interest income into payments, cards, merchant services, and wealth management.</li>
             <li data-i18n="research.repro.c2v2">Broaden country coverage to restore the ASEAN-5 design.</li>
-            <li data-i18n="research.repro.c2v3">Move towards identification: payment infrastructure or licensing changes, difference-in-differences or event designs, lagged explanatory variables, and dynamic panel methods.</li>
-            <li data-i18n="research.repro.c2v4">Consider cross-sectional dependence in inference, for example Driscoll–Kraay standard errors.</li>
+            <li data-i18n="research.repro.c2v3">Move towards identification: staggered payment-licensing reforms as quasi-experiments, difference-in-differences or event-study designs, an external instrument for digital adoption, and dynamic panel methods. (A one-year lag of the regressor is already reported in the thesis.)</li>
+            <li data-i18n="research.repro.c2v4">Strengthen inference with few clusters: a wild-cluster bootstrap now, and country-level clustering once more countries are added. (Driscoll–Kraay standard errors are already reported in the thesis.)</li>
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="ai-use">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.ai.eyebrow">Research process</span>
+        <h2 data-i18n="research.ai.heading">Generative AI use</h2>
+        <p data-i18n="research.ai.tools">Tools used: ChatGPT, Claude, Google Gemini, and NotebookLM.</p>
+      </div>
+      <ul class="card-list">
+        <li data-i18n="research.ai.use1">Brainstorming and identifying weaknesses in ideas.</li>
+        <li data-i18n="research.ai.use2">Preliminary summaries of concepts and literature.</li>
+        <li data-i18n="research.ai.use3">Planning the research schedule.</li>
+        <li data-i18n="research.ai.use4">Grammar and spelling checks.</li>
+        <li data-i18n="research.ai.use5">Assistance with regression and data-cleaning code.</li>
+        <li data-i18n="research.ai.use6">Reference formatting.</li>
+      </ul>
+      <p class="small muted" data-i18n="research.ai.statement">All outputs were critically reviewed and independently verified.</p>
     </div>
   </section>
 
@@ -443,7 +560,7 @@ uv run pytest</div>
         </li>
         <li>
           <a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/src/analysis/run_main_regressions.py" rel="noopener noreferrer" data-i18n="research.sources.l4" target="_blank">Main regression code</a>
-          <span class="link-note" data-i18n="research.sources.l4n">Final specifications, retained for transparency.</span>
+          <span class="link-note" data-i18n="research.sources.l4n">Final specifications, retained for transparency. Robustness tables F3–F6 are reported in the thesis; their code is not yet in the public repository.</span>
         </li>
         <li>
           <a href="https://data360.worldbank.org/en/dataset/IMF_FAS" rel="noopener noreferrer" data-i18n="research.sources.l5" target="_blank">IMF Financial Access Survey</a>
