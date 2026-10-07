@@ -985,6 +985,58 @@ figcaption {
 /* --- Print (CV and research pages) -------------------------------------- */
 
 @media print {
+  html[data-theme] body.cv-page {
+    --bg: #ffffff;
+    --bg-elevated: #ffffff;
+    --surface: #ffffff;
+    --surface-alt: #f3f6f8;
+    --ink: #17212b;
+    --ink-soft: #354555;
+    --muted: #4b5b69;
+    --line: #d5dde5;
+    --line-strong: #b8c5d1;
+    --accent: #15547d;
+    --accent-ink: #123c59;
+    --accent-soft: #e9f1f6;
+    --accent-alt: #176d63;
+    --accent-alt-soft: #e7f2f0;
+    --warn: #80500c;
+    --warn-soft: #faf1df;
+    --shadow: none;
+    background: #ffffff;
+    color: #17212b;
+    font-family: Arial, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  }
+
+  html[data-theme] body.cv-page .hero {
+    background: #ffffff;
+  }
+
+  html[data-theme] body.cv-page .card,
+  html[data-theme] body.cv-page .cv-sheet {
+    background: #ffffff;
+    color: #17212b;
+    box-shadow: none;
+  }
+
+  html[data-theme] body.cv-page h1,
+  html[data-theme] body.cv-page h2,
+  html[data-theme] body.cv-page h3,
+  html[data-theme] body.cv-page h4 {
+    color: #17212b;
+    font-family: Arial, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  }
+
+  html[data-theme] body.cv-page p,
+  html[data-theme] body.cv-page li {
+    color: #273746;
+  }
+
+  html[data-theme] body.cv-page .muted,
+  html[data-theme] body.cv-page .small {
+    color: #4b5b69;
+  }
+
   :root {
     --bg: #ffffff;
     --surface: #ffffff;
