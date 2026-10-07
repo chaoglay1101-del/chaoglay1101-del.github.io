@@ -515,8 +515,14 @@ html[data-theme="dark"] .btn-primary {
   margin: 1.25rem 0;
 }
 
-.tableau-card {
-  grid-column: 1 / -1;
+.tableau-showcase {
+  width: 100%;
+  margin: 2rem auto 0;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .embedded-work iframe {
@@ -528,8 +534,8 @@ html[data-theme="dark"] .btn-primary {
 }
 
 .tableau-frame {
-  min-height: 520px;
-  height: min(82vw, 820px);
+  min-height: 640px;
+  height: min(72vw, 900px);
 }
 
 .certificate-frame {
