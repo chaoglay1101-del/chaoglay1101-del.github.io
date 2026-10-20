@@ -153,6 +153,13 @@
     if (persist) {
       writeStore(STORE_KEY.lang, currentLang);
     }
+
+    // story.js redraws its charts and labels in the new language when it hears this.
+    try {
+      document.dispatchEvent(new CustomEvent("site:languagechange", { detail: { lang: currentLang } }));
+    } catch (error) {
+      /* CustomEvent unavailable: the charts keep the language they were drawn in. */
+    }
   }
 
   /* The CV is published in both languages. Each download link names the document

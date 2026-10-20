@@ -1,7 +1,7 @@
 # Personal website
 
 Static, dependency-free portfolio site for **Yu-Chen Chao**: three hand-written
-pages with a shared stylesheet, a small progressive-enhancement script, and a
+pages with a shared stylesheet, two small progressive-enhancement scripts, and a
 Traditional Chinese translation pack. There is no build step and no framework —
 open the files and they work.
 
@@ -58,12 +58,13 @@ sites are useful for structure, not for claims.
 
 ```text
 index.html                     Home: what I am looking for, about, what I bring, research summary, experience, education, skills, work, contact
-research.html                  Research: question, data, method, results, limitations, research agenda, reproducibility, sources
-cv.html                        CV: the complete record, profile through to notes
+research.html                  Research: the findings in six steps, then question, data, method, results, limitations, research agenda, reproducibility, sources
+cv.html                        CV: a two-minute tour, then the complete record, profile through to notes, with an evidence index above Skills
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
 assets/css/styles.css          Main stylesheet: light and dark themes, print styles
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
 assets/js/main.js              Theme toggle, language toggle, mobile navigation, print button, ?lang= deep link, current year
+assets/js/story.js             Step-through stories, their charts, the cohort strips and the evidence index (see "Step-through stories")
 assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
 assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
@@ -332,6 +333,53 @@ GitHub, LinkedIn and Tableau open in a new tab, and `styles.css` appends a small
 arrow marker so the change of context is not a surprise. `_verify_html.py`
 enforces both attributes, so a newly added external link cannot quietly regress.
 The arrow is suppressed in print.
+
+A step, or a point inside a step, can be linked to directly; see the deep links
+in "Step-through stories" below.
+
+## Step-through stories
+
+`research.html` opens with the findings in six steps, and `cv.html` with the CV
+told in six steps, both driven by `assets/js/story.js`. The techniques come from
+Slidev slide decks: a step reveals its annotations one click at a time, a
+hand-drawn mark on the chart follows each click, a presentation mode advances
+one click per key press, and any step and click can be linked to.
+
+| Feature | Where | What it does |
+| --- | --- | --- |
+| Six-step findings | `research.html#story` | Read by scrolling, or press **P** (the Present button) for one annotation per key press: → or Space forward, ← back, Home and End, **F** full screen, Esc to leave. Each step links to the table rows its numbers come from (tagged `data-cite-id`) and a bar brings the reader back. |
+| Two-minute tour | `cv.html#intro` | The same engine over the CV, with a timeline whose marks follow the steps and a presenter timer (**T**) whose per-step budget, in seconds, is `data-deck-timer` on the deck. |
+| Cohort strips | `cv.html`, under the two assessed marks | The mark beside the class mean, upper quartile and maximum already stated in `cv.research.grade1` and `cv.research.grade2`. |
+| Evidence index | `cv.html`, above Skills | One button per capability marks the CV lines that show it (`data-ev="key"` on those lines); pressing again moves to the next line. |
+
+Deep links follow Slidev's `?clicks=` idea: `research.html#step-4.2` opens step 4
+with its first two marks drawn, `cv.html#intro-3` opens step 3 of the tour, and
+`cv.html#evidence-panel` lights up one capability. In presentation mode the
+address follows each click, as it does in Slidev; reading by scrolling leaves the
+address alone, and the copy-link button writes the current position instead.
+
+Five rules keep it consistent with the rest of the site:
+
+- **Every number in a chart is already on the page.** The chart data at the top
+  of `story.js` (`DATA`, `TIMELINE`, `COHORT`) restates the research tables and
+  the CV's grade lines and adds nothing of its own. When a published figure
+  changes, its entry in `story.js` changes in the same commit.
+- **Text stays in the translation workflow.** Step copy uses ordinary
+  `data-i18n-html` keys (`research.story.*`, `cv.tour.*`, `cv.evidence.*`), and a
+  mark is `<mark class="mk" data-mark="n">`, where `n` is the click that draws it.
+  `<mark>` rather than `<span>` keeps `_check_i18n.py`'s markup balance check
+  meaningful. Chart labels live in hidden `<span data-s="…" data-i18n="…">`
+  elements, so `main.js` translates them like any other key and `story.js`
+  redraws when `main.js` announces a `site:languagechange` event.
+- **Screen only.** Everything `story.js` adds is `.screen-only` or styled out of
+  print, so `cv.html` prints the same text as before and the PDFs in
+  `assets/pdf/` do not need rebuilding for this feature.
+- **Progressive enhancement.** Without JavaScript the sections are hidden
+  (`html:not(.js)`) and the pages read as before. If `story.js` fails to load or
+  stops with an error, `html.story-off` hides them in the same way rather than
+  leaving dimmed text beside empty charts.
+- **Motion is optional.** Under `prefers-reduced-motion` the marks and charts
+  appear without being drawn.
 
 ## Publishing
 

@@ -21,8 +21,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chaoglay1101-del.github.io/assets/img/og-image.png">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script>document.documentElement.classList.add("js");</script>
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/story.js" defer onerror="document.documentElement.classList.add('story-off')"></script>
 </head>
 <body class="cv-page">
 <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to main content</a>
@@ -83,6 +85,144 @@
     </div>
   </section>
 
+
+  <section class="section screen-only cv-tour" id="intro" aria-labelledby="intro-heading">
+    <div class="container story-container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="cv.tour.eyebrow">In two minutes</span>
+        <h2 id="intro-heading" data-i18n="cv.tour.heading">This CV in six steps</h2>
+        <p data-i18n="cv.tour.lede">The same record as below, told in order: where the research question came from, what I built, what it found, and what I want to study next. Present it to step through one highlight at a time.</p>
+        <button class="btn btn-primary btn-small" type="button" data-story="present" data-from-start><span data-i18n="cv.tour.present">Present the two-minute version</span> <kbd>P</kbd></button>
+      </div>
+
+      <div class="story story--cv" id="intro-deck" data-deck="cv" data-deck-prefix="intro" data-deck-timer="15,20,30,20,15,20" tabindex="-1">
+        <div class="story-steps">
+          <article class="step" id="intro-1" data-clicks="2" aria-labelledby="intro-s1-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="cv.tour.s1.kicker">Who I am</span></p>
+              <h3 id="intro-s1-title" data-i18n="cv.tour.s1.title">Accounting and finance graduate, doing empirical research on digital payments</h3>
+              <p data-i18n-html="cv.tour.s1.body">BSc (Hons) Accounting and Finance from the University of Birmingham, taught in English at its Singapore campus: <mark class="mk mk--key" data-mark="1">Class II (Division I), GPA 3.25</mark>, with the degree to be conferred on 12 November 2026. <mark class="mk mk--find" data-mark="2">I am seeking graduate roles in financial data analysis and master's study in finance or business analytics.</mark></p>
+            </div>
+          </article>
+          <article class="step" id="intro-2" data-clicks="2" aria-labelledby="intro-s2-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">2</span><span data-i18n="cv.tour.s2.kicker">Where the question came from</span></p>
+              <h3 id="intro-s2-title" data-i18n="cv.tour.s2.title">A coursework finding became my research question</h3>
+              <p data-i18n-html="cv.tour.s2.body">In my Business Analytics Tableau story, submitted in December 2025, <mark class="mk mk--find" data-mark="1">digital payment use ran ahead of debit-card ownership</mark>. That raised the question my final-year project tested: <mark class="mk mk--key" data-mark="2">what happens to banks' fee income as payments move away from cards?</mark></p>
+            </div>
+          </article>
+          <article class="step" id="intro-3" data-clicks="3" aria-labelledby="intro-s3-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">3</span><span data-i18n="cv.tour.s3.kicker">What I studied</span></p>
+              <h3 id="intro-s3-title" data-i18n="cv.tour.s3.title">A bank panel I built and estimated myself</h3>
+              <p data-i18n-html="cv.tour.s3.body"><mark class="mk mk--find" data-mark="1">39 commercial banks in Indonesia, Malaysia and Thailand, 344 bank-year observations, 2014–2022.</mark> I built the Python pipeline, merged in the IMF digital-payment indicator, and estimated <mark class="mk mk--key" data-mark="2">bank and year fixed-effects models with bank-clustered standard errors</mark>. The research report scored <mark class="mk mk--box" data-mark="3">80/100</mark>, above the cohort's upper quartile.</p>
+              <div class="step-visual cohort" data-cohort="research"><div class="cohort-plot"></div></div>
+            </div>
+          </article>
+          <article class="step" id="intro-4" data-clicks="3" aria-labelledby="intro-s4-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">4</span><span data-i18n="cv.tour.s4.kicker">What it found</span></p>
+              <h3 id="intro-s4-title" data-i18n="cv.tour.s4.title">A negative association, stated with its limits</h3>
+              <p data-i18n-html="cv.tour.s4.body">The log model shows <mark class="mk mk--find" data-mark="1">a negative, statistically significant pooled association</mark> between digital payment pressure and net fee margins. <mark class="mk mk--warn" data-mark="2">The decomposition suggests it comes mainly from differences between countries</mark>, so I report a conditional association, <mark class="mk mk--warn" data-mark="3">not a causal effect</mark>.</p>
+              <a class="story-cite" href="research.html#story" data-i18n="cv.tour.s4.link">See the findings step by step on the research page</a>
+            </div>
+          </article>
+          <article class="step" id="intro-5" data-clicks="2" aria-labelledby="intro-s5-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">5</span><span data-i18n="cv.tour.s5.kicker">Practice</span></p>
+              <h3 id="intro-s5-title" data-i18n="cv.tour.s5.title">Tax advisory internship: evidence and procedures</h3>
+              <p data-i18n-html="cv.tour.s5.body">At Evershine CPAs, from July to September 2025, I worked on <mark class="mk mk--find" data-mark="1">Philippines tax incentive applications</mark>, preparing and checking supporting documentation, including BOI Form 501. I also <mark class="mk mk--key" data-mark="2">mapped the procedure into SOP flowcharts</mark> that the team used for the workflow and for handover.</p>
+            </div>
+          </article>
+          <article class="step" id="intro-6" data-clicks="2" aria-labelledby="intro-s6-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">6</span><span data-i18n="cv.tour.s6.kicker">What next</span></p>
+              <h3 id="intro-s6-title" data-i18n="cv.tour.s6.title">From associations to identification</h3>
+              <p data-i18n-html="cv.tour.s6.body">In master's study I want to test designs that can identify an effect: <mark class="mk mk--find" data-mark="1">event studies around staggered payment-licensing reforms</mark>, inference suited to few clusters, and <mark class="mk mk--key" data-mark="2">fee income broken down into payments, cards and merchant services</mark>.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="story-stage">
+          <div class="stage-inner">
+            <div class="stage-top">
+              <ol class="stage-pills" aria-label="Steps" data-i18n-attr="aria-label:story.ui.steps"></ol>
+              <div class="stage-actions">
+                <button class="btn btn-small" type="button" data-story="copy-link"><span data-i18n="story.ui.copy">Copy link</span></button>
+                <button class="btn btn-small btn-primary" type="button" data-story="present"><span data-i18n="story.ui.present">Present</span> <kbd>P</kbd></button>
+              </div>
+            </div>
+            <div class="stage-card">
+              <div class="scene-head"><span class="scene-title" data-i18n="cv.tour.timelineTitle">Education, research and practice, 2023–2027</span></div>
+              <div class="stage-visual" data-visual="timeline"></div>
+              <p class="stage-caption" data-i18n="cv.tour.timelineCaption">Dates as on this CV. The final-year project is drawn across the 2025–26 academic year; hover or tab to a bar for its dates.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-strings" hidden>
+        <span data-s="ui.stepN" data-i18n="story.str.stepN">Step {n}</span>
+        <span data-s="ui.count" data-i18n="story.str.count">Step {s} of {n} · note {c} of {m}</span>
+        <span data-s="ui.copied" data-i18n="story.str.copied">Link copied: {h}</span>
+        <span data-s="ui.copyFail" data-i18n="story.str.copyFail">Could not copy. The link is {u}</span>
+        <span data-s="ui.citeLabel" data-i18n="story.str.citeLabel">Numbers behind step {n}</span>
+        <span data-s="ui.timer" data-i18n="cv.tour.str.timer">{t} of {total} · this step about {step} s</span>
+        <span data-s="tl.aria" data-i18n="cv.tour.str.tlAria">Timeline, 2023 to 2027: SIM Diploma from April 2023 to June 2024; BSc at the University of Birmingham from September 2024 to June 2026; internship from July to September 2025; Tableau story submitted in December 2025; final-year research project in 2025–26; degree conferred on 12 November 2026; next, master's study.</span>
+        <span data-s="tl.lane.edu" data-i18n="cv.tour.str.laneEdu">EDUCATION</span>
+        <span data-s="tl.lane.res" data-i18n="cv.tour.str.laneRes">RESEARCH</span>
+        <span data-s="tl.lane.prac" data-i18n="cv.tour.str.lanePrac">PRACTICE</span>
+        <span data-s="tl.sim" data-i18n="cv.tour.str.sim">SIM Diploma</span>
+        <span data-s="tl.bsc" data-i18n="cv.tour.str.bsc">BSc, Birmingham</span>
+        <span data-s="tl.conferral" data-i18n="cv.tour.str.conferral">Degree conferred</span>
+        <span data-s="tl.next" data-i18n="cv.tour.str.next">Next: master's</span>
+        <span data-s="tl.research" data-i18n="cv.tour.str.research">Final-year research</span>
+        <span data-s="tl.intern" data-i18n="cv.tour.str.intern">Evershine internship</span>
+        <span data-s="tl.tableau" data-i18n="cv.tour.str.tableau">Tableau story</span>
+        <span data-s="tl.when.sim" data-i18n="cv.tour.str.whenSim">April 2023 – June 2024</span>
+        <span data-s="tl.when.bsc" data-i18n="cv.tour.str.whenBsc">September 2024 – June 2026 · Class II (Division I) · GPA 3.25</span>
+        <span data-s="tl.when.conferral" data-i18n="cv.tour.str.whenConferral">12 November 2026</span>
+        <span data-s="tl.when.next" data-i18n="cv.tour.str.whenNext">Applying for master's study</span>
+        <span data-s="tl.when.research" data-i18n="cv.tour.str.whenResearch">2025–2026 · report component 80/100</span>
+        <span data-s="tl.when.intern" data-i18n="cv.tour.str.whenIntern">July – September 2025 · tax advisory team</span>
+        <span data-s="tl.when.tableau" data-i18n="cv.tour.str.whenTableau">Submitted December 2025 · 70/100</span>
+        <span data-s="cohort.me" data-i18n="cv.tour.str.cohortMe">My mark</span>
+        <span data-s="cohort.mean" data-i18n="cv.tour.str.cohortMean">Cohort mean</span>
+        <span data-s="cohort.uq" data-i18n="cv.tour.str.cohortUq">Upper quartile</span>
+        <span data-s="cohort.max" data-i18n="cv.tour.str.cohortMax">Maximum</span>
+        <span data-s="cohort.band" data-i18n="cv.tour.str.cohortBand">Shaded: upper quartile to maximum</span>
+        <span data-s="cohort.aria.research" data-i18n="cv.tour.str.cohortAriaResearch">Research report component: my mark 80 against a cohort mean of 67, an upper quartile of 73 and a maximum of 84.</span>
+        <span data-s="cohort.aria.tableau" data-i18n="cv.tour.str.cohortAriaTableau">Tableau assignment: my mark 70 against a cohort mean of 63.7, an upper quartile of 70 and a maximum of 76.</span>
+        <span data-s="ev.status" data-i18n="cv.tour.str.evStatus">{name}: {i} of {n} · press again for the next</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="present-ui screen-only" data-present-ui hidden>
+    <div class="present-top">
+      <span class="present-brand"><span class="brand-mark" aria-hidden="true" data-i18n="name.monogram">YC</span><span class="present-title" data-i18n="name.full">Yu-Chen Chao (趙于楨)</span></span>
+      <span class="present-timer" data-present-timer hidden></span>
+      <span class="present-count" data-present-count aria-live="polite"></span>
+      <button class="icon-btn" type="button" data-story="timer" data-present-timer-toggle aria-label="Show or hide the timer" title="Show or hide the timer" data-i18n-attr="aria-label:story.ui.timerToggle,title:story.ui.timerToggle" hidden><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 7.5V11l2.3 1.6M8 2.5h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      <button class="icon-btn" type="button" data-story="fullscreen" data-present-fullscreen aria-label="Full screen" title="Full screen" data-i18n-attr="aria-label:story.ui.fullscreen,title:story.ui.fullscreen">⤢</button>
+      <button class="btn btn-small" type="button" data-story="exit"><span data-i18n="story.ui.exit">Exit</span> <kbd>Esc</kbd></button>
+    </div>
+    <div class="present-bottom">
+      <button class="icon-btn" type="button" data-story="prev" data-present-prev aria-label="Previous step" data-i18n-attr="aria-label:story.ui.prev">←</button>
+      <div class="present-track" data-present-track><span class="present-fill" data-present-fill></span></div>
+      <button class="icon-btn" type="button" data-story="next" data-present-next aria-label="Next step" data-i18n-attr="aria-label:story.ui.next">→</button>
+      <span class="present-hint" data-i18n="story.ui.hint">← → or Space</span>
+    </div>
+  </div>
+
+  <div class="jump-bar screen-only" data-jump-bar hidden>
+    <span data-jump-label></span>
+    <button class="btn btn-small" type="button" data-jump-next><span data-i18n="story.ui.nextPlace">Next</span></button>
+    <button class="btn btn-small" type="button" data-jump-back><span data-i18n="story.ui.back">Back</span></button>
+    <button class="icon-btn" type="button" data-jump-close aria-label="Close" title="Close" data-i18n-attr="aria-label:story.ui.close,title:story.ui.close">×</button>
+  </div>
+
+
   <section class="section" id="profile">
     <div class="container">
       <h2 data-i18n="cv.profile.heading">Profile</h2>
@@ -117,13 +257,14 @@
           <h3 data-i18n="cv.research.title1">Digital payment pressure and bank net fee margins — ASEAN-3 bank panel</h3>
           <p class="timeline-org" data-i18n="cv.research.org1">Accounting and Finance Research Project · University of Birmingham</p>
           <p class="timeline-grade" data-i18n-html="cv.research.grade1"><strong>Research report component: 80/100 (65% of module; module total 77/100 on transcript)</strong> · above the component's upper quartile (73), i.e. top 25%; cohort mean 67, maximum 84</p>
+          <div class="cohort screen-only" data-cohort="research"><div class="cohort-plot"></div></div>
           <ul class="card-list">
             <li data-i18n="cv.research.b1">Designed the study around an explicit research question and defined the estimation sample: 39 listed commercial banks, 344 bank-year observations, 2014–2022.</li>
-            <li data-i18n-html="cv.research.b2">Built a Python pipeline to prepare the bank panel, discover and extract the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, and merge the country-year measure into the bank-year panel.</li>
-            <li data-i18n-html="cv.research.b3">Constructed <code>Net_Fee_Margin</code> and financial controls, winsorised continuous variables at the 1st and 99th percentiles, and formed a complete-case estimation sample.</li>
-            <li data-i18n-html="cv.research.b4">Estimated bank and year fixed-effects models with bank-clustered standard errors using <code>linearmodels</code>, then tested log, bank-size interaction, nonlinear and country-subsample specifications; checked the result with Driscoll–Kraay errors, a Mundlak decomposition, a one-year lag and a net-interest-margin placebo.</li>
-            <li data-i18n="cv.research.b5">Reported results as conditional associations, stating the data-level, coverage, and omitted-variable limitations explicitly.</li>
-            <li data-i18n="cv.research.b6">Published a public research report, variable definitions, and a methodology appendix, plus a runnable synthetic fixed-effects example with an automated test.</li>
+            <li data-i18n-html="cv.research.b2" data-ev="pipeline">Built a Python pipeline to prepare the bank panel, discover and extract the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, and merge the country-year measure into the bank-year panel.</li>
+            <li data-i18n-html="cv.research.b3" data-ev="panel">Constructed <code>Net_Fee_Margin</code> and financial controls, winsorised continuous variables at the 1st and 99th percentiles, and formed a complete-case estimation sample.</li>
+            <li data-i18n-html="cv.research.b4" data-ev="panel">Estimated bank and year fixed-effects models with bank-clustered standard errors using <code>linearmodels</code>, then tested log, bank-size interaction, nonlinear and country-subsample specifications; checked the result with Driscoll–Kraay errors, a Mundlak decomposition, a one-year lag and a net-interest-margin placebo.</li>
+            <li data-i18n="cv.research.b5" data-ev="limits">Reported results as conditional associations, stating the data-level, coverage, and omitted-variable limitations explicitly.</li>
+            <li data-i18n="cv.research.b6" data-ev="pipeline docs">Published a public research report, variable definitions, and a methodology appendix, plus a runnable synthetic fixed-effects example with an automated test.</li>
           </ul>
           <ul class="chips">
             <li class="chip chip-accent">Python</li>
@@ -141,10 +282,11 @@
           <h3 data-i18n="cv.research.title2">Mobile money adoption in the Global South — Tableau story</h3>
           <p class="timeline-org" data-i18n="cv.research.org2">Business Analytics module · University of Birmingham</p>
           <p class="timeline-grade" data-i18n-html="cv.research.grade2"><strong>Tableau assignment 70/100 (module mark 70/100 on transcript)</strong> · equal to the cohort's upper quartile (70); cohort mean 63.7, maximum 76</p>
+          <div class="cohort screen-only" data-cohort="tableau"><div class="cohort-plot"></div></div>
           <ul class="card-list">
-            <li data-i18n="cv.research.b7">Cleaned and documented the dataset in a data-cleaning log, then designed an interactive Tableau story covering adoption trends, regional comparison, and inclusion drivers.</li>
-            <li data-i18n="cv.research.b8">Presented the findings as a management narrative and published the story on Tableau Public.</li>
-            <li data-i18n="cv.research.b9">Mapped 437 coded World Bank Findex fields across 174 economies and 12 population groups into 24 business-readable measures, then excluded the 2011 and 2022 waves for coverage, leaving 171 economies and four survey waves (2014–2024).</li>
+            <li data-i18n="cv.research.b7" data-ev="cleaning story">Cleaned and documented the dataset in a data-cleaning log, then designed an interactive Tableau story covering adoption trends, regional comparison, and inclusion drivers.</li>
+            <li data-i18n="cv.research.b8" data-ev="story">Presented the findings as a management narrative and published the story on Tableau Public.</li>
+            <li data-i18n="cv.research.b9" data-ev="cleaning">Mapped 437 coded World Bank Findex fields across 174 economies and 12 population groups into 24 business-readable measures, then excluded the 2011 and 2022 waves for coverage, leaving 171 economies and four survey waves (2014–2024).</li>
             <li data-i18n="cv.research.b10">Findings: mobile money adoption leads in Sub-Saharan Africa; digital payment use runs ahead of debit-card ownership; savings lag far behind payment usage; and mobile money drives women's financial participation more than traditional banking does.</li>
             <li data-i18n="cv.research.b11">Submitted December 2025. Its finding that digital payment use runs ahead of debit-card ownership raised the question my final-year project then tested: what happens to banks' fee income as payments move away from cards.</li>
           </ul>
@@ -165,6 +307,20 @@
   <section class="section" id="cv-skills">
     <div class="container">
       <h2 data-i18n="cv.skills.heading">Technical skills</h2>
+      <div class="evidence screen-only" data-evidence-index>
+        <h3 data-i18n="cv.evidence.heading">Where each skill shows up in this CV</h3>
+        <p class="small muted" data-i18n="cv.evidence.lede">Pick a skill to mark the lines in this CV that show it; press it again to move to the next line.</p>
+        <div class="evidence-chips" role="group" aria-label="Skills" data-i18n-attr="aria-label:cv.evidence.group">
+          <button class="chip-btn" type="button" data-evidence="pipeline" aria-pressed="false"><span data-i18n="cv.evidence.pipeline">Python data pipeline</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="panel" aria-pressed="false"><span data-i18n="cv.evidence.panel">Panel econometrics</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="limits" aria-pressed="false"><span data-i18n="cv.evidence.limits">Stating limits</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="cleaning" aria-pressed="false"><span data-i18n="cv.evidence.cleaning">Data cleaning and mapping</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="story" aria-pressed="false"><span data-i18n="cv.evidence.story">Data storytelling</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="docs" aria-pressed="false"><span data-i18n="cv.evidence.docs">Documentation and SOPs</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="compliance" aria-pressed="false"><span data-i18n="cv.evidence.compliance">Compliance documents</span><span class="ev-count" aria-hidden="true"></span></button>
+        </div>
+        <p class="evidence-status" data-evidence-status aria-live="polite"></p>
+      </div>
       <div class="grid grid-2">
         <div class="card">
           <h3 data-i18n="cv.skills.c1">Programming and libraries</h3>
@@ -211,9 +367,9 @@
           <h3 data-i18n="cv.exp.title1">Intern, tax advisory team</h3>
           <p class="timeline-org" data-i18n="cv.exp.org1">Evershine CPAs Firm (永輝啟佳聯合會計師事務所)</p>
           <ul class="card-list">
-            <li data-i18n="cv.exp.b1">Assisted on Philippines tax incentive applications, preparing and checking supporting documentation.</li>
-            <li data-i18n="cv.exp.b2">Mapped standard operating procedures (SOP) and turned them into flowcharts for the application process.</li>
-            <li data-i18n="cv.exp.b3">Deliverable: SOP flowcharts covering the tax incentive application workflow.</li>
+            <li data-i18n="cv.exp.b1" data-ev="compliance">Assisted on Philippines tax incentive applications, preparing and checking supporting documentation.</li>
+            <li data-i18n="cv.exp.b2" data-ev="docs">Mapped standard operating procedures (SOP) and turned them into flowcharts for the application process.</li>
+            <li data-i18n="cv.exp.b3" data-ev="docs">Deliverable: SOP flowcharts covering the tax incentive application workflow.</li>
           </ul>
           <figure class="embedded-work certificate-work screen-only">
             <iframe

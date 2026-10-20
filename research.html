@@ -21,8 +21,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chaoglay1101-del.github.io/assets/img/og-image.png">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script>document.documentElement.classList.add("js");</script>
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/story.js" defer onerror="document.documentElement.classList.add('story-off')"></script>
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to main content</a>
@@ -89,6 +91,212 @@
     </div>
   </section>
 
+
+  <section class="section screen-only story-section" id="story" aria-labelledby="story-heading">
+    <div class="container story-container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.story.eyebrow">Findings, step by step</span>
+        <h2 id="story-heading" data-i18n="research.story.heading">From a pooled association to what it can and cannot claim</h2>
+        <p data-i18n="research.story.lede">Six steps, each with the chart behind it. Scroll to read them, or present them one annotation at a time. Every chart links to the table rows it is drawn from.</p>
+        <button class="btn btn-primary btn-small" type="button" data-story="present" data-from-start><span data-i18n="research.story.present">Present the six steps</span> <kbd>P</kbd></button>
+      </div>
+
+      <div class="story" id="story-deck" data-deck="research" data-deck-prefix="step" tabindex="-1">
+        <div class="story-steps">
+          <article class="step" id="step-1" data-clicks="3" aria-labelledby="story-s1-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="research.story.s1.kicker">The measure</span></p>
+              <h3 id="story-s1-title" data-i18n="research.story.s1.title">Digital payments grew everywhere, from very different starting points</h3>
+              <p data-i18n-html="research.story.s1.body">Mobile and internet banking transactions, measured as a share of GDP, <mark class="mk mk--find" data-mark="1">rose in all three markets between 2014 and 2022</mark>: Indonesia from 111% to 268% and Malaysia from 366% to 719%, while <mark class="mk mk--key" data-mark="2">Thailand more than quadrupled, from 124% to 532%</mark>.</p>
+              <p class="caution" data-i18n-html="research.story.s1.caution"><mark class="mk mk--warn" data-mark="3">The indicator counts transactions processed by banks themselves, not activity on non-bank FinTech platforms.</mark></p>
+              <a class="story-cite" href="#data" data-cite="dpp" data-i18n="research.story.s1.cite">Numbers: the Data section</a>
+            </div>
+            <figure class="scene" data-scene="dpp" aria-labelledby="story-s1-fig">
+              <div class="scene-head"><span class="scene-title" id="story-s1-fig" data-i18n="research.story.s1.fig">Mobile and internet banking transactions, % of GDP</span><span class="scene-num">1 / 6</span></div>
+              <div class="scene-plot"></div>
+              <figcaption data-i18n="research.story.s1.cap">2014 and 2022 values for each country; the years in between are not drawn.</figcaption>
+            </figure>
+          </article>
+          <article class="step" id="step-2" data-clicks="3" aria-labelledby="story-s2-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">2</span><span data-i18n="research.story.s2.kicker">Across countries</span></p>
+              <h3 id="story-s2-title" data-i18n="research.story.s2.title">Across countries, more digital intensity goes with lower fee margins</h3>
+              <p data-i18n-html="research.story.s2.body">Averaged over the sample, <mark class="mk mk--find" data-mark="1">Indonesian banks earn a net fee margin of 2.2% of assets at a digital intensity of 164% of GDP</mark>. Thailand (1.2% at 271%) and Malaysia (1.2% at 540%) are more digital and <mark class="mk mk--key" data-mark="2">earn about one percentage point less</mark>.</p>
+              <p class="caution" data-i18n-html="research.story.s2.caution"><mark class="mk mk--warn" data-mark="3">Three countries make three points. This compares markets; it does not show change within any one of them.</mark></p>
+              <a class="story-cite" href="#results" data-cite="avg obs" data-i18n="research.story.s2.cite">Numbers: the robustness paragraph and the Data table</a>
+            </div>
+            <figure class="scene" data-scene="avg" aria-labelledby="story-s2-fig">
+              <div class="scene-head"><span class="scene-title" id="story-s2-fig" data-i18n="research.story.s2.fig">Country averages, 2014–2022</span><span class="scene-num">2 / 6</span></div>
+              <div class="scene-plot"></div>
+              <figcaption data-i18n="research.story.s2.cap">Each dot is one country's sample average. Labels give the number of bank-year observations.</figcaption>
+            </figure>
+          </article>
+          <article class="step" id="step-3" data-clicks="3" aria-labelledby="story-s3-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">3</span><span data-i18n="research.story.s3.kicker">The pooled model</span></p>
+              <h3 id="story-s3-title" data-i18n="research.story.s3.title">The log model finds a negative, significant pooled association</h3>
+              <p data-i18n-html="research.story.s3.body">With bank and year fixed effects and bank-clustered standard errors, the log baseline estimates <mark class="mk mk--box" data-mark="1">−0.0102 (SE 0.0051, p = 0.048)</mark>. In economic terms, doubling digital intensity goes with a net fee margin <mark class="mk mk--find" data-mark="2">about 0.71 percentage points of assets lower, roughly 39% of the 1.81% sample mean</mark>.</p>
+              <p class="caution" data-i18n-html="research.story.s3.caution"><mark class="mk mk--warn" data-mark="3">The three linear specifications point the same way, but only the first reaches even marginal significance.</mark></p>
+              <a class="story-cite" href="#results" data-cite="r1 r2 r3 r4 r4b r5" data-i18n="research.story.s3.cite">Numbers: the Results table</a>
+            </div>
+            <figure class="scene" data-scene="tstat" aria-labelledby="story-s3-fig">
+              <div class="scene-head"><span class="scene-title" id="story-s3-fig" data-i18n="research.story.s3.fig">t-statistic by specification</span><span class="scene-num">3 / 6</span></div>
+              <div class="scene-plot"></div>
+              <figcaption data-i18n="research.story.s3.cap">Each dot is a t-statistic: the published coefficient divided by its bank-clustered standard error. The scaled and log models use different units, so t is the comparable quantity. Dashed lines mark |t| = 1.645 (10%) and 1.96 (5%).</figcaption>
+            </figure>
+          </article>
+          <article class="step" id="step-4" data-clicks="3" aria-labelledby="story-s4-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">4</span><span data-i18n="research.story.s4.kicker">Where it comes from</span></p>
+              <h3 id="story-s4-title" data-i18n="research.story.s4.title">Split the association, and it sits between countries</h3>
+              <p data-i18n-html="research.story.s4.body">A Mundlak decomposition separates two sources of variation. <mark class="mk mk--key" data-mark="1">The between-country coefficient, −0.0124, has the same sign and size as the pooled estimate</mark>, although with three countries it is imprecise (p = 0.48). <mark class="mk mk--warn" data-mark="2">The within-country coefficient, −0.0049 (p = 0.53), is less than half the pooled estimate and far from significant.</mark></p>
+              <p class="caution" data-i18n-html="research.story.s4.caution"><mark class="mk mk--find" data-mark="3">The pooled result mostly reflects differences between countries, not change within each country over time.</mark></p>
+              <a class="story-cite" href="#results" data-cite="r4 t1 t3 t4 t5" data-i18n="research.story.s4.cite">Numbers: the Robustness table</a>
+            </div>
+            <figure class="scene" data-scene="decomp" aria-labelledby="story-s4-fig">
+              <div class="scene-head"><span class="scene-title" id="story-s4-fig" data-i18n="research.story.s4.fig">The pooled estimate, split into between and within</span><span class="scene-num">4 / 6</span></div>
+              <div class="scene-plot"></div>
+              <figcaption data-i18n="research.story.s4.cap">Dots are estimates and bars are 95% intervals (estimate ± 1.96 × SE). Every row uses the log specification.</figcaption>
+            </figure>
+          </article>
+          <article class="step" id="step-5" data-clicks="3" aria-labelledby="story-s5-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">5</span><span data-i18n="research.story.s5.kicker">Country by country</span></p>
+              <h3 id="story-s5-title" data-i18n="research.story.s5.title">Country by country, the sign is not the same</h3>
+              <p data-i18n-html="research.story.s5.body">Estimated separately, with bank effects but no year effects, Indonesia is −0.0014 with a wide interval and Malaysia +0.0055, while <mark class="mk mk--key" data-mark="1">Thailand is +0.0017, weakly positive</mark>. <mark class="mk mk--find" data-mark="2">Thailand is also the market whose virtual-bank framework is led by incumbents</mark>, which fits a contestable-markets reading.</p>
+              <p class="caution" data-i18n-html="research.story.s5.caution"><mark class="mk mk--warn" data-mark="3">Few clusters: 9 Malaysian and 7 Thai banks.</mark></p>
+              <a class="story-cite" href="#results" data-cite="t6 l2" data-i18n="research.story.s5.cite">Numbers: the country-subsample row and the limitations</a>
+            </div>
+            <figure class="scene" data-scene="countries" aria-labelledby="story-s5-fig">
+              <div class="scene-head"><span class="scene-title" id="story-s5-fig" data-i18n="research.story.s5.fig">Country subsamples, log specification</span><span class="scene-num">5 / 6</span></div>
+              <div class="scene-plot"></div>
+              <figcaption data-i18n="research.story.s5.cap">Bank effects, no year effects, because a single-country model would absorb a country-year regressor into the year effects. Bars are 95% intervals.</figcaption>
+            </figure>
+          </article>
+          <article class="step" id="step-6" data-clicks="3" aria-labelledby="story-s6-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">6</span><span data-i18n="research.story.s6.kicker">What it can claim</span></p>
+              <h3 id="story-s6-title" data-i18n="research.story.s6.title">What the evidence supports, and what it does not</h3>
+              <p data-i18n-html="research.story.s6.body">Statistical significance is not economic importance, and <mark class="mk mk--warn" data-mark="2">neither is causality</mark>: the regressor varies only at the country-year level, about 27 distinct values. <mark class="mk mk--find" data-mark="3">The next design would test a policy event</mark>, such as Malaysia's digital-bank licences (2020) or Thailand's virtual-bank framework (2024), with an event-study design and inference suited to few clusters.</p>
+              <a class="story-cite" href="#results" data-cite="t1 t8 t9 h2 h3 l1" data-i18n="research.story.s6.cite">Numbers: the Robustness, Hypotheses and Limitations rows</a>
+            </div>
+            <figure class="scene" data-scene="ledger" aria-labelledby="story-s6-fig">
+              <div class="scene-head"><span class="scene-title" id="story-s6-fig" data-i18n="research.story.s6.fig">Claim ledger</span><span class="scene-num">6 / 6</span></div>
+              <div class="scene-plot"></div>
+              <figcaption data-i18n="research.story.s6.cap">Each line restates a result from this page, with its estimate.</figcaption>
+            </figure>
+          </article>
+        </div>
+
+        <div class="story-stage">
+          <div class="stage-inner">
+            <div class="stage-top">
+              <ol class="stage-pills" aria-label="Steps" data-i18n-attr="aria-label:story.ui.steps"></ol>
+              <div class="stage-actions">
+                <button class="btn btn-small" type="button" data-story="copy-link"><span data-i18n="story.ui.copy">Copy link</span></button>
+                <button class="btn btn-small btn-primary" type="button" data-story="present"><span data-i18n="story.ui.present">Present</span> <kbd>P</kbd></button>
+              </div>
+            </div>
+            <div class="stage-scenes"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-strings" hidden>
+        <span data-s="ui.stepN" data-i18n="story.str.stepN">Step {n}</span>
+        <span data-s="ui.count" data-i18n="story.str.count">Step {s} of {n} · note {c} of {m}</span>
+        <span data-s="ui.copied" data-i18n="story.str.copied">Link copied: {h}</span>
+        <span data-s="ui.copyFail" data-i18n="story.str.copyFail">Could not copy. The link is {u}</span>
+        <span data-s="ui.citeLabel" data-i18n="story.str.citeLabel">Numbers behind step {n}</span>
+        <span data-s="c.id" data-i18n="research.story.str.cId">Indonesia</span>
+        <span data-s="c.my" data-i18n="research.story.str.cMy">Malaysia</span>
+        <span data-s="c.th" data-i18n="research.story.str.cTh">Thailand</span>
+        <span data-s="dpp.aria" data-i18n="research.story.str.dppAria">Slope chart: mobile and internet banking transactions as a share of GDP in 2014 and 2022 for Indonesia, Malaysia and Thailand.</span>
+        <span data-s="dpp.value" data-i18n="research.story.str.dppValue">{v}% of GDP</span>
+        <span data-s="dpp.bankOnly" data-i18n="research.story.str.dppBankOnly">Banks' own transactions only</span>
+        <span data-s="avg.aria" data-i18n="research.story.str.avgAria">Scatter of country averages: Indonesia 2.2% net fee margin at 164% of GDP, Thailand 1.2% at 271%, Malaysia 1.2% at 540%.</span>
+        <span data-s="avg.x" data-i18n="research.story.str.avgX">Average digital intensity, % of GDP</span>
+        <span data-s="avg.y" data-i18n="research.story.str.avgY">Average net fee margin, % of assets</span>
+        <span data-s="avg.obs" data-i18n="research.story.str.avgObs">{n} bank-years</span>
+        <span data-s="avg.gap" data-i18n="research.story.str.avgGap">≈ 1.0 pp lower</span>
+        <span data-s="avg.three" data-i18n="research.story.str.avgThree">3 countries = 3 points</span>
+        <span data-s="avg.tip" data-i18n="research.story.str.avgTip">{d}% of GDP · margin {m}% · {n} bank-years</span>
+        <span data-s="tstat.aria" data-i18n="research.story.str.tAria">Dot plot of t-statistics for six specifications; the log baseline and the squared-term model pass |t| = 1.96.</span>
+        <span data-s="tstat.x" data-i18n="research.story.str.tX">t = coefficient ÷ standard error</span>
+        <span data-s="tstat.linear" data-i18n="research.story.str.tLinear">LINEAR</span>
+        <span data-s="tstat.log" data-i18n="research.story.str.tLog">LOG</span>
+        <span data-s="spec.r1" data-i18n="research.story.str.specR1">Scaled measure</span>
+        <span data-s="spec.r2" data-i18n="research.story.str.specR2">+ financial controls</span>
+        <span data-s="spec.r3" data-i18n="research.story.str.specR3">Full controls</span>
+        <span data-s="spec.r4" data-i18n="research.story.str.specR4">Log baseline</span>
+        <span data-s="spec.r4b" data-i18n="research.story.str.specR4b">Size interaction</span>
+        <span data-s="spec.r5" data-i18n="research.story.str.specR5">Squared log term</span>
+        <span data-s="lg.sig" data-i18n="research.story.str.lgSig">p < 0.05</span>
+        <span data-s="lg.marg" data-i18n="research.story.str.lgMarg">p < 0.10</span>
+        <span data-s="lg.ns" data-i18n="research.story.str.lgNs">not significant</span>
+        <span data-s="tstat.double" data-i18n="research.story.str.tDouble">doubling ≈ −0.71 pp</span>
+        <span data-s="dec.aria" data-i18n="research.story.str.decAria">Interval plot: pooled estimates near −0.010, between-country −0.0124, within-country −0.0049 with an interval crossing zero.</span>
+        <span data-s="dec.x" data-i18n="research.story.str.decX">Coefficient on log digital intensity</span>
+        <span data-s="dec.d1" data-i18n="research.story.str.decD1">Pooled · clustered SE</span>
+        <span data-s="dec.d2" data-i18n="research.story.str.decD2">Pooled · Driscoll–Kraay</span>
+        <span data-s="dec.d3" data-i18n="research.story.str.decD3">Between countries</span>
+        <span data-s="dec.d4" data-i18n="research.story.str.decD4">Within countries</span>
+        <span data-s="dec.d5" data-i18n="research.story.str.decD5">Within-only FE</span>
+        <span data-s="dec.same" data-i18n="research.story.str.decSame">same size</span>
+        <span data-s="dec.half" data-i18n="research.story.str.decHalf">less than half, p = 0.53</span>
+        <span data-s="cty.aria" data-i18n="research.story.str.ctyAria">Interval plot by country: Indonesia −0.0014, Malaysia +0.0055, Thailand +0.0017.</span>
+        <span data-s="cty.obs" data-i18n="research.story.str.ctyObs">{n} obs</span>
+        <span data-s="cty.incumbent" data-i18n="research.story.str.ctyIncumbent">incumbent-led virtual banks</span>
+        <span data-s="cty.few" data-i18n="research.story.str.ctyFew">9 Malaysian, 7 Thai banks</span>
+        <span data-s="ci.tip" data-i18n="research.story.str.ciTip">{c} · 95% [{lo}, {hi}] · p {p}</span>
+        <span data-s="l.yes" data-i18n="research.story.str.lYes">Supported by the data</span>
+        <span data-s="l.no" data-i18n="research.story.str.lNo">Not supported, or not claimed</span>
+        <span data-s="l.next" data-i18n="research.story.str.lNext">Next design</span>
+        <span data-s="l.y1" data-i18n="research.story.str.lY1">A negative pooled association in the log model</span>
+        <span data-s="l.y1d" data-i18n="research.story.str.lY1d">−0.0102, p = 0.048; Driscoll–Kraay p = 0.004</span>
+        <span data-s="l.y2" data-i18n="research.story.str.lY2">It shows in fees, not in lending</span>
+        <span data-s="l.y2d" data-i18n="research.story.str.lY2d">Net-interest-margin placebo 0.0041, p = 0.45</span>
+        <span data-s="l.y3" data-i18n="research.story.str.lY3">Larger and negative with a one-year lag</span>
+        <span data-s="l.y3d" data-i18n="research.story.str.lY3d">−0.0159, p = 0.062</span>
+        <span data-s="l.n1" data-i18n="research.story.str.lN1">A within-country effect</span>
+        <span data-s="l.n1d" data-i18n="research.story.str.lN1d">−0.0049, p = 0.53</span>
+        <span data-s="l.n2" data-i18n="research.story.str.lN2">Larger banks are more resilient (H2)</span>
+        <span data-s="l.n2d" data-i18n="research.story.str.lN2d">Interaction −0.0039, not significant</span>
+        <span data-s="l.n3" data-i18n="research.story.str.lN3">A U-shaped recovery (H3)</span>
+        <span data-s="l.n3d" data-i18n="research.story.str.lN3d">Squared term −0.0020, not significant</span>
+        <span data-s="l.n4" data-i18n="research.story.str.lN4">A causal effect</span>
+        <span data-s="l.n4d" data-i18n="research.story.str.lN4d">The regressor varies by country-year: about 27 values</span>
+        <span data-s="l.x1" data-i18n="research.story.str.lX1">Event study on staggered licensing reforms</span>
+        <span data-s="l.x1d" data-i18n="research.story.str.lX1d">Malaysia's digital-bank licences (2020), Thailand's virtual-bank framework (2024); wild-cluster bootstrap for few clusters</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="present-ui screen-only" data-present-ui hidden>
+    <div class="present-top">
+      <span class="present-brand"><span class="brand-mark" aria-hidden="true" data-i18n="name.monogram">YC</span><span class="present-title" data-i18n="research.title">Digital payment pressure and bank net fee margins</span></span>
+      <span class="present-timer" data-present-timer hidden></span>
+      <span class="present-count" data-present-count aria-live="polite"></span>
+      <button class="icon-btn" type="button" data-story="timer" data-present-timer-toggle aria-label="Show or hide the timer" title="Show or hide the timer" data-i18n-attr="aria-label:story.ui.timerToggle,title:story.ui.timerToggle" hidden><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 7.5V11l2.3 1.6M8 2.5h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      <button class="icon-btn" type="button" data-story="fullscreen" data-present-fullscreen aria-label="Full screen" title="Full screen" data-i18n-attr="aria-label:story.ui.fullscreen,title:story.ui.fullscreen">⤢</button>
+      <button class="btn btn-small" type="button" data-story="exit"><span data-i18n="story.ui.exit">Exit</span> <kbd>Esc</kbd></button>
+    </div>
+    <div class="present-bottom">
+      <button class="icon-btn" type="button" data-story="prev" data-present-prev aria-label="Previous step" data-i18n-attr="aria-label:story.ui.prev">←</button>
+      <div class="present-track" data-present-track><span class="present-fill" data-present-fill></span></div>
+      <button class="icon-btn" type="button" data-story="next" data-present-next aria-label="Next step" data-i18n-attr="aria-label:story.ui.next">→</button>
+      <span class="present-hint" data-i18n="story.ui.hint">← → or Space</span>
+    </div>
+  </div>
+
+  <div class="jump-bar screen-only" data-jump-bar hidden>
+    <span data-jump-label></span>
+    <button class="btn btn-small" type="button" data-jump-next><span data-i18n="story.ui.nextPlace">Next</span></button>
+    <button class="btn btn-small" type="button" data-jump-back><span data-i18n="story.ui.back">Back</span></button>
+    <button class="icon-btn" type="button" data-jump-close aria-label="Close" title="Close" data-i18n-attr="aria-label:story.ui.close,title:story.ui.close">×</button>
+  </div>
+
+
   <section class="section" id="question">
     <div class="container">
       <div class="section-head">
@@ -145,13 +353,13 @@
               <td>β₁ &gt; 0</td>
               <td data-i18n="research.hyp.h1bresult">Not supported</td>
             </tr>
-            <tr>
+            <tr data-cite-id="h2">
               <th scope="row" data-i18n="research.hyp.h2">H2 Scale heterogeneity</th>
               <td data-i18n="research.hyp.h2theory">Scale economies in technology (Berger, 2003)</td>
               <td data-i18n="research.hyp.h2prediction">Larger banks more resilient</td>
               <td data-i18n="research.hyp.h2result">Not supported: interaction −0.003930 (n.s.)</td>
             </tr>
-            <tr>
+            <tr data-cite-id="h3">
               <th scope="row" data-i18n="research.hyp.h3">H3 Non-linear transition</th>
               <td data-i18n="research.hyp.h3theory">Substitution first, complementarity as markets mature</td>
               <td data-i18n="research.hyp.h3prediction">U-shape, β₂ &gt; 0</td>
@@ -202,7 +410,7 @@
               <th scope="row" data-i18n="research.data.s5">Study design</th>
               <td data-i18n="research.data.s5v">ASEAN-5 was originally planned; the selected indicator was not consistently available for the Philippines and Singapore</td>
             </tr>
-            <tr>
+            <tr data-cite-id="obs">
               <th scope="row" data-i18n="research.data.s6">Observations by country</th>
               <td data-i18n="research.data.s6v">Indonesia 200 · Malaysia 81 · Thailand 63</td>
             </tr>
@@ -230,7 +438,7 @@
         <div class="card">
           <span class="card-tag" data-i18n="research.data.c2tag">Explanatory measure</span>
           <h3 data-i18n="research.data.c2title">Country-year digital payment pressure</h3>
-          <p data-i18n-html="research.data.c2body">The explanatory variable comes from the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, used with the unit <code>PT_GDP</code>: mobile and internet banking transactions as a percentage of GDP. It counts transactions processed by banks themselves, not by non-bank FinTech platforms. Between 2014 and 2022 it rose from 111% to 268% of GDP in Indonesia, from 366% to 719% in Malaysia and from 124% to 532% in Thailand. In the linear models one unit equals 10 percentage points of GDP (<code>DPP_10pct_GDP</code>); the refined models use ln(1 + DPP).</p>
+          <p data-i18n-html="research.data.c2body" data-cite-id="dpp">The explanatory variable comes from the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, used with the unit <code>PT_GDP</code>: mobile and internet banking transactions as a percentage of GDP. It counts transactions processed by banks themselves, not by non-bank FinTech platforms. Between 2014 and 2022 it rose from 111% to 268% of GDP in Indonesia, from 366% to 719% in Malaysia and from 124% to 532% in Thailand. In the linear models one unit equals 10 percentage points of GDP (<code>DPP_10pct_GDP</code>); the refined models use ln(1 + DPP).</p>
           <ul class="card-list">
             <li data-i18n="research.data.c2v1">The indicator source is public; generated extraction files are not committed to the repository.</li>
             <li data-i18n="research.data.c2v2">Availability, definitions, and reuse terms can change, so the workflow documents how the indicator was discovered and selected instead of treating it as a black box.</li>
@@ -313,7 +521,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr data-cite-id="r1">
               <th scope="row" data-i18n="research.results.r1spec">Main model, scaled measure</th>
               <td class="num">−0.000292*</td>
               <td class="num">(0.000177)</td>
@@ -321,7 +529,7 @@
               <td class="num">0.0065</td>
               <td><span class="badge badge-sig" data-i18n="research.results.badgeMarginal">Marginal</span> <span data-i18n="research.results.r1">Negative association with marginal statistical evidence.</span></td>
             </tr>
-            <tr>
+            <tr data-cite-id="r2">
               <th scope="row" data-i18n="research.results.r2spec">Main model with controls</th>
               <td class="num">−0.000264</td>
               <td class="num">(0.000201)</td>
@@ -329,7 +537,7 @@
               <td class="num">0.0241</td>
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r2">Negative sign but no statistical evidence.</span></td>
             </tr>
-            <tr>
+            <tr data-cite-id="r3">
               <th scope="row" data-i18n="research.results.r3spec">Full controls model</th>
               <td class="num">−0.000208</td>
               <td class="num">(0.000333)</td>
@@ -337,7 +545,7 @@
               <td class="num">0.0739</td>
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r3">Negative sign but no statistical evidence.</span></td>
             </tr>
-            <tr>
+            <tr data-cite-id="r4">
               <th scope="row" data-i18n="research.results.r4spec">Log baseline model</th>
               <td class="num">−0.010171**</td>
               <td class="num">(0.005116)</td>
@@ -345,7 +553,7 @@
               <td class="num">0.0757</td>
               <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r4">Negative, statistically significant pooled association.</span></td>
             </tr>
-            <tr>
+            <tr data-cite-id="r4b">
               <th scope="row" data-i18n="research.results.r4bspec">Size interaction model</th>
               <td class="num">−0.006507</td>
               <td class="num">(0.005227)</td>
@@ -353,7 +561,7 @@
               <td class="num">0.0796</td>
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r4b">Neither the Large Bank dummy nor its interaction with log pressure (−0.003930) is significant.</span></td>
             </tr>
-            <tr>
+            <tr data-cite-id="r5">
               <th scope="row" data-i18n="research.results.r5spec">Nonlinear model</th>
               <td class="num">−0.010829**</td>
               <td class="num">(0.005432)</td>
@@ -385,20 +593,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row" data-i18n="research.robust.t1">Driscoll–Kraay SE (Model 4)</th><td data-i18n="research.robust.e1">−0.0102, SE 0.0035, p = 0.004 (bank-clustered p = 0.048)</td><td data-i18n="research.robust.r1">Still significant when cross-sectional dependence is allowed</td></tr>
+            <tr data-cite-id="t1"><th scope="row" data-i18n="research.robust.t1">Driscoll–Kraay SE (Model 4)</th><td data-i18n="research.robust.e1">−0.0102, SE 0.0035, p = 0.004 (bank-clustered p = 0.048)</td><td data-i18n="research.robust.r1">Still significant when cross-sectional dependence is allowed</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t2">Driscoll–Kraay SE (Model 6 linear term)</th><td data-i18n="research.robust.e2">−0.0108, SE 0.0032, p = 0.001 (bank-clustered p = 0.047)</td><td data-i18n="research.robust.r2">Same</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t3">Mundlak decomposition: within</th><td>−0.0049, SE 0.0079, p = 0.53</td><td data-i18n="research.robust.r3">No within-country association</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t4">Mundlak decomposition: between</th><td>−0.0124, SE 0.0175, p = 0.48</td><td data-i18n="research.robust.r4">Same sign and size as the pooled estimate; imprecise with three countries</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t5">Within-only fixed effects</th><td>−0.0035, SE 0.0083, p = 0.67</td><td data-i18n="research.robust.r5">Not significant</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t6">Country subsamples, no year effects</th><td data-i18n="research.robust.e6">Indonesia −0.001420 (0.014970); Malaysia +0.005521 (0.005378); Thailand +0.001687* (0.000870)</td><td data-i18n="research.robust.r6">Not uniform; Thailand weakly positive</td></tr>
+            <tr data-cite-id="t3"><th scope="row" data-i18n="research.robust.t3">Mundlak decomposition: within</th><td>−0.0049, SE 0.0079, p = 0.53</td><td data-i18n="research.robust.r3">No within-country association</td></tr>
+            <tr data-cite-id="t4"><th scope="row" data-i18n="research.robust.t4">Mundlak decomposition: between</th><td>−0.0124, SE 0.0175, p = 0.48</td><td data-i18n="research.robust.r4">Same sign and size as the pooled estimate; imprecise with three countries</td></tr>
+            <tr data-cite-id="t5"><th scope="row" data-i18n="research.robust.t5">Within-only fixed effects</th><td>−0.0035, SE 0.0083, p = 0.67</td><td data-i18n="research.robust.r5">Not significant</td></tr>
+            <tr data-cite-id="t6"><th scope="row" data-i18n="research.robust.t6">Country subsamples, no year effects</th><td data-i18n="research.robust.e6">Indonesia −0.001420 (0.014970); Malaysia +0.005521 (0.005378); Thailand +0.001687* (0.000870)</td><td data-i18n="research.robust.r6">Not uniform; Thailand weakly positive</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t7">Exclude 2020</th><td data-i18n="research.robust.e7">Model 4 −0.008006 (0.004941), p = 0.106, n = 305</td><td data-i18n="research.robust.r7">Similar size, less precise</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t8">Net interest margin placebo</th><td>0.004125 (0.005450), p = 0.45, n = 335</td><td data-i18n="research.robust.r8">No effect on the lending margin: the pressure shows in the fee channel</td></tr>
-            <tr><th scope="row" data-i18n="research.robust.t9">One-year lag of regressor</th><td>−0.015901* (0.008475), p = 0.062, n = 305</td><td data-i18n="research.robust.r9">Larger and negative; eases the reverse-causality concern</td></tr>
+            <tr data-cite-id="t8"><th scope="row" data-i18n="research.robust.t8">Net interest margin placebo</th><td>0.004125 (0.005450), p = 0.45, n = 335</td><td data-i18n="research.robust.r8">No effect on the lending margin: the pressure shows in the fee channel</td></tr>
+            <tr data-cite-id="t9"><th scope="row" data-i18n="research.robust.t9">One-year lag of regressor</th><td>−0.015901* (0.008475), p = 0.062, n = 305</td><td data-i18n="research.robust.r9">Larger and negative; eases the reverse-causality concern</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t10">Exclude Islamic and digital-challenger banks</th><td data-i18n="research.robust.e10">−0.004328 (0.002631), p = 0.101, n = 273, 31 banks</td><td data-i18n="research.robust.r10">Smaller; part of the pooled size comes from this high-margin segment</td></tr>
           </tbody>
         </table>
       </div>
-      <p data-i18n="research.robust.interp">The pooled negative association comes mainly from differences between countries — Indonesia averages a net fee margin of 0.022 at a digital intensity of 164% of GDP, Thailand 0.012 at 271%, Malaysia 0.012 at 540% — rather than from change within each country over time. That is the pattern contestable-markets theory predicts, because contestability is a property of market structure and entry conditions differ: Indonesia licenses e-money and peer-to-peer providers openly, Malaysia has issued digital-bank licences against mature incumbents, and Thailand's virtual-bank framework is led by incumbents — and it is in Thailand that the coefficient is weakly positive.</p>
+      <p data-i18n="research.robust.interp" data-cite-id="avg">The pooled negative association comes mainly from differences between countries — Indonesia averages a net fee margin of 0.022 at a digital intensity of 164% of GDP, Thailand 0.012 at 271%, Malaysia 0.012 at 540% — rather than from change within each country over time. That is the pattern contestable-markets theory predicts, because contestability is a property of market structure and entry conditions differ: Indonesia licenses e-money and peer-to-peer providers openly, Malaysia has issued digital-bank licences against mature incumbents, and Thailand's virtual-bank framework is led by incumbents — and it is in Thailand that the coefficient is weakly positive.</p>
     </div>
   </section>
 
@@ -410,8 +618,8 @@
         <p data-i18n="research.limits.lede">The results are conditional associations, not causal estimates. Eight constraints explain why.</p>
       </div>
       <ol class="card-list">
-        <li data-i18n="research.limits.l1">Interpretation: a coefficient describes an association under a model, not an identified causal effect.</li>
-        <li data-i18n="research.limits.l2">Data level and cluster counts: the explanatory measure varies only at the country-year level (about 27 distinct values across three countries and nine years), so the pooled estimate rests on few macro movements. Bank-level clustering (39 clusters) does not address cross-sectional correlation, which is why Driscoll–Kraay errors are also reported; country subsamples also have few clusters (9 Malaysian and 7 Thai banks).</li>
+        <li data-i18n="research.limits.l1" data-cite-id="l1">Interpretation: a coefficient describes an association under a model, not an identified causal effect.</li>
+        <li data-i18n="research.limits.l2" data-cite-id="l2">Data level and cluster counts: the explanatory measure varies only at the country-year level (about 27 distinct values across three countries and nine years), so the pooled estimate rests on few macro movements. Bank-level clustering (39 clusters) does not address cross-sectional correlation, which is why Driscoll–Kraay errors are also reported; country subsamples also have few clusters (9 Malaysian and 7 Thai banks).</li>
         <li data-i18n="research.limits.l3">Coverage: three countries are included, so the study should not be generalised to ASEAN-5 or all banking markets.</li>
         <li data-i18n="research.limits.l4">Omitted variables: regulation, payment infrastructure, macroeconomic conditions, and market concentration may affect both digital payments and fee margins.</li>
         <li data-i18n="research.limits.l5">Income aggregation: the outcome is total non-interest income over assets, so it cannot separate payment, card, merchant-service or wealth-management fees, and it also contains trading and other non-interest revenue.</li>
