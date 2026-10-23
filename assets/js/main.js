@@ -306,22 +306,33 @@
   window.addEventListener("hashchange", revealTarget);
 
   // The Tableau story has a fixed size, so its frame is drawn at that size and
-  // scaled to the width it is given (see .tableau-fit in styles.css). The
-  // observer also fires when the collapsed section is opened.
+  // scaled to the width it is given (see .tableau-fit in styles.css). It is
+  // refitted when its collapsed section opens and whenever its width changes.
   var tableauBoxes = document.querySelectorAll(".tableau-fit");
-  if (tableauBoxes.length && "ResizeObserver" in window) {
-    var tableauFit = new ResizeObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var box = entry.target;
-        var native = parseFloat(getComputedStyle(box).getPropertyValue("--tableau-w")) || 1150;
-        if (box.clientWidth > 0) {
-          box.style.setProperty("--tableau-scale", String(Math.min(1, box.clientWidth / native)));
-        }
+  function fitTableau(box) {
+    var native = parseFloat(getComputedStyle(box).getPropertyValue("--tableau-w")) || 1150;
+    if (box.clientWidth > 0) {
+      box.style.setProperty("--tableau-scale", String(Math.min(1, box.clientWidth / native)));
+    }
+  }
+  function fitAllTableau() {
+    Array.prototype.forEach.call(tableauBoxes, fitTableau);
+  }
+  if (tableauBoxes.length) {
+    if ("ResizeObserver" in window) {
+      var tableauFit = new ResizeObserver(function (entries) {
+        entries.forEach(function (entry) {
+          fitTableau(entry.target);
+        });
       });
-    });
-    Array.prototype.forEach.call(tableauBoxes, function (box) {
-      tableauFit.observe(box);
-    });
+      Array.prototype.forEach.call(tableauBoxes, function (box) {
+        tableauFit.observe(box);
+      });
+    }
+    // "toggle" does not bubble, so listen in the capture phase.
+    document.addEventListener("toggle", fitAllTableau, true);
+    window.addEventListener("resize", fitAllTableau);
+    fitAllTableau();
   }
 
   var openedForPrint = [];
