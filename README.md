@@ -301,8 +301,11 @@ Rebuild them after any change to the CV pages, in either of two ways:
   workflow. It runs on Windows with the fonts the files were first made with
   (Arial and Segoe UI from Windows, Noto Sans TC and Cascadia Mono installed
   from the Google Fonts repository) and attaches the four PDFs to the run as a
-  download. Tick **commit** to put them on the site in the same run; leave it
-  unticked to look at them first.
+  download. The run's summary page lists each file's page count and fonts; the
+  current files use Arial and Noto Sans TC throughout, plus Segoe UI and
+  Cascadia Mono in the full CVs, and a rebuild should show the same. Tick
+  **commit** to put them on the site in the same run; leave it unticked to look
+  at them first.
 - **Locally**, on a machine with Chrome or Edge: `python tools/_build_cv_pdfs.py`,
   then commit the four files.
 

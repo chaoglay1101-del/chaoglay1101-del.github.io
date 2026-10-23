@@ -56,6 +56,39 @@ jobs:
       - name: Build the PDFs
         run: python tools/_build_cv_pdfs.py
 
+      - name: Report pages and fonts
+        shell: bash
+        run: |
+          python -m pip install --quiet --disable-pip-version-check pypdf
+          python - <<'EOF'
+          # One line per PDF on the run's summary page, so a rebuild can be
+          # compared with the files on the site before it is committed.
+          import os, pathlib, re
+          from pypdf import PdfReader
+
+          def font_name(font):
+              name = font.get("/BaseFont")
+              if name is None:  # Type 3 fonts carry the name in the descriptor
+                  descriptor = font.get("/FontDescriptor")
+                  name = descriptor.get_object().get("/FontName") if descriptor else font.get("/Name", "?")
+              return re.sub(r"^[A-Z]{6}\+", "", str(name).lstrip("/"))
+
+          rows = ["| File | Pages | Fonts |", "| --- | --- | --- |"]
+          for path in sorted(pathlib.Path("assets/pdf").glob("Chao_YuChen_CV_*.pdf")):
+              reader = PdfReader(path)
+              fonts = set()
+              for page in reader.pages:
+                  resources = page.get("/Resources")
+                  table = resources.get_object().get("/Font") if resources else None
+                  for ref in (table.get_object().values() if table else ()):
+                      fonts.add(font_name(ref.get_object()))
+              listed = ", ".join(sorted(fonts))
+              rows.append(f"| {path.name} | {len(reader.pages)} | {listed} |")
+              print(f"::notice title={path.name}::{len(reader.pages)} page(s); fonts: {listed}")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("\n".join(rows) + "\n")
+          EOF
+
       - name: Attach the PDFs to the run
         uses: actions/upload-artifact@v4
         with:
