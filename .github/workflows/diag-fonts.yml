@@ -8,6 +8,7 @@ permissions:
 jobs:
   diag:
     runs-on: windows-latest
+    timeout-minutes: 20
     env:
       PYTHONUTF8: "1"
     steps:
@@ -29,9 +30,9 @@ jobs:
           def note(title, msg):
               print(f"::notice title={title}::{msg}")
           chrome = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-          r = subprocess.run([chrome, "--version"], capture_output=True, text=True)
-          note("chrome", (r.stdout or r.stderr).strip() or "no version output")
-          note("os", subprocess.run(["cmd", "/c", "ver"], capture_output=True, text=True).stdout.strip())
+          r = subprocess.run(["powershell", "-NoProfile", "-Command", f"(Get-Item '{chrome}').VersionInfo.ProductVersion"], capture_output=True, text=True, timeout=60)
+          note("chrome", r.stdout.strip() or "unknown")
+          note("os", subprocess.run(["cmd", "/c", "ver"], capture_output=True, text=True, timeout=30).stdout.strip())
           src = pathlib.Path(os.environ["RUNNER_TEMP"]) / "google-fonts" / "ofl"
           files = sorted((src / "notosanstc").glob("*.ttf"))
           note("source", "; ".join(f"{f.name} {f.stat().st_size}" for f in files) or "none")
@@ -56,10 +57,11 @@ jobs:
               return ", ".join(sorted(out))
           def render(tag):
               out = work / f"{tag}.pdf"
-              with tempfile.TemporaryDirectory() as prof:
+              prof = tempfile.mkdtemp()
+              if True:
                   subprocess.run([chrome, "--headless=new", "--disable-gpu", "--no-first-run",
                                   f"--user-data-dir={prof}", "--no-pdf-header-footer",
-                                  f"--print-to-pdf={out}", page.as_uri()], capture_output=True, timeout=180)
+                                  f"--print-to-pdf={out}", page.as_uri()], capture_output=True, timeout=120)
               note(tag, names(out) if out.exists() else "no pdf")
           def gdi(tag):
               r = subprocess.run(["powershell", "-NoProfile", "-Command",
