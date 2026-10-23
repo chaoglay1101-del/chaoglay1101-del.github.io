@@ -2147,3 +2147,113 @@ html.is-presenting body { overflow: hidden; }
     gap: 0.6rem;
   }
 }
+
+/* --- Flow texture (assets/js/flow.js) --------------------------------------
+   The site is about payment flows, so its texture is a current. Three parts,
+   all screen only: each page hero carries a field of current lines drawn by
+   flow.js (one bold element, still after the first four seconds); sections
+   and the footer meet at a soft tide line instead of a ruler-straight rule;
+   and the header is frosted glass, so the lines show through it as the page
+   scrolls. Print keeps the plain rules set in the print block above, so the CV
+   PDFs do not change. */
+
+:root {
+  --flow-a: #2a6f9f;
+  --flow-b: #1a9a88;
+  --flow-head: #1c5f8f;
+  --flow-alpha: 0.34;
+  --tide: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 10'%3E%3Cpath d='M0 5C80 1.5 240 1.5 320 5S560 8.5 640 5' fill='none' stroke='%23000' stroke-width='1.3'/%3E%3C/svg%3E");
+}
+
+html[data-theme="dark"] {
+  --flow-a: #5fa8d8;
+  --flow-b: #4fc4b0;
+  --flow-head: #cfe8fb;
+  --flow-alpha: 0.3;
+}
+
+@media screen {
+  [data-flow] {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Full strength in the open space to the right of the hero text, faint
+     behind the text itself so its contrast is untouched. */
+  .flow-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.16) 0%, rgb(0 0 0 / 0.16) 34%, #000 80%);
+    mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.16) 0%, rgb(0 0 0 / 0.16) 34%, #000 80%);
+  }
+
+  /* On a phone the text spans the hero, so the lines stay faint throughout
+     and gather towards the top, above the first line of the heading. */
+  @media (max-width: 720px) {
+    .flow-canvas {
+      -webkit-mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.14) 55%);
+      mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.14) 55%);
+    }
+  }
+
+  /* Tide line: one gentle wave, 640px long, tiled across the boundary.
+     Alternate sections are offset by half a wave so the lines do not stack
+     into a pattern as the page scrolls. */
+  .section,
+  .site-footer {
+    position: relative;
+    border-top: 0;
+  }
+
+  .section:not(:first-of-type)::before,
+  .site-footer::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: var(--line-strong);
+    -webkit-mask: var(--tide) 0 0 / 640px 10px repeat-x;
+    mask: var(--tide) 0 0 / 640px 10px repeat-x;
+    pointer-events: none;
+  }
+
+  .section:nth-of-type(even)::before {
+    -webkit-mask-position: 320px 0;
+    mask-position: 320px 0;
+  }
+
+  /* The CV hero opens with its download buttons; give the name room below. */
+  .hero .btn-group + .hero-layout {
+    margin-top: 2.25rem;
+  }
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  @media screen {
+    .site-header {
+      background: color-mix(in srgb, var(--bg-elevated) 78%, transparent);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px);
+      backdrop-filter: saturate(1.4) blur(14px);
+    }
+
+    /* The open phone menu reads as a solid panel. */
+    .site-header:has(.nav-list.is-open) {
+      background: var(--bg-elevated);
+    }
+  }
+}
+
+/* The footer's current is quieter than the hero's and leans to the right,
+   away from the first column of links. */
+@media screen {
+  .site-footer .flow-canvas {
+    -webkit-mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.1) 0%, rgb(0 0 0 / 0.1) 40%, rgb(0 0 0 / 0.65) 100%);
+    mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.1) 0%, rgb(0 0 0 / 0.1) 40%, rgb(0 0 0 / 0.65) 100%);
+  }
+}

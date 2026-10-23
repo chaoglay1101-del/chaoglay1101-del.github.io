@@ -25,6 +25,7 @@
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/story.js" defer onerror="document.documentElement.classList.add('story-off')"></script>
+<script src="assets/js/flow.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to main content</a>
@@ -55,7 +56,7 @@
 
 <main id="main">
 
-  <section class="hero">
+  <section class="hero" data-flow="2">
     <div class="container">
       <div class="hero-text">
         <p class="hero-name" data-i18n="research.eyebrow">Research and projects</p>
@@ -852,7 +853,7 @@
 
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" data-flow="5" data-flow-still>
   <div class="container">
     <div class="footer-grid">
       <div>

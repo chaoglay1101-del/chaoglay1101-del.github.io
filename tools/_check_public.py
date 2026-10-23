@@ -40,6 +40,7 @@ REQUIRED = (
     "assets/js/main.js",
     "assets/js/i18n.js",
     "assets/js/story.js",
+    "assets/js/flow.js",
     "assets/img/og-image.png",
     "assets/pdf/Chao_YuChen_CV_EN.pdf",
     "assets/pdf/Chao_YuChen_CV_Full_EN.pdf",

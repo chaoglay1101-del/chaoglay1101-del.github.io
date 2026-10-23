@@ -74,6 +74,7 @@ assets/css/styles.css          Main stylesheet: light and dark themes, print sty
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
 assets/js/main.js              Theme toggle, language toggle, mobile navigation, print button, ?lang= deep link, current year; opens collapsed sections for links and printing
 assets/js/story.js             Step-through stories, their charts, the cohort strips and the evidence index (see "Step-through stories")
+assets/js/flow.js              The current lines behind the heroes and footers (see "Flow texture")
 assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
 assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
@@ -462,6 +463,35 @@ search results.
 Until October 2026 the site was kept in the research repository
 (`digital-payment-pressure-bank-margins`, folder `10_Personal_Website`) and
 copied here with `git subtree`. That copy has been retired: edit here only.
+
+## Flow texture
+
+The site is about payment flows, so its texture is a current. It has three
+parts, all on screen only:
+
+| Part | Where | What it does |
+| --- | --- | --- |
+| Current lines | Every page hero and footer (`data-flow` on the element) | `flow.js` draws evenly spaced streamlines of a smooth, mostly rightward field, the way a wind or ocean-current map does. In a hero a front sweeps them in on load, then faint glints run along them while the hero is on screen. The pointer parts the lines around it, and a click or tap sends a ripple through them. The number in `data-flow` seeds the field, so each page has its own current; `data-flow-still` (the footers) skips the intro and the glints. |
+| Tide lines | Between sections and above the footer | One gentle wave, tiled, in place of a straight rule; alternate sections are offset by half a wave. |
+| Frosted header | The sticky header | Translucent with a blur, so the lines show through it while scrolling. |
+
+The rules it keeps:
+
+- **Text first.** A CSS mask keeps the lines faint behind the hero text and
+  full strength only in the open space to its right; on a phone they stay faint
+  throughout.
+- **Nothing depends on it.** The canvases are `aria-hidden` and ignore the
+  pointer (the host listens, so every link and button works as before). Without
+  JavaScript, or if `flow.js` fails, the pages are exactly as they were.
+- **Motion is optional and bounded.** Under `prefers-reduced-motion` the lines
+  are drawn at once and nothing moves. Otherwise the animation runs only while
+  a hero is on screen, the tab is showing, and no presentation is open, and a
+  resting pointer costs nothing.
+- **Print is untouched.** Canvases are `.screen-only` and the tide lines, glass
+  header and spacing are inside `@media screen`, so `cv.html` prints the same
+  text and page count and the PDFs in `assets/pdf/` need no rebuild.
+- **Colours live in CSS** as `--flow-a`, `--flow-b`, `--flow-head` and
+  `--flow-alpha`, with dark-theme values beside the light ones.
 
 ## Social sharing
 
