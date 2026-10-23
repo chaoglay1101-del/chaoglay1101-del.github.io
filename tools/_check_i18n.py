@@ -16,7 +16,7 @@ mode the key uses.
 A report is written to tools/_i18n_report.txt in ASCII-safe form so it can be
 read on a cp950 console. Run from the project root:
 
-    uv run python 10_Personal_Website/tools/_check_i18n.py
+    python tools/_check_i18n.py
 """
 
 from __future__ import annotations
@@ -149,7 +149,7 @@ def main() -> int:
         lines.append(f"  {key}  [{'|'.join(sorted(kinds[key]))}]")
 
     OUT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"wrote {OUT.relative_to(SITE.parent)}")
+    print(f"wrote {OUT.relative_to(SITE)}")
     print("RESULT:", "ALL GOOD" if problems == 0 else f"{problems} problem group(s); see report")
     return 0 if problems == 0 else 1
 

@@ -1,0 +1,67 @@
+# Runs the site's own checks on every push to main. GitHub Pages publishes main
+# by itself (Settings > Pages > Deploy from a branch), so this does not gate the
+# deploy: a red cross here means "fix and push again", and the reports the
+# tools write are attached to the run as a download.
+name: Site checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: English key list is up to date
+        run: |
+          python tools/_extract_en.py
+          git diff --exit-code tools/_en_keys.json || {
+            echo "::error::tools/_en_keys.json is out of date: run python tools/_extract_en.py and commit it"
+            exit 1
+          }
+
+      - name: Page keys match the English list
+        run: python tools/_check_keys.py
+
+      - name: Chinese coverage and markup hazards
+        run: python tools/_check_i18n.py
+
+      - name: HTML, local files, external links, share cards
+        run: python tools/_verify_html.py
+
+      - name: Only public files are tracked
+        run: python tools/_check_public.py
+
+      - name: Chinese not left behind by an English change
+        if: github.event_name == 'push'
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            python tools/_check_stale.py "$BEFORE"
+          else
+            python tools/_check_stale.py HEAD~1
+          fi
+
+      - name: Attach the reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-reports
+          path: tools/_*.txt
+          if-no-files-found: ignore

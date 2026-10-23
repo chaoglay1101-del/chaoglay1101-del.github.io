@@ -8,7 +8,7 @@ tools/_zh_preview.txt.
 This is a simulation of main.js, not a replacement for it: it proves that each
 key resolves and shows how the Chinese page reads end to end.
 
-    uv run python 10_Personal_Website/tools/_preview_zh.py [en|zh]
+    python tools/_preview_zh.py [en|zh]
 """
 
 from __future__ import annotations
@@ -105,7 +105,7 @@ def main() -> int:
         chunks.append("=" * 72)
         chunks.append(readable(apply_pack(source, pack)))
     OUT.write_text("\n".join(chunks) + "\n", encoding="utf-8")
-    print(f"wrote {OUT.relative_to(SITE.parent)}")
+    print(f"wrote {OUT.relative_to(SITE)}")
     return 0
 
 

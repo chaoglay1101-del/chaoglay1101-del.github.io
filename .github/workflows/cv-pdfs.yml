@@ -1,0 +1,78 @@
+# Rebuilds the four CV PDFs in assets/pdf/ from cv.html and cv-onepage.html,
+# without a local machine. Start it from the Actions tab ("Build CV PDFs" >
+# "Run workflow").
+#
+# It runs on Windows with the fonts the current PDFs were made with (Arial and
+# Segoe UI ship with Windows; Noto Sans TC and Cascadia Mono are installed from
+# the Google Fonts repository), so a rebuild looks like the files it replaces.
+# The build fails, and nothing is committed, if a one-page CV runs to two pages.
+#
+# By default the PDFs are only attached to the run as a download to look at
+# first. Tick "commit" to put them on the site in the same run.
+name: Build CV PDFs
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: "Commit the rebuilt PDFs to main (unticked: download only)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cv-pdfs
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Noto Sans TC and Cascadia Mono
+        shell: pwsh
+        run: |
+          $src = Join-Path $env:RUNNER_TEMP 'google-fonts'
+          git clone --quiet --depth 1 --filter=blob:none --sparse https://github.com/google/fonts.git $src
+          git -C $src sparse-checkout set ofl/notosanstc ofl/cascadiamono
+          $fonts = @(Get-ChildItem "$src/ofl/notosanstc", "$src/ofl/cascadiamono" -Filter *.ttf -ErrorAction SilentlyContinue)
+          if (-not ($fonts | Where-Object Name -like 'NotoSansTC*')) { throw 'Noto Sans TC was not found in the Google Fonts repository' }
+          $key = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
+          foreach ($font in $fonts) {
+            Copy-Item $font.FullName (Join-Path $env:WINDIR 'Fonts') -Force
+            New-ItemProperty -Path $key -Name "$($font.BaseName) (TrueType)" -Value $font.Name -PropertyType String -Force | Out-Null
+            Write-Host "installed $($font.Name)"
+          }
+
+      - name: Build the PDFs
+        run: python tools/_build_cv_pdfs.py
+
+      - name: Attach the PDFs to the run
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs
+          path: assets/pdf/Chao_YuChen_CV_*.pdf
+          if-no-files-found: error
+
+      - name: Commit to main
+        if: ${{ inputs.commit }}
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/pdf/Chao_YuChen_CV_*.pdf
+          if git diff --cached --quiet; then
+            echo "The PDFs are unchanged."
+          else
+            git commit -m "Rebuild CV PDFs"
+            git push
+          fi

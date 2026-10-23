@@ -1,8 +1,15 @@
-"""Cross-check: every i18n key referenced by the pages vs _en_keys.json."""
+"""Cross-check: every i18n key referenced by the pages vs _en_keys.json.
+
+    python tools/_check_keys.py
+
+Exit status is non-zero when the two lists disagree, so the GitHub Actions
+check fails on it.
+"""
 
 import json
 import pathlib
 import re
+import sys
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
 PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
@@ -28,3 +35,5 @@ print("referenced:", len(referenced))
 print("en_keys.json:", len(en_keys))
 print("referenced but missing from en:", missing or "none")
 print("in en but not referenced:", extra or "none")
+print("RESULT:", "ALL GOOD" if not (missing or extra) else "run tools/_extract_en.py and check the keys above")
+sys.exit(1 if missing or extra else 0)

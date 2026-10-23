@@ -17,7 +17,7 @@ The English side is read from the working tree, and the Chinese from both the
 given revision and the working tree, so the intended workflow is: change copy,
 edit the pack, then run this before publishing.
 
-    uv run python 10_Personal_Website/tools/_check_stale.py <last-published-rev>
+    python tools/_check_stale.py <last-published-rev>
 
 A report is written to tools/_stale_report.txt in readable form, because the
 console may not be able to print Chinese. Exit status is non-zero when any key
@@ -33,10 +33,11 @@ import subprocess
 import sys
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-REPO = SITE.parent
-PREFIX = "10_Personal_Website/"
+# The repository root is the site root: GitHub Pages serves main as it is.
+REPO = SITE
+PREFIX = ""
 PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
-PACK_REL = "10_Personal_Website/assets/js/i18n.js"
+PACK_REL = "assets/js/i18n.js"
 SCRIPT = SITE / "assets" / "js" / "i18n.js"
 OUT = SITE / "tools" / "_stale_report.txt"
 

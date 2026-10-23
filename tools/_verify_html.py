@@ -14,6 +14,7 @@ Checks that matter for this site:
 import html.parser
 import pathlib
 import re
+import sys
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
 PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
@@ -157,3 +158,4 @@ for name in PAGES:
         problems += 1
 
 print("\nRESULT:", "ALL GOOD" if problems == 0 else f"{problems} page(s) with issues")
+sys.exit(1 if problems else 0)

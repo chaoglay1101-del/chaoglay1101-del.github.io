@@ -14,11 +14,13 @@ Filenames use the document convention of the wider project (name first,
 underscores) rather than the site's asset convention, because the filename is
 what an applicant tracking system reads and an admissions office sees.
 
-Run from the project root:
+Run from the repository root on a machine with Chrome or Edge:
 
-    uv run python 10_Personal_Website/tools/_build_cv_pdfs.py
+    python tools/_build_cv_pdfs.py
 
-Output: 10_Personal_Website/assets/pdf/
+or, with no local machine at all, from the "Build CV PDFs" workflow in GitHub
+Actions, which runs this on a Windows runner so the fonts match a Windows
+browser. Output: assets/pdf/
 """
 
 from __future__ import annotations
@@ -116,7 +118,7 @@ def main() -> int:
     browser = find_browser()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     print("browser:", browser)
-    print("writing:", OUT_DIR.relative_to(SITE.parent))
+    print("writing:", OUT_DIR.relative_to(SITE))
     problems = 0
 
     with tempfile.TemporaryDirectory(prefix="cv-pdf-") as temporary:

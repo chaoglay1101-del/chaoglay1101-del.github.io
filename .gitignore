@@ -1,0 +1,6 @@
+# This repository is the published site: GitHub Pages serves every tracked file.
+# Reports the tools write, and local Python clutter, stay out of it.
+tools/_*.txt
+__pycache__/
+*.pyc
+.venv/

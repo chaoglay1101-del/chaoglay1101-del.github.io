@@ -78,17 +78,28 @@ assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
 assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
 tools/                         Maintenance, validation, and PDF build scripts (published, but kept out of search results)
+.github/workflows/             Site checks on every push, and the CV PDF build (see "Publishing")
 ```
 
-## Local preview
+## Where the site lives
 
-```powershell
-uv run python -m http.server 8000 --directory 10_Personal_Website
-```
+This repository is the site and its only copy. GitHub Pages serves `main` as it
+is, so there is nothing to build, sync or copy: a commit to `main` is live a
+minute or two later. There is no longer a copy inside the research repository,
+and nothing needs to be kept on a local machine.
 
-Then open <http://localhost:8000/>. Serving over HTTP is recommended so that
-relative paths, `localStorage`, and the deferred scripts behave exactly as they
-do in production.
+Three ways to edit, from lightest to heaviest:
+
+| Way | When it fits |
+| --- | --- |
+| The pencil icon on a file in the GitHub web page | A sentence, a date, a link |
+| Press `.` on the repository page (github.dev) | Several files at once, for example the English in a page plus its Chinese in `i18n.js` |
+| A local clone, previewed with `python -m http.server 8000` from the repository root and opened at <http://localhost:8000/> | Layout work, or running the scripts in `tools/` before pushing |
+
+A clone is optional and disposable: delete it whenever you like, and clone again
+when it is useful. Serving over HTTP rather than opening the files directly keeps
+relative paths, `localStorage` and the deferred scripts behaving as they do in
+production.
 
 ## Editing copy
 
@@ -108,13 +119,17 @@ Workflow for a copy change:
 ```powershell
 # 1. Edit the English text in the HTML, keeping (or adding) its data-i18n attribute.
 # 2. Refresh the English key list that translators work from.
-uv run python 10_Personal_Website/tools/_extract_en.py
+python tools/_extract_en.py
 # 3. Add or update the Chinese string in assets/js/i18n.js.
 # 4. Check coverage, stale keys, and markup hazards.
-uv run python 10_Personal_Website/tools/_check_i18n.py
+python tools/_check_i18n.py
 # 5. Proof-read the Chinese pages without a browser.
-uv run python 10_Personal_Website/tools/_preview_zh.py
+python tools/_preview_zh.py
 ```
+
+Editing in the browser only, steps 2 and 4 are done for you: the "Site checks"
+workflow runs on the push and fails if `tools/_en_keys.json` needed refreshing
+or a key has no Chinese. Its reports are attached to the run.
 
 Rules for `assets/js/i18n.js`:
 
@@ -137,31 +152,29 @@ Rules for `assets/js/i18n.js`:
   has never opened the site.
 - **Changing English means re-reading the Chinese.** `_check_i18n.py` proves that
   every key exists; it cannot prove the key still says the right thing. Run
-  `_check_stale.py <last-published-rev>` before publishing: it reports the keys
-  whose English moved while their Chinese stayed put, which is a mistake that has
+  `_check_stale.py <previous-rev>` before pushing (the "Site checks" workflow
+  runs it against the previous commit on every push): it reports the keys whose
+  English moved while their Chinese stayed put, which is a mistake that has
   already reached the live site once.
 
 ## Validation
 
 ```powershell
-uv run python 10_Personal_Website/tools/_verify_html.py   # UTF-8, tag balance, header controls
-uv run python 10_Personal_Website/tools/_check_keys.py    # page keys vs the English source list
-uv run python 10_Personal_Website/tools/_check_i18n.py    # Chinese coverage and hazards
-uv run python 10_Personal_Website/tools/_list_i18n.py     # every key in document order
-uv run python 10_Personal_Website/tools/_build_cv_pdfs.py # rebuild assets/pdf/ with headless Chrome
-uv run python 10_Personal_Website/tools/_check_stale.py <rev>  # Chinese left behind by a copy rewrite
-uv run python 10_Personal_Website/tools/_publish.py      # run every check above, then audit a publish
+python tools/_verify_html.py   # UTF-8, tag balance, local files, external links, share cards
+python tools/_check_keys.py    # page keys vs the English source list
+python tools/_check_i18n.py    # Chinese coverage and hazards
+python tools/_check_public.py  # every tracked file is meant to be public, and none is missing
+python tools/_check_stale.py <rev>  # Chinese left behind by a copy rewrite
+python tools/_list_i18n.py     # every key in document order
+python tools/_build_cv_pdfs.py # rebuild assets/pdf/ with headless Chrome or Edge
 ```
 
-`_check_i18n.py`, `_preview_zh.py`, and `_check_stale.py` write reports into
-`tools/` (ignored by git) and exit non-zero when something needs attention.
+Each check exits non-zero when something needs attention, which is what lets
+the "Site checks" workflow (`.github/workflows/checks.yml`) run all of them on
+every push to `main`. `_check_i18n.py`, `_preview_zh.py` and `_check_stale.py`
+also write reports into `tools/`, which `.gitignore` keeps out of the site.
 
-`_publish.py` is the one to reach for before publishing, and it is safe to run
-at any time: it validates, refuses to work from a dirty folder, works out which
-revision is live, runs the staleness check against it, splits, and then prints
-exactly which files would become public. **It does not push unless you pass
-`--push`.** The manual sequence in "Deploying to the user site" below is what it
-does, in order.
+Plain `python` is enough: the scripts use the standard library only.
 
 ## Personal details
 
@@ -282,11 +295,19 @@ Rebuilding rewrites the PDFs even when nothing changed, because the browser
 stamps a creation date into the file. When the CV pages themselves have not
 changed, discard the rebuilt files rather than committing a metadata-only diff.
 
-Rebuild them after any copy change:
+Rebuild them after any change to the CV pages, in either of two ways:
 
-```powershell
-uv run python 10_Personal_Website/tools/_build_cv_pdfs.py
-```
+- **In GitHub**, with no local machine: Actions > "Build CV PDFs" > Run
+  workflow. It runs on Windows with the fonts the files were first made with
+  (Arial and Segoe UI from Windows, Noto Sans TC and Cascadia Mono installed
+  from the Google Fonts repository) and attaches the four PDFs to the run as a
+  download. Tick **commit** to put them on the site in the same run; leave it
+  unticked to look at them first.
+- **Locally**, on a machine with Chrome or Edge: `python tools/_build_cv_pdfs.py`,
+  then commit the four files.
+
+Either way the build fails, and nothing is committed, if a one-page CV no longer
+fits on one page.
 
 Four details are load-bearing:
 
@@ -300,11 +321,11 @@ Four details are load-bearing:
   `data-cv-download="Chao_YuChen_CV"` has its `href` rewritten to the `_EN` or
   `_ZH` file by the active language. The `href` in the HTML points at the English
   file, which is what a browser without JavaScript fetches.
-- **`*.pdf` is ignored at the repository root** for submission drafts, so the
-  negation rules at the end of `.gitignore` are what keep the CVs in the
-  published site. Without them `git subtree` would publish pages that link to
-  files it left behind. The build also warns if a one-page CV no longer fits on
-  one page, so keep that check.
+- **A PDF is only public under `assets/pdf/`.** `_check_public.py` fails the
+  checks when one of the five linked PDFs is missing from the repository, or when
+  a PDF anywhere else is committed, which is how a submission draft would leak.
+  Submission documents belong in the research repository or the application
+  folders, never here.
 
 ### Copy it into Word instead
 
@@ -406,64 +427,30 @@ Five rules keep it consistent with the rest of the site:
 
 ## Publishing
 
-The pages use canonical URLs on `https://chaoglay1101-del.github.io/`, so this
-folder is published as the root of that site rather than from a sub-path.
-`.nojekyll` is already present, which keeps GitHub Pages from running Jekyll.
+**Live at <https://chaoglay1101-del.github.io/>.** This repository is named
+after the account, so GitHub Pages serves it at the root of that address, and
+Pages is set to deploy from the `main` branch. The canonical and `og:url` values
+point at that root for the same reason. `.nojekyll` keeps Pages from running
+Jekyll, so every file is served exactly as committed.
 
-### Deploying to the user site
+Publishing is therefore just committing to `main`:
 
-**Live at <https://chaoglay1101-del.github.io/>.** GitHub Pages activates itself
-for a repository named after the account, so no settings change is needed.
+1. Edit and commit (in the browser, in github.dev, or push from a clone).
+2. Pages deploys on its own; the "pages build and deployment" run in the Actions
+   tab shows when it is live, usually within two minutes.
+3. "Site checks" runs beside it. A red cross does not take the site down, since
+   Pages does not wait for it, but it means something should be fixed in the next
+   commit; open the run for the failing step and the attached reports.
 
-`https://chaoglay1101-del.github.io/` is the root of a separate repository named
-`chaoglay1101-del.github.io`. `git subtree` publishes this folder there without
-duplicating the source, so this repository stays the single source of truth.
+Every tracked file is public, `tools/`, `.github/` and this README included, so
+nothing private belongs here: no submission documents, no transcripts, no data
+files, no working notes. `_check_public.py` enforces the shapes of that rule
+(see "Validation"), and `robots.txt` keeps `tools/` and the README out of
+search results.
 
-`tools/_publish.py` runs the whole sequence and stops at the first thing that
-looks wrong. Without `--push` it only reports, which is the useful half: the
-audit names every file that would become public before it becomes public.
-
-```powershell
-# one-off: point a remote at the published site repository
-git remote add site https://github.com/chaoglay1101-del/chaoglay1101-del.github.io.git
-
-# validate everything, split, and list what would go public. Nothing is pushed.
-uv run python 10_Personal_Website/tools/_publish.py
-
-# publish, then confirm the live pages answer
-uv run python 10_Personal_Website/tools/_publish.py --push --verify-live
-```
-
-The equivalent by hand, which is what that script does in order:
-
-```powershell
-# publish. The split is a separate step so the exact file list can be checked
-# before it becomes public.
-git subtree split --prefix=10_Personal_Website -b site-publish
-git ls-tree -r site-publish --name-only
-git push site site-publish:main
-
-# afterwards, check the live result
-#   https://chaoglay1101-del.github.io/
-```
-
-The folder has to land at the root of the user site, which is why the canonical
-and `og:url` values point at `https://chaoglay1101-del.github.io/` rather than a
-sub-path. Every tracked file in this folder is published, including `tools/`,
-`README.md` and the portrait, so nothing private belongs here.
-
-One trap worth remembering: **`git subtree` only publishes tracked files**, and
-`.gitignore` can silently swallow a site file. It has now happened twice:
-`robots.txt` was excluded by the blanket `*.txt` rule, and the CVs in
-`assets/pdf/` would have been excluded by the blanket `*.pdf` rule. Both needed a
-negation rule at the end of `.gitignore`, where a later rule wins.
-
-`_publish.py` turns that habit into a gate: it fails when a file the pages link
-to is absent from the split, and it fails when a file that should never be public
-is present in it, since the whole folder is published including `tools/`. So the
-third time this happens it stops the push instead of reaching the site.
-`git ls-tree -r site-publish --name-only` is still worth reading, and the script
-prints it as the list of files that would become public.
+Until October 2026 the site was kept in the research repository
+(`digital-payment-pressure-bank-margins`, folder `10_Personal_Website`) and
+copied here with `git subtree`. That copy has been retired: edit here only.
 
 ## Social sharing
 
