@@ -2,8 +2,8 @@
 # without a local machine. Start it from the Actions tab ("Build CV PDFs" >
 # "Run workflow").
 #
-# It runs on Windows with the fonts the current PDFs were made with (Arial and
-# Segoe UI ship with Windows; Noto Sans TC and Cascadia Mono are installed from
+# It runs on Windows with the fonts the current PDFs were made with (Arial,
+# Segoe UI and Cascadia Mono ship with Windows; Noto Sans TC is installed from
 # the Google Fonts repository), so a rebuild looks like the files it replaces.
 # The build fails, and nothing is committed, if a one-page CV runs to two pages.
 #
@@ -44,20 +44,20 @@ jobs:
           $src = Join-Path $env:RUNNER_TEMP 'google-fonts'
           git clone --quiet --depth 1 --filter=blob:none --sparse https://github.com/google/fonts.git $src
           git -C $src sparse-checkout set ofl/notosanstc ofl/cascadiamono
-          $fonts = @(Get-ChildItem "$src/ofl/notosanstc", "$src/ofl/cascadiamono" -Filter *.ttf -ErrorAction SilentlyContinue)
-          if (-not ($fonts | Where-Object Name -like 'NotoSansTC*')) { throw 'Noto Sans TC was not found in the Google Fonts repository' }
+          $fonts = @(Get-ChildItem "$src/ofl/notosanstc" -Filter *.ttf)
+          if (-not $fonts) { throw 'Noto Sans TC was not found in the Google Fonts repository' }
+          # Recent Windows images already ship Cascadia Mono; add it only if missing.
+          if (-not (Get-ChildItem (Join-Path $env:WINDIR 'Fonts') -Filter 'CascadiaMono*')) {
+            $fonts += @(Get-ChildItem "$src/ofl/cascadiamono" -Filter *.ttf)
+          }
           $key = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
           foreach ($font in $fonts) {
-            Copy-Item $font.FullName (Join-Path $env:WINDIR 'Fonts') -Force
+            # -LiteralPath: the file names contain [wght], which -Path reads as a wildcard.
+            Copy-Item -LiteralPath $font.FullName -Destination (Join-Path $env:WINDIR 'Fonts') -Force
             New-ItemProperty -Path $key -Name "$($font.BaseName) (TrueType)" -Value $font.Name -PropertyType String -Force | Out-Null
+            if (-not (Test-Path -LiteralPath (Join-Path $env:WINDIR "Fonts\$($font.Name)"))) { throw "could not install $($font.Name)" }
             Write-Host "installed $($font.Name)"
           }
-          # Chrome finds fonts through DirectWrite, which reads them from the
-          # Windows font cache service. Rebuild that cache so the new fonts are
-          # in it before the browser starts.
-          Stop-Service -Name FontCache -Force
-          Remove-Item "$env:WINDIR\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*" -Force -ErrorAction SilentlyContinue
-          Start-Service -Name FontCache
 
       - name: Build the PDFs
         run: python tools/_build_cv_pdfs.py
