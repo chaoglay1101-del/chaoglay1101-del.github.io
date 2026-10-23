@@ -67,7 +67,7 @@ sites are useful for structure, not for claims.
 
 ```text
 index.html                     Home: hero, what I bring (each item linked to its evidence), selected work with an overview timeline, contact
-research.html                  Research and projects: the final-year research (six steps, question, data, method, results, limitations, agenda, reproducibility, sources), then the Tableau coursework project (#tableau); data, method and reproducibility details open on request
+research.html                  Research and projects: the final-year research (six steps, question, data, method, results, limitations, agenda, reproducibility, sources), then the Tableau coursework project (#tableau) and the TechStarterWeb studio website (#techstarterweb); data, method and reproducibility details open on request
 cv.html                        CV: a two-minute tour, then the complete record, profile through to notes, with an evidence index above Skills; the internship certificate opens on request
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
 assets/css/styles.css          Main stylesheet: light and dark themes, print styles
@@ -404,7 +404,7 @@ one click per key press, and any step and click can be linked to.
 | --- | --- | --- |
 | Six-step findings | `research.html#story` | Read by scrolling, or press **P** (the Present button) for one annotation per key press: → or Space forward, ← back, Home and End, **F** full screen, Esc to leave. Each step links to the table rows its numbers come from (tagged `data-cite-id`) and a bar brings the reader back. |
 | Two-minute tour | `cv.html#intro` | The same engine over the CV, with a timeline whose marks follow the steps and a presenter timer (**T**) whose per-step budget, in seconds, is `data-deck-timer` on the deck. |
-| Overview timeline | `index.html`, Selected work | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the two pages cannot disagree about dates. |
+| Overview timeline | `index.html`, Selected work | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the two pages cannot disagree about dates. An item marked `overviewOnly` (TechStarterWeb) appears here but not in the six-step tour, which stays as told. |
 | Cohort strips | `cv.html`, under the two assessed marks | The mark beside the class mean, upper quartile and maximum already stated in `cv.research.grade1` and `cv.research.grade2`. |
 | Evidence index | `cv.html`, above Skills | One button per capability marks the CV lines that show it (`data-ev="key"` on those lines); pressing again moves to the next line. |
 

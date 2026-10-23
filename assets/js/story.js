@@ -563,7 +563,10 @@
         { id: "next", lane: "edu", from: 2027, to: 2028, open: true },          // applying now
         { id: "research", lane: "res", from: 2025 + 8 / 12, to: 2026 + 6 / 12 }, // 2025–2026 final-year project
         { id: "intern", lane: "prac", from: 2025 + 6 / 12, to: 2025 + 9 / 12 },  // July – September 2025
-        { id: "tableau", lane: "prac", at: 2025 + 11.5 / 12 }                     // submitted December 2025
+        { id: "tableau", lane: "prac", at: 2025 + 11.5 / 12 },                    // submitted December 2025
+        // TechStarterWeb, from 22 October 2026, ongoing. Overview only: the CV
+        // tour tells six steps and this is not one of them.
+        { id: "tsw", lane: "prac", from: 2026 + 9 / 12 + 21 / 365, to: 2027 + 6 / 12, open: true, overviewOnly: true }
       ],
       focus: [["sim", "bsc", "conferral"], ["tableau", "research"], ["research"], ["research"], ["intern"], ["next"]]
     };
@@ -578,10 +581,11 @@
       var laneH = narrow ? (overview ? 58 : 34) : 50;
       var H = m.t + laneH * TIMELINE.lanes.length + m.b;
       var x = lin(TIMELINE.from, TIMELINE.to, m.l, W - m.r);
-      var svg = svgRoot(W, H, s("tl.aria"));
+      var items = TIMELINE.items.filter(function (it) { return overview || !it.overviewOnly; });
+      var svg = svgRoot(W, H, s(overview ? "tl.ariaAll" : "tl.aria"));
       var hits = S("g", null);
       svg.appendChild(hits);
-      var focus = overview ? TIMELINE.items.map(function (it) { return it.id; }) : (TIMELINE.focus[focusStep] || []);
+      var focus = overview ? items.map(function (it) { return it.id; }) : (TIMELINE.focus[focusStep] || []);
       function laneY(lane) { return m.t + laneH * (TIMELINE.lanes.indexOf(lane) + 0.62); }
       for (var year = TIMELINE.from; year <= TIMELINE.to; year++) {
         svg.appendChild(seg(x(year), m.t - 6, x(year), H - m.b + 4, "gridline"));
@@ -592,7 +596,7 @@
       });
       // Shapes first, so the labels can be placed around everything already drawn.
       var taken = [], groups = {};
-      TIMELINE.items.forEach(function (item) {
+      items.forEach(function (item) {
         var on = focus.indexOf(item.id) > -1;
         var yy = laneY(item.lane);
         var group = S("g", { "class": "tl-item" + (on ? " is-focus" : "") + (item.open ? " is-open" : "") });
@@ -641,7 +645,7 @@
         if (box.x0 < 0 || box.x1 > W - 1 || box.y0 < 0 || box.y1 > H - m.b + 4) { return false; }
         return taken.every(function (o) { return box.x1 + 6 <= o.x0 || o.x1 + 6 <= box.x0 || box.y1 <= o.y0 || o.y1 <= box.y0; });
       }
-      TIMELINE.items.slice().sort(function (a, b) { return b.bounds.x0 - a.bounds.x0; }).forEach(function (item) {
+      items.slice().sort(function (a, b) { return b.bounds.x0 - a.bounds.x0; }).forEach(function (item) {
         if (narrow && focus.indexOf(item.id) < 0) { return; }
         var label = s("tl." + item.id), w = textW(label, 11.5, 600);
         function spot(where) {

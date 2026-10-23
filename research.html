@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-i18n="meta.research.title">Research — Digital payment pressure and bank net fee margins</title>
-<meta name="description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand, plus a Tableau story on mobile money adoption." data-i18n-meta="meta.research.description">
+<meta name="description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand, plus a Tableau story on mobile money adoption and the TechStarterWeb studio website." data-i18n-meta="meta.research.description">
 <link rel="canonical" href="https://chaoglay1101-del.github.io/research.html">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Research — Digital payment pressure and bank net fee margins" data-i18n-meta="meta.research.title">
-<meta property="og:description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand, plus a Tableau story on mobile money adoption." data-i18n-meta="meta.research.description">
+<meta property="og:description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand, plus a Tableau story on mobile money adoption and the TechStarterWeb studio website." data-i18n-meta="meta.research.description">
 <meta property="og:url" content="https://chaoglay1101-del.github.io/research.html">
 <meta property="og:site_name" content="Yu-Chen Chao">
 <meta property="og:locale" content="en_GB">
@@ -95,6 +95,10 @@
         <a href="#tableau">
           <span class="project-index-kind" data-i18n="research.index.p2kind">Business Analytics coursework · December 2025</span>
           <span class="project-index-title" data-i18n="research.index.p2">Mobile money adoption in the Global South (Tableau)</span>
+        </a>
+        <a href="#techstarterweb">
+          <span class="project-index-kind" data-i18n="research.index.p3kind">Web studio · since October 2026</span>
+          <span class="project-index-title" data-i18n="research.index.p3">TechStarterWeb: studio website and order back office</span>
         </a>
       </nav>
     </div>
@@ -848,6 +852,50 @@
           <figcaption class="tableau-note" data-i18n="research.tab.embedNote">Scaled to fit this screen. The Tableau Public story link above opens it at full size.</figcaption>
         </figure>
       </details>
+    </div>
+  </section>
+
+  <section class="section project-section" id="techstarterweb">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.tsw.eyebrow">Project 3 · Web studio, co-founded</span>
+        <h2 data-i18n="research.tsw.heading">TechStarterWeb: a studio website that is also its order desk</h2>
+        <p data-i18n="research.tsw.lede">TechStarterWeb Consulting builds personal and small-business websites for clients in Taiwan, Hong Kong and Singapore. I co-founded it in October 2026 and lead the technical side. The studio's own site, live since 23 October 2026, is its first piece of work.</p>
+        <p class="card-meta" data-i18n="research.tsw.meta">Astro · Cloudflare Workers · Cloudflare D1 · Cloudflare Access · OpenCC</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="plain-block">
+          <h3 data-i18n="research.tsw.didHeading">What I built</h3>
+          <ul class="card-list">
+            <li data-i18n="research.tsw.did1">One site serving both sides: the public pages take enquiries, and a back office behind sign-in turns each enquiry into an order with a status, internal notes and a record of who changed what.</li>
+            <li data-i18n="research.tsw.did2">Three languages: Traditional Chinese, Simplified Chinese generated from it at build time with OpenCC, and English pages for Singapore. Visitors are sent to their browser's language, and the contact options follow the region: LINE, WhatsApp, WeChat and Xiaohongshu.</li>
+            <li data-i18n="research.tsw.did3">Privacy built in: the back office admits only the team's addresses, through Cloudflare Access with one-time email codes; the server checks the sign-in again; and a client's record can be deleted for good on request.</li>
+            <li data-i18n="research.tsw.did4">Launch and operations: the techstarterweb.com domain, a www redirect, a hello@ mailbox, Google Search Console with a sitemap, and visit statistics that count a page only after a click, a scroll or ten seconds on screen, so scanners are left out.</li>
+          </ul>
+        </div>
+        <div class="plain-block">
+          <h3 data-i18n="research.tsw.flowHeading">How an enquiry moves</h3>
+          <ol class="card-list">
+            <li data-i18n="research.tsw.flow1">A client fills in the form in any of the three languages.</li>
+            <li data-i18n="research.tsw.flow2">A hidden field turns away basic spam, and the enquiry is stored in the D1 database.</li>
+            <li data-i18n="research.tsw.flow3">A team member signs in to the back office with an email code.</li>
+            <li data-i18n="research.tsw.flow4">The order moves from enquiry to quoted, signed, in production and delivered, or is marked as not going ahead.</li>
+            <li data-i18n="research.tsw.flow5">Every change is logged with who made it and when.</li>
+          </ol>
+          <div class="callout">
+            <h3 data-i18n="research.tsw.limitsHeading">What it does not do yet</h3>
+            <p data-i18n="research.tsw.limits">Enquiries are not yet emailed to the team; they are read in the back office. Cloudflare's free plan has no servers in mainland China, so some mainland networks load the site slowly or not at all. The English pages are translated by hand and can fall behind the Chinese.</p>
+          </div>
+        </div>
+      </div>
+      <div class="callout callout-note">
+        <h3 data-i18n="research.tsw.aiHeading">How it was built</h3>
+        <p data-i18n="research.tsw.ai">I built it with an AI coding agent (Claude). I set the requirements and the architecture, including the idea of one site serving both clients and the studio; made the account, security and launch decisions; reviewed each change; and checked it on the live site. The agent wrote the code, and each release was tested before it went out.</p>
+      </div>
+      <p class="work-links">
+        <a href="https://techstarterweb.com/" rel="noopener noreferrer" target="_blank" data-i18n="research.tsw.linkSite">techstarterweb.com</a>
+        <a href="cv.html#cv-experience" data-i18n="research.tsw.linkCv">The CV entry</a>
+      </p>
     </div>
   </section>
 

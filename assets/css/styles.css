@@ -1146,7 +1146,8 @@ figcaption {
   margin-top: 0;
 }
 
-/* Research page: the two projects it holds, as links. */
+/* Research page: the three projects it holds, as links. One column until
+   all three fit side by side, so no card is left alone on a row. */
 .project-index {
   display: grid;
   gap: 0.75rem;
@@ -1154,9 +1155,9 @@ figcaption {
   grid-template-columns: minmax(0, 1fr);
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 52rem) {
   .project-index {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
