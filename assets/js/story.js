@@ -33,7 +33,9 @@
     var deckEl = document.querySelector("[data-deck]");
     var evidenceIndex = document.querySelector("[data-evidence-index]");
     var cohortSlots = Array.prototype.slice.call(document.querySelectorAll("[data-cohort]"));
-    if (!deckEl && !evidenceIndex && !cohortSlots.length) {
+    // A standalone timeline (home page): every item labelled, no step marks.
+    var timelineSlots = Array.prototype.slice.call(document.querySelectorAll("[data-timeline]"));
+    if (!deckEl && !evidenceIndex && !cohortSlots.length && !timelineSlots.length) {
       return;
     }
 
@@ -569,14 +571,17 @@
     function chartTimeline(W, focusStep) {
       var narrow = W < 460;
       var laneLabelW = Math.max.apply(null, TIMELINE.lanes.map(function (lane) { return textW(s("tl.lane." + lane), 11.5, 600); })) + 14;
-      var m = { t: 18, b: 30, l: narrow ? laneLabelW : laneLabelW + 6, r: 8 };
-      var laneH = narrow ? 34 : 50;
+      // The overview labels every item, so on a phone it needs taller lanes and
+      // a second row of label slots above and below each lane.
+      var overview = focusStep === "all";
+      var m = { t: overview && narrow ? 34 : 18, b: 30, l: narrow ? laneLabelW : laneLabelW + 6, r: 8 };
+      var laneH = narrow ? (overview ? 58 : 34) : 50;
       var H = m.t + laneH * TIMELINE.lanes.length + m.b;
       var x = lin(TIMELINE.from, TIMELINE.to, m.l, W - m.r);
       var svg = svgRoot(W, H, s("tl.aria"));
       var hits = S("g", null);
       svg.appendChild(hits);
-      var focus = TIMELINE.focus[focusStep] || [];
+      var focus = overview ? TIMELINE.items.map(function (it) { return it.id; }) : (TIMELINE.focus[focusStep] || []);
       function laneY(lane) { return m.t + laneH * (TIMELINE.lanes.indexOf(lane) + 0.62); }
       for (var year = TIMELINE.from; year <= TIMELINE.to; year++) {
         svg.appendChild(seg(x(year), m.t - 6, x(year), H - m.b + 4, "gridline"));
@@ -632,7 +637,8 @@
       // the later items, whose labels have the least room, choose first. A
       // phone shows only the labels the current step is about.
       function free(box) {
-        if (box.x0 < 0 || box.x1 > W - 1) { return false; }
+        // Inside the drawing, and clear of the year labels under the plot.
+        if (box.x0 < 0 || box.x1 > W - 1 || box.y0 < 0 || box.y1 > H - m.b + 4) { return false; }
         return taken.every(function (o) { return box.x1 + 6 <= o.x0 || o.x1 + 6 <= box.x0 || box.y1 <= o.y0 || o.y1 <= box.y0; });
       }
       TIMELINE.items.slice().sort(function (a, b) { return b.bounds.x0 - a.bounds.x0; }).forEach(function (item) {
@@ -640,7 +646,11 @@
         var label = s("tl." + item.id), w = textW(label, 11.5, 600);
         function spot(where) {
           var ly, lx, anchor, left;
-          if (where === "side") {
+          if (where === "above2" || where === "below2") {
+            ly = where === "above2" ? item.y - 30 : item.y + 36;
+            lx = clamp((item.bounds.x0 + item.bounds.x1) / 2, m.l + w / 2, W - 2 - w / 2);
+            anchor = "middle"; left = lx - w / 2;
+          } else if (where === "side") {
             ly = item.y + 4; lx = item.bounds.x1 + 14; anchor = "start"; left = lx;
           } else if (where === "below") {
             ly = item.y + 22;
@@ -653,13 +663,14 @@
           }
           return { lx: lx, ly: ly, anchor: anchor, box: { x0: left, x1: left + w, y0: ly - 9, y1: ly + 2 } };
         }
-        var order = narrow && item.id === "conferral" ? ["below", "above", "side"] : ["above", "below", "side"];
+        var order = narrow && item.id === "conferral" ? ["below", "above", "side", "below2", "above2"] : ["above", "below", "side", "above2", "below2"];
         var spots = order.map(spot);
         var pick = spots.filter(function (one) { return free(one.box); })[0] || spots[0];
         taken.push(pick.box);
         groups[item.id].appendChild(Tx(pick.lx, pick.ly, label, "t-tl", { "text-anchor": pick.anchor }));
       });
 
+      if (overview) { return svg; }
       // One annotation per step, drawn on the item that step is about.
       function around(id, step, seed, warn) {
         var box = boxAround(itemById(id), 9, 9);
@@ -716,6 +727,12 @@
       return p;
     }
 
+    function renderTimelines() {
+      timelineSlots.forEach(function (slot) {
+        var W = Math.max(280, Math.round(slot.getBoundingClientRect().width || 560));
+        slot.replaceChildren(chartTimeline(W, "all"));
+      });
+    }
     function renderCohorts() {
       cohortSlots.forEach(function (slot) {
         var key = slot.getAttribute("data-cohort");
@@ -1183,7 +1200,13 @@
           event.preventDefault();
           var fromStep = cur;
           $$(".is-cited").forEach(function (node) { node.classList.remove("is-cited"); });
-          targets.forEach(function (node) { node.classList.add("is-cited"); });
+          targets.forEach(function (node) {
+            node.classList.add("is-cited");
+            // Rows inside a collapsed "details" section are opened first.
+            for (var up = node.parentElement; up; up = up.parentElement) {
+              if (up.tagName === "DETAILS" && !up.open) { up.open = true; }
+            }
+          });
           scrollToEl(targets[0], "center");
           openBar(s("ui.citeLabel", { n: fromStep + 1 }), null, function () { go({ i: fromStep, c: null }, true); }, function () {
             $$(".is-cited").forEach(function (node) { node.classList.remove("is-cited"); });
@@ -1282,6 +1305,7 @@
       bodyFont = window.getComputedStyle(document.body).fontFamily;
       loadStrings();
       renderCohorts();
+      renderTimelines();
       if (deck) { deck.refreshText(); }
       if (evidence) { evidence.refreshText(); }
     }
@@ -1299,6 +1323,7 @@
     bodyFont = window.getComputedStyle(document.body).fontFamily;
     loadStrings();
     renderCohorts();
+    renderTimelines();
     if (deck) { deck.init(); }
     if (evidence) { evidence.init(); }
     measureHeader();
@@ -1323,6 +1348,7 @@
         measureHeader();
         if (deck) { deck.relayout(true); }
         renderCohorts();
+        renderTimelines();
         measureHeader();
       }, 140);
     });

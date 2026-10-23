@@ -277,4 +277,45 @@
   Array.prototype.forEach.call(document.querySelectorAll("[data-current-year]"), function (node) {
     node.textContent = String(new Date().getFullYear());
   });
+
+  /* Collapsed sections ("details") open when a link points inside them, and all
+     of them open for printing, so nothing stays hidden on paper. */
+  function revealTarget() {
+    var id = window.location.hash.slice(1);
+    if (!id) {
+      return;
+    }
+    var target = null;
+    try {
+      target = document.getElementById(decodeURIComponent(id));
+    } catch (error) {
+      target = null;
+    }
+    var opened = false;
+    for (var node = target && target.parentElement; node; node = node.parentElement) {
+      if (node.tagName === "DETAILS" && !node.open) {
+        node.open = true;
+        opened = true;
+      }
+    }
+    if (opened) {
+      target.scrollIntoView();
+    }
+  }
+  revealTarget();
+  window.addEventListener("hashchange", revealTarget);
+
+  var openedForPrint = [];
+  window.addEventListener("beforeprint", function () {
+    openedForPrint = Array.prototype.filter.call(document.querySelectorAll("details:not([open])"), function (node) {
+      node.open = true;
+      return true;
+    });
+  });
+  window.addEventListener("afterprint", function () {
+    openedForPrint.forEach(function (node) {
+      node.open = false;
+    });
+    openedForPrint = [];
+  });
 })();

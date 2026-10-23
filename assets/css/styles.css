@@ -281,8 +281,16 @@ hr {
   gap: 1.25rem;
 }
 
+/* Two columns, never three: four items sit two by two instead of leaving one
+   card alone on a row. */
 .grid-2 {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 40rem) {
+  .grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .grid-3 {
@@ -540,12 +548,13 @@ html[data-theme="dark"] .btn-primary {
 
 /* --- Cards and callouts ------------------------------------------------- */
 
+/* Cards are flat: a shadow is kept for things that can be clicked or that
+   carry a chart, so the hierarchy is not flattened by every block floating. */
 .card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.35rem 1.4rem;
-  box-shadow: var(--shadow);
 }
 
 .embedded-work {
@@ -960,6 +969,230 @@ figcaption {
   display: none;
 }
 
+/* --- Home, project index and collapsible detail --------------------------- */
+
+/* What I bring: four statements, two by two, each ending in its evidence. */
+.value-grid {
+  display: grid;
+  gap: 1.6rem 2.75rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 40rem) {
+  .value-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.value-item {
+  padding-top: 1rem;
+  border-top: 2px solid var(--line);
+}
+
+.value-item h3 {
+  font-size: 1.12rem;
+  margin: 0.15rem 0 0.45rem;
+}
+
+.value-item p {
+  color: var(--ink-soft);
+  margin-bottom: 0.6rem;
+}
+
+.value-link,
+.work-links a {
+  font-weight: 600;
+  font-size: 0.93rem;
+}
+
+.value-link:not([target="_blank"])::after,
+.work-links a:not([target="_blank"])::after {
+  content: " \2192";
+}
+
+/* Selected work: one timeline for orientation, then one row per piece of work. */
+.work-timeline {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.1rem 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.work-timeline-plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+  background: none;
+}
+
+.work-timeline figcaption {
+  margin-top: 0.35rem;
+}
+
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.work-list li + li {
+  margin-top: 0;
+}
+
+.work-item {
+  display: grid;
+  gap: 0.35rem 2.25rem;
+  padding: 1.35rem 0;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 48rem) {
+  .work-item {
+    grid-template-columns: 13rem minmax(0, 1fr);
+  }
+}
+
+.work-when {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.work-body h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+}
+
+.work-body p {
+  color: var(--ink-soft);
+}
+
+.work-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+  margin: 0.5rem 0 0;
+}
+
+/* Contact: three plain columns. */
+.contact-grid {
+  display: grid;
+  gap: 1.25rem 2.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 48rem) {
+  .contact-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.contact-block {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.plain-block h3 {
+  margin-top: 0;
+}
+
+/* Research page: the two projects it holds, as links. */
+.project-index {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.1rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 40rem) {
+  .project-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.project-index a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1.05rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s ease;
+}
+
+.project-index a:hover {
+  border-color: var(--accent);
+}
+
+.project-index-kind {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.project-index-title {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.project-section {
+  background: linear-gradient(var(--surface-alt), transparent 22rem);
+}
+
+/* Detail on request: the heading and summary stay visible, the rest opens. */
+details.more {
+  margin-top: 0.25rem;
+}
+
+details.more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.93rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+details.more > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.more > summary::before {
+  content: "+";
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+details.more[open] > summary {
+  margin-bottom: 1.25rem;
+}
+
+details.more[open] > summary::before {
+  content: "\2212";
+}
+
+details.more > summary:hover {
+  border-color: var(--accent);
+}
+
 /* --- Step-through stories (assets/js/story.js) ---------------------------- */
 
 /* The hidden attribute must win over component display rules (.icon-btn,
@@ -975,6 +1208,8 @@ html:not(.js) .story-section,
 html:not(.js) .cv-tour,
 html:not(.js) .evidence,
 html:not(.js) .cohort,
+html:not(.js) .work-timeline,
+html.story-off .work-timeline,
 html.story-off .story-section,
 html.story-off .cv-tour,
 html.story-off .evidence,
@@ -1796,7 +2031,8 @@ html.is-presenting body { overflow: hidden; }
   .story-tip,
   .story-toast,
   .jump-bar,
-  .present-ui {
+  .present-ui,
+  details.more > summary {
     display: none !important;
   }
 

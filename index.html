@@ -21,8 +21,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chaoglay1101-del.github.io/assets/img/og-image.png">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script>document.documentElement.classList.add("js");</script>
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/story.js" defer onerror="document.documentElement.classList.add('story-off')"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -90,11 +92,11 @@
       <div class="hero-text">
         <p class="hero-name" data-i18n="name.short">Yu-Chen Chao</p>
         <h1 data-i18n="home.hero.title">Accounting and finance graduate with a public bank-panel research report</h1>
-        <p class="hero-role" data-i18n="home.hero.role">BSc (Hons) Accounting and Finance · Class II Division I · GPA 3.25</p>
+        <p class="hero-role" data-i18n="home.hero.role">BSc (Hons) Accounting and Finance, University of Birmingham · Class II Division I · to be conferred 12 November 2026</p>
         <div class="btn-group">
           <a class="btn btn-primary" href="assets/pdf/Chao_YuChen_CV_EN.pdf" download data-cv-download="Chao_YuChen_CV" data-i18n="home.hero.ctaCv">Download CV (PDF)</a>
           <a class="btn" href="mailto:chaoglay1101@gmail.com" data-i18n="home.hero.ctaEmail">Email me</a>
-          <a class="btn" href="research.html" data-i18n="home.hero.ctaResearch">Explore the research</a>
+          <a class="btn" href="research.html" data-i18n="home.hero.ctaResearch">Research and projects</a>
           <a class="btn" href="https://www.linkedin.com/in/yu-chen-chao/" rel="noopener noreferrer" target="_blank">LinkedIn</a>
         </div>
       </div>
@@ -112,7 +114,7 @@
           <span class="fact-label" data-i18n="home.facts.analytics">Business Analytics module</span>
         </li>
       </ul>
-      <p class="small muted" data-i18n="home.facts.note">Class-relative figures are from Canvas cohort statistics.</p>
+      <p class="small muted" data-i18n="home.facts.note">The CV shows where each mark sits in its cohort, from Canvas cohort statistics.</p>
     </div>
   </section>
 
@@ -123,227 +125,30 @@
         <h2 data-i18n="home.contribute.heading">What I bring</h2>
         <p data-i18n="home.contribute.lede">Four things I have already taken from raw input to a finished, checkable output — rather than tools I have read about.</p>
       </div>
-      <div class="grid grid-2">
-        <div class="card">
+      <div class="value-grid">
+        <div class="value-item">
           <span class="card-tag" data-i18n="home.contribute.c1tag">Data work</span>
           <h3 data-i18n="home.contribute.c1title">Financial data from raw file to a finished table</h3>
-          <p data-i18n="home.contribute.c1body">I built the whole path myself: a restricted bank-level panel, an IMF Financial Access Survey indicator discovered and extracted, the country-year merge, and a complete-case sample with documented variable definitions. The dataset ends up auditable, not merely finished.</p>
+          <p data-i18n="home.contribute.c1body">A restricted bank panel and an IMF indicator, merged by country and year into a complete-case sample with documented definitions.</p>
+          <a class="value-link" href="cv.html#evidence-pipeline" data-i18n="home.contribute.cvLink">Where it shows in the CV</a>
         </div>
-        <div class="card">
+        <div class="value-item">
           <span class="card-tag" data-i18n="home.contribute.c2tag">Measurement</span>
           <h3 data-i18n="home.contribute.c2title">Econometrics that survives being questioned</h3>
-          <p data-i18n="home.contribute.c2body">Bank and year fixed effects, bank-clustered standard errors, winsorisation, log and interaction specifications, country subsamples, and a between-within decomposition. I test the specification rather than reporting whichever result appeared first.</p>
+          <p data-i18n="home.contribute.c2body">Fixed effects with clustered standard errors, then log, interaction and subsample checks before a result is reported.</p>
+          <a class="value-link" href="cv.html#evidence-panel" data-i18n="home.contribute.cvLink">Where it shows in the CV</a>
         </div>
-        <div class="card">
+        <div class="value-item">
           <span class="card-tag" data-i18n="home.contribute.c3tag">Communication</span>
           <h3 data-i18n="home.contribute.c3title">Analysis a non-specialist can act on</h3>
-          <p data-i18n="home.contribute.c3body">A five-dashboard Tableau story written for investors and FinTech strategists, with a stated insight and a commercial recommendation on every page — and the same work documented in Python so a technical reader can check it.</p>
+          <p data-i18n="home.contribute.c3body">A five-dashboard Tableau story with a stated insight and a commercial recommendation on every page.</p>
+          <a class="value-link" href="research.html#tableau" data-i18n="home.contribute.c3link">See the Tableau project</a>
         </div>
-        <div class="card">
+        <div class="value-item">
           <span class="card-tag" data-i18n="home.contribute.c4tag">Reproducibility</span>
           <h3 data-i18n="home.contribute.c4title">Work that can be rerun, not just read</h3>
-          <p data-i18n="home.contribute.c4body">A locked Python environment, an automated test suite, a continuous-integration workflow, and a deterministic synthetic panel that lets anyone verify the estimation workflow in about a minute, because the restricted bank data itself cannot be shared.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="research">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow" data-i18n="home.research.eyebrow">Research</span>
-        <h2 data-i18n="home.research.heading">Digital payment pressure and bank net fee margins</h2>
-        <p data-i18n="home.research.lede">A final-year panel study of 39 commercial banks in Indonesia, Malaysia, and Thailand, 2014–2022.</p>
-      </div>
-
-      <div class="callout">
-        <h3 data-i18n="home.research.questionLabel">Research question</h3>
-        <p data-i18n="home.research.question">Is digital payment pressure associated with bank net fee margins in Indonesia, Malaysia, and Thailand?</p>
-      </div>
-
-      <div class="grid grid-2">
-        <div class="card">
-          <h3 data-i18n="home.research.designHeading">What I did</h3>
-          <ol class="card-list">
-            <li data-i18n="home.research.design1">Constructed bank-level net fee margins and financial controls from a restricted bank panel.</li>
-            <li data-i18n-html="home.research.design2">Extracted IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>: mobile and internet banking transactions as a percentage of GDP.</li>
-            <li data-i18n="home.research.design3">Merged the country-year measure into the bank-year panel.</li>
-            <li data-i18n="home.research.design4">Estimated bank and year fixed-effects models with bank-clustered standard errors and 1st/99th percentile winsorisation.</li>
-            <li data-i18n="home.research.design5">Tested log, interaction, nonlinear and country-subsample specifications, then checked the result with Driscoll–Kraay errors, a Mundlak decomposition, a one-year lag and a net-interest-margin placebo.</li>
-          </ol>
-          <ul class="chips">
-            <li class="chip">Python</li>
-            <li class="chip">pandas</li>
-            <li class="chip">linearmodels</li>
-            <li class="chip">PanelOLS</li>
-            <li class="chip">IMF FAS</li>
-            <li class="chip">WRDS-derived panel</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3 data-i18n="home.research.findingsHeading">What I found</h3>
-          <ul class="card-list">
-            <li data-i18n="home.research.finding1">Linear specifications provide limited evidence of a direct association.</li>
-            <li data-i18n="home.research.finding2">The log specification shows a negative, statistically significant pooled association.</li>
-            <li data-i18n="home.research.finding3">Country subsamples are heterogeneous, and decomposition suggests cross-country structure may drive much of the pooled result.</li>
-            <li data-i18n="home.research.finding4">The design tests two competing hypotheses, substitution (Baumol, 1982) and complementarity (Thakor, 2020); the evidence is consistent with substitution in the pooled sample only.</li>
-          </ul>
-          <p class="small muted" data-i18n="home.research.caution">These are conditional associations. The explanatory measure varies at the country-year level, only three countries are covered, and omitted factors cannot be ruled out.</p>
-          <a class="btn" href="research.html" data-i18n="home.research.more">Read the full research page</a>
-        </div>
-      </div>
-
-      <p class="small muted" data-i18n="home.research.restriction">Because the bank panel is restricted, the thesis regressions are documented and inspectable but cannot be rerun publicly. The repository ships a deterministic synthetic panel so that the estimation workflow still runs end to end.</p>
-    </div>
-  </section>
-
-  <section class="section" id="experience">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow" data-i18n="home.exp.eyebrow">Experience</span>
-        <h2 data-i18n="home.exp.heading">Research, coursework, and practice</h2>
-      </div>
-      <ul class="timeline">
-        <li>
-          <span class="timeline-when" data-i18n="home.exp.e1when">2025–2026 · Final-year research project</span>
-          <h3 data-i18n="home.exp.e1title">Digital payment pressure and bank net fee margins</h3>
-          <p class="timeline-org" data-i18n="home.exp.e1org">University of Birmingham · Accounting and Finance</p>
-          <p class="timeline-grade" data-i18n-html="home.exp.e1grade"><strong>Research report component: 80/100 (65% of module; module total 77/100 on transcript)</strong> · above the component's upper quartile (73), i.e. top 25%; cohort mean 67, maximum 84</p>
-          <ul class="card-list">
-            <li data-i18n="home.exp.e1b1">Designed the research question, sample definition, and variable construction for a 39-bank ASEAN-3 panel (344 bank-year observations, 2014–2022).</li>
-            <li data-i18n="home.exp.e1b2">Built the Python pipeline: panel preparation, IMF FAS indicator discovery and extraction, country-year merge, and complete-case sample construction.</li>
-            <li data-i18n="home.exp.e1b3">Estimated two-way fixed-effects models with bank-clustered standard errors, then tested log, interaction, nonlinear, and country-subsample specifications.</li>
-            <li data-i18n="home.exp.e1b4">Published the design, results, limitations, and data-access boundaries as a public research report.</li>
-          </ul>
-        </li>
-        <li>
-          <span class="timeline-when" data-i18n="home.exp.e2when">Business Analytics module</span>
-          <h3 data-i18n="home.exp.e2title">Mobile money adoption in the Global South — a five-dashboard Tableau story</h3>
-          <p class="timeline-org" data-i18n="home.exp.e2org">Business Analytics module · individual Tableau assignment</p>
-          <p class="timeline-grade" data-i18n-html="home.exp.e2grade"><strong>Tableau assignment 70/100 (module mark 70/100 on transcript)</strong> · equal to the cohort's upper quartile (70); cohort mean 63.7, maximum 76</p>
-          <ul class="card-list">
-            <li data-i18n="home.exp.e2b1">Prepared the data first: an extract of 437 coded World Bank Findex fields across 174 economies and 12 population groups was mapped down to 24 business-readable measures, with decimals rescaled to percentages and missing binary usage flags imputed as zero.</li>
-            <li data-i18n="home.exp.e2b2">Dropped the 2011 and 2022 waves because their coverage is too thin, leaving 171 economies and four waves (2014, 2017, 2021, 2024).</li>
-            <li data-i18n="home.exp.e2b3">Built five interactive dashboards framed by a cover and a conclusion — Mobile Money Boom, Leapfrogging the Plastic Era, The Catch-Up, The Usage Paradox, and Platform Transformation — each with a written insight and a commercial recommendation.</li>
-            <li data-i18n="home.exp.e2b4">Findings: mobile money adoption expanded steadily from 2014 and leads in Sub-Saharan Africa; digital payment use runs ahead of debit-card ownership; savings lag far behind payment usage, most sharply in lower-income economies; and mobile money drives women's financial participation more than traditional banking does.</li>
-            <li data-i18n="home.exp.e2b5">Wrote a critical assessment of every dashboard, naming the limits of the data — no transaction-level detail, no qualitative evidence — and the chart types that would have carried the message better.</li>
-            <li data-i18n="home.exp.e2b6">Submitted December 2025. Its finding that digital payment use runs ahead of debit-card ownership raised the question my final-year project then tested: what happens to banks' fee income as payments move away from cards.</li>
-          </ul>
-          <ul class="chips">
-            <li class="chip chip-accent">Tableau</li>
-            <li class="chip">Tableau Story and filters</li>
-            <li class="chip">Tableau calculated fields</li>
-            <li class="chip">Tableau Public</li>
-            <li class="chip">Excel</li>
-            <li class="chip">Python data preparation</li>
-            <li class="chip">World Bank Global Findex</li>
-            <li class="chip">GSMA industry data</li>
-          </ul>
-        </li>
-        <li>
-          <span class="timeline-when" data-i18n="home.exp.e3when">July – September 2025</span>
-          <h3 data-i18n="home.exp.e3title">Intern, tax advisory team</h3>
-          <p class="timeline-org" data-i18n="home.exp.e3org">Evershine CPAs Firm (永輝啟佳聯合會計師事務所)</p>
-          <ul class="card-list">
-            <li data-i18n="home.exp.e3b1">Context: applications for Philippines tax incentives, where eligibility turns on documented business activity, expenditure, and timing.</li>
-            <li data-i18n="home.exp.e3b2">What I did: prepared and checked the supporting documentation, including BOI Form 501, and reviewed business activity timelines and expenditure details against the stated eligibility conditions.</li>
-            <li data-i18n="home.exp.e3b3">Output: standard operating procedures mapped into flowcharts that the team used for the application workflow and for handover.</li>
-          </ul>
-          <figure class="embedded-work certificate-work screen-only">
-            <iframe
-              class="certificate-frame"
-              src="assets/pdf/Internship_Certificate_Redacted.pdf"
-              title="Internship certificate with personal information redacted"
-              data-i18n-attr="title:home.exp.e3certificateTitle"
-              loading="lazy"></iframe>
-            <figcaption data-i18n="home.exp.e3certificateCaption">Internship certificate. Personal information has been redacted.</figcaption>
-            <a href="assets/pdf/Internship_Certificate_Redacted.pdf" target="_blank" rel="noopener noreferrer" data-i18n="home.exp.e3certificateOpen">Open certificate PDF</a>
-          </figure>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section" id="education">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow" data-i18n="home.edu.eyebrow">Education</span>
-        <h2 data-i18n="home.edu.heading">Degree</h2>
-      </div>
-      <div class="card">
-        <h3 data-i18n="home.edu.degree">BSc (Hons) Accounting and Finance — University of Birmingham</h3>
-        <p class="card-meta"><span data-i18n="home.edu.dates">September 2024 – June 2026</span> · <span data-i18n="home.edu.language">University of Birmingham · Singapore · Campus: Totally Taught Abroad · Language of instruction: English</span></p>
-        <p data-i18n-html="home.edu.record">Qualification recommended: Class II (Division I) · GPA: 3.25 · Degree to be conferred 12 November 2026</p>
-        <p data-i18n="home.edu.diploma">SIM Diploma in International Business · April 2023 – June 2024</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="skills">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow" data-i18n="home.skills.eyebrow">Skills</span>
-        <h2 data-i18n="home.skills.heading">What I work with</h2>
-        <p data-i18n="home.skills.lede">Tools and methods I have used on real coursework and research data, not a list of everything I have read about.</p>
-      </div>
-      <div class="grid grid-2">
-        <div class="card">
-          <span class="card-tag" data-i18n="home.skills.c1tag">Data and code</span>
-          <h3 data-i18n="home.skills.c1title">Python for data work</h3>
-          <ul class="chips">
-            <li class="chip">Python 3.14</li>
-            <li class="chip">pandas</li>
-            <li class="chip">NumPy</li>
-            <li class="chip">openpyxl</li>
-            <li class="chip">requests</li>
-            <li class="chip">BeautifulSoup</li>
-            <li class="chip">matplotlib</li>
-            <li class="chip">pytest</li>
-            <li class="chip">uv</li>
-            <li class="chip">Git and GitHub</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="card-tag" data-i18n="home.skills.c2tag">Econometrics</span>
-          <h3 data-i18n="home.skills.c2title">Panel data and inference</h3>
-          <ul class="chips">
-            <li class="chip">linearmodels PanelOLS</li>
-            <li class="chip">statsmodels</li>
-            <li class="chip">Bank and year fixed effects</li>
-            <li class="chip">Bank-clustered standard errors</li>
-            <li class="chip">1st/99th percentile winsorisation</li>
-            <li class="chip">Log and interaction specifications</li>
-            <li class="chip">Between-within decomposition</li>
-            <li class="chip">Country subsample robustness</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="card-tag" data-i18n="home.skills.c3tag">Analytics and communication</span>
-          <h3 data-i18n="home.skills.c3title">Turning analysis into a story</h3>
-          <ul class="chips">
-            <li class="chip">Tableau</li>
-            <li class="chip">Tableau Story and dashboards</li>
-            <li class="chip">Tableau calculated fields and filters</li>
-            <li class="chip">Tableau Public story</li>
-            <li class="chip">Excel and pivot analysis</li>
-            <li class="chip">Field mapping and data dictionaries</li>
-            <li class="chip">Data visualisation</li>
-            <li class="chip">Research writing</li>
-            <li class="chip">Markdown documentation</li>
-            <li class="chip">Reproducible workflows</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="card-tag" data-i18n="home.skills.c4tag">Domain</span>
-          <h3 data-i18n="home.skills.c4title">Finance and accounting</h3>
-          <ul class="chips">
-            <li class="chip">Financial statement analysis</li>
-            <li class="chip">Bank profitability and margins</li>
-            <li class="chip">Non-interest income</li>
-            <li class="chip">Digital payments and FinTech</li>
-            <li class="chip">Financial Access Survey indicators</li>
-            <li class="chip">Cross-border tax</li>
-          </ul>
+          <p data-i18n="home.contribute.c4body">A locked Python environment, automated tests and a synthetic panel that rerun the estimation workflow in about a minute.</p>
+          <a class="value-link" href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/examples/run_example.py" rel="noopener noreferrer" target="_blank" data-i18n="home.contribute.c4link">Run the example</a>
         </div>
       </div>
     </div>
@@ -353,60 +158,67 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow" data-i18n="home.work.eyebrow">Selected work</span>
-        <h2 data-i18n="home.work.heading">Projects you can open and check</h2>
+        <h2 data-i18n="home.work.heading">Research, coursework, and practice</h2>
       </div>
-      <div class="grid grid-3">
-        <article class="card">
-          <span class="card-tag" data-i18n="home.work.p1tag">Research portfolio</span>
-          <h3 data-i18n="home.work.p1title">Digital payment pressure and bank net fee margins</h3>
-          <p class="card-meta" data-i18n="home.work.p1meta">Python · panel econometrics · public research report</p>
-          <p data-i18n="home.work.p1body">A documented research repository: bank-panel preparation, IMF FAS indicator extraction, main regressions and country-subsample robustness, plus a synthetic fixed-effects example that runs anywhere.</p>
-          <ul class="card-list">
-            <li><a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins" rel="noopener noreferrer" data-i18n="home.work.p1link" target="_blank">Repository</a></li>
-            <li><a href="research.html" data-i18n="home.work.p1page">Research page on this site</a></li>
-          </ul>
-        </article>
-        <article class="card">
-          <span class="card-tag" data-i18n="home.work.p2tag">Data storytelling</span>
-          <h3 data-i18n="home.work.p2title">Mobile money adoption in the Global South</h3>
-          <p class="card-meta" data-i18n="home.work.p2meta">Tableau · Excel · Python · World Bank Findex and GSMA data</p>
-          <p data-i18n="home.work.p2body">A Tableau story in five dashboards, framed by a cover and a conclusion: a global bubble map and trend line, a leapfrogging comparison of bank accounts against mobile wallets, a catch-up scatterplot, a bow-tie and treemap of the savings gap, and a platform view of digital payments against bank accounts.</p>
-          <ul class="card-list">
-            <li data-i18n="home.work.p2f1">Mobile money adoption expanded steadily from 2014 and leads in Sub-Saharan Africa.</li>
-            <li data-i18n="home.work.p2f2">Digital payment use runs ahead of debit-card ownership, and savings trail both.</li>
-            <li data-i18n="home.work.p2f3">Mobile money drives women's financial participation more than traditional banking does.</li>
-          </ul>
-          <ul class="chips">
-            <li class="chip chip-accent">Tableau Story</li>
-            <li class="chip">Tableau Public</li>
-            <li class="chip">Excel</li>
-            <li class="chip">Python</li>
-          </ul>
-          <ul class="card-list">
-            <li><a href="https://public.tableau.com/views/BANALAssignment2/STORY" rel="noopener noreferrer" data-i18n="home.work.p2link" target="_blank">Tableau Public story</a></li>
-            <li><a href="https://github.com/chaoglay1101-del/mobile-money-adoption-tableau" rel="noopener noreferrer" data-i18n="home.work.p2repo" target="_blank">Repository</a></li>
-          </ul>
-        </article>
-        <article class="card">
-          <span class="card-tag" data-i18n="home.work.p3tag">Reproducibility</span>
-          <h3 data-i18n="home.work.p3title">Runnable synthetic fixed-effects example</h3>
-          <p class="card-meta" data-i18n="home.work.p3meta">Python · pytest · continuous integration</p>
-          <p data-i18n="home.work.p3body">Because the underlying bank data is restricted, the repository ships a deterministic synthetic panel and an automated test. Anyone can clone the project and verify the estimation workflow within a minute.</p>
-          <ul class="card-list">
-            <li><a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/examples/run_example.py" rel="noopener noreferrer" data-i18n="home.work.p3link" target="_blank">Example script</a></li>
-          </ul>
-        </article>
-      </div>
-      <figure class="embedded-work tableau-showcase screen-only">
-        <iframe
-          class="tableau-frame"
-          src="https://public.tableau.com/views/BANALAssignment2/STORY?:showVizHome=no"
-          title="Mobile Money Adoption in the Global South — Tableau story"
-          data-i18n-attr="title:home.work.p2embedTitle"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <figure class="work-timeline screen-only">
+        <div class="work-timeline-plot" data-timeline></div>
+        <figcaption class="small muted" data-i18n="home.work.tlNote">Dates as in the CV; hover over or tab to a bar for details.</figcaption>
       </figure>
+      <ol class="work-list">
+        <li class="work-item">
+          <p class="work-when" data-i18n="home.work.r1when">Final-year research · 2025–2026</p>
+          <div class="work-body">
+            <h3 data-i18n="home.work.r1title">Digital payment pressure and bank net fee margins</h3>
+            <p data-i18n="home.work.r1body">A panel of 39 commercial banks in Indonesia, Malaysia and Thailand, 2014–2022. The log specification shows a negative, statistically significant pooled association that comes mainly from differences between countries: a conditional association, not a causal effect.</p>
+            <p class="work-links">
+              <a href="research.html#story" data-i18n="home.work.r1link">Findings in six steps</a>
+              <a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins" rel="noopener noreferrer" target="_blank" data-i18n="home.work.repoLink">Repository</a>
+              <a href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/examples/run_example.py" rel="noopener noreferrer" target="_blank" data-i18n="home.work.exampleLink">Runnable example</a>
+            </p>
+          </div>
+        </li>
+        <li class="work-item">
+          <p class="work-when" data-i18n="home.work.r2when">Business Analytics coursework · December 2025</p>
+          <div class="work-body">
+            <h3 data-i18n="home.work.r2title">Mobile money adoption in the Global South</h3>
+            <p data-i18n="home.work.r2body">A five-dashboard Tableau story built from World Bank Global Findex data. Its finding that digital payment use runs ahead of debit-card ownership raised the question the final-year research then tested.</p>
+            <p class="work-links">
+              <a href="research.html#tableau" data-i18n="home.work.r2link">Project details</a>
+              <a href="https://public.tableau.com/views/BANALAssignment2/STORY" rel="noopener noreferrer" target="_blank" data-i18n="home.work.r2public">Tableau Public story</a>
+            </p>
+          </div>
+        </li>
+        <li class="work-item">
+          <p class="work-when" data-i18n="home.work.r3when">Practice · July – September 2025</p>
+          <div class="work-body">
+            <h3 data-i18n="home.work.r3title">Intern, tax advisory team · Evershine CPAs</h3>
+            <p data-i18n="home.work.r3body">Prepared and checked supporting documentation, including BOI Form 501, for Philippines tax incentive applications, and mapped the procedure into SOP flowcharts the team used for handover.</p>
+            <p class="work-links">
+              <a href="cv.html#cv-experience" data-i18n="home.work.r3link">Details and certificate in the CV</a>
+            </p>
+          </div>
+        </li>
+      </ol>
+      <div class="story-strings" hidden>
+        <span data-s="tl.aria" data-i18n="cv.tour.str.tlAria">Timeline, 2023 to 2027: SIM Diploma from April 2023 to June 2024; BSc at the University of Birmingham from September 2024 to June 2026; internship from July to September 2025; Tableau story submitted in December 2025; final-year research project in 2025–26; degree conferred on 12 November 2026; next, master's study.</span>
+        <span data-s="tl.lane.edu" data-i18n="cv.tour.str.laneEdu">EDUCATION</span>
+        <span data-s="tl.lane.res" data-i18n="cv.tour.str.laneRes">RESEARCH</span>
+        <span data-s="tl.lane.prac" data-i18n="cv.tour.str.lanePrac">PRACTICE</span>
+        <span data-s="tl.sim" data-i18n="cv.tour.str.sim">SIM Diploma</span>
+        <span data-s="tl.bsc" data-i18n="cv.tour.str.bsc">BSc, Birmingham</span>
+        <span data-s="tl.conferral" data-i18n="cv.tour.str.conferral">Degree conferred</span>
+        <span data-s="tl.next" data-i18n="cv.tour.str.next">Next: master's</span>
+        <span data-s="tl.research" data-i18n="cv.tour.str.research">Final-year research</span>
+        <span data-s="tl.intern" data-i18n="cv.tour.str.intern">Evershine internship</span>
+        <span data-s="tl.tableau" data-i18n="cv.tour.str.tableau">Tableau story</span>
+        <span data-s="tl.when.sim" data-i18n="cv.tour.str.whenSim">April 2023 – June 2024</span>
+        <span data-s="tl.when.bsc" data-i18n="cv.tour.str.whenBsc">September 2024 – June 2026 · Class II (Division I) · GPA 3.25</span>
+        <span data-s="tl.when.conferral" data-i18n="cv.tour.str.whenConferral">12 November 2026</span>
+        <span data-s="tl.when.next" data-i18n="cv.tour.str.whenNext">Applying for master's study</span>
+        <span data-s="tl.when.research" data-i18n="cv.tour.str.whenResearch">2025–2026 · report component 80/100</span>
+        <span data-s="tl.when.intern" data-i18n="cv.tour.str.whenIntern">July – September 2025 · tax advisory team</span>
+        <span data-s="tl.when.tableau" data-i18n="cv.tour.str.whenTableau">Submitted December 2025 · 70/100</span>
+      </div>
     </div>
   </section>
 
@@ -417,8 +229,8 @@
         <h2 data-i18n="home.contact.heading">Get in touch</h2>
         <p data-i18n="home.contact.lede">I am happy to talk about the research, the code, or opportunities in finance, banking, and data analysis.</p>
       </div>
-      <div class="grid grid-2">
-        <div class="card">
+      <div class="contact-grid">
+        <div class="contact-block">
           <h3 data-i18n="home.contact.directHeading">Direct</h3>
           <ul class="link-list">
             <li>
@@ -431,7 +243,7 @@
             </li>
           </ul>
         </div>
-        <div class="card">
+        <div class="contact-block">
           <h3 data-i18n="home.contact.cvHeading">CV as a PDF</h3>
           <ul class="link-list">
             <li>
@@ -444,7 +256,7 @@
           </ul>
           <p class="small muted" data-i18n="home.contact.cvLangNote">The CV exists in English and Traditional Chinese; each link downloads the version that matches the language of this page.</p>
         </div>
-        <div class="card">
+        <div class="contact-block">
           <h3 data-i18n="home.contact.publicHeading">Public work</h3>
           <ul class="link-list">
             <li>

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-i18n="meta.research.title">Research — Digital payment pressure and bank net fee margins</title>
-<meta name="description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand." data-i18n-meta="meta.research.description">
+<meta name="description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand, plus a Tableau story on mobile money adoption." data-i18n-meta="meta.research.description">
 <link rel="canonical" href="https://chaoglay1101-del.github.io/research.html">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Research — Digital payment pressure and bank net fee margins" data-i18n-meta="meta.research.title">
-<meta property="og:description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in an ASEAN-3 bank panel." data-i18n-meta="meta.research.description">
+<meta property="og:description" content="Research design, data, results, and limitations of a panel study on digital payment pressure and bank net fee margins in Indonesia, Malaysia, and Thailand, plus a Tableau story on mobile money adoption." data-i18n-meta="meta.research.description">
 <meta property="og:url" content="https://chaoglay1101-del.github.io/research.html">
 <meta property="og:site_name" content="Yu-Chen Chao">
 <meta property="og:locale" content="en_GB">
@@ -58,7 +58,7 @@
   <section class="hero">
     <div class="container">
       <div class="hero-text">
-        <p class="hero-name" data-i18n="research.eyebrow">Research</p>
+        <p class="hero-name" data-i18n="research.eyebrow">Research and projects</p>
         <h1 data-i18n="research.title">Digital payment pressure and bank net fee margins</h1>
         <p class="small" data-i18n="research.formalTitle">Thesis title: The Impact of Digital Payment Pressure on Banks' Fee-Based Income: Evidence from ASEAN Banking Markets</p>
         <p class="hero-role" data-i18n="research.subtitle">Evidence from an ASEAN-3 bank panel, 2014–2022</p>
@@ -66,8 +66,6 @@
         <div class="btn-group">
           <a class="btn btn-primary" href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins" rel="noopener noreferrer" data-i18n="research.ctaRepo" target="_blank">Open the repository</a>
           <a class="btn" href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/docs/public-research-report.md" rel="noopener noreferrer" data-i18n="research.ctaReport" target="_blank">Full public research report</a>
-          <a class="btn" href="assets/pdf/Chao_YuChen_CV_EN.pdf" download data-cv-download="Chao_YuChen_CV" data-i18n="research.ctaCvPdf">Download the CV (PDF)</a>
-          <a class="btn" href="cv.html" data-i18n="research.ctaCv">CV and methods summary</a>
         </div>
       </div>
       <ul class="fact-strip">
@@ -88,6 +86,16 @@
           <span class="fact-label" data-i18n="research.facts.period">annual observations</span>
         </li>
       </ul>
+      <nav class="project-index" aria-label="Projects on this page" data-i18n-attr="aria-label:research.index.label">
+        <a href="#story">
+          <span class="project-index-kind" data-i18n="research.index.p1kind">Final-year research · 2025–2026</span>
+          <span class="project-index-title" data-i18n="research.index.p1">Digital payment pressure and bank net fee margins</span>
+        </a>
+        <a href="#tableau">
+          <span class="project-index-kind" data-i18n="research.index.p2kind">Business Analytics coursework · December 2025</span>
+          <span class="project-index-title" data-i18n="research.index.p2">Mobile money adoption in the Global South (Tableau)</span>
+        </a>
+      </nav>
     </div>
   </section>
 
@@ -380,72 +388,75 @@
         <h2 data-i18n="research.data.heading">Two data levels joined into one panel</h2>
         <p data-i18n="research.data.lede">Bank-year financial variables form the outcome and controls; a country-year indicator measures digital payment activity.</p>
       </div>
-      <div class="table-wrap">
-        <table>
-          <caption data-i18n="research.data.sampleCaption">Final analysis sample.</caption>
-          <thead>
-            <tr>
-              <th scope="col" data-i18n="research.data.item">Item</th>
-              <th scope="col" data-i18n="research.data.value">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" data-i18n="research.data.s1">Countries</th>
-              <td data-i18n="research.data.s1v">Indonesia, Malaysia, Thailand</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.data.s2">Banks</th>
-              <td data-i18n="research.data.s2v">39 publicly traded commercial banks and banking groups (including 3 Islamic and 5 digital-challenger banks)</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.data.s3">Bank-year observations</th>
-              <td>344</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.data.s4">Period</th>
-              <td>2014–2022</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.data.s5">Study design</th>
-              <td data-i18n="research.data.s5v">ASEAN-5 was originally planned; the selected indicator was not consistently available for the Philippines and Singapore</td>
-            </tr>
-            <tr data-cite-id="obs">
-              <th scope="row" data-i18n="research.data.s6">Observations by country</th>
-              <td data-i18n="research.data.s6v">Indonesia 200 · Malaysia 81 · Thailand 63</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.data.s7">Period rationale</th>
-              <td data-i18n="research.data.s7v">2014: 4G roll-out and systematic payment monitoring begin; 2022: last year with complete audited reports for every bank.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="more">
+        <summary data-i18n="research.more.data">Show the sample, variables and indicator</summary>
+        <div class="table-wrap">
+          <table>
+            <caption data-i18n="research.data.sampleCaption">Final analysis sample.</caption>
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="research.data.item">Item</th>
+                <th scope="col" data-i18n="research.data.value">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-i18n="research.data.s1">Countries</th>
+                <td data-i18n="research.data.s1v">Indonesia, Malaysia, Thailand</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.data.s2">Banks</th>
+                <td data-i18n="research.data.s2v">39 publicly traded commercial banks and banking groups (including 3 Islamic and 5 digital-challenger banks)</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.data.s3">Bank-year observations</th>
+                <td>344</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.data.s4">Period</th>
+                <td>2014–2022</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.data.s5">Study design</th>
+                <td data-i18n="research.data.s5v">ASEAN-5 was originally planned; the selected indicator was not consistently available for the Philippines and Singapore</td>
+              </tr>
+              <tr data-cite-id="obs">
+                <th scope="row" data-i18n="research.data.s6">Observations by country</th>
+                <td data-i18n="research.data.s6v">Indonesia 200 · Malaysia 81 · Thailand 63</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.data.s7">Period rationale</th>
+                <td data-i18n="research.data.s7v">2014: 4G roll-out and systematic payment monitoring begin; 2022: last year with complete audited reports for every bank.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <div class="grid grid-2">
-        <div class="card">
-          <span class="card-tag" data-i18n="research.data.c1tag">Outcome and controls</span>
-          <h3 data-i18n="research.data.c1title">Bank-year variables</h3>
-          <ul class="card-list">
-            <li><code>Net_Fee_Margin</code> — <span data-i18n="research.data.c1v1">net fee and commission income relative to total assets, proxied by Compustat Global total non-interest income — the closest series available consistently across the three markets, which also contains trading and other non-interest revenue.</span></li>
-            <li><code>Size_USD</code> — <span data-i18n="research.data.c1v2">natural log of total assets converted into US dollars.</span></li>
-            <li><code>Capital_Adequacy_Proxy</code> — <span data-i18n="research.data.c1v3">equity-to-assets ratio (EQRAT in the thesis): book equity / total assets.</span></li>
-            <li><code>Credit_Risk</code> — <span data-i18n="research.data.c1v4">loan loss provisions / total assets.</span></li>
-            <li><code>Interest_Expense_Ratio</code> — <span data-i18n="research.data.c1v5">interest expense / total assets.</span></li>
-            <li><code>Deposit_Ratio</code> — <span data-i18n="research.data.c1v6">total deposits / total assets.</span></li>
-          </ul>
+        <div class="grid grid-2">
+          <div class="card">
+            <span class="card-tag" data-i18n="research.data.c1tag">Outcome and controls</span>
+            <h3 data-i18n="research.data.c1title">Bank-year variables</h3>
+            <ul class="card-list">
+              <li><code>Net_Fee_Margin</code> — <span data-i18n="research.data.c1v1">net fee and commission income relative to total assets, proxied by Compustat Global total non-interest income — the closest series available consistently across the three markets, which also contains trading and other non-interest revenue.</span></li>
+              <li><code>Size_USD</code> — <span data-i18n="research.data.c1v2">natural log of total assets converted into US dollars.</span></li>
+              <li><code>Capital_Adequacy_Proxy</code> — <span data-i18n="research.data.c1v3">equity-to-assets ratio (EQRAT in the thesis): book equity / total assets.</span></li>
+              <li><code>Credit_Risk</code> — <span data-i18n="research.data.c1v4">loan loss provisions / total assets.</span></li>
+              <li><code>Interest_Expense_Ratio</code> — <span data-i18n="research.data.c1v5">interest expense / total assets.</span></li>
+              <li><code>Deposit_Ratio</code> — <span data-i18n="research.data.c1v6">total deposits / total assets.</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="card-tag" data-i18n="research.data.c2tag">Explanatory measure</span>
+            <h3 data-i18n="research.data.c2title">Country-year digital payment pressure</h3>
+            <p data-i18n-html="research.data.c2body" data-cite-id="dpp">The explanatory variable comes from the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, used with the unit <code>PT_GDP</code>: mobile and internet banking transactions as a percentage of GDP. It counts transactions processed by banks themselves, not by non-bank FinTech platforms. Between 2014 and 2022 it rose from 111% to 268% of GDP in Indonesia, from 366% to 719% in Malaysia and from 124% to 532% in Thailand. In the linear models one unit equals 10 percentage points of GDP (<code>DPP_10pct_GDP</code>); the refined models use ln(1 + DPP).</p>
+            <ul class="card-list">
+              <li data-i18n="research.data.c2v1">The indicator source is public; generated extraction files are not committed to the repository.</li>
+              <li data-i18n="research.data.c2v2">Availability, definitions, and reuse terms can change, so the workflow documents how the indicator was discovered and selected instead of treating it as a black box.</li>
+            </ul>
+            <a class="btn" href="https://data360.worldbank.org/en/dataset/IMF_FAS" rel="noopener noreferrer" data-i18n="research.data.c2link" target="_blank">IMF Financial Access Survey</a>
+          </div>
         </div>
-        <div class="card">
-          <span class="card-tag" data-i18n="research.data.c2tag">Explanatory measure</span>
-          <h3 data-i18n="research.data.c2title">Country-year digital payment pressure</h3>
-          <p data-i18n-html="research.data.c2body" data-cite-id="dpp">The explanatory variable comes from the IMF Financial Access Survey indicator <code>IMF_FAS_FCMIBT</code>, used with the unit <code>PT_GDP</code>: mobile and internet banking transactions as a percentage of GDP. It counts transactions processed by banks themselves, not by non-bank FinTech platforms. Between 2014 and 2022 it rose from 111% to 268% of GDP in Indonesia, from 366% to 719% in Malaysia and from 124% to 532% in Thailand. In the linear models one unit equals 10 percentage points of GDP (<code>DPP_10pct_GDP</code>); the refined models use ln(1 + DPP).</p>
-          <ul class="card-list">
-            <li data-i18n="research.data.c2v1">The indicator source is public; generated extraction files are not committed to the repository.</li>
-            <li data-i18n="research.data.c2v2">Availability, definitions, and reuse terms can change, so the workflow documents how the indicator was discovered and selected instead of treating it as a black box.</li>
-          </ul>
-          <a class="btn" href="https://data360.worldbank.org/en/dataset/IMF_FAS" rel="noopener noreferrer" data-i18n="research.data.c2link" target="_blank">IMF Financial Access Survey</a>
-        </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -461,42 +472,44 @@
         <img src="assets/img/research-design.svg" width="1400" height="600" loading="lazy" alt="Flow diagram: restricted bank panel data and the public IMF Financial Access Survey indicator enter variable construction, then country-year merging, fixed-effects estimation, association results, and limitations." data-i18n-attr="alt:research.method.figureAlt">
         <figcaption data-i18n="research.method.figureCaption">Research design: restricted bank data and the public country-year indicator are constructed separately, then merged and estimated with bank and year fixed effects. The final stage records interpretation limits rather than causal claims.</figcaption>
       </figure>
+      <details class="more">
+        <summary data-i18n="research.more.method">Show the estimation and cleaning steps</summary>
+        <h3 data-i18n="research.method.modelHeading">Specification</h3>
+        <div class="formula">NFM<sub>it</sub> = &beta; DPP<sub>ct</sub> + &gamma;&prime;X<sub>it</sub> + &alpha;<sub>i</sub> + &lambda;<sub>t</sub> + &epsilon;<sub>it</sub></div>
+        <ul class="card-list">
+          <li data-i18n="research.method.f1">NFM is bank i's net fee margin in year t.</li>
+          <li data-i18n="research.method.f2">DPP is the digital-payment-pressure measure for country c in year t.</li>
+          <li data-i18n="research.method.f3">X is a vector of bank-level controls.</li>
+          <li data-i18n="research.method.f4">&alpha; is a bank fixed effect and &lambda; is a year fixed effect, which absorb persistent bank differences and common time shocks.</li>
+          <li data-i18n="research.method.f5">The coefficient &beta; is a conditional association inside the stated model, not an automatically causal effect.</li>
+        </ul>
 
-      <h3 data-i18n="research.method.modelHeading">Specification</h3>
-      <div class="formula">NFM<sub>it</sub> = &beta; DPP<sub>ct</sub> + &gamma;&prime;X<sub>it</sub> + &alpha;<sub>i</sub> + &lambda;<sub>t</sub> + &epsilon;<sub>it</sub></div>
-      <ul class="card-list">
-        <li data-i18n="research.method.f1">NFM is bank i's net fee margin in year t.</li>
-        <li data-i18n="research.method.f2">DPP is the digital-payment-pressure measure for country c in year t.</li>
-        <li data-i18n="research.method.f3">X is a vector of bank-level controls.</li>
-        <li data-i18n="research.method.f4">&alpha; is a bank fixed effect and &lambda; is a year fixed effect, which absorb persistent bank differences and common time shocks.</li>
-        <li data-i18n="research.method.f5">The coefficient &beta; is a conditional association inside the stated model, not an automatically causal effect.</li>
-      </ul>
-
-      <div class="grid grid-2">
-        <div class="card">
-          <span class="card-tag" data-i18n="research.method.c1tag">Estimation choices</span>
-          <h3 data-i18n="research.method.c1title">How the models were run</h3>
-          <ul class="card-list">
-            <li data-i18n="research.method.c1v1">A complete-case sample is formed on the required outcome, explanatory variable, and controls so specifications are comparable.</li>
-            <li data-i18n="research.method.c1v2">Continuous variables are winsorised at the 1st and 99th percentiles within the analysis sample.</li>
-            <li data-i18n="research.method.c1v3">Standard errors are clustered at the bank level to account for dependence within bank histories. Driscoll–Kraay standard errors, robust to cross-sectional dependence, are reported alongside.</li>
-            <li data-i18n="research.method.c1v4">Country subsamples keep bank fixed effects and drop year effects, because a country-year explanatory variable would otherwise be absorbed in a single-country model.</li>
-          </ul>
+        <div class="grid grid-2">
+          <div class="card">
+            <span class="card-tag" data-i18n="research.method.c1tag">Estimation choices</span>
+            <h3 data-i18n="research.method.c1title">How the models were run</h3>
+            <ul class="card-list">
+              <li data-i18n="research.method.c1v1">A complete-case sample is formed on the required outcome, explanatory variable, and controls so specifications are comparable.</li>
+              <li data-i18n="research.method.c1v2">Continuous variables are winsorised at the 1st and 99th percentiles within the analysis sample.</li>
+              <li data-i18n="research.method.c1v3">Standard errors are clustered at the bank level to account for dependence within bank histories. Driscoll–Kraay standard errors, robust to cross-sectional dependence, are reported alongside.</li>
+              <li data-i18n="research.method.c1v4">Country subsamples keep bank fixed effects and drop year effects, because a country-year explanatory variable would otherwise be absorbed in a single-country model.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="card-tag" data-i18n="research.method.c2tag">Specifications tested</span>
+            <h3 data-i18n="research.method.c2title">From baseline to robustness</h3>
+            <ul class="card-list">
+              <li data-i18n-html="research.method.c2v1">Scaled digital-payment pressure (<code>DPP_10pct_GDP</code>).</li>
+              <li data-i18n="research.method.c2v2">Scaled pressure with additional financial controls, then a full-controls specification.</li>
+              <li data-i18n-html="research.method.c2v3">A logarithmic baseline (<code>Log_Digital_Payment_Pressure</code>).</li>
+              <li data-i18n-html="research.method.c2v4">A bank-size interaction (<code>Digital_x_LargeBank</code>).</li>
+              <li data-i18n="research.method.c2v5">A centred nonlinear specification with a squared log term.</li>
+              <li data-i18n="research.method.c2v6">Country-subsample estimates of the log specification.</li>
+              <li data-i18n="research.method.c2v7">Robustness: Driscoll–Kraay standard errors, a Mundlak between/within decomposition, excluding 2020, a net-interest-margin placebo, a one-year lag, and excluding Islamic and digital-challenger banks.</li>
+            </ul>
+          </div>
         </div>
-        <div class="card">
-          <span class="card-tag" data-i18n="research.method.c2tag">Specifications tested</span>
-          <h3 data-i18n="research.method.c2title">From baseline to robustness</h3>
-          <ul class="card-list">
-            <li data-i18n-html="research.method.c2v1">Scaled digital-payment pressure (<code>DPP_10pct_GDP</code>).</li>
-            <li data-i18n="research.method.c2v2">Scaled pressure with additional financial controls, then a full-controls specification.</li>
-            <li data-i18n-html="research.method.c2v3">A logarithmic baseline (<code>Log_Digital_Payment_Pressure</code>).</li>
-            <li data-i18n-html="research.method.c2v4">A bank-size interaction (<code>Digital_x_LargeBank</code>).</li>
-            <li data-i18n="research.method.c2v5">A centred nonlinear specification with a squared log term.</li>
-            <li data-i18n="research.method.c2v6">Country-subsample estimates of the log specification.</li>
-            <li data-i18n="research.method.c2v7">Robustness: Driscoll–Kraay standard errors, a Mundlak between/within decomposition, excluding 2020, a net-interest-margin placebo, a one-year lag, and excluding Islamic and digital-challenger banks.</li>
-          </ul>
-        </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -670,60 +683,63 @@
         <h2 data-i18n="research.repro.heading">Method transparency without data redistribution</h2>
         <p data-i18n="research.repro.lede">The repository separates what can be rerun from what can only be inspected.</p>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col" data-i18n="research.repro.component">Component</th>
-              <th scope="col" data-i18n="research.repro.public">Publicly reproducible?</th>
-              <th scope="col" data-i18n="research.repro.notes">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" data-i18n="research.repro.r1">Synthetic fixed-effects demonstration</th>
-              <td><span class="badge badge-yes" data-i18n="research.repro.yes">Yes</span></td>
-              <td data-i18n-html="research.repro.r1note">Self-contained in <code>examples/run_example.py</code>, with a deterministic synthetic panel.</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.repro.r2">IMF FAS retrieval and indicator extraction</th>
-              <td><span class="badge badge-partial" data-i18n="research.repro.partly">Partly</span></td>
-              <td data-i18n="research.repro.r2note">The source is public, but availability and terms can change; generated outputs are not committed.</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.repro.r3">Bank-panel construction and thesis regressions</th>
-              <td><span class="badge badge-no" data-i18n="research.repro.no">No</span></td>
-              <td data-i18n="research.repro.r3note">Required WRDS-derived data and intermediate files are restricted and excluded.</td>
-            </tr>
-            <tr>
-              <th scope="row" data-i18n="research.repro.r4">Reported thesis findings</th>
-              <td><span class="badge badge-no" data-i18n="research.repro.inspect">Inspectable only</span></td>
-              <td data-i18n="research.repro.r4note">The results are documented, but public files cannot regenerate them without the restricted inputs.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="more">
+        <summary data-i18n="research.more.repro">Show what can be rerun and what comes next</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="research.repro.component">Component</th>
+                <th scope="col" data-i18n="research.repro.public">Publicly reproducible?</th>
+                <th scope="col" data-i18n="research.repro.notes">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-i18n="research.repro.r1">Synthetic fixed-effects demonstration</th>
+                <td><span class="badge badge-yes" data-i18n="research.repro.yes">Yes</span></td>
+                <td data-i18n-html="research.repro.r1note">Self-contained in <code>examples/run_example.py</code>, with a deterministic synthetic panel.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.repro.r2">IMF FAS retrieval and indicator extraction</th>
+                <td><span class="badge badge-partial" data-i18n="research.repro.partly">Partly</span></td>
+                <td data-i18n="research.repro.r2note">The source is public, but availability and terms can change; generated outputs are not committed.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.repro.r3">Bank-panel construction and thesis regressions</th>
+                <td><span class="badge badge-no" data-i18n="research.repro.no">No</span></td>
+                <td data-i18n="research.repro.r3note">Required WRDS-derived data and intermediate files are restricted and excluded.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-i18n="research.repro.r4">Reported thesis findings</th>
+                <td><span class="badge badge-no" data-i18n="research.repro.inspect">Inspectable only</span></td>
+                <td data-i18n="research.repro.r4note">The results are documented, but public files cannot regenerate them without the restricted inputs.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <div class="grid grid-2">
-        <div class="card">
-          <span class="card-tag" data-i18n="research.repro.c1tag">Run it yourself</span>
-          <h3 data-i18n="research.repro.c1title">Public demonstration in three commands</h3>
-          <div class="formula">uv sync --group dev
-uv run python examples/run_example.py
-uv run pytest</div>
-          <p class="small muted" data-i18n-html="research.repro.c1note">The example uses deterministic synthetic data. It demonstrates the Python and <code>linearmodels</code> workflow; it is not evidence for the thesis.</p>
+        <div class="grid grid-2">
+          <div class="card">
+            <span class="card-tag" data-i18n="research.repro.c1tag">Run it yourself</span>
+            <h3 data-i18n="research.repro.c1title">Public demonstration in three commands</h3>
+            <div class="formula">uv sync --group dev
+  uv run python examples/run_example.py
+  uv run pytest</div>
+            <p class="small muted" data-i18n-html="research.repro.c1note">The example uses deterministic synthetic data. It demonstrates the Python and <code>linearmodels</code> workflow; it is not evidence for the thesis.</p>
+          </div>
+          <div class="card">
+            <span class="card-tag" data-i18n="research.repro.c2tag">Next steps</span>
+            <h3 data-i18n="research.repro.c2title">Where the research should go next</h3>
+            <ul class="card-list">
+              <li data-i18n="research.repro.c2v1">Disaggregate non-interest income into payments, cards, merchant services, and wealth management.</li>
+              <li data-i18n="research.repro.c2v2">Broaden country coverage to restore the ASEAN-5 design.</li>
+              <li data-i18n="research.repro.c2v3">Move towards identification: staggered payment-licensing reforms as quasi-experiments, difference-in-differences or event-study designs, an external instrument for digital adoption, and dynamic panel methods. (A one-year lag of the regressor is already reported in the thesis.)</li>
+              <li data-i18n="research.repro.c2v4">Strengthen inference with few clusters: a wild-cluster bootstrap now, and country-level clustering once more countries are added. (Driscoll–Kraay standard errors are already reported in the thesis.)</li>
+            </ul>
+          </div>
         </div>
-        <div class="card">
-          <span class="card-tag" data-i18n="research.repro.c2tag">Next steps</span>
-          <h3 data-i18n="research.repro.c2title">Where the research should go next</h3>
-          <ul class="card-list">
-            <li data-i18n="research.repro.c2v1">Disaggregate non-interest income into payments, cards, merchant services, and wealth management.</li>
-            <li data-i18n="research.repro.c2v2">Broaden country coverage to restore the ASEAN-5 design.</li>
-            <li data-i18n="research.repro.c2v3">Move towards identification: staggered payment-licensing reforms as quasi-experiments, difference-in-differences or event-study designs, an external instrument for digital adoption, and dynamic panel methods. (A one-year lag of the regressor is already reported in the thesis.)</li>
-            <li data-i18n="research.repro.c2v4">Strengthen inference with few clusters: a wild-cluster bootstrap now, and country-level clustering once more countries are added. (Driscoll–Kraay standard errors are already reported in the thesis.)</li>
-          </ul>
-        </div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -776,6 +792,58 @@ uv run pytest</div>
         </li>
       </ul>
       <p class="small muted" data-i18n="research.sources.note">The repository keeps bank identifiers, raw and derived datasets, submission drafts, feedback, and signatures out of the public surface. Check current WRDS, IMF, and university terms before redistributing any data or supporting material.</p>
+    </div>
+  </section>
+
+  <section class="section project-section" id="tableau">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.tab.eyebrow">Project 2 · Business Analytics coursework</span>
+        <h2 data-i18n="research.tab.heading">Mobile money adoption in the Global South</h2>
+        <p data-i18n="research.tab.lede">An individual Tableau story, submitted in December 2025: five dashboards on how mobile money is spreading across the Global South, built from World Bank Global Findex and GSMA data.</p>
+        <p class="card-meta" data-i18n="research.tab.meta">Tableau · Excel · Python · World Bank Findex and GSMA data</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="plain-block">
+          <h3 data-i18n="research.tab.didHeading">What I did</h3>
+          <ul class="card-list">
+            <li data-i18n="research.tab.did1">Prepared the data first: an extract of 437 coded World Bank Findex fields across 174 economies and 12 population groups was mapped down to 24 business-readable measures, with decimals rescaled to percentages and missing binary usage flags imputed as zero.</li>
+            <li data-i18n="research.tab.did2">Dropped the 2011 and 2022 waves because their coverage is too thin, leaving 171 economies and four waves (2014, 2017, 2021, 2024).</li>
+            <li data-i18n="research.tab.did3">Built five interactive dashboards framed by a cover and a conclusion — Mobile Money Boom, Leapfrogging the Plastic Era, The Catch-Up, The Usage Paradox, and Platform Transformation — each with a written insight and a commercial recommendation.</li>
+            <li data-i18n="research.tab.did4">Wrote a critical assessment of every dashboard, naming the limits of the data — no transaction-level detail, no qualitative evidence — and the chart types that would have carried the message better.</li>
+          </ul>
+        </div>
+        <div class="plain-block">
+          <h3 data-i18n="research.tab.foundHeading">What it found</h3>
+          <ul class="card-list">
+            <li data-i18n="research.tab.found1">Mobile money adoption expanded steadily from 2014 and leads in Sub-Saharan Africa.</li>
+            <li data-i18n="research.tab.found2">Digital payment use runs ahead of debit-card ownership, and savings trail both.</li>
+            <li data-i18n="research.tab.found3">Mobile money drives women's financial participation more than traditional banking does.</li>
+          </ul>
+          <div class="callout">
+            <h3 data-i18n="research.tab.ledHeading">Where it led</h3>
+            <p data-i18n="research.tab.led">Its finding that digital payment use runs ahead of debit-card ownership raised the question my final-year project then tested: what happens to banks' fee income as payments move away from cards.</p>
+            <a href="#story" data-i18n="research.tab.ledLink">Back to the final-year research</a>
+          </div>
+        </div>
+      </div>
+      <p class="work-links">
+        <a href="https://public.tableau.com/views/BANALAssignment2/STORY" rel="noopener noreferrer" target="_blank" data-i18n="research.tab.linkPublic">Tableau Public story</a>
+        <a href="https://github.com/chaoglay1101-del/mobile-money-adoption-tableau" rel="noopener noreferrer" target="_blank" data-i18n="research.tab.linkRepo">Repository</a>
+      </p>
+      <details class="more screen-only">
+        <summary data-i18n="research.tab.embedSummary">Open the interactive story on this page</summary>
+        <figure class="embedded-work tableau-showcase">
+          <iframe
+            class="tableau-frame"
+            src="https://public.tableau.com/views/BANALAssignment2/STORY?:showVizHome=no"
+            title="Mobile Money Adoption in the Global South — Tableau story"
+            data-i18n-attr="title:research.tab.embedTitle"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </figure>
+      </details>
     </div>
   </section>
 

@@ -18,7 +18,7 @@ The site serves two audiences at once, and the page order is arranged for both:
 | --- | --- | --- |
 | Recruiters | The credential, then a CV file, within the first screen | The hero credentials strip, the `Download CV (PDF)` button, `cv.html`, `cv-onepage.html`, and the files in `assets/pdf/` |
 | Admissions committees | The written work and the direction of future research | `research.html`, especially the Research agenda section, plus the public research report in the code repository |
-| Either | What the author is looking for | The "What I am looking for" section on the home page (`#targets`) |
+| Either | What the author is looking for | The CV profile (`cv.html#profile`), and the "Next: master's" end of the home-page timeline |
 
 Two consequences are deliberate, and both should stay in mind when editing:
 
@@ -34,8 +34,10 @@ reads well states capability as value, sources every number, and states limits a
 plainly as results.
 
 1. **Capability is written as value, not as a tool list.** The "What I bring"
-   section on the home page (`#contribute`) exists for this reason. The `#skills`
-   section below it is still a tool inventory, and that is fine for keyword
+   section on the home page (`#contribute`) exists for this reason, and each of
+   its four items links to the evidence: the CV lines that show it
+   (`cv.html#evidence-…`), the Tableau project, or the runnable example. The tool
+   inventory lives in the CV's Technical skills section, which is fine for keyword
    matching, but a reader should not have to infer what the author can do from a
    list of libraries.
 2. **Every number is traceable.** The credentials strip carries a note saying
@@ -47,6 +49,13 @@ plainly as results.
    the evidence cannot support. This is a differentiator, not a weakness to
    soften, and it is the reason the research agenda section reads as a plan
    rather than a set of findings.
+4. **Each fact has one home.** The CV holds the record (dates, marks, bullets,
+   the internship, skills); `research.html` holds the evidence for both projects;
+   the home page says each thing once, in a line, and links to where it is
+   documented. Before adding a sentence to the home page, check whether another
+   page already says it, and link instead. The October 2026 redesign removed the
+   home page's experience, education and skills sections for this reason: they
+   repeated the CV nearly word for word.
 
 What deliberately does **not** appear: service-selling framing ("how I can help
 you"), scale metrics the author does not have, awards and social feeds that would
@@ -57,13 +66,13 @@ sites are useful for structure, not for claims.
 ## Layout
 
 ```text
-index.html                     Home: what I am looking for, about, what I bring, research summary, experience, education, skills, work, contact
-research.html                  Research: the findings in six steps, then question, data, method, results, limitations, research agenda, reproducibility, sources
-cv.html                        CV: a two-minute tour, then the complete record, profile through to notes, with an evidence index above Skills
+index.html                     Home: hero, what I bring (each item linked to its evidence), selected work with an overview timeline, contact
+research.html                  Research and projects: the final-year research (six steps, question, data, method, results, limitations, agenda, reproducibility, sources), then the Tableau coursework project (#tableau); data, method and reproducibility details open on request
+cv.html                        CV: a two-minute tour, then the complete record, profile through to notes, with an evidence index above Skills; the internship certificate opens on request
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
 assets/css/styles.css          Main stylesheet: light and dark themes, print styles
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
-assets/js/main.js              Theme toggle, language toggle, mobile navigation, print button, ?lang= deep link, current year
+assets/js/main.js              Theme toggle, language toggle, mobile navigation, print button, ?lang= deep link, current year; opens collapsed sections for links and printing
 assets/js/story.js             Step-through stories, their charts, the cohort strips and the evidence index (see "Step-through stories")
 assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
@@ -165,7 +174,7 @@ than a proper noun is wired into the translation workflow:
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `cv.html` hero and the `index.html` contact card |
 | Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree to be conferred 12 November 2026 | `cv.html` (`cv.edu.meta`); the home page shows the classification, GPA, and conferral date without the weighted mark |
 | Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
-| Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, embedded in the home page and CV | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
+| Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
 been removed. The firm's office location was not supplied, so both pages list the
@@ -188,9 +197,22 @@ Business Analytics module result is 70/100:
 Class averages and maxima are shown as supplied supplemental coursework data;
 the transcript module totals remain the official recorded results.
 
+### Detail on request
+
+Long reference material sits in `<details class="more">` blocks: the data,
+method and reproducibility detail on `research.html`, the Tableau embed, and the
+internship certificate on the CV. The section heading and its one-line summary
+stay visible, so a skimming reader still gets the point. `main.js` opens a
+block when a link points inside it and opens every block before printing (and
+closes them again afterwards); `story.js` opens one before jumping to a cited
+table row. The open buttons themselves are hidden in print.
+
 ### Business analytics project
 
-The Tableau project is described with figures measured from the coursework files
+The Tableau project is presented as the second project on `research.html`
+(`#tableau`), with the interactive Tableau Public story loaded only when the
+reader opens it, and summarised in one line on the home page. It is described
+with figures measured from the coursework files
 rather than from memory. Each of these was read off the data and is safe to
 quote:
 
@@ -349,6 +371,7 @@ one click per key press, and any step and click can be linked to.
 | --- | --- | --- |
 | Six-step findings | `research.html#story` | Read by scrolling, or press **P** (the Present button) for one annotation per key press: → or Space forward, ← back, Home and End, **F** full screen, Esc to leave. Each step links to the table rows its numbers come from (tagged `data-cite-id`) and a bar brings the reader back. |
 | Two-minute tour | `cv.html#intro` | The same engine over the CV, with a timeline whose marks follow the steps and a presenter timer (**T**) whose per-step budget, in seconds, is `data-deck-timer` on the deck. |
+| Overview timeline | `index.html`, Selected work | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the two pages cannot disagree about dates. |
 | Cohort strips | `cv.html`, under the two assessed marks | The mark beside the class mean, upper quartile and maximum already stated in `cv.research.grade1` and `cv.research.grade2`. |
 | Evidence index | `cv.html`, above Skills | One button per capability marks the CV lines that show it (`data-ev="key"` on those lines); pressing again moves to the next line. |
 
