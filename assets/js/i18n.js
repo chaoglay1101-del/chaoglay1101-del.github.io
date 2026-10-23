@@ -652,6 +652,7 @@ window.SITE_I18N = {
     "research.tab.did3": "建構五個互動式儀表板，並以封面與結論頁框住整體故事：Mobile Money Boom、Leapfrogging the Plastic Era、The Catch-Up、The Usage Paradox、Platform Transformation；每個儀表板都附上文字洞察與商業建議。",
     "research.tab.did4": "為每個儀表板撰寫批判性檢討，指出資料限制（無交易層級明細、缺乏質性證據），並說明哪些圖表型態更能傳達訊息。",
     "research.tab.didHeading": "我做了什麼",
+    "research.tab.embedNote": "已縮小以符合螢幕寬度。上方的「Tableau Public 故事」連結可以看原尺寸。",
     "research.tab.embedSummary": "在本頁開啟互動式故事",
     "research.tab.embedTitle": "全球南方的行動貨幣採用 — Tableau 故事",
     "research.tab.eyebrow": "專案二 · 商業分析課程",

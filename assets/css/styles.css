@@ -561,14 +561,63 @@ html[data-theme="dark"] .btn-primary {
   margin: 1.25rem 0;
 }
 
+/* The Tableau story has a fixed size: 1150 x 964 plus a 27px toolbar, with the
+   workbook tabs hidden (:tabs=no). A frame narrower than that crops both sides,
+   so the frame is drawn at the story's own size and scaled down to fit; main.js
+   sets --tableau-scale from the box width. The figure may run wider than the
+   text column, up to the story's width, so a desktop screen shows it at or
+   near full size. Change --tableau-w and --tableau-h if the story is resized. */
 .tableau-showcase {
-  width: 100%;
-  margin: 2rem auto 0;
-  padding: clamp(0.75rem, 2vw, 1.5rem);
+  --showcase-pad: clamp(0.75rem, 2vw, 1.5rem);
+  position: relative;
+  left: 50%;
+  translate: -50% 0;
+  width: min(calc(1150px + 2 * var(--showcase-pad) + 2px), calc(100vw - 2rem));
+  margin: 1rem 0 0;
+  padding: var(--showcase-pad);
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.tableau-fit {
+  --tableau-w: 1150;
+  --tableau-h: 991;
+  position: relative;
+  aspect-ratio: var(--tableau-w) / var(--tableau-h);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.embedded-work .tableau-fit iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--tableau-w) * 1px);
+  height: calc(var(--tableau-h) * 1px);
+  border: 0;
+  border-radius: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--tableau-scale, 1));
+}
+
+/* Without JavaScript nothing sets the scale: show it full size and scroll. */
+html:not(.js) .tableau-fit {
+  aspect-ratio: auto;
+  height: calc(var(--tableau-h) * 1px);
+  overflow-x: auto;
+}
+
+.tableau-note {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .tableau-note {
+    display: block;
+  }
 }
 
 .embedded-work iframe {
@@ -577,11 +626,6 @@ html[data-theme="dark"] .btn-primary {
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: var(--surface-alt);
-}
-
-.tableau-frame {
-  min-height: 640px;
-  height: min(72vw, 900px);
 }
 
 .certificate-frame {

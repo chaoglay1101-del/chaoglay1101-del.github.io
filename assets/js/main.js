@@ -305,6 +305,25 @@
   revealTarget();
   window.addEventListener("hashchange", revealTarget);
 
+  // The Tableau story has a fixed size, so its frame is drawn at that size and
+  // scaled to the width it is given (see .tableau-fit in styles.css). The
+  // observer also fires when the collapsed section is opened.
+  var tableauBoxes = document.querySelectorAll(".tableau-fit");
+  if (tableauBoxes.length && "ResizeObserver" in window) {
+    var tableauFit = new ResizeObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var box = entry.target;
+        var native = parseFloat(getComputedStyle(box).getPropertyValue("--tableau-w")) || 1150;
+        if (box.clientWidth > 0) {
+          box.style.setProperty("--tableau-scale", String(Math.min(1, box.clientWidth / native)));
+        }
+      });
+    });
+    Array.prototype.forEach.call(tableauBoxes, function (box) {
+      tableauFit.observe(box);
+    });
+  }
+
   var openedForPrint = [];
   window.addEventListener("beforeprint", function () {
     openedForPrint = Array.prototype.filter.call(document.querySelectorAll("details:not([open])"), function (node) {

@@ -224,7 +224,14 @@ table row. The open buttons themselves are hidden in print.
 
 The Tableau project is presented as the second project on `research.html`
 (`#tableau`), with the interactive Tableau Public story loaded only when the
-reader opens it, and summarised in one line on the home page. It is described
+reader opens it, and summarised in one line on the home page.
+
+The story has a fixed size in Tableau (1150 × 964 plus a 27-pixel toolbar, with
+the workbook tabs hidden by `:tabs=no`), and a narrower frame crops it on both
+sides. So the frame is drawn at exactly that size and scaled down to the width
+available (`.tableau-fit` in `styles.css`, scaled by `main.js`); on a wide
+screen the figure grows past the text column to show it at full size. If the
+story is resized in Tableau, change `--tableau-w` and `--tableau-h` to match. It is described
 with figures measured from the coursework files
 rather than from memory. Each of these was read off the data and is safe to
 quote:
