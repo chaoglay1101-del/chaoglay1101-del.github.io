@@ -32,9 +32,9 @@ jobs:
     env:
       PYTHONUTF8: "1"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -52,6 +52,12 @@ jobs:
             New-ItemProperty -Path $key -Name "$($font.BaseName) (TrueType)" -Value $font.Name -PropertyType String -Force | Out-Null
             Write-Host "installed $($font.Name)"
           }
+          # Chrome finds fonts through DirectWrite, which reads them from the
+          # Windows font cache service. Rebuild that cache so the new fonts are
+          # in it before the browser starts.
+          Stop-Service -Name FontCache -Force
+          Remove-Item "$env:WINDIR\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*" -Force -ErrorAction SilentlyContinue
+          Start-Service -Name FontCache
 
       - name: Build the PDFs
         run: python tools/_build_cv_pdfs.py
@@ -74,6 +80,7 @@ jobs:
               return re.sub(r"^[A-Z]{6}\+", "", str(name).lstrip("/"))
 
           rows = ["| File | Pages | Fonts |", "| --- | --- | --- |"]
+          missing = []
           for path in sorted(pathlib.Path("assets/pdf").glob("Chao_YuChen_CV_*.pdf")):
               reader = PdfReader(path)
               fonts = set()
@@ -85,12 +92,20 @@ jobs:
               listed = ", ".join(sorted(fonts))
               rows.append(f"| {path.name} | {len(reader.pages)} | {listed} |")
               print(f"::notice title={path.name}::{len(reader.pages)} page(s); fonts: {listed}")
+              if not any(re.search(r"noto.?sans.?tc", name, re.I) for name in fonts):
+                  missing.append(path.name)
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
               summary.write("\n".join(rows) + "\n")
+          # The Chinese text on the site's PDFs is set in Noto Sans TC. A file
+          # without it fell back to another font, so stop before committing it.
+          for name in missing:
+              print(f"::error title={name}::Noto Sans TC is not in this PDF, so its Chinese text used a fallback font")
+          raise SystemExit(1 if missing else 0)
           EOF
 
       - name: Attach the PDFs to the run
-        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v5
         with:
           name: cv-pdfs
           path: assets/pdf/Chao_YuChen_CV_*.pdf
