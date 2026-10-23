@@ -1,0 +1,95 @@
+# Temporary: find which font installation Chrome's DirectWrite picks up.
+name: Diagnose fonts
+on:
+  push:
+    branches: [diag-fonts]
+permissions:
+  contents: read
+jobs:
+  diag:
+    runs-on: windows-latest
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Fetch fonts
+        shell: pwsh
+        run: |
+          $src = Join-Path $env:RUNNER_TEMP 'google-fonts'
+          git clone --quiet --depth 1 --filter=blob:none --sparse https://github.com/google/fonts.git $src
+          git -C $src sparse-checkout set ofl/notosanstc ofl/cascadiamono
+          python -m pip install --quiet --disable-pip-version-check pypdf
+      - name: Try each installation
+        shell: python
+        run: |
+          import ctypes, os, pathlib, re, shutil, subprocess, tempfile, winreg
+          from pypdf import PdfReader
+          def note(title, msg):
+              print(f"::notice title={title}::{msg}")
+          chrome = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+          r = subprocess.run([chrome, "--version"], capture_output=True, text=True)
+          note("chrome", (r.stdout or r.stderr).strip() or "no version output")
+          note("os", subprocess.run(["cmd", "/c", "ver"], capture_output=True, text=True).stdout.strip())
+          src = pathlib.Path(os.environ["RUNNER_TEMP"]) / "google-fonts" / "ofl"
+          files = sorted((src / "notosanstc").glob("*.ttf"))
+          note("source", "; ".join(f"{f.name} {f.stat().st_size}" for f in files) or "none")
+          windir = pathlib.Path(os.environ["WINDIR"]) / "Fonts"
+          note("preinstalled", ", ".join(p.name for p in windir.iterdir() if re.match(r"(?i)(cascadia|noto|msjh)", p.name)) or "none")
+          work = pathlib.Path(tempfile.mkdtemp())
+          page = work / "t.html"
+          page.write_text("<meta charset=utf-8><p style=\"font-family:'Noto Sans TC',serif\">中文測試 latin</p>"
+                          "<p style=\"font-family:'Cascadia Mono',serif\">mono 0123</p>", encoding="utf-8")
+          def names(pdf):
+              out = set()
+              for pg in PdfReader(pdf).pages:
+                  res = pg.get("/Resources")
+                  table = res.get_object().get("/Font") if res else None
+                  for ref in (table.get_object().values() if table else ()):
+                      font = ref.get_object()
+                      name = font.get("/BaseFont")
+                      if name is None:
+                          d = font.get("/FontDescriptor")
+                          name = d.get_object().get("/FontName") if d else font.get("/Name", "?")
+                      out.add(re.sub(r"^[A-Z]{6}\+", "", str(name).lstrip("/")))
+              return ", ".join(sorted(out))
+          def render(tag):
+              out = work / f"{tag}.pdf"
+              with tempfile.TemporaryDirectory() as prof:
+                  subprocess.run([chrome, "--headless=new", "--disable-gpu", "--no-first-run",
+                                  f"--user-data-dir={prof}", "--no-pdf-header-footer",
+                                  f"--print-to-pdf={out}", page.as_uri()], capture_output=True, timeout=180)
+              note(tag, names(out) if out.exists() else "no pdf")
+          def gdi(tag):
+              r = subprocess.run(["powershell", "-NoProfile", "-Command",
+                  "Add-Type -AssemblyName System.Drawing; (New-Object System.Drawing.Text.InstalledFontCollection).Families | ? Name -match 'Noto|Cascadia' | % Name"],
+                  capture_output=True, text=True)
+              note(tag + " gdi+", r.stdout.replace("\n", ", ").strip(", ") or "none")
+          render("0 before")
+          gdi("0 before")
+          key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts", 0, winreg.KEY_SET_VALUE)
+          for f in files:
+              shutil.copy(f, windir / f.name)
+              winreg.SetValueEx(key, f.stem + " (TrueType)", 0, winreg.REG_SZ, f.name)
+          render("A machine copy+registry")
+          gdi("A")
+          subprocess.run(["powershell", "-NoProfile", "-Command", "Stop-Service FontCache -Force; Start-Service FontCache"])
+          render("A2 after FontCache restart")
+          for f in files:
+              note("AddFontResource", f"{f.name}: {ctypes.windll.gdi32.AddFontResourceW(str(windir / f.name))}")
+          ctypes.windll.user32.SendMessageTimeoutW(0xFFFF, 0x001D, 0, 0, 0x2, 2000, None)
+          render("B AddFontResource+WM_FONTCHANGE")
+          user_fonts = pathlib.Path(os.environ["LOCALAPPDATA"]) / "Microsoft" / "Windows" / "Fonts"
+          user_fonts.mkdir(parents=True, exist_ok=True)
+          ukey = winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts")
+          for f in files:
+              shutil.copy(f, user_fonts / f.name)
+              winreg.SetValueEx(ukey, f.stem + " (TrueType)", 0, winreg.REG_SZ, str(user_fonts / f.name))
+          render("C per-user")
+          subprocess.run(["powershell", "-NoProfile", "-Command", "Stop-Service FontCache -Force; Start-Service FontCache"])
+          render("C2 per-user after restart")
+          # D: a static instance renamed? also test the face name Chrome sees via a local() @font-face
+          page.write_text("<meta charset=utf-8><style>@font-face{font-family:T;src:url('" + files[0].as_uri() + "')}</style>"
+                          "<p style=\"font-family:T,serif\">中文測試 latin</p>", encoding="utf-8")
+          render("D webfont from file url")
