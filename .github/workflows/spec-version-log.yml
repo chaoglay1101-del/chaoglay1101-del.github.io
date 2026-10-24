@@ -1,0 +1,31 @@
+# 每次推到 main，在 Google 雲端硬碟的「Yu-Chen Chao 個人網站規格書」第 10 節版本紀錄加一列。
+# 沒設定 GOOGLE_SERVICE_ACCOUNT 時會略過，不算失敗。設定方式見 README「Version management」。
+name: Spec version log
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spec-version-log
+  cancel-in-progress: false
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Append a row to the spec's version log
+        env:
+          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+          SPEC_DOC_ID: ${{ vars.SPEC_DOC_ID || '1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY' }}
+        run: node tools/_spec_version_log.mjs

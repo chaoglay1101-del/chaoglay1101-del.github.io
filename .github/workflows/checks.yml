@@ -65,3 +65,23 @@ jobs:
           name: check-reports
           path: tools/_*.txt
           if-no-files-found: ignore
+
+  # 改到頁面或程式碼就要一起更新 spec-sync.json（同步「Yu-Chen Chao 個人網站規格書」），沒做就失敗。
+  # 也跑這些版本管理腳本和 Claude Code hook 的測試。
+  spec-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Version-management script tests
+        run: node --test "tools/tests/*.test.js"
+
+      - name: Check that the spec was synced
+        run: node tools/_check_spec_sync.mjs ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'HEAD^1' }}

@@ -1,9 +1,12 @@
 User-agent: *
 Allow: /
 
-# Maintenance scripts and the repository README are public but are not part of
-# the website, so keep them out of search results.
+# Maintenance scripts, the repository README and the agent rules are public but
+# are not part of the website, so keep them out of search results.
 Disallow: /tools/
 Disallow: /README.md
+Disallow: /AGENTS.md
+Disallow: /CLAUDE.md
+Disallow: /spec-sync.json
 
 Sitemap: https://chaoglay1101-del.github.io/sitemap.xml

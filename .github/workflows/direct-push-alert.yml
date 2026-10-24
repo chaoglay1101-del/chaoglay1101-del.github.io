@@ -1,0 +1,49 @@
+# 有人直接推到 main（沒有經過 PR）就開一個 issue 提醒。
+# Build CV PDFs 勾選 commit 時由 github-actions 機器人直接提交，那是預期的，不提醒。
+# Claude Code 另外有 hook 先擋（.claude/hooks/block-main-push.mjs）。
+name: Direct push alert
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Open an issue when main was pushed without a PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          PUSHER: ${{ github.event.pusher.name }}
+          COMPARE: ${{ github.event.compare }}
+          COMMITS: ${{ toJSON(github.event.commits) }}
+        run: |
+          if [ "$PUSHER" = "github-actions[bot]" ]; then
+            echo "Build CV PDFs 等 workflow 的提交，不用提醒。"
+            exit 0
+          fi
+          prs=$(gh api "repos/$REPO/commits/$SHA/pulls" --jq '[.[] | select(.merged_at != null)] | length')
+          if [ "$prs" != "0" ]; then
+            echo "這次推送來自已合併的 PR，不用提醒。"
+            exit 0
+          fi
+          list=$(echo "$COMMITS" | jq -r '.[] | "- `\(.id[0:7])` \(.message | split("\n")[0])（\(.author.name)）"')
+          short=${SHA:0:7}
+          body=$(printf '%s\n\n%s\n\n%s\n%s\n\n%s\n%s\n%s\n%s\n' \
+            "有人直接推到 main，沒有經過 PR：推送者 **$PUSHER**，最新 commit \`$short\`。" \
+            "這些改動已經發布到網站，但跳過了 PR 上的 Site checks（checks、spec-sync）。" \
+            "**這次推送的 commit：**" \
+            "$list" \
+            "**請處理：**" \
+            "1. 到 Actions 分頁確認這次 main 的 Site checks 有沒有通過；失敗的話開 PR 修正。" \
+            "2. 確認「Yu-Chen Chao 個人網站規格書」和 spec-sync.json 都有同步；沒有的話在 Claude Code 執行 /sync-spec。" \
+            "3. 確認沒問題後關閉這個 issue。差異：$COMPARE")
+          gh issue create --repo "$REPO" --title "直接推到 main，沒有經過 PR（$short）" --body "$body"

@@ -62,10 +62,11 @@ FORBIDDEN = (
 )
 
 # Exceptions to blanket rules: a .txt only as robots.txt, a .pdf only under
-# assets/pdf/, Markdown only as the README (notes and reports stay elsewhere).
+# assets/pdf/, Markdown only as the README and the agent rules that keep the
+# spec in sync (notes and reports stay elsewhere).
 TXT_ALLOWED = ("robots.txt",)
 PDF_ALLOWED = re.compile(r"^assets/pdf/[^/]+\.pdf$")
-MD_ALLOWED = ("README.md",)
+MD_ALLOWED = ("README.md", "AGENTS.md", "CLAUDE.md", ".claude/skills/sync-spec/SKILL.md")
 
 
 def tracked() -> list[str]:
