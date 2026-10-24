@@ -1,0 +1,6 @@
+{
+  "spec_version": "1.0",
+  "last_change": "建立「Yu-Chen Chao 個人網站規格書」並開始版本管理：規格書同步規則、spec-sync 檢查、版本紀錄 Action、main 只透過 PR 更新",
+  "spec_doc": "https://docs.google.com/document/d/1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY/edit",
+  "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大），last_change 寫一句這次改了什麼。規格書內容不受影響時（例如只改一句文案），spec_version 不變，last_change 以「規格書不受影響：」開頭寫原因。CI 會檢查。"
+}

@@ -445,14 +445,17 @@ Pages is set to deploy from the `main` branch. The canonical and `og:url` values
 point at that root for the same reason. `.nojekyll` keeps Pages from running
 Jekyll, so every file is served exactly as committed.
 
-Publishing is therefore just committing to `main`:
+Publishing is therefore merging into `main`, through a pull request (see
+"Version management"):
 
-1. Edit and commit (in the browser, in github.dev, or push from a clone).
-2. Pages deploys on its own; the "pages build and deployment" run in the Actions
+1. Edit on a branch (in the browser choose "Create a new branch for this commit
+   and start a pull request"; in github.dev or a clone, push a branch) and open a
+   pull request.
+2. "Site checks" runs on the pull request. Merge once both of its jobs, `checks`
+   and `spec-sync`, are green; Pages does not wait for them, so a red cross after
+   merging would already be live.
+3. Pages deploys on its own; the "pages build and deployment" run in the Actions
    tab shows when it is live, usually within two minutes.
-3. "Site checks" runs beside it. A red cross does not take the site down, since
-   Pages does not wait for it, but it means something should be fixed in the next
-   commit; open the run for the failing step and the attached reports.
 
 Every tracked file is public, `tools/`, `.github/` and this README included, so
 nothing private belongs here: no submission documents, no transcripts, no data
@@ -463,6 +466,29 @@ search results.
 Until October 2026 the site was kept in the research repository
 (`digital-payment-pressure-bank-margins`, folder `10_Personal_Website`) and
 copied here with `git subtree`. That copy has been retired: edit here only.
+
+## Version management
+
+The site moves together with a written spec, "Yu-Chen Chao 個人網站規格書", a
+Google Doc in the owner's Drive. The README says how things work; the spec says
+what the site is now and why, and keeps a version log. Four pieces keep the two
+in step:
+
+| Piece | What it does |
+| --- | --- |
+| `CLAUDE.md`, `AGENTS.md`, `.claude/skills/sync-spec/SKILL.md` | Tell any coding agent to update the affected spec sections in the same task, with a map from files to sections. After editing by hand, run `/sync-spec` in Claude Code. |
+| `spec-sync.json` and the `spec-sync` job in "Site checks" | A pull request that changes pages or code must raise `spec_version` to the spec's new version, or keep it and start `last_change` with 「規格書不受影響：」 and a reason. README, the agent rules, `tools/tests/`, the CV PDFs and `tools/_en_keys.json` are exempt. `git log -p spec-sync.json` shows which spec version each commit matches. |
+| `.github/workflows/spec-version-log.yml` | After each push to `main`, appends a row (time, commit, description with the spec version) to section 10 of the spec. Skipped, not failed, until the secret below exists. |
+| `.claude/hooks/block-main-push.mjs`, `.github/workflows/direct-push-alert.yml` | Claude Code refuses a `git push` to `main`; any other direct push to `main` opens an issue listing the commits that skipped review. Commits made by the "Build CV PDFs" workflow are expected and do not raise one. |
+
+Branch protection is not switched on, because "Build CV PDFs" commits to `main`
+itself; turning it on means changing that workflow to open a pull request first.
+
+To let the version log fill itself (once, by the owner): create a Google Cloud
+service account with the Google Docs API enabled (the TechStarterWeb one can be
+reused), share the spec with its `…@….iam.gserviceaccount.com` address as an
+editor, and add its JSON key as the repository secret `GOOGLE_SERVICE_ACCOUNT`.
+`node tools/_spec_version_log.mjs --dry-run` shows the row the next push would add.
 
 ## Flow texture
 
