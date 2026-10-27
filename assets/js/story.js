@@ -3,6 +3,12 @@
    research.html: the findings in six steps, each with its chart.
    index.html (the CV): the CV in two minutes, a timeline, cohort strips and an evidence
    index that marks the lines proving each skill.
+   projects.html: one short deck per project, drawn from static HTML scenes.
+
+   A page can hold several decks ([data-deck]). Each deck keeps its own steps,
+   clicks, scenes and deep-link prefix (data-deck-prefix); the presentation
+   overlay, the keyboard and the tooltip are shared, and only one deck plays at
+   a time.
 
    Ideas borrowed from Slidev decks: content revealed one click at a time
    (v-click), hand-drawn annotations tied to a click (v-mark), links to a step
@@ -30,12 +36,12 @@
 
   function run() {
     var root = document.documentElement;
-    var deckEl = document.querySelector("[data-deck]");
+    var deckEls = Array.prototype.slice.call(document.querySelectorAll("[data-deck]"));
     var evidenceIndex = document.querySelector("[data-evidence-index]");
     var cohortSlots = Array.prototype.slice.call(document.querySelectorAll("[data-cohort]"));
     // A standalone timeline (home page): every item labelled, no step marks.
     var timelineSlots = Array.prototype.slice.call(document.querySelectorAll("[data-timeline]"));
-    if (!deckEl && !evidenceIndex && !cohortSlots.length && !timelineSlots.length) {
+    if (!deckEls.length && !evidenceIndex && !cohortSlots.length && !timelineSlots.length) {
       return;
     }
 
@@ -833,11 +839,20 @@
 
     /* --- Deck: steps, clicks, scroll, stage, presentation --------------------------- */
 
-    var deck = null;
-    if (deckEl) {
-      deck = (function () {
+    // One presentation overlay serves every deck on the page; activeDeck is the
+    // one that is playing (or null), so the keyboard and the buttons in the
+    // overlay know whom they belong to.
+    var presentUI = $("[data-present-ui]");
+    var presentTitle = presentUI && $("[data-present-title]", presentUI);
+    var activeDeck = null;
+    var decks = [];
+
+    function createDeck(deckEl) {
+      return (function () {
         var kind = deckEl.getAttribute("data-deck");
         var prefix = deckEl.getAttribute("data-deck-prefix") || "step";
+        var titleSource = deckEl.getAttribute("data-deck-title");
+        var printable = deckEl.classList.contains("story--project");
         var timerBudget = (deckEl.getAttribute("data-deck-timer") || "").split(",").filter(Boolean).map(Number);
         var STEPS = $$(".step", deckEl);
         var N = STEPS.length;
@@ -847,9 +862,14 @@
         var stageScenes = $(".stage-scenes", deckEl);
         var stageVisual = $("[data-visual]", deckEl);
         var pills = $(".stage-pills", deckEl);
-        var presentUI = $("[data-present-ui]");
         var BUILD = { dpp: chartDpp, avg: chartAvg, tstat: chartTstat, decomp: chartDecomp, countries: chartCountries, ledger: ledger };
-        var cur = 0, click = 0, presenting = false, placed = null;
+        // A step without a scene of its own keeps the previous step's scene on the
+        // stage (the first one borrows the next), so the right column is never empty.
+        var SHOW = SCENES.map(function () { return null; });
+        SCENES.forEach(function (scene, i) { SHOW[i] = scene || (i > 0 ? SHOW[i - 1] : null); });
+        var firstScene = SCENES.filter(Boolean)[0] || null;
+        SHOW = SHOW.map(function (scene) { return scene || firstScene; });
+        var cur = 0, click = 0, presenting = false, printing = false, placed = null;
         var played = STEPS.map(function () { return 0; });
         var startedByScroll = STEPS.map(function () { return false; });
         var scrollCur = -1, autoTimer = 0, suppressUntil = 0;
@@ -866,8 +886,10 @@
               node.classList.toggle("is-on", Number(node.getAttribute("data-mark")) <= level);
             });
             if (SCENES[k]) {
+              // A scene shown while a later step is read has been fully drawn.
+              var sceneLevel = (k !== cur && SHOW[cur] === SCENES[k] && k < cur) ? MAXC[k] : level;
               $$("[data-mark]", SCENES[k]).forEach(function (node) {
-                node.classList.toggle("is-on", Number(node.getAttribute("data-mark")) <= level);
+                node.classList.toggle("is-on", Number(node.getAttribute("data-mark")) <= sceneLevel);
               });
             }
           });
@@ -879,17 +901,18 @@
           }
         }
         function syncScenes() {
-          SCENES.forEach(function (scene, i) {
+          SCENES.forEach(function (scene) {
             if (!scene) { return; }
-            var hiddenScene = placed === "stage" && i !== cur;
-            scene.classList.toggle("is-active", i === cur);
+            var shown = scene === SHOW[cur];
+            var hiddenScene = placed === "stage" && !shown;
+            scene.classList.toggle("is-active", shown);
             if (hiddenScene) { scene.setAttribute("aria-hidden", "true"); scene.inert = true; }
             else { scene.removeAttribute("aria-hidden"); scene.inert = false; }
           });
         }
         function placeScenes() {
           if (!stageScenes) { placed = "none"; return false; }
-          var want = (presenting || WIDE.matches) ? "stage" : "inline";
+          var want = printing ? "inline" : (presenting || WIDE.matches) ? "stage" : "inline";
           if (want === placed) { return false; }
           placed = want;
           SCENES.forEach(function (scene, i) {
@@ -937,13 +960,14 @@
           c = clamp(c, 0, MAXC[i]);
           var changed = i !== cur;
           if (changed) { played[cur] = (!presenting && startedByScroll[cur]) ? MAXC[cur] : Math.max(played[cur], click); }
+          var shownBefore = SHOW[cur];
           cur = i;
           click = c;
           played[i] = Math.max(played[i], c);
           STEPS.forEach(function (step, k) { step.classList.toggle("is-active", k === i); });
           syncScenes();
           if (stageVisual && changed) { stageVisual.replaceChildren(chartTimeline(Math.max(280, Math.round(stageVisual.getBoundingClientRect().width || 560)), cur)); }
-          if (changed) { animateIn(SCENES[i]); animateIn($(".step-visual", STEPS[i])); }
+          if (changed) { if (SHOW[i] !== shownBefore) { animateIn(SHOW[i]); } animateIn($(".step-visual", STEPS[i])); }
           applyMarks();
           updateStageUI();
           updatePresentUI();
@@ -1056,7 +1080,10 @@
         var timerEl = presentUI && $("[data-present-timer]", presentUI);
         var TOTAL = MAXC.reduce(function (sum, value) { return sum + value + 1; }, 0);
         var timerStart = 0, timerTick = 0, timerShown = false;
-        if (trackEl) {
+        // The overlay is shared, so each deck draws its own step ticks when it starts playing.
+        function buildTicks() {
+          if (!trackEl) { return; }
+          $$(".present-tick", trackEl).forEach(function (tick) { tick.remove(); });
           var acc = 0;
           MAXC.forEach(function (value, i) {
             if (i > 0) {
@@ -1077,8 +1104,13 @@
           timerEl.textContent = s("ui.timer", { t: clock(elapsed), total: clock(total), step: timerBudget[cur] || 0 });
           timerEl.classList.toggle("is-over", elapsed > budgetSoFar);
         }
+        function updateTitle() {
+          if (!presentTitle || !titleSource) { return; }
+          var source = $(titleSource);
+          if (source) { presentTitle.textContent = source.textContent.replace(/\s+/g, " ").trim(); }
+        }
         function updatePresentUI() {
-          if (!presentUI) { return; }
+          if (!presentUI || !presenting) { return; }
           if (countEl) { countEl.textContent = s("ui.count", { s: cur + 1, n: N, c: click, m: MAXC[cur] }); }
           var done = MAXC.slice(0, cur).reduce(function (sum, value) { return sum + value + 1; }, 0) + click + 1;
           if (fillEl) { fillEl.style.width = (done / TOTAL * 100).toFixed(2) + "%"; }
@@ -1093,17 +1125,22 @@
           updateTimer();
         }
         function enterPresent(fromStart) {
-          if (presenting || !presentUI) { return; }
+          if (presenting || activeDeck || !presentUI) { return; }
           presenting = true;
+          activeDeck = api;
           cancelAuto();
           closeBar();
           root.classList.add("is-presenting");
           deckEl.classList.add("is-presenting");
           presentUI.hidden = false;
+          buildTicks();
+          updateTitle();
+          if (timerEl) { timerEl.hidden = !(timerShown && timerBudget.length); }
+          if (timerBtn) { timerBtn.hidden = !timerBudget.length; }
           placeScenes();
           render();
           setState(fromStart ? 0 : cur, 0, "present");
-          animateIn(SCENES[cur]);
+          animateIn(SHOW[cur]);
           timerStart = Date.now();
           clearInterval(timerTick);
           if (timerBudget.length) { timerTick = setInterval(updateTimer, 500); }
@@ -1112,6 +1149,7 @@
         function exitPresent() {
           if (!presenting) { return; }
           presenting = false;
+          activeDeck = null;
           played[cur] = Math.max(played[cur], click);
           clearInterval(timerTick);
           root.classList.remove("is-presenting");
@@ -1144,25 +1182,17 @@
         var timerBtn = presentUI && $("[data-present-timer-toggle]", presentUI);
         if (timerBtn) { timerBtn.hidden = !timerBudget.length; }
 
-        document.addEventListener("keydown", function (event) {
-          if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) { return; }
-          var target = event.target || {};
-          if (/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName || "") || target.isContentEditable) { return; }
-          var onControl = target.closest && target.closest("button, a, summary");
-          if (presenting) {
-            if ((event.key === "Enter" || event.key === " ") && onControl) { return; }
-            if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].indexOf(event.key) > -1) { event.preventDefault(); next(); }
-            else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].indexOf(event.key) > -1) { event.preventDefault(); prev(); }
-            else if (event.key === "Home") { event.preventDefault(); setState(0, 0, "present"); }
-            else if (event.key === "End") { event.preventDefault(); setState(N - 1, MAXC[N - 1], "present"); }
-            else if (event.key === "Escape" || event.key === "p" || event.key === "P") { event.preventDefault(); exitPresent(); }
-            else if (event.key === "f" || event.key === "F") { event.preventDefault(); toggleFullscreen(); }
-            else if (event.key === "t" || event.key === "T") { event.preventDefault(); toggleTimer(); }
-          } else if (event.key === "p" || event.key === "P") {
-            event.preventDefault();
-            enterPresent(false);
-          }
-        });
+        // Keys while this deck plays; the shared keydown listener below calls it.
+        function handleKey(event, onControl) {
+          if ((event.key === "Enter" || event.key === " ") && onControl) { return; }
+          if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].indexOf(event.key) > -1) { event.preventDefault(); next(); }
+          else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].indexOf(event.key) > -1) { event.preventDefault(); prev(); }
+          else if (event.key === "Home") { event.preventDefault(); setState(0, 0, "present"); }
+          else if (event.key === "End") { event.preventDefault(); setState(N - 1, MAXC[N - 1], "present"); }
+          else if (event.key === "Escape" || event.key === "p" || event.key === "P") { event.preventDefault(); exitPresent(); }
+          else if (event.key === "f" || event.key === "F") { event.preventDefault(); toggleFullscreen(); }
+          else if (event.key === "t" || event.key === "T") { event.preventDefault(); toggleTimer(); }
+        }
         var swipeX = null, swipeY = null;
         deckEl.addEventListener("pointerdown", function (event) { if (presenting) { swipeX = event.clientX; swipeY = event.clientY; } });
         deckEl.addEventListener("pointerup", function (event) {
@@ -1171,10 +1201,8 @@
           swipeX = null;
           if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) { if (dx < 0) { next(); } else { prev(); } }
         });
-        document.addEventListener("click", function (event) {
-          var button = event.target.closest && event.target.closest("[data-story]");
-          if (!button) { return; }
-          var action = button.getAttribute("data-story");
+        // Buttons marked data-story; the shared click listener below finds the deck they belong to.
+        function act(action, button) {
           if (action === "present") { enterPresent(button.hasAttribute("data-from-start")); }
           else if (action === "exit") { exitPresent(); }
           else if (action === "next") { next(); }
@@ -1182,7 +1210,7 @@
           else if (action === "fullscreen") { toggleFullscreen(); }
           else if (action === "timer") { toggleTimer(); }
           else if (action === "copy-link") { copyLink(); }
-        });
+        }
         function copyLink() {
           var url = window.location.href.split("#")[0] + hashFor(cur, click);
           function fail() { toast(s("ui.copyFail", { u: url }), 6000); }
@@ -1218,20 +1246,78 @@
         });
 
         deckEl.classList.add("is-ready");
-        return {
+        var api = {
+          el: deckEl,
           init: function () {
             placeScenes();
             render();
             buildPills();
             setState(0, 0, "init");
-            animateIn(SCENES[0]);
+            animateIn(SHOW[0]);
             var link = readLink(window.location.hash);
             if (link) { setTimeout(function () { go(link, false); }, 60); }
           },
           relayout: function (force) { if (placeScenes() || force) { render(); } },
-          refreshText: function () { render(); buildPills(); updatePresentUI(); }
+          refreshText: function () { render(); buildPills(); updateTitle(); updatePresentUI(); },
+          isPresenting: function () { return presenting; },
+          enter: enterPresent,
+          key: handleKey,
+          act: act,
+          // Printing puts every scene back inline, next to its step (project decks only).
+          setPrint: function (on) {
+            if (!printable || printing === on) { return; }
+            printing = on;
+            placeScenes();
+          }
         };
+        return api;
       })();
+    }
+
+    deckEls.forEach(function (el) { decks.push(createDeck(el)); });
+
+    function deckFor(node) {
+      if (activeDeck) { return activeDeck; }
+      var el = node.closest && node.closest("[data-deck]");
+      if (!el) {
+        var section = node.closest && node.closest("section");
+        el = section && section.querySelector("[data-deck]");
+      }
+      return decks.filter(function (d) { return d.el === el; })[0] || null;
+    }
+
+    // With several decks on a page, P opens the one nearest the middle of the screen.
+    function nearestDeck() {
+      var mid = window.innerHeight / 2, best = null, bestGap = Infinity, bestSeen = false;
+      decks.forEach(function (d) {
+        var box = d.el.getBoundingClientRect();
+        var seen = box.bottom > 0 && box.top < window.innerHeight;
+        var gap = box.top <= mid && box.bottom >= mid ? 0 : Math.min(Math.abs(box.top - mid), Math.abs(box.bottom - mid));
+        if ((seen && !bestSeen) || (seen === bestSeen && gap < bestGap)) { best = d; bestGap = gap; bestSeen = seen; }
+      });
+      return best;
+    }
+
+    if (decks.length) {
+      document.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) { return; }
+        var target = event.target || {};
+        if (/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName || "") || target.isContentEditable) { return; }
+        var onControl = target.closest && target.closest("button, a, summary");
+        if (activeDeck) { activeDeck.key(event, onControl); }
+        else if (event.key === "p" || event.key === "P") {
+          var d = nearestDeck();
+          if (d) { event.preventDefault(); d.enter(false); }
+        }
+      });
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest && event.target.closest("[data-story]");
+        if (!button) { return; }
+        var d = deckFor(button);
+        if (d) { d.act(button.getAttribute("data-story"), button); }
+      });
+      window.addEventListener("beforeprint", function () { decks.forEach(function (d) { d.setPrint(true); }); });
+      window.addEventListener("afterprint", function () { decks.forEach(function (d) { d.setPrint(false); }); });
     }
 
     /* --- Evidence index (index.html): mark the lines that prove a skill ----------------- */
@@ -1310,7 +1396,7 @@
       loadStrings();
       renderCohorts();
       renderTimelines();
-      if (deck) { deck.refreshText(); }
+      decks.forEach(function (d) { d.refreshText(); });
       if (evidence) { evidence.refreshText(); }
     }
 
@@ -1328,7 +1414,7 @@
     loadStrings();
     renderCohorts();
     renderTimelines();
-    if (deck) { deck.init(); }
+    decks.forEach(function (d) { d.init(); });
     if (evidence) { evidence.init(); }
     measureHeader();
 
@@ -1350,14 +1436,14 @@
         lastWidth = window.innerWidth;
         lastHeight = window.innerHeight;
         measureHeader();
-        if (deck) { deck.relayout(true); }
+        decks.forEach(function (d) { d.relayout(true); });
         renderCohorts();
         renderTimelines();
         measureHeader();
       }, 140);
     });
-    if (deck && WIDE.addEventListener) {
-      WIDE.addEventListener("change", function () { deck.relayout(false); });
+    if (decks.length && WIDE.addEventListener) {
+      WIDE.addEventListener("change", function () { decks.forEach(function (d) { d.relayout(false); }); });
     }
   }
 })();

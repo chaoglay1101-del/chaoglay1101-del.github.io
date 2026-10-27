@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Personal website — motion
+   --------------------------------------------------------------------------
+   Five small things, all from the tokens at the top of styles.css
+   (--t-fast, --t-mid, --t-slow, --ease-out):
+
+     1. page-to-page transitions (the header holds still while the page changes)
+     2. cards and blocks ease in as they scroll into view
+     3. micro-interactions: cards lift, links underline, buttons press
+     4. (the project decks and their lines are drawn by story.js and the scene
+        styles in styles.css)
+     5. nothing moves for visitors who ask for reduced motion, or in print
+
+   This file is linked by the home, projects, research and 404 pages and not by
+   cv-onepage.html, which stays a still document. Everything that moves sits
+   inside prefers-reduced-motion: no-preference, so the default is the finished
+   page: visible, in place, with no animation to wait for.
+   ========================================================================== */
+
+/* --- 1. Page transitions -------------------------------------------------- */
+
+/* A cross-document view transition: the old and the new page cross-fade, and the
+   brand and the navigation, which are the same on every page, are pinned so they
+   do not flicker. Browsers without support navigate as before. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  /* A named element is painted as a layer of its own, which clips anything outside
+     its box; the padding leaves room for the keyboard focus ring. */
+  .site-header .brand {
+    view-transition-name: site-brand;
+    padding: 5px;
+    margin-block: -5px;
+    margin-left: -5px;
+  }
+
+  .site-header .primary-nav {
+    view-transition-name: site-nav;
+    padding: 5px;
+    margin: -5px;
+  }
+
+  ::view-transition-group(root) {
+    animation-duration: var(--t-mid);
+    animation-timing-function: var(--ease-out);
+  }
+
+  ::view-transition-old(root) {
+    animation: vt-out var(--t-fast) var(--ease-out) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: vt-in var(--t-mid) var(--ease-out) both;
+  }
+
+  ::view-transition-group(site-brand),
+  ::view-transition-group(site-nav) {
+    animation-duration: var(--t-mid);
+    animation-timing-function: var(--ease-out);
+  }
+
+  @keyframes vt-out {
+    to { opacity: 0; }
+  }
+
+  @keyframes vt-in {
+    from { opacity: 0; }
+  }
+}
+
+/* --- 2. Scroll entrance ----------------------------------------------------- */
+
+/* Blocks fade in and rise a few pixels as they enter the screen, driven by the
+   scroll position (no JavaScript). Only the opacity and the separate "translate"
+   property change, so a card's hover lift (transform) is not overridden. The
+   deck steps are not listed here: story.js manages those. A new block can opt in
+   with class="reveal". The animation only fills forwards, so a block that has not
+   reached the screen yet is in its normal place and fully visible (full-page
+   screenshots, find-in-page and print see the finished page). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes reveal-up {
+      from {
+        opacity: 0;
+        translate: 0 14px;
+      }
+
+      to {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    .reveal,
+    .card,
+    .timeline > li,
+    .project-index a,
+    .project-section > .container > .section-head {
+      animation: reveal-up linear forwards;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+}
+
+/* --- 3. Micro-interactions ---------------------------------------------------- */
+
+/* Cards: the border takes the accent and a soft shadow appears, on hover and on
+   keyboard focus alike; where motion is welcome the card also lifts a little.
+   Nothing here hides information: on a touch screen the card simply is as it is. */
+.project-index a {
+  transition:
+    transform var(--t-mid) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out),
+    box-shadow var(--t-mid) var(--ease-out);
+}
+
+.project-index a:hover,
+.project-index a:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 12px 24px -16px color-mix(in srgb, var(--ink) 45%, transparent);
+}
+
+.project-index a:hover .project-index-title,
+.project-index a:focus-visible .project-index-title {
+  color: var(--accent-ink);
+}
+
+.project-index-title {
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+/* Links: a thin, faint line at rest; a solid one is drawn along the text on
+   hover and focus. The two lines are background layers at the same place, so one
+   replaces the other without a jump. Cards and buttons are left alone. */
+main a:not(.btn):not(.skip-link):not(.project-index a),
+.site-footer a {
+  text-decoration: none;
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(color-mix(in srgb, currentColor 38%, transparent), color-mix(in srgb, currentColor 38%, transparent));
+  background-repeat: no-repeat;
+  background-position: 0 100%, 0 100%;
+  background-size: 0 2px, 100% 1px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition:
+    background-size var(--t-mid) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+
+main a:not(.btn):not(.skip-link):not(.project-index a):hover,
+main a:not(.btn):not(.skip-link):not(.project-index a):focus-visible,
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  background-size: 100% 2px, 100% 1px;
+}
+
+/* Buttons: the same two states, with a small press. */
+.btn {
+  transition:
+    transform var(--t-fast) var(--ease-out),
+    background-color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: var(--surface-alt);
+  border-color: var(--accent);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .project-index a:hover,
+  .project-index a:focus-visible {
+    transform: translateY(-3px);
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    transform: translateY(-1px);
+  }
+}
+
+/* --- 5. Reduced motion and print ---------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover,
+  .btn:focus-visible {
+    transform: none;
+  }
+
+  main a:not(.btn):not(.skip-link):not(.project-index a),
+  .site-footer a,
+  .project-index a,
+  .btn {
+    transition: none;
+  }
+}
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  main a:not(.btn),
+  .site-footer a {
+    background: none;
+  }
+}

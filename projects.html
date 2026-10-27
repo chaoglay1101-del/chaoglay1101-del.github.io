@@ -21,6 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chaoglay1101-del.github.io/assets/img/og-image.png">
 <link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/motion.css">
 <script>document.documentElement.classList.add("js");</script>
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/main.js" defer></script>
@@ -88,146 +89,127 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow" data-i18n="research.tsw.eyebrow">Web studio, co-founded</span>
-        <h2 data-i18n="research.tsw.heading">TechStarterWeb: a studio website that is also its order desk</h2>
+        <h2 id="tsw-heading" data-i18n="research.tsw.heading">TechStarterWeb: a studio website that is also its order desk</h2>
         <p data-i18n="research.tsw.lede">TechStarterWeb Consulting builds personal and small-business websites for clients in Taiwan, Hong Kong and Singapore. I co-founded it in October 2026 and lead the technical side. The studio's own site, live since 23 October 2026, is its first piece of work.</p>
         <p class="card-meta" data-i18n="research.tsw.meta">Astro · Cloudflare Workers · Cloudflare D1 · Cloudflare Access · OpenCC</p>
+        <button class="btn btn-primary btn-small" type="button" data-story="present" data-from-start><span data-i18n="projects.present">Present this project</span> <kbd>P</kbd></button>
       </div>
-      <div class="grid grid-2">
-        <div class="plain-block">
-          <h3 data-i18n="research.tsw.didHeading">What I built</h3>
-          <ul class="card-list">
-            <li data-i18n="research.tsw.did1">One site serving both sides: the public pages take enquiries, and a back office behind sign-in turns each enquiry into an order with a status, internal notes and a record of who changed what.</li>
-            <li data-i18n="research.tsw.did2">Three languages: Traditional Chinese, Simplified Chinese generated from it at build time with OpenCC, and English pages for Singapore. Visitors are sent to their browser's language, and the contact options follow the region: LINE, WhatsApp, WeChat and Xiaohongshu.</li>
-            <li data-i18n="research.tsw.did3">Privacy built in: the back office admits only the team's addresses, through Cloudflare Access with one-time email codes; the server checks the sign-in again; and a client's record can be deleted for good on request.</li>
-            <li data-i18n="research.tsw.did4">Launch and operations: the techstarterweb.com domain, a www redirect, a hello@ mailbox, Google Search Console with a sitemap, and visit statistics that count a page only after a click, a scroll or ten seconds on screen, so scanners are left out.</li>
-          </ul>
+      <div class="story story--project" id="tsw-deck" data-deck="tsw" data-deck-prefix="tsw" data-deck-title="#tsw-heading" tabindex="-1">
+        <div class="story-steps">
+          <article class="step" id="tsw-1" data-clicks="3" aria-labelledby="tsw-1-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="projects.k.need">The need</span></p>
+              <h3 id="tsw-1-title" data-i18n="projects.tsw.s1.title">One site for clients and for the studio</h3>
+              <p data-i18n-html="projects.tsw.s1.body"><mark class="mk mk--find" data-mark="1">The public pages take enquiries in three languages</mark>; <mark class="mk mk--find" data-mark="2">a back office behind sign-in</mark> turns each one into an order with <mark class="mk mk--key" data-mark="3">a status and a log of every change</mark>.</p>
+            </div>
+            <figure class="scene scene--static scene--flow" aria-labelledby="tsw-s1-fig">
+              <div class="scene-head"><span class="scene-title" id="tsw-s1-fig" data-i18n="research.tsw.flowHeading">How an enquiry moves</span></div>
+              <ol class="flow-steps">
+                <li class="flow-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><strong class="flow-title" data-i18n="research.tsw.flowT1">Enquiry</strong></li>
+                <li class="flow-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><strong class="flow-title" data-i18n="research.tsw.flowT2">Stored</strong></li>
+                <li class="flow-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><strong class="flow-title" data-i18n="research.tsw.flowT3">Sign-in</strong></li>
+                <li class="flow-step" data-mark="3"><span class="flow-dot" aria-hidden="true"></span><strong class="flow-title" data-i18n="research.tsw.flowT4">Status</strong></li>
+                <li class="flow-step" data-mark="3"><span class="flow-dot" aria-hidden="true"></span><strong class="flow-title" data-i18n="research.tsw.flowT5">Logged</strong></li>
+              </ol>
+              <ol class="flow-statuses">
+                <li class="flow-chip" data-mark="3" style="--i:0" data-i18n="research.tsw.chip1">Enquiry</li>
+                <li class="flow-chip" data-mark="3" style="--i:1" data-i18n="research.tsw.chip2">Quoted</li>
+                <li class="flow-chip" data-mark="3" style="--i:2" data-i18n="research.tsw.chip3">Signed</li>
+                <li class="flow-chip" data-mark="3" style="--i:3" data-i18n="research.tsw.chip4">In production</li>
+                <li class="flow-chip" data-mark="3" style="--i:4" data-i18n="research.tsw.chip5">Delivered</li>
+              </ol>
+            </figure>
+          </article>
+          <article class="step" id="tsw-2" data-clicks="2" aria-labelledby="tsw-2-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">2</span><span data-i18n="projects.k.inuse">In use</span></p>
+              <h3 id="tsw-2-title" data-i18n="projects.tsw.s2.title">Private by design, and live on its own domain</h3>
+              <p data-i18n-html="projects.tsw.s2.body">Only the team's addresses can sign in to the back office, <mark class="mk mk--find" data-mark="1">through Cloudflare Access with one-time email codes</mark>. <mark class="mk mk--find" data-mark="2">The site is live on its own domain</mark>, with Google Search Console and visit statistics.</p>
+            </div>
+          </article>
+          <article class="step" id="tsw-3" data-clicks="2" aria-labelledby="tsw-3-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">3</span><span data-i18n="projects.k.limits">Limits</span></p>
+              <h3 id="tsw-3-title" data-i18n="research.tsw.limitsHeading">What it does not do yet</h3>
+              <p data-i18n-html="projects.tsw.s3.body"><mark class="mk mk--warn" data-mark="1">Enquiries are not yet emailed to the team</mark>, and <mark class="mk mk--warn" data-mark="2">Cloudflare's free plan has no servers in mainland China</mark>, so some networks load the site slowly or not at all.</p>
+            </div>
+          </article>
+          <article class="step" id="tsw-4" data-clicks="3" aria-labelledby="tsw-4-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">4</span><span data-i18n="research.tsw.aiHeading">How it was built</span></p>
+              <h3 id="tsw-4-title" data-i18n="projects.tsw.s4.title">Built with an AI coding agent, in five layers</h3>
+              <p data-i18n-html="projects.tsw.s4.body"><mark class="mk mk--find" data-mark="1">I set the requirements and review each change</mark>; <mark class="mk mk--find" data-mark="2">the agent writes the code</mark>. Routine work goes to cheaper models: <mark class="mk mk--key" data-mark="3">ten calls to the low-cost model came to about US$0.03</mark>.</p>
+            </div>
+            <figure class="scene scene--static scene--layers" aria-labelledby="tsw-s4-fig">
+              <div class="scene-head"><span class="scene-title" id="tsw-s4-fig" data-i18n="research.tsw.orgHeading">How the work is organised</span></div>
+              <ol class="layers-stack">
+                <li class="layers-row layers-row-0" data-mark="1">
+                  <span class="layers-tag">L0</span>
+                  <span class="layers-name" data-i18n="research.tsw.layer0Name">People</span>
+                  <span class="layers-role" data-i18n="research.tsw.layer0Role">decide, pay, merge</span>
+                </li>
+                <li class="layers-row layers-row-1" data-mark="2">
+                  <span class="layers-tag">L1</span>
+                  <span class="layers-name" data-i18n="research.tsw.layer1Name">Lead agent</span>
+                  <span class="layers-role" data-i18n="research.tsw.layer1Role">splits work into task cards, reviews</span>
+                </li>
+                <li class="layers-row layers-row-2" data-mark="2">
+                  <span class="layers-tag">L2</span>
+                  <span class="layers-name" data-i18n="research.tsw.layer2Name">Worker agents</span>
+                  <span class="layers-role" data-i18n="research.tsw.layer2Role">write code, open pull requests</span>
+                </li>
+                <li class="layers-row layers-row-3" data-mark="3">
+                  <span class="layers-tag">L3</span>
+                  <span class="layers-name" data-i18n="research.tsw.layer3Name">Low-cost model</span>
+                  <span class="layers-role" data-i18n="research.tsw.layer3Role">copy, translations, summaries</span>
+                </li>
+                <li class="layers-row layers-row-4" data-mark="3">
+                  <span class="layers-tag">L4</span>
+                  <span class="layers-name" data-i18n="research.tsw.layer4Name">Scripts and CI</span>
+                  <span class="layers-role" data-i18n="research.tsw.layer4Role">anything a rule can decide</span>
+                </li>
+              </ol>
+              <p class="layers-rule" data-mark="3" data-i18n="research.tsw.layerRule">Use the lowest layer that can do the job</p>
+            </figure>
+          </article>
+          <article class="step" id="tsw-5" data-clicks="2" aria-labelledby="tsw-5-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">5</span><span data-i18n="projects.k.track">How it stays on track</span></p>
+              <h3 id="tsw-5-title" data-i18n="projects.tsw.s5.title">Task cards and checks keep every change in bounds</h3>
+              <p data-i18n-html="projects.tsw.s5.body"><mark class="mk mk--find" data-mark="1">Each task card lists its goal and the files it may change</mark>, and <mark class="mk mk--key" data-mark="2">CI fails a pull request that breaks the rules</mark>.</p>
+              <p class="step-actions"><a class="btn btn-primary btn-small" href="https://github.com/chaoglay1101-del/layered-ai-dev-workflow/blob/main/docs/case-study.md" target="_blank" rel="noopener noreferrer" data-i18n="projects.fullWriteup">Full write-up on GitHub</a></p>
+            </div>
+            <figure class="scene scene--static scene--life" aria-labelledby="tsw-s5-fig">
+              <div class="scene-head"><span class="scene-title" id="tsw-s5-fig" data-i18n="research.tsw.lifeHeading">The life of a task card</span></div>
+              <ol class="flow-life">
+                <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life1">To-do</span></span></li>
+                <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life2">Task card</span></span></li>
+                <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life3">agent:ready</span></span></li>
+                <li class="flow-life-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life4">Agent run</span></span></li>
+                <li class="flow-life-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life5">Pull request</span></span></li>
+                <li class="flow-life-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life6">CI checks</span><small class="flow-life-note" data-i18n="research.tsw.lifeCiNote">file locks · version numbers · spec sync</small></span></li>
+                <li class="flow-life-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life7">Merge</span></span></li>
+                <li class="flow-life-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><span class="flow-life-label" data-i18n="research.tsw.life8">Auto wrap-up</span></span></li>
+              </ol>
+            </figure>
+          </article>
         </div>
-        <div class="plain-block">
-          <div class="callout">
-            <h3 data-i18n="research.tsw.limitsHeading">What it does not do yet</h3>
-            <p data-i18n="research.tsw.limits">Enquiries are not yet emailed to the team; they are read in the back office. Cloudflare's free plan has no servers in mainland China, so some mainland networks load the site slowly or not at all. The English pages are translated by hand and can fall behind the Chinese.</p>
+
+        <div class="story-stage">
+          <div class="stage-inner">
+            <div class="stage-top">
+              <ol class="stage-pills" aria-label="Steps" data-i18n-attr="aria-label:story.ui.steps"></ol>
+              <div class="stage-actions">
+                <button class="btn btn-small" type="button" data-story="copy-link"><span data-i18n="story.ui.copy">Copy link</span></button>
+                <button class="btn btn-small btn-primary" type="button" data-story="present"><span data-i18n="story.ui.present">Present</span> <kbd>P</kbd></button>
+              </div>
+            </div>
+            <div class="stage-scenes"></div>
           </div>
         </div>
       </div>
-      <div class="plain-block">
-        <h3 data-i18n="research.tsw.flowHeading">How an enquiry moves</h3>
-        <ol class="flow-steps">
-          <li class="flow-step">
-            <span class="flow-dot" aria-hidden="true"></span>
-            <strong class="flow-title" data-i18n="research.tsw.flowT1">Enquiry</strong>
-            <span class="flow-text" data-i18n="research.tsw.flow1">A client fills in the form in any of the three languages.</span>
-          </li>
-          <li class="flow-step">
-            <span class="flow-dot" aria-hidden="true"></span>
-            <strong class="flow-title" data-i18n="research.tsw.flowT2">Stored</strong>
-            <span class="flow-text" data-i18n="research.tsw.flow2">A hidden field turns away basic spam, and the enquiry is stored in the D1 database.</span>
-          </li>
-          <li class="flow-step">
-            <span class="flow-dot" aria-hidden="true"></span>
-            <strong class="flow-title" data-i18n="research.tsw.flowT3">Sign-in</strong>
-            <span class="flow-text" data-i18n="research.tsw.flow3">A team member signs in to the back office with an email code.</span>
-          </li>
-          <li class="flow-step">
-            <span class="flow-dot" aria-hidden="true"></span>
-            <strong class="flow-title" data-i18n="research.tsw.flowT4">Status</strong>
-            <span class="flow-text" data-i18n="research.tsw.flow4">The order moves from enquiry to quoted, signed, in production and delivered, or is marked as not going ahead.</span>
-            <span class="flow-chips" aria-hidden="true">
-              <span class="flow-chip" data-i18n="research.tsw.chip1">Enquiry</span>
-              <span class="flow-chip" data-i18n="research.tsw.chip2">Quoted</span>
-              <span class="flow-chip" data-i18n="research.tsw.chip3">Signed</span>
-              <span class="flow-chip" data-i18n="research.tsw.chip4">In production</span>
-              <span class="flow-chip" data-i18n="research.tsw.chip5">Delivered</span>
-            </span>
-          </li>
-          <li class="flow-step">
-            <span class="flow-dot" aria-hidden="true"></span>
-            <strong class="flow-title" data-i18n="research.tsw.flowT5">Logged</strong>
-            <span class="flow-text" data-i18n="research.tsw.flow5">Every change is logged with who made it and when.</span>
-          </li>
-        </ol>
-      </div>
-      <div class="plain-block">
-        <h3 data-i18n="research.tsw.orgHeading">How the work is organised</h3>
-        <figure class="layers-figure">
-          <ol class="layers-stack">
-            <li class="layers-row layers-row-0">
-              <span class="layers-tag">L0</span>
-              <span class="layers-name" data-i18n="research.tsw.layer0Name">People</span>
-              <span class="layers-role" data-i18n="research.tsw.layer0Role">decide, pay, merge</span>
-            </li>
-            <li class="layers-row layers-row-1">
-              <span class="layers-tag">L1</span>
-              <span class="layers-name" data-i18n="research.tsw.layer1Name">Lead agent</span>
-              <span class="layers-role" data-i18n="research.tsw.layer1Role">splits work into task cards, reviews</span>
-            </li>
-            <li class="layers-row layers-row-2">
-              <span class="layers-tag">L2</span>
-              <span class="layers-name" data-i18n="research.tsw.layer2Name">Worker agents</span>
-              <span class="layers-role" data-i18n="research.tsw.layer2Role">write code, open pull requests</span>
-            </li>
-            <li class="layers-row layers-row-3">
-              <span class="layers-tag">L3</span>
-              <span class="layers-name" data-i18n="research.tsw.layer3Name">Low-cost model</span>
-              <span class="layers-role" data-i18n="research.tsw.layer3Role">copy, translations, summaries</span>
-            </li>
-            <li class="layers-row layers-row-4">
-              <span class="layers-tag">L4</span>
-              <span class="layers-name" data-i18n="research.tsw.layer4Name">Scripts and CI</span>
-              <span class="layers-role" data-i18n="research.tsw.layer4Role">anything a rule can decide</span>
-            </li>
-          </ol>
-          <p class="layers-rule" data-i18n="research.tsw.layerRule">Use the lowest layer that can do the job</p>
-          <h4 class="flow-subhead" data-i18n="research.tsw.lifeHeading">The life of a task card</h4>
-          <ol class="flow-life">
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life1">To-do</span>
-            </li>
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life2">Task card</span>
-            </li>
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life3">agent:ready</span>
-            </li>
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life4">Agent run</span>
-            </li>
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life5">Pull request</span>
-            </li>
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life6">CI checks</span>
-              <small class="flow-life-note" data-i18n="research.tsw.lifeCiNote">file locks · version numbers · spec sync</small>
-            </li>
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life7">Merge</span>
-            </li>
-            <li class="flow-life-step">
-              <span class="flow-dot" aria-hidden="true"></span>
-              <span class="flow-life-label" data-i18n="research.tsw.life8">Auto wrap-up</span>
-            </li>
-          </ol>
-          <figcaption data-i18n="research.tsw.org1">Five layers: each step goes to the lowest layer that can do it.</figcaption>
-        </figure>
-        <ul class="card-list">        
-          <li data-i18n="research.tsw.org2">State lives in GitHub, not in chat: each task card lists its goal, the files it may change, pre-assigned version numbers and acceptance checks, and every session ends with a four-part handoff note.</li>
-          <li data-i18n="research.tsw.org3">Rules became checks: CI fails a pull request that edits files outside its card, reuses a version number, or changes code without updating the spec.</li>
-          <li data-i18n="research.tsw.org4">Cost control: routine work goes to cheaper models, every model call is logged, and ten calls to the low-cost model came to about US$0.03.</li>
-        </ul>
-      </div>
-      <div class="callout callout-note">
-        <h3 data-i18n="research.tsw.aiHeading">How it was built</h3>
-        <p data-i18n="research.tsw.ai">I built it with an AI coding agent (Claude). I set the requirements and the architecture, including the idea of one site serving both clients and the studio; made the account, security and launch decisions; reviewed each change; and checked it on the live site. The agent wrote the code, and each release was tested before it went out. The workflow is open-sourced, with tests, as layered-ai-dev-workflow.</p>
-      </div>
       <p class="work-links">
         <a href="https://techstarterweb.com/" rel="noopener noreferrer" target="_blank" data-i18n="research.tsw.linkSite">techstarterweb.com</a>
-        <a href="https://github.com/chaoglay1101-del/layered-ai-dev-workflow" rel="noopener noreferrer" target="_blank" data-i18n="research.tsw.linkWorkflow">Workflow on GitHub</a>
         <a href="index.html#cv-experience" data-i18n="research.tsw.linkCv">The CV entry</a>
       </p>
     </div>
@@ -237,31 +219,97 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow" data-i18n="research.tab.eyebrow">Business Analytics coursework</span>
-        <h2 data-i18n="research.tab.heading">Mobile money adoption in the Global South</h2>
+        <h2 id="tableau-heading" data-i18n="research.tab.heading">Mobile money adoption in the Global South</h2>
         <p data-i18n="research.tab.lede">An individual Tableau story, submitted in December 2025: five dashboards on how mobile money is spreading across the Global South, built from World Bank Global Findex and GSMA data.</p>
         <p class="card-meta" data-i18n="research.tab.meta">Tableau · Excel · Python · World Bank Findex and GSMA data</p>
+        <button class="btn btn-primary btn-small" type="button" data-story="present" data-from-start><span data-i18n="projects.present">Present this project</span> <kbd>P</kbd></button>
       </div>
-      <div class="grid grid-2">
-        <div class="plain-block">
-          <h3 data-i18n="research.tab.didHeading">What I did</h3>
-          <ul class="card-list">
-            <li data-i18n="research.tab.did1">Prepared the data first: an extract of 437 coded World Bank Findex fields across 174 economies and 12 population groups was mapped down to 24 business-readable measures, with decimals rescaled to percentages and missing binary usage flags imputed as zero.</li>
-            <li data-i18n="research.tab.did2">Dropped the 2011 and 2022 waves because their coverage is too thin, leaving 171 economies and four waves (2014, 2017, 2021, 2024).</li>
-            <li data-i18n="research.tab.did3">Built five interactive dashboards framed by a cover and a conclusion — Mobile Money Boom, Leapfrogging the Plastic Era, The Catch-Up, The Usage Paradox, and Platform Transformation — each with a written insight and a commercial recommendation.</li>
-            <li data-i18n="research.tab.did4">Wrote a critical assessment of every dashboard, naming the limits of the data — no transaction-level detail, no qualitative evidence — and the chart types that would have carried the message better.</li>
-          </ul>
+      <div class="story story--project" id="tableau-deck" data-deck="tableau" data-deck-prefix="tableau" data-deck-title="#tableau-heading" tabindex="-1">
+        <div class="story-steps">
+          <article class="step" id="tableau-1" data-clicks="2" aria-labelledby="tableau-1-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="projects.k.data">The data</span></p>
+              <h3 id="tableau-1-title" data-i18n="projects.tab.s1.title">From 437 coded fields to 24 measures</h3>
+              <p data-i18n-html="projects.tab.s1.body"><mark class="mk mk--find" data-mark="1">An extract of 437 coded Findex fields across 174 economies was mapped down to 24 business-readable measures.</mark> <mark class="mk mk--find" data-mark="2">The 2011 and 2022 waves were dropped for thin coverage, leaving 171 economies.</mark></p>
+            </div>
+            <figure class="scene scene--static scene--funnel" aria-labelledby="tab-s1-fig">
+              <div class="scene-head"><span class="scene-title" id="tab-s1-fig" data-i18n="projects.tab.fig1">Data preparation</span></div>
+              <ul class="funnel">
+                <li class="funnel-row" data-mark="1">
+                  <span class="funnel-k" data-i18n="projects.tab.fFields">Coded fields to measures</span>
+                  <span class="funnel-v"><span class="funnel-num">437</span><i class="funnel-line" aria-hidden="true"></i><span class="funnel-num funnel-num--to">24</span></span>
+                </li>
+                <li class="funnel-row" data-mark="2">
+                  <span class="funnel-k" data-i18n="projects.tab.fEcon">Economies</span>
+                  <span class="funnel-v"><span class="funnel-num">174</span><i class="funnel-line" aria-hidden="true"></i><span class="funnel-num funnel-num--to">171</span></span>
+                </li>
+                <li class="funnel-row" data-mark="2">
+                  <span class="funnel-k" data-i18n="projects.tab.fWaves">Survey waves</span>
+                  <ol class="waves">
+                  <li class="wave is-dropped">2011<span class="visually-hidden"> (<span data-i18n="projects.tab.fDropped">dropped</span>)</span></li>
+                  <li class="wave">2014</li>
+                  <li class="wave">2017</li>
+                  <li class="wave">2021</li>
+                  <li class="wave is-dropped">2022<span class="visually-hidden"> (<span data-i18n="projects.tab.fDropped">dropped</span>)</span></li>
+                  <li class="wave">2024</li>
+                  </ol>
+                </li>
+              </ul>
+            </figure>
+          </article>
+          <article class="step" id="tableau-2" data-clicks="3" aria-labelledby="tableau-2-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">2</span><span data-i18n="projects.k.story">The story</span></p>
+              <h3 id="tableau-2-title" data-i18n="projects.tab.s2.title">Five dashboards, each with an insight and a recommendation</h3>
+              <p data-i18n-html="projects.tab.s2.body"><mark class="mk mk--find" data-mark="1">A cover opens the story</mark>, <mark class="mk mk--find" data-mark="2">five interactive dashboards follow</mark>, and <mark class="mk mk--key" data-mark="3">a conclusion closes it</mark>.</p>
+            </div>
+            <figure class="scene scene--static scene--order" aria-labelledby="tab-s2-fig">
+              <div class="scene-head"><span class="scene-title" id="tab-s2-fig" data-i18n="projects.tab.fig2">The story, in order</span></div>
+              <ol class="order">
+                <li class="order-item order-item--end" data-mark="1"><span class="flow-dot flow-dot--plain" aria-hidden="true"></span><span data-i18n="projects.tab.cover">Cover</span></li>
+                <li class="order-item" data-mark="2" style="--i:0"><span class="flow-dot" aria-hidden="true"></span><span>Mobile Money Boom</span></li>
+                <li class="order-item" data-mark="2" style="--i:1"><span class="flow-dot" aria-hidden="true"></span><span>Leapfrogging the Plastic Era</span></li>
+                <li class="order-item" data-mark="2" style="--i:2"><span class="flow-dot" aria-hidden="true"></span><span>The Catch-Up</span></li>
+                <li class="order-item" data-mark="2" style="--i:3"><span class="flow-dot" aria-hidden="true"></span><span>The Usage Paradox</span></li>
+                <li class="order-item" data-mark="2" style="--i:4"><span class="flow-dot" aria-hidden="true"></span><span>Platform Transformation</span></li>
+                <li class="order-item order-item--end" data-mark="3"><span class="flow-dot flow-dot--plain" aria-hidden="true"></span><span data-i18n="projects.tab.conclusion">Conclusion</span></li>
+              </ol>
+            </figure>
+          </article>
+          <article class="step" id="tableau-3" data-clicks="3" aria-labelledby="tableau-3-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">3</span><span data-i18n="research.tab.foundHeading">What it found</span></p>
+              <h3 id="tableau-3-title" data-i18n="projects.tab.s3.title">Mobile money leads in Sub-Saharan Africa</h3>
+              <p data-i18n-html="projects.tab.s3.body">Adoption <mark class="mk mk--find" data-mark="1">expanded steadily from 2014</mark>. Digital payment use <mark class="mk mk--find" data-mark="2">runs ahead of debit-card ownership</mark>, and <mark class="mk mk--key" data-mark="3">savings trail both</mark>.</p>
+            </div>
+          </article>
+          <article class="step" id="tableau-4" data-clicks="2" aria-labelledby="tableau-4-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">4</span><span data-i18n="projects.k.limits">Limits</span></p>
+              <h3 id="tableau-4-title" data-i18n="projects.tab.s4.title">What the data cannot show</h3>
+              <p data-i18n-html="projects.tab.s4.body">My critical assessment of each dashboard names the limits: <mark class="mk mk--warn" data-mark="1">no transaction-level detail</mark> and <mark class="mk mk--warn" data-mark="2">no qualitative evidence</mark>.</p>
+            </div>
+          </article>
+          <article class="step" id="tableau-5" data-clicks="1" aria-labelledby="tableau-5-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">5</span><span data-i18n="research.tab.ledHeading">Where it led</span></p>
+              <h3 id="tableau-5-title" data-i18n="projects.tab.s5.title">It led to my final-year research</h3>
+              <p data-i18n-html="projects.tab.s5.body"><mark class="mk mk--find" data-mark="1">Digital payment use running ahead of debit-card ownership</mark> raised the question my final-year project tested: what happens to banks' fee income as payments move away from cards.</p>
+              <a class="story-cite" href="research.html#story" data-i18n="research.tab.ledLink">Back to the final-year research</a>
+            </div>
+          </article>
         </div>
-        <div class="plain-block">
-          <h3 data-i18n="research.tab.foundHeading">What it found</h3>
-          <ul class="card-list">
-            <li data-i18n="research.tab.found1">Mobile money adoption expanded steadily from 2014 and leads in Sub-Saharan Africa.</li>
-            <li data-i18n="research.tab.found2">Digital payment use runs ahead of debit-card ownership, and savings trail both.</li>
-            <li data-i18n="research.tab.found3">Mobile money drives women's financial participation more than traditional banking does.</li>
-          </ul>
-          <div class="callout">
-            <h3 data-i18n="research.tab.ledHeading">Where it led</h3>
-            <p data-i18n="research.tab.led">Its finding that digital payment use runs ahead of debit-card ownership raised the question my final-year project then tested: what happens to banks' fee income as payments move away from cards.</p>
-            <a href="research.html#story" data-i18n="research.tab.ledLink">Back to the final-year research</a>
+
+        <div class="story-stage">
+          <div class="stage-inner">
+            <div class="stage-top">
+              <ol class="stage-pills" aria-label="Steps" data-i18n-attr="aria-label:story.ui.steps"></ol>
+              <div class="stage-actions">
+                <button class="btn btn-small" type="button" data-story="copy-link"><span data-i18n="story.ui.copy">Copy link</span></button>
+                <button class="btn btn-small btn-primary" type="button" data-story="present"><span data-i18n="story.ui.present">Present</span> <kbd>P</kbd></button>
+              </div>
+            </div>
+            <div class="stage-scenes"></div>
           </div>
         </div>
       </div>
@@ -292,19 +340,73 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow" data-i18n="projects.wf.eyebrow">Open source</span>
-        <h2 data-i18n="projects.wf.heading">layered-ai-dev-workflow: how the studio works with AI coding agents</h2>
-        <p data-i18n="projects.wf.lede">The layered way of working that TechStarterWeb uses with AI coding agents, open-sourced with tests so that others can reuse or adapt it. The five-layer figure is in the TechStarterWeb project above.</p>
+        <h2 id="workflow-heading" data-i18n="projects.wf.heading">layered-ai-dev-workflow: how the studio works with AI coding agents</h2>
+        <p data-i18n="projects.wf.lede">The layered way of working that TechStarterWeb uses with AI coding agents. The five-layer figure is in the TechStarterWeb project above.</p>
+        <button class="btn btn-primary btn-small" type="button" data-story="present" data-from-start><span data-i18n="projects.present">Present this project</span> <kbd>P</kbd></button>
       </div>
-      <div class="plain-block">
-        <ul class="card-list">
-          <li data-i18n="projects.wf.b1">A lead agent turns a to-do into a task card, worker agents write the code, a low-cost model handles copy and translation, and scripts and CI check whatever a rule can decide.</li>
-          <li data-i18n="projects.wf.b2">Work state is kept in GitHub issues and handoff notes rather than in chat, so a new session can pick up where the last one stopped.</li>
-          <li data-i18n="projects.wf.b3">The rules are enforced by checks: a pull request that edits files outside its task card, reuses a version number, or skips the spec update fails CI.</li>
-        </ul>
+      <div class="story story--project" id="workflow-deck" data-deck="workflow" data-deck-prefix="workflow" data-deck-title="#workflow-heading" tabindex="-1">
+        <div class="story-steps">
+          <article class="step" id="workflow-1" data-clicks="3" aria-labelledby="workflow-1-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="projects.k.idea">The idea</span></p>
+              <h3 id="workflow-1-title" data-i18n="projects.wf.s1.title">A lead agent plans, worker agents build, CI checks</h3>
+              <p data-i18n-html="projects.wf.s1.body"><mark class="mk mk--find" data-mark="1">A lead agent turns a to-do into a task card</mark>, <mark class="mk mk--find" data-mark="2">worker agents write the code</mark>, and <mark class="mk mk--key" data-mark="3">scripts and CI check whatever a rule can decide</mark>.</p>
+            </div>
+            <figure class="scene scene--static scene--chain" aria-labelledby="wf-s1-fig">
+              <div class="scene-head"><span class="scene-title" id="wf-s1-fig" data-i18n="projects.wf.fig1">From a to-do to a checked pull request</span></div>
+              <ol class="flow-life">
+                <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life1">To-do</strong></span></li>
+                <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life2">Task card</strong></span></li>
+                <li class="flow-life-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life5">Pull request</strong></span></li>
+                <li class="flow-life-step" data-mark="3"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life6">CI checks</strong></span></li>
+              </ol>
+            </figure>
+          </article>
+          <article class="step" id="workflow-2" data-clicks="1" aria-labelledby="workflow-2-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">2</span><span data-i18n="projects.k.state">State</span></p>
+              <h3 id="workflow-2-title" data-i18n="projects.wf.s2.title">State lives in GitHub, not in chat</h3>
+              <p data-i18n-html="projects.wf.s2.body"><mark class="mk mk--find" data-mark="1">Work state is kept in issues and handoff notes</mark>, so a new session can pick up where the last one stopped.</p>
+            </div>
+          </article>
+          <article class="step" id="workflow-3" data-clicks="3" aria-labelledby="workflow-3-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">3</span><span data-i18n="projects.k.rules">Rules</span></p>
+              <h3 id="workflow-3-title" data-i18n="projects.wf.s3.title">Rules are enforced by checks</h3>
+              <p data-i18n-html="projects.wf.s3.body">CI fails a pull request that <mark class="mk mk--find" data-mark="1">edits files outside its task card</mark>, <mark class="mk mk--find" data-mark="2">reuses a version number</mark> or <mark class="mk mk--warn" data-mark="3">skips the spec update</mark>.</p>
+            </div>
+            <figure class="scene scene--static scene--checks" aria-labelledby="wf-s3-fig">
+              <div class="scene-head"><span class="scene-title" id="wf-s3-fig" data-i18n="projects.wf.fig2">CI checks on every pull request</span></div>
+              <ul class="checks">
+                <li class="check" data-mark="1"><span class="check-mark" aria-hidden="true"></span><span data-i18n="projects.wf.chk1">File locks</span></li>
+                <li class="check" data-mark="2"><span class="check-mark" aria-hidden="true"></span><span data-i18n="projects.wf.chk2">Version numbers</span></li>
+                <li class="check" data-mark="3"><span class="check-mark" aria-hidden="true"></span><span data-i18n="projects.wf.chk3">Spec sync</span></li>
+              </ul>
+            </figure>
+          </article>
+          <article class="step" id="workflow-4" data-clicks="1" aria-labelledby="workflow-4-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">4</span><span data-i18n="projects.k.reuse">Reuse</span></p>
+              <h3 id="workflow-4-title" data-i18n="projects.wf.s4.title">Open source, with tests</h3>
+              <p data-i18n-html="projects.wf.s4.body"><mark class="mk mk--find" data-mark="1">Published with tests</mark>, so that others can reuse or adapt it.</p>
+              <p class="step-actions"><a class="btn btn-primary btn-small" href="https://github.com/chaoglay1101-del/layered-ai-dev-workflow" target="_blank" rel="noopener noreferrer" data-i18n="projects.fullWriteup">Full write-up on GitHub</a></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="story-stage">
+          <div class="stage-inner">
+            <div class="stage-top">
+              <ol class="stage-pills" aria-label="Steps" data-i18n-attr="aria-label:story.ui.steps"></ol>
+              <div class="stage-actions">
+                <button class="btn btn-small" type="button" data-story="copy-link"><span data-i18n="story.ui.copy">Copy link</span></button>
+                <button class="btn btn-small btn-primary" type="button" data-story="present"><span data-i18n="story.ui.present">Present</span> <kbd>P</kbd></button>
+              </div>
+            </div>
+            <div class="stage-scenes"></div>
+          </div>
+        </div>
       </div>
-      <p class="work-links">
-        <a href="https://github.com/chaoglay1101-del/layered-ai-dev-workflow" rel="noopener noreferrer" target="_blank" data-i18n="projects.wf.link">layered-ai-dev-workflow on GitHub</a>
-      </p>
     </div>
   </section>
 
@@ -321,6 +423,30 @@
       </p>
     </div>
   </section>
+
+  <div class="story-strings" hidden>
+    <span data-s="ui.stepN" data-i18n="story.str.stepN">Step {n}</span>
+    <span data-s="ui.count" data-i18n="story.str.count">Step {s} of {n} · note {c} of {m}</span>
+    <span data-s="ui.copied" data-i18n="story.str.copied">Link copied: {h}</span>
+    <span data-s="ui.copyFail" data-i18n="story.str.copyFail">Could not copy. The link is {u}</span>
+  </div>
+
+  <div class="present-ui screen-only" data-present-ui hidden>
+    <div class="present-top">
+      <span class="present-brand"><span class="brand-mark" aria-hidden="true" data-i18n="name.monogram">YC</span><span class="present-title" data-present-title></span></span>
+      <span class="present-timer" data-present-timer hidden></span>
+      <span class="present-count" data-present-count aria-live="polite"></span>
+      <button class="icon-btn" type="button" data-story="timer" data-present-timer-toggle aria-label="Show or hide the timer" title="Show or hide the timer" data-i18n-attr="aria-label:story.ui.timerToggle,title:story.ui.timerToggle" hidden><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 7.5V11l2.3 1.6M8 2.5h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      <button class="icon-btn" type="button" data-story="fullscreen" data-present-fullscreen aria-label="Full screen" title="Full screen" data-i18n-attr="aria-label:story.ui.fullscreen,title:story.ui.fullscreen">⤢</button>
+      <button class="btn btn-small" type="button" data-story="exit"><span data-i18n="story.ui.exit">Exit</span> <kbd>Esc</kbd></button>
+    </div>
+    <div class="present-bottom">
+      <button class="icon-btn" type="button" data-story="prev" data-present-prev aria-label="Previous step" data-i18n-attr="aria-label:story.ui.prev">←</button>
+      <div class="present-track" data-present-track><span class="present-fill" data-present-fill></span></div>
+      <button class="icon-btn" type="button" data-story="next" data-present-next aria-label="Next step" data-i18n-attr="aria-label:story.ui.next">→</button>
+      <span class="present-hint" data-i18n="story.ui.hint">← → or Space</span>
+    </div>
+  </div>
 
 </main>
 
