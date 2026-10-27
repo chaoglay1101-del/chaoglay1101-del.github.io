@@ -888,12 +888,22 @@
           </div>
         </div>
       </div>
+      <div class="plain-block">
+        <h3 data-i18n="research.tsw.orgHeading">How the work is organised</h3>
+        <ul class="card-list">
+          <li data-i18n="research.tsw.org1">Five layers: people decide and merge; a lead agent splits work into task cards and reviews; worker agents write code and open pull requests; a low-cost model drafts copy, translations and summaries; scripts and CI do anything a rule can decide.</li>
+          <li data-i18n="research.tsw.org2">State lives in GitHub, not in chat: each task card lists its goal, the files it may change, pre-assigned version numbers and acceptance checks, and every session ends with a four-part handoff note.</li>
+          <li data-i18n="research.tsw.org3">Rules became checks: CI fails a pull request that edits files outside its card, reuses a version number, or changes code without updating the spec.</li>
+          <li data-i18n="research.tsw.org4">Cost control: routine work goes to cheaper models, every model call is logged, and ten calls to the low-cost model came to about US$0.03.</li>
+        </ul>
+      </div>
       <div class="callout callout-note">
         <h3 data-i18n="research.tsw.aiHeading">How it was built</h3>
-        <p data-i18n="research.tsw.ai">I built it with an AI coding agent (Claude). I set the requirements and the architecture, including the idea of one site serving both clients and the studio; made the account, security and launch decisions; reviewed each change; and checked it on the live site. The agent wrote the code, and each release was tested before it went out.</p>
+        <p data-i18n="research.tsw.ai">I built it with an AI coding agent (Claude). I set the requirements and the architecture, including the idea of one site serving both clients and the studio; made the account, security and launch decisions; reviewed each change; and checked it on the live site. The agent wrote the code, and each release was tested before it went out. The workflow is open-sourced, with tests, as layered-ai-dev-workflow.</p>
       </div>
       <p class="work-links">
         <a href="https://techstarterweb.com/" rel="noopener noreferrer" target="_blank" data-i18n="research.tsw.linkSite">techstarterweb.com</a>
+        <a href="https://github.com/chaoglay1101-del/layered-ai-dev-workflow" rel="noopener noreferrer" target="_blank" data-i18n="research.tsw.linkWorkflow">Workflow on GitHub</a>
         <a href="cv.html#cv-experience" data-i18n="research.tsw.linkCv">The CV entry</a>
       </p>
     </div>
