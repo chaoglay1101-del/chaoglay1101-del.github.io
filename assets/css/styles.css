@@ -1146,7 +1146,7 @@ figcaption {
   margin-top: 0;
 }
 
-/* Research page: the three projects it holds, as links. One column until
+/* Projects page: the projects it holds, as links. One column until
    all three fit side by side, so no card is left alone on a row. */
 .project-index {
   display: grid;
@@ -1158,6 +1158,17 @@ figcaption {
 @media (min-width: 52rem) {
   .project-index {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.hero .btn-group + p.small {
+  margin-top: 0.9rem;
+}
+
+/* Four projects: two by two, so the fourth does not sit alone on a row. */
+@media (min-width: 52rem) {
+  .project-index--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

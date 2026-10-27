@@ -36,7 +36,7 @@ SITE = pathlib.Path(__file__).resolve().parents[1]
 # The repository root is the site root: GitHub Pages serves main as it is.
 REPO = SITE
 PREFIX = ""
-PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
+PAGES = ("index.html", "projects.html", "research.html", "cv-onepage.html", "404.html")
 PACK_REL = "assets/js/i18n.js"
 SCRIPT = SITE / "assets" / "js" / "i18n.js"
 OUT = SITE / "tools" / "_stale_report.txt"

@@ -1,4 +1,4 @@
-# Rebuilds the four CV PDFs in assets/pdf/ from cv.html and cv-onepage.html,
+# Rebuilds the four CV PDFs in assets/pdf/ from index.html and cv-onepage.html,
 # without a local machine. Start it from the Actions tab ("Build CV PDFs" >
 # "Run workflow").
 #

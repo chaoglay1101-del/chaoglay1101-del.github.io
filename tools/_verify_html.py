@@ -17,7 +17,7 @@ import re
 import sys
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
+PAGES = ("index.html", "projects.html", "research.html", "cv-onepage.html", "404.html")
 
 REF_RE = re.compile(r'(?:href|src)="([^"]+)"')
 EXTERNAL_RE = re.compile(r"^(?:[a-zA-Z][a-zA-Z0-9+.-]*:|//|#)")

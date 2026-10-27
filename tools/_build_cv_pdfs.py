@@ -40,8 +40,8 @@ OUT_DIR = SITE / "assets" / "pdf"
 DOCUMENTS = (
     ("cv-onepage.html", "", 1, "Chao_YuChen_CV_EN.pdf"),
     ("cv-onepage.html", "?lang=zh", 1, "Chao_YuChen_CV_ZH.pdf"),
-    ("cv.html", "", None, "Chao_YuChen_CV_Full_EN.pdf"),
-    ("cv.html", "?lang=zh", None, "Chao_YuChen_CV_Full_ZH.pdf"),
+    ("index.html", "", None, "Chao_YuChen_CV_Full_EN.pdf"),
+    ("index.html", "?lang=zh", None, "Chao_YuChen_CV_Full_ZH.pdf"),
 )
 
 BROWSER_SUFFIXES = (
