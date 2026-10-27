@@ -67,14 +67,15 @@ sites are useful for structure, not for claims.
 
 ```text
 index.html                     Home and CV: hero (portrait, credentials strip, download buttons, contact line), what I bring (each item linked to its evidence), a two-minute tour, the complete record with an overview timeline and an evidence index above Skills, contact; the internship certificate opens on request
-projects.html                  Projects: TechStarterWeb (#techstarterweb, with its flow and layer figures), the Tableau coursework project (#tableau), layered-ai-dev-workflow (#workflow) and a summary card for the research (#research-summary)
+projects.html                  Projects: TechStarterWeb (#techstarterweb), the Tableau coursework project (#tableau) and layered-ai-dev-workflow (#workflow), each a short step-through deck with its own figures and a link to the full write-up on GitHub, then a summary card for the research (#research-summary)
 research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, agenda, reproducibility, sources); data, method and reproducibility details open on request
 cv.html                        Redirect to the home page (keeps old links, including hashes, working); not indexed
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
-assets/css/styles.css          Main stylesheet: light and dark themes, print styles
+assets/css/styles.css          Main stylesheet: light and dark themes, motion tokens, the project-deck figures, print styles
+assets/css/motion.css          Page transitions, scroll entrance and hover states (see "Motion"); not linked from cv-onepage.html
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
 assets/js/main.js              Theme toggle, language toggle, mobile navigation, print button, ?lang= deep link, current year; opens collapsed sections for links and printing
-assets/js/story.js             Step-through stories, their charts, the cohort strips and the evidence index (see "Step-through stories")
+assets/js/story.js             Step-through stories (one or several decks per page), their charts, the cohort strips and the evidence index (see "Step-through stories")
 assets/js/flow.js              The current lines behind the heroes and footers (see "Flow texture")
 assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
@@ -405,9 +406,12 @@ one click per key press, and any step and click can be linked to.
 | --- | --- | --- |
 | Six-step findings | `research.html#story` | Read by scrolling, or press **P** (the Present button) for one annotation per key press: → or Space forward, ← back, Home and End, **F** full screen, Esc to leave. Each step links to the table rows its numbers come from (tagged `data-cite-id`) and a bar brings the reader back. |
 | Two-minute tour | `index.html#intro` | The same engine over the CV, with a timeline whose marks follow the steps and a presenter timer (**T**) whose per-step budget, in seconds, is `data-deck-timer` on the deck. |
+| Project decks | `projects.html#techstarterweb`, `#tableau`, `#workflow` | One deck per project, four or five steps of one or two sentences each (problem, approach, how it works, result, limits). The figures are plain HTML written in the page, not drawn by `story.js`: a mark in the step's sentence lights the part of the figure it is about (`data-mark="n"` on the figure's items), and the lines between the parts are drawn as they light. A step with no figure of its own keeps the previous one on the stage, fully lit. The last step of the TechStarterWeb and layered-ai-dev-workflow decks links to the write-up in the layered-ai-dev-workflow repository, where the detail lives; the page keeps only the key sentence. Deep links are `#tsw-2.1`, `#tableau-3` and `#workflow-1`. |
 | Overview timeline | `index.html`, Profile | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the overview and the tour cannot disagree about dates. An item marked `overviewOnly` (TechStarterWeb) appears in the overview but not in the six-step tour, which stays as told. |
 | Cohort strips | `index.html`, under the two assessed marks | The mark beside the class mean, upper quartile and maximum already stated in `cv.research.grade1` and `cv.research.grade2`. |
 | Evidence index | `index.html`, above Skills | One button per capability marks the CV lines that show it (`data-ev="key"` on those lines); pressing again moves to the next line. |
+
+A page can hold several decks (`[data-deck]`), as `projects.html` does. Each deck has its own steps, scenes and link prefix (`data-deck-prefix`), and a deck's own Present button plays only that deck. The presentation overlay and the keyboard are shared and only one deck plays at a time: **P** acts on the deck that is playing, or else on the one nearest the middle of the screen. Without JavaScript (or if `story.js` stops) a project deck is not hidden, because on that page the deck is the content: the steps read one after another with their figures beside them. On paper the figures are put back next to their steps and drawn finished.
 
 Deep links follow Slidev's `?clicks=` idea: `research.html#step-4.2` opens step 4
 with its first two marks drawn, `index.html#intro-3` opens step 3 of the tour, and
@@ -430,11 +434,14 @@ Five rules keep it consistent with the rest of the site:
   redraws when `main.js` announces a `site:languagechange` event.
 - **Screen only.** Everything `story.js` adds is `.screen-only` or styled out of
   print, so `index.html` prints the same CV text as before and the PDFs in
-  `assets/pdf/` do not need rebuilding for this feature.
+  `assets/pdf/` do not need rebuilding for this feature. The exception is the
+  project decks, which are the content of `projects.html` and print as plain
+  steps with their figures.
 - **Progressive enhancement.** Without JavaScript the sections are hidden
   (`html:not(.js)`) and the pages read as before. If `story.js` fails to load or
   stops with an error, `html.story-off` hides them in the same way rather than
-  leaving dimmed text beside empty charts.
+  leaving dimmed text beside empty charts. The project decks are the exception:
+  they stay, as one column of steps with their figures.
 - **Motion is optional.** Under `prefers-reduced-motion` the marks and charts
   appear without being drawn.
 
@@ -519,6 +526,23 @@ The rules it keeps:
   text and page count and the PDFs in `assets/pdf/` need no rebuild.
 - **Colours live in CSS** as `--flow-a`, `--flow-b`, `--flow-head` and
   `--flow-alpha`, with dark-theme values beside the light ones.
+
+## Motion
+
+Five small effects, all timed from the tokens at the top of `styles.css`
+(`--t-fast` 160 ms, `--t-mid` 260 ms, `--t-slow` 480 ms, `--ease-out`), none of
+which carries information the page does not already show:
+
+| Effect | Where | How |
+| --- | --- | --- |
+| Page transitions | Home, projects, research, 404 | `@view-transition { navigation: auto }` in `motion.css`: the old and new page cross-fade, and the brand and the navigation (`view-transition-name: site-brand`, `site-nav`) hold still. Browsers without support navigate as before. |
+| Scroll entrance | `.card`, `.timeline > li`, the project index cards, the project section headings, and anything marked `class="reveal"` | `animation-timeline: view()`, opacity and a 14 px rise only, inside `@supports`. The animation fills forwards only, so a block that has not reached the screen is in its normal place. Deck steps are not included: `story.js` runs those. |
+| Drawn lines | The deck figures (enquiry steps, task-card life, the five layers, data preparation, dashboards in order, CI checks) | The line into a part is drawn when that part lights; plain CSS transitions on `.is-on`, which `story.js` toggles. Drawn from the start without JavaScript. |
+| Micro-interactions | Project index cards, buttons, text links | `:hover` and `:focus-visible` together: cards lift 3 px and take the accent border and a soft shadow; links keep a faint line at rest and draw a solid one on hover. Nothing is only visible on hover. |
+| Reduced motion and print | Everywhere | Under `prefers-reduced-motion: reduce` there are no transitions, no entrance and no dimming of figures: the finished state is shown. Print has no animation and no transition. |
+
+`cv-onepage.html` does not link `motion.css` and gets none of this. A new page
+that should move links `motion.css` after `styles.css`.
 
 ## Social sharing
 

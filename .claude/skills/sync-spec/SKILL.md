@@ -30,7 +30,7 @@ description: 把個人網站（chaoglay1101-del.github.io）的變更同步到 G
 | 新增或刪除頁面、`assets/` 的結構 | 2 |
 | 文案規則（README「Content conventions」） | 3 |
 | `assets/js/i18n.js`、`main.js` 的語言切換、翻譯腳本 | 4 |
-| `story.js`、`flow.js`、`cv-onepage.html`、`cv-print.css`、`cv-pdfs.yml`、外部連結 | 5 |
+| `story.js`、`flow.js`、`motion.css`、`cv-onepage.html`、`cv-print.css`、`cv-pdfs.yml`、外部連結 | 5 |
 | `tools/_check_*.py`、`_verify_html.py`、`checks.yml` | 6 |
 | `robots.txt`、`sitemap.xml`、`404.html`、分享卡、Pages 設定 | 7 |
 | `CLAUDE.md`、`AGENTS.md`、hook、spec-sync、版本紀錄、直接推 main 提醒 | 8 |

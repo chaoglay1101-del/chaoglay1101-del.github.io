@@ -35,6 +35,13 @@
     serif;
   --font-mono: "Cascadia Mono", Consolas, "SFMono-Regular", "Liberation Mono", monospace;
 
+  /* Motion tokens: every transition and animation on the site uses these
+     (assets/css/motion.css, and the scene styles below). */
+  --t-fast: 160ms;
+  --t-mid: 260ms;
+  --t-slow: 480ms;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+
   /* Story and CV tour (assets/js/story.js): marker washes, annotation pen,
      significance bands, and three country colours checked for colour-blind
      separation against the card surface in both themes. */
@@ -2270,33 +2277,239 @@ html[data-theme="dark"] {
   }
 }
 
-/* --- Project 3 diagrams (pure CSS; text stays in the HTML) --------------- */
+/* --- Project decks (projects.html) -----------------------------------------
+   Each project is a short deck that story.js drives like the research steps.
+   Its scenes are plain HTML figures (no chart code): the text stays in the page,
+   a mark in the step's sentence lights the part of the figure it is about, and
+   the lines between the parts are drawn as they light. Without JavaScript (or
+   if story.js stops) nothing is dimmed or hidden: the steps read one after
+   another with their figures beside them, as a plain page. */
 
-/* layers-*: the five-layer stack, stepped to the right to show hand-offs. */
-.layers-figure {
-  margin: 0.5rem 0 1.25rem;
+.project-section .section-head .btn { margin-top: 1rem; }
+html:not(.js) .project-section .section-head [data-story],
+html.story-off .project-section .section-head [data-story] { display: none; }
+
+.step-actions { margin: 1.1rem 0 0; }
+.story .step .step-actions { color: inherit; }
+.btn[target="_blank"]::after { color: inherit; }
+
+/* Plain reading order when the deck is not running (no JavaScript, or story.js stopped):
+   one column, every step in full strength, no stage. */
+@media (min-width: 900px) {
+  .js .story--project:not(.is-ready),
+  html.story-off .story--project { display: block; }
+
+  .js .story--project:not(.is-ready) .story-stage,
+  html.story-off .story--project .story-stage { display: none; }
+
+  .js .story--project:not(.is-ready) .step,
+  .js .story--project:not(.is-ready) .step:first-child,
+  .js .story--project:not(.is-ready) .step:last-child,
+  html.story-off .story--project .step,
+  html.story-off .story--project .step:first-child,
+  html.story-off .story--project .step:last-child {
+    display: block;
+    min-height: 0;
+    padding-block: 1.75rem;
+  }
+
+  .js .story--project:not(.is-ready) .step + .step,
+  html.story-off .story--project .step + .step { border-top: 1px solid var(--line); }
+
+  .js .story--project:not(.is-ready) .step-text,
+  html.story-off .story--project .step-text { opacity: 1; }
+
+  /* Shorter steps than the research page: a project is four or five of them. */
+  .js .story--project.is-ready .step { min-height: 50vh; padding-block: 2rem; }
+  .js .story--project.is-ready .step:first-child { min-height: 44vh; }
+  .js .story--project.is-ready .step:last-child { min-height: 60vh; }
 }
 
-.layers-stack,
+.story--project .step-text { max-width: 30rem; }
+
+/* Figures */
+.scene--static { container-type: inline-size; }
+.scene--static .scene-head { margin-bottom: 1.1rem; }
+.scene--static li + li { margin-top: 0; }
+
+.flow-steps,
 .flow-life,
-.flow-steps {
+.layers-stack,
+.order,
+.funnel,
+.waves,
+.flow-statuses,
+.checks {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.layers-stack {
+/* Steps and lifecycle: a column of dots joined by lines; a row when the figure is wide. */
+.flow-steps,
+.flow-life,
+.order {
   display: grid;
-  gap: 0.9rem;
+  grid-template-columns: minmax(0, 1fr);
+  counter-reset: flow;
 }
+
+.flow-step,
+.flow-life-step,
+.order-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0 0 1rem;
+}
+
+.flow-step,
+.flow-life-step,
+.order-item:not(.order-item--end) { counter-increment: flow; }
+
+.flow-step:last-child,
+.flow-life-step:last-child,
+.order-item:last-child { padding-bottom: 0; }
+
+.flow-dot {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.flow-dot::before { content: counter(flow); }
+
+.flow-dot--plain { background: none; }
+
+.flow-dot--plain::before {
+  content: "";
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background: var(--accent-alt);
+}
+
+.scene--life .flow-life-step:nth-child(3) .flow-dot,
+.scene--life .flow-life-step:nth-child(6) .flow-dot { background: var(--accent-alt); }
+
+.flow-title {
+  font-size: 0.78rem;
+  line-height: 1.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.flow-life-body {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  padding-top: 0.3rem;
+}
+
+.flow-life-label,
+.order-item > span:last-child {
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.order-item > span:last-child { padding-top: 0.3rem; }
+
+.flow-life-label[data-i18n="research.tsw.life3"] {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.flow-life-note {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* The line to the next dot (vertical here, horizontal in a wide figure). */
+.flow-step:not(:last-child)::after,
+.flow-life-step:not(:last-child)::after,
+.order-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0.89rem;
+  top: 1.9rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--line-strong);
+  transform-origin: top;
+}
+
+.flow-statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+}
+
+.flow-chip {
+  padding: 0.1rem 0.55rem;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+}
+
+@container (min-width: 460px) {
+  .flow-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .flow-life { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 1.25rem; }
+
+  .flow-step,
+  .flow-life-step {
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0 0.6rem 0 0;
+  }
+
+  .flow-title { line-height: 1.3; }
+  .flow-life-body { padding-top: 0; }
+
+  .flow-step:not(:last-child)::after,
+  .flow-life-step:not(:last-child)::after {
+    top: 0.95rem;
+    bottom: auto;
+    left: 2.1rem;
+    right: 0.2rem;
+    width: auto;
+    height: 2px;
+    transform-origin: left;
+  }
+
+  .flow-life-step:nth-child(4n)::after { display: none; }
+}
+
+/* The five layers: stepped to the right to show the hand-offs. */
+.layers-stack { display: grid; gap: 0.95rem; }
 
 .layers-row {
   position: relative;
   display: grid;
-  grid-template-columns: 3rem minmax(8rem, 12rem) 1fr;
+  grid-template-columns: 2.9rem minmax(6.5rem, 10.5rem) minmax(0, 1fr);
   align-items: center;
   column-gap: 0.9rem;
-  padding: 0.7rem 1rem 0.7rem 0.7rem;
+  padding: 0.6rem 0.9rem 0.6rem 0.6rem;
   background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-sm);
@@ -2307,17 +2520,17 @@ html[data-theme="dark"] {
 .layers-row-3 { margin-left: 4.5rem; }
 .layers-row-4 { margin-left: 6rem; }
 
-/* A thin arrow from each band to the next one down. */
-.layers-row:not(:last-child)::after {
-  content: "\2193";
+/* The arrow into this layer from the one above it. */
+.layers-row:not(:first-child)::before {
+  content: "";
   position: absolute;
-  left: 1.45rem;
-  bottom: -1.05rem;
-  width: 1.1rem;
-  line-height: 1.2rem;
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--accent);
+  left: 0.1rem;
+  top: -1.1rem;
+  width: 0.8rem;
+  height: 1rem;
+  background: var(--accent);
+  clip-path: polygon(38% 0, 62% 0, 62% 58%, 100% 58%, 50% 100%, 0 58%, 38% 58%);
+  transform-origin: top;
 }
 
 .layers-tag {
@@ -2340,314 +2553,224 @@ html[data-theme="dark"] {
   border-color: var(--accent-alt);
 }
 
-.layers-name {
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.layers-role {
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
+.layers-name { font-weight: 600; color: var(--ink); }
+.layers-role { color: var(--ink-soft); font-size: 0.93rem; line-height: 1.4; }
 
 .layers-rule {
-  margin: 0.9rem 0 0;
-  padding: 0.5rem 0.9rem;
+  margin: 1.1rem 0 0;
+  padding: 0.45rem 0.9rem;
   display: inline-block;
   font-weight: 600;
-  font-size: 0.93rem;
+  font-size: 0.9rem;
   color: var(--accent-ink);
   background: var(--accent-alt-soft);
   border: 1px dashed var(--accent-alt);
   border-radius: 999px;
 }
 
-.layers-rule::before {
-  content: "\2193\00a0";
+.layers-rule::before { content: "\2193\00a0"; }
+
+@container (max-width: 470px) {
+  .layers-stack { gap: 0.8rem; }
+  .layers-row { grid-template-columns: 2.8rem minmax(0, 1fr); row-gap: 0; padding-block: 0.42rem; }
+  .layers-role { grid-column: 2; font-size: 0.85rem; }
+  .layers-tag { grid-row: span 2; }
+  .layers-row-1 { margin-left: 0.6rem; }
+  .layers-row-2 { margin-left: 1.2rem; }
+  .layers-row-3 { margin-left: 1.8rem; }
+  .layers-row-4 { margin-left: 2.4rem; }
+  .layers-row:not(:first-child)::before { top: -0.95rem; height: 0.9rem; }
+  .layers-rule { margin-top: 0.9rem; }
 }
 
-/* flow-*: horizontal step strips that turn vertical on phones. */
-.flow-subhead {
-  margin: 1.6rem 0 0.9rem;
-  font-size: 1rem;
-  color: var(--ink);
-}
+/* Data preparation: from this many to that many. */
+.funnel { display: grid; gap: 1.2rem; }
+.funnel-row { display: grid; gap: 0.4rem; }
 
-.flow-life,
-.flow-steps {
-  display: grid;
-  gap: 0.75rem 0;
-  counter-reset: flow;
-}
-
-.flow-life {
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-}
-
-.flow-steps {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.flow-life-step,
-.flow-step {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
-  padding-right: 0.6rem;
-  counter-increment: flow;
-}
-
-.flow-dot {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 1.9rem;
-  height: 1.9rem;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--surface);
-  font-family: var(--font-mono);
+.funnel-k {
+  font-size: 0.74rem;
   font-weight: 700;
-  font-size: 0.85rem;
-}
-
-.flow-dot::before {
-  content: counter(flow);
-}
-
-.flow-life-step:nth-child(3) .flow-dot,
-.flow-life-step:nth-child(6) .flow-dot {
-  background: var(--accent-alt);
-}
-
-/* The connector runs from each dot to the next one. */
-.flow-life-step:not(:last-child)::after,
-.flow-step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 0.9rem;
-  left: 2.1rem;
-  right: 0.2rem;
-  border-top: 2px solid var(--line-strong);
-}
-
-.flow-life-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  line-height: 1.3;
-  color: var(--ink);
-  overflow-wrap: anywhere;
-}
-
-.flow-life-label[data-i18n="research.tsw.life3"] {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-}
-
-.flow-life-note {
-  font-size: 0.78rem;
-  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
-.flow-title {
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
+.funnel-v { display: flex; align-items: center; gap: 0.8rem; }
+
+.funnel-num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
-.flow-text {
+.funnel-num--to { color: var(--accent-ink); }
+
+.funnel-line {
+  position: relative;
+  flex: 1 1 auto;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+}
+
+.funnel-line::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  border-left: 8px solid var(--accent);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.waves { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.wave {
+  padding: 0.12rem 0.65rem;
   font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-.flow-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-top: 0.15rem;
-}
-
-.flow-chip {
-  padding: 0.1rem 0.5rem;
-  font-size: 0.74rem;
-  white-space: nowrap;
-  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
   background: var(--accent-soft);
   border: 1px solid var(--line-strong);
   border-radius: 999px;
 }
 
-@media (max-width: 1099px) {
-  .flow-life {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+.wave.is-dropped {
+  color: var(--muted);
+  background: none;
+  border-style: dashed;
+  text-decoration: line-through;
+}
 
-  .flow-life-step:nth-child(4)::after {
-    display: none;
+/* CI checks */
+.checks { display: grid; gap: 0.6rem; }
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+}
+
+.check-mark {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--accent-alt);
+}
+
+.check-mark::after {
+  content: "";
+  position: absolute;
+  left: 0.43rem;
+  top: 0.14rem;
+  width: 0.36rem;
+  height: 0.7rem;
+  border: solid var(--accent-alt);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transform-origin: 30% 70%;
+}
+
+/* While a deck is running, the parts a click has not reached yet recede, and the
+   lines between them are drawn as the parts light. */
+.story.is-ready .scene--static [data-mark] {
+  transition: opacity var(--t-mid) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.story.is-ready .scene--static [data-mark]:not(.is-on) { opacity: 0.38; }
+
+.story.is-ready .scene--static .flow-step::after,
+.story.is-ready .scene--static .flow-life-step::after,
+.story.is-ready .scene--static .order-item::after,
+.story.is-ready .scene--static .layers-row::before,
+.story.is-ready .scene--static .funnel-line,
+.story.is-ready .scene--static .check-mark::after {
+  transition: transform var(--t-slow) var(--ease-out) var(--t-fast);
+}
+
+.story.is-ready .scene--static .check { transition: opacity var(--t-mid) var(--ease-out), border-color var(--t-mid); }
+.story.is-ready .scene--static .check.is-on { border-color: var(--accent-alt); }
+
+.story.is-ready .scene--static .layers-row:not(.is-on)::before { transform: scaleY(0); }
+.story.is-ready .scene--static .funnel-row:not(.is-on) .funnel-line { transform: scaleX(0); }
+.story.is-ready .scene--static .check:not(.is-on) .check-mark::after { transform: rotate(45deg) scale(0); }
+
+@supports selector(:has(*)) {
+  .story.is-ready .scene--static .flow-step:not(:last-child)::after,
+  .story.is-ready .scene--static .flow-life-step:not(:last-child)::after,
+  .story.is-ready .scene--static .order-item:not(:last-child)::after { transform: scaleY(0); }
+
+  .story.is-ready .scene--static .flow-step:has(+ .is-on)::after,
+  .story.is-ready .scene--static .flow-life-step:has(+ .is-on)::after,
+  .story.is-ready .scene--static .order-item:has(+ .is-on)::after { transform: none; }
+
+  @container (min-width: 460px) {
+    .story.is-ready .scene--static .flow-step:not(:last-child)::after,
+    .story.is-ready .scene--static .flow-life-step:not(:last-child)::after { transform: scaleX(0); }
+
+    .story.is-ready .scene--static .flow-step:has(+ .is-on)::after,
+    .story.is-ready .scene--static .flow-life-step:has(+ .is-on)::after { transform: none; }
   }
 }
 
-@media (max-width: 899px) {
-  .flow-steps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem 0;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .story.is-ready .scene--static [data-mark]:not(.is-on) { opacity: 1; }
 
-  .flow-step:nth-child(3)::after {
-    display: none;
-  }
-}
+  .story.is-ready .scene--static .flow-step::after,
+  .story.is-ready .scene--static .flow-life-step::after,
+  .story.is-ready .scene--static .order-item::after,
+  .story.is-ready .scene--static .layers-row::before,
+  .story.is-ready .scene--static .funnel-line { transform: none !important; }
 
-@media (max-width: 699px) {
-  .layers-row {
-    grid-template-columns: 2.8rem 1fr;
-    row-gap: 0.1rem;
-  }
-
-  .layers-role {
-    grid-column: 2;
-  }
-
-  .layers-tag {
-    grid-row: span 2;
-  }
-
-  .layers-row-1 { margin-left: 0.6rem; }
-  .layers-row-2 { margin-left: 1.2rem; }
-  .layers-row-3 { margin-left: 1.8rem; }
-  .layers-row-4 { margin-left: 2.4rem; }
-
-  .layers-row:not(:last-child)::after {
-    left: 1.2rem;
-  }
-
-  .flow-life,
-  .flow-steps {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .flow-life-step,
-  .flow-step {
-    display: block;
-    padding: 0 0 1.1rem 2.9rem;
-    min-height: 2.6rem;
-  }
-
-  .flow-life-step:last-child,
-  .flow-step:last-child {
-    padding-bottom: 0;
-  }
-
-  .flow-dot {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
-  /* Vertical connector on the left, from dot to dot. */
-  .flow-life-step:not(:last-child)::after,
-  .flow-step:not(:last-child)::after,
-  .flow-life-step:nth-child(4)::after,
-  .flow-step:nth-child(3)::after {
-    display: block;
-    top: 1.9rem;
-    bottom: 0;
-    left: 0.93rem;
-    right: auto;
-    border-top: 0;
-    border-left: 2px solid var(--line-strong);
-  }
-
-  .flow-life-label,
-  .flow-title,
-  .flow-text,
-  .flow-life-note {
-    display: block;
-  }
-
-  .flow-life-label {
-    padding-top: 0.3rem;
-  }
-
-  .flow-title {
-    padding-top: 0.2rem;
-  }
-
-  .flow-chips {
-    margin-top: 0.4rem;
-  }
-}
-
-/* A quiet fade-in; switched off for reduced motion and for print. */
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes flow-rise {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: none; }
-  }
-
-  .layers-row,
-  .flow-life-step,
-  .flow-step {
-    animation: flow-rise 0.5s ease-out both;
-  }
-
-  .layers-row-1, .flow-life-step:nth-child(2), .flow-step:nth-child(2) { animation-delay: 0.08s; }
-  .layers-row-2, .flow-life-step:nth-child(3), .flow-step:nth-child(3) { animation-delay: 0.16s; }
-  .layers-row-3, .flow-life-step:nth-child(4), .flow-step:nth-child(4) { animation-delay: 0.24s; }
-  .layers-row-4, .flow-life-step:nth-child(5), .flow-step:nth-child(5) { animation-delay: 0.32s; }
+  .story.is-ready .scene--static .check-mark::after { transform: rotate(45deg) !important; }
 }
 
 @media print {
-  .layers-figure,
-  .layers-row,
-  .flow-life-step,
-  .flow-step,
-  .flow-steps,
-  .flow-life {
-    break-inside: avoid;
-    animation: none !important;
-  }
+  .story--project .story-stage { display: none !important; }
+  .story--project .step { display: block !important; min-height: 0 !important; padding-block: 0.6rem !important; break-inside: avoid; }
+  .story--project .step-text { opacity: 1 !important; max-width: none; }
+  .story--project .scene--static { box-shadow: none; border-color: #000; break-inside: avoid; }
+  .story--project .scene--static [data-mark] { opacity: 1 !important; transition: none !important; }
+  .story--project .scene--static *::before,
+  .story--project .scene--static *::after { transition: none !important; }
+  .story--project .scene--static .flow-step::after,
+  .story--project .scene--static .flow-life-step::after,
+  .story--project .scene--static .order-item::after,
+  .story--project .scene--static .layers-row::before,
+  .story--project .scene--static .funnel-line { transform: none !important; }
+  .story--project .scene--static .check-mark::after { transform: rotate(45deg) !important; }
+  .project-section .section-head [data-story],
+  .step-actions { display: none !important; }
 
-  /* Structure carries the meaning, not colour: solid outlines and numbers. */
   .layers-row,
   .layers-tag,
   .flow-chip,
+  .wave,
+  .check,
   .layers-rule {
     background: #ffffff;
     border: 1px solid #000000;
     color: #000000;
   }
 
-  .flow-dot {
-    background: #ffffff;
-    color: #000000;
-    border: 2px solid #000000;
-  }
-
-  .layers-row::after,
+  .flow-dot { background: #ffffff; color: #000000; border: 2px solid #000000; }
+  .flow-dot--plain::before { background: #000000; }
+  .layers-row::before { background: #000000; }
+  .flow-step::after,
   .flow-life-step::after,
-  .flow-step::after {
-    color: #000000;
-    border-color: #000000;
-  }
-}
-
-/* Room between the stacked blocks in Project 3 (the diagrams sit in their own blocks). */
-#techstarterweb .grid + .plain-block,
-#techstarterweb .plain-block + .plain-block {
-  margin-top: 2rem;
-}
-
-/* The generic "li + li" spacing does not apply inside the diagrams. */
-.layers-stack > li,
-.flow-life > li,
-.flow-steps > li {
-  margin-top: 0;
+  .order-item::after,
+  .funnel-line { background: #000000; }
+  .funnel-line::after { border-left-color: #000000; }
 }

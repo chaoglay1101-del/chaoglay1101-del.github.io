@@ -37,6 +37,7 @@ REQUIRED = (
     "sitemap.xml",
     "assets/css/styles.css",
     "assets/css/cv-print.css",
+    "assets/css/motion.css",
     "assets/js/main.js",
     "assets/js/i18n.js",
     "assets/js/story.js",
