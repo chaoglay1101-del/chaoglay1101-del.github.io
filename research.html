@@ -874,14 +874,6 @@
           </ul>
         </div>
         <div class="plain-block">
-          <h3 data-i18n="research.tsw.flowHeading">How an enquiry moves</h3>
-          <ol class="card-list">
-            <li data-i18n="research.tsw.flow1">A client fills in the form in any of the three languages.</li>
-            <li data-i18n="research.tsw.flow2">A hidden field turns away basic spam, and the enquiry is stored in the D1 database.</li>
-            <li data-i18n="research.tsw.flow3">A team member signs in to the back office with an email code.</li>
-            <li data-i18n="research.tsw.flow4">The order moves from enquiry to quoted, signed, in production and delivered, or is marked as not going ahead.</li>
-            <li data-i18n="research.tsw.flow5">Every change is logged with who made it and when.</li>
-          </ol>
           <div class="callout">
             <h3 data-i18n="research.tsw.limitsHeading">What it does not do yet</h3>
             <p data-i18n="research.tsw.limits">Enquiries are not yet emailed to the team; they are read in the back office. Cloudflare's free plan has no servers in mainland China, so some mainland networks load the site slowly or not at all. The English pages are translated by hand and can fall behind the Chinese.</p>
@@ -889,9 +881,112 @@
         </div>
       </div>
       <div class="plain-block">
+        <h3 data-i18n="research.tsw.flowHeading">How an enquiry moves</h3>
+        <ol class="flow-steps">
+          <li class="flow-step">
+            <span class="flow-dot" aria-hidden="true"></span>
+            <strong class="flow-title" data-i18n="research.tsw.flowT1">Enquiry</strong>
+            <span class="flow-text" data-i18n="research.tsw.flow1">A client fills in the form in any of the three languages.</span>
+          </li>
+          <li class="flow-step">
+            <span class="flow-dot" aria-hidden="true"></span>
+            <strong class="flow-title" data-i18n="research.tsw.flowT2">Stored</strong>
+            <span class="flow-text" data-i18n="research.tsw.flow2">A hidden field turns away basic spam, and the enquiry is stored in the D1 database.</span>
+          </li>
+          <li class="flow-step">
+            <span class="flow-dot" aria-hidden="true"></span>
+            <strong class="flow-title" data-i18n="research.tsw.flowT3">Sign-in</strong>
+            <span class="flow-text" data-i18n="research.tsw.flow3">A team member signs in to the back office with an email code.</span>
+          </li>
+          <li class="flow-step">
+            <span class="flow-dot" aria-hidden="true"></span>
+            <strong class="flow-title" data-i18n="research.tsw.flowT4">Status</strong>
+            <span class="flow-text" data-i18n="research.tsw.flow4">The order moves from enquiry to quoted, signed, in production and delivered, or is marked as not going ahead.</span>
+            <span class="flow-chips" aria-hidden="true">
+              <span class="flow-chip" data-i18n="research.tsw.chip1">Enquiry</span>
+              <span class="flow-chip" data-i18n="research.tsw.chip2">Quoted</span>
+              <span class="flow-chip" data-i18n="research.tsw.chip3">Signed</span>
+              <span class="flow-chip" data-i18n="research.tsw.chip4">In production</span>
+              <span class="flow-chip" data-i18n="research.tsw.chip5">Delivered</span>
+            </span>
+          </li>
+          <li class="flow-step">
+            <span class="flow-dot" aria-hidden="true"></span>
+            <strong class="flow-title" data-i18n="research.tsw.flowT5">Logged</strong>
+            <span class="flow-text" data-i18n="research.tsw.flow5">Every change is logged with who made it and when.</span>
+          </li>
+        </ol>
+      </div>
+      <div class="plain-block">
         <h3 data-i18n="research.tsw.orgHeading">How the work is organised</h3>
-        <ul class="card-list">
-          <li data-i18n="research.tsw.org1">Five layers: people decide and merge; a lead agent splits work into task cards and reviews; worker agents write code and open pull requests; a low-cost model drafts copy, translations and summaries; scripts and CI do anything a rule can decide.</li>
+        <figure class="layers-figure">
+          <ol class="layers-stack">
+            <li class="layers-row layers-row-0">
+              <span class="layers-tag">L0</span>
+              <span class="layers-name" data-i18n="research.tsw.layer0Name">People</span>
+              <span class="layers-role" data-i18n="research.tsw.layer0Role">decide, pay, merge</span>
+            </li>
+            <li class="layers-row layers-row-1">
+              <span class="layers-tag">L1</span>
+              <span class="layers-name" data-i18n="research.tsw.layer1Name">Lead agent</span>
+              <span class="layers-role" data-i18n="research.tsw.layer1Role">splits work into task cards, reviews</span>
+            </li>
+            <li class="layers-row layers-row-2">
+              <span class="layers-tag">L2</span>
+              <span class="layers-name" data-i18n="research.tsw.layer2Name">Worker agents</span>
+              <span class="layers-role" data-i18n="research.tsw.layer2Role">write code, open pull requests</span>
+            </li>
+            <li class="layers-row layers-row-3">
+              <span class="layers-tag">L3</span>
+              <span class="layers-name" data-i18n="research.tsw.layer3Name">Low-cost model</span>
+              <span class="layers-role" data-i18n="research.tsw.layer3Role">copy, translations, summaries</span>
+            </li>
+            <li class="layers-row layers-row-4">
+              <span class="layers-tag">L4</span>
+              <span class="layers-name" data-i18n="research.tsw.layer4Name">Scripts and CI</span>
+              <span class="layers-role" data-i18n="research.tsw.layer4Role">anything a rule can decide</span>
+            </li>
+          </ol>
+          <p class="layers-rule" data-i18n="research.tsw.layerRule">Use the lowest layer that can do the job</p>
+          <h4 class="flow-subhead" data-i18n="research.tsw.lifeHeading">The life of a task card</h4>
+          <ol class="flow-life">
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life1">To-do</span>
+            </li>
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life2">Task card</span>
+            </li>
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life3">agent:ready</span>
+            </li>
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life4">Agent run</span>
+            </li>
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life5">Pull request</span>
+            </li>
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life6">CI checks</span>
+              <small class="flow-life-note" data-i18n="research.tsw.lifeCiNote">file locks · version numbers · spec sync</small>
+            </li>
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life7">Merge</span>
+            </li>
+            <li class="flow-life-step">
+              <span class="flow-dot" aria-hidden="true"></span>
+              <span class="flow-life-label" data-i18n="research.tsw.life8">Auto wrap-up</span>
+            </li>
+          </ol>
+          <figcaption data-i18n="research.tsw.org1">Five layers: each step goes to the lowest layer that can do it.</figcaption>
+        </figure>
+        <ul class="card-list">        
           <li data-i18n="research.tsw.org2">State lives in GitHub, not in chat: each task card lists its goal, the files it may change, pre-assigned version numbers and acceptance checks, and every session ends with a four-part handoff note.</li>
           <li data-i18n="research.tsw.org3">Rules became checks: CI fails a pull request that edits files outside its card, reuses a version number, or changes code without updating the spec.</li>
           <li data-i18n="research.tsw.org4">Cost control: routine work goes to cheaper models, every model call is logged, and ten calls to the low-cost model came to about US$0.03.</li>

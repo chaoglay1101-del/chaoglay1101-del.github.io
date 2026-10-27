@@ -2258,3 +2258,385 @@ html[data-theme="dark"] {
     mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.1) 0%, rgb(0 0 0 / 0.1) 40%, rgb(0 0 0 / 0.65) 100%);
   }
 }
+
+/* --- Project 3 diagrams (pure CSS; text stays in the HTML) --------------- */
+
+/* layers-*: the five-layer stack, stepped to the right to show hand-offs. */
+.layers-figure {
+  margin: 0.5rem 0 1.25rem;
+}
+
+.layers-stack,
+.flow-life,
+.flow-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.layers-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.layers-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(8rem, 12rem) 1fr;
+  align-items: center;
+  column-gap: 0.9rem;
+  padding: 0.7rem 1rem 0.7rem 0.7rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+}
+
+.layers-row-1 { margin-left: 1.5rem; }
+.layers-row-2 { margin-left: 3rem; }
+.layers-row-3 { margin-left: 4.5rem; }
+.layers-row-4 { margin-left: 6rem; }
+
+/* A thin arrow from each band to the next one down. */
+.layers-row:not(:last-child)::after {
+  content: "\2193";
+  position: absolute;
+  left: 1.45rem;
+  bottom: -1.05rem;
+  width: 1.1rem;
+  line-height: 1.2rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.layers-tag {
+  justify-self: center;
+  padding: 0.2rem 0;
+  width: 2.6rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+
+.layers-row-4 .layers-tag {
+  color: var(--ink);
+  background: var(--accent-alt-soft);
+  border-color: var(--accent-alt);
+}
+
+.layers-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.layers-role {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.layers-rule {
+  margin: 0.9rem 0 0;
+  padding: 0.5rem 0.9rem;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.93rem;
+  color: var(--accent-ink);
+  background: var(--accent-alt-soft);
+  border: 1px dashed var(--accent-alt);
+  border-radius: 999px;
+}
+
+.layers-rule::before {
+  content: "\2193\00a0";
+}
+
+/* flow-*: horizontal step strips that turn vertical on phones. */
+.flow-subhead {
+  margin: 1.6rem 0 0.9rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.flow-life,
+.flow-steps {
+  display: grid;
+  gap: 0.75rem 0;
+  counter-reset: flow;
+}
+
+.flow-life {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.flow-steps {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.flow-life-step,
+.flow-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding-right: 0.6rem;
+  counter-increment: flow;
+}
+
+.flow-dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.flow-dot::before {
+  content: counter(flow);
+}
+
+.flow-life-step:nth-child(3) .flow-dot,
+.flow-life-step:nth-child(6) .flow-dot {
+  background: var(--accent-alt);
+}
+
+/* The connector runs from each dot to the next one. */
+.flow-life-step:not(:last-child)::after,
+.flow-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  left: 2.1rem;
+  right: 0.2rem;
+  border-top: 2px solid var(--line-strong);
+}
+
+.flow-life-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.flow-life-label[data-i18n="research.tsw.life3"] {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.flow-life-note {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.flow-title {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.flow-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.flow-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+}
+
+.flow-chip {
+  padding: 0.1rem 0.5rem;
+  font-size: 0.74rem;
+  white-space: nowrap;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+}
+
+@media (max-width: 1099px) {
+  .flow-life {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .flow-life-step:nth-child(4)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .flow-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem 0;
+  }
+
+  .flow-step:nth-child(3)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 699px) {
+  .layers-row {
+    grid-template-columns: 2.8rem 1fr;
+    row-gap: 0.1rem;
+  }
+
+  .layers-role {
+    grid-column: 2;
+  }
+
+  .layers-tag {
+    grid-row: span 2;
+  }
+
+  .layers-row-1 { margin-left: 0.6rem; }
+  .layers-row-2 { margin-left: 1.2rem; }
+  .layers-row-3 { margin-left: 1.8rem; }
+  .layers-row-4 { margin-left: 2.4rem; }
+
+  .layers-row:not(:last-child)::after {
+    left: 1.2rem;
+  }
+
+  .flow-life,
+  .flow-steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .flow-life-step,
+  .flow-step {
+    display: block;
+    padding: 0 0 1.1rem 2.9rem;
+    min-height: 2.6rem;
+  }
+
+  .flow-life-step:last-child,
+  .flow-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .flow-dot {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  /* Vertical connector on the left, from dot to dot. */
+  .flow-life-step:not(:last-child)::after,
+  .flow-step:not(:last-child)::after,
+  .flow-life-step:nth-child(4)::after,
+  .flow-step:nth-child(3)::after {
+    display: block;
+    top: 1.9rem;
+    bottom: 0;
+    left: 0.93rem;
+    right: auto;
+    border-top: 0;
+    border-left: 2px solid var(--line-strong);
+  }
+
+  .flow-life-label,
+  .flow-title,
+  .flow-text,
+  .flow-life-note {
+    display: block;
+  }
+
+  .flow-life-label {
+    padding-top: 0.3rem;
+  }
+
+  .flow-title {
+    padding-top: 0.2rem;
+  }
+
+  .flow-chips {
+    margin-top: 0.4rem;
+  }
+}
+
+/* A quiet fade-in; switched off for reduced motion and for print. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes flow-rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .layers-row,
+  .flow-life-step,
+  .flow-step {
+    animation: flow-rise 0.5s ease-out both;
+  }
+
+  .layers-row-1, .flow-life-step:nth-child(2), .flow-step:nth-child(2) { animation-delay: 0.08s; }
+  .layers-row-2, .flow-life-step:nth-child(3), .flow-step:nth-child(3) { animation-delay: 0.16s; }
+  .layers-row-3, .flow-life-step:nth-child(4), .flow-step:nth-child(4) { animation-delay: 0.24s; }
+  .layers-row-4, .flow-life-step:nth-child(5), .flow-step:nth-child(5) { animation-delay: 0.32s; }
+}
+
+@media print {
+  .layers-figure,
+  .layers-row,
+  .flow-life-step,
+  .flow-step,
+  .flow-steps,
+  .flow-life {
+    break-inside: avoid;
+    animation: none !important;
+  }
+
+  /* Structure carries the meaning, not colour: solid outlines and numbers. */
+  .layers-row,
+  .layers-tag,
+  .flow-chip,
+  .layers-rule {
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+
+  .flow-dot {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+  }
+
+  .layers-row::after,
+  .flow-life-step::after,
+  .flow-step::after {
+    color: #000000;
+    border-color: #000000;
+  }
+}
+
+/* Room between the stacked blocks in Project 3 (the diagrams sit in their own blocks). */
+#techstarterweb .grid + .plain-block,
+#techstarterweb .plain-block + .plain-block {
+  margin-top: 2rem;
+}
+
+/* The generic "li + li" spacing does not apply inside the diagrams. */
+.layers-stack > li,
+.flow-life > li,
+.flow-steps > li {
+  margin-top: 0;
+}

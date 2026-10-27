@@ -1,6 +1,6 @@
 {
-  "spec_version": "1.0",
-  "last_change": "規格書不受影響：只更新 TechStarterWeb 段落文案（協作架構、雛形流程、開源連結），頁面結構和規則不變",
+  "spec_version": "1.1",
+  "last_change": "Project 3 加兩張純 CSS 流程圖（分層與任務卡生命週期、詢價步驟條）",
   "spec_doc": "https://docs.google.com/document/d/1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY/edit",
   "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大），last_change 寫一句這次改了什麼。規格書內容不受影響時（例如只改一句文案），spec_version 不變，last_change 以「規格書不受影響：」開頭寫原因。CI 會檢查。"
 }
