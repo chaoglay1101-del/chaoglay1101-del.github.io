@@ -1,7 +1,7 @@
 # Personal website
 
-Static, dependency-free portfolio site for **Yu-Chen Chao**: three hand-written
-pages with a shared stylesheet, two small progressive-enhancement scripts, and a
+Static, dependency-free portfolio site for **Yu-Chen Chao**: four hand-written
+pages (home, projects, research and a one-page CV) plus a redirect with a shared stylesheet, two small progressive-enhancement scripts, and a
 Traditional Chinese translation pack. There is no build step and no framework —
 open the files and they work.
 
@@ -16,15 +16,15 @@ The site serves two audiences at once, and the page order is arranged for both:
 
 | Audience | What they need first | Where they find it |
 | --- | --- | --- |
-| Recruiters | The credential, then a CV file, within the first screen | The hero credentials strip, the `Download CV (PDF)` button, `cv.html`, `cv-onepage.html`, and the files in `assets/pdf/` |
-| Admissions committees | The written work and the direction of future research | `research.html`, especially the Research agenda section, plus the public research report in the code repository |
-| Either | What the author is looking for | The CV profile (`cv.html#profile`), and the "Next: master's" end of the home-page timeline |
+| Recruiters | The credential, then a CV file, within the first screen | The hero credentials strip, the `Download CV (PDF)` button, the home page (which is the CV), `cv-onepage.html`, and the files in `assets/pdf/` |
+| Admissions committees | The written work and the direction of future research | `research.html` (the graduate research only), especially the Research agenda section, plus the public research report in the code repository |
+| Either | What the author is looking for | The CV profile (`index.html#profile`), and the "Next: master's" end of the overview timeline in it |
 
 Two consequences are deliberate, and both should stay in mind when editing:
 
 - the p-value results table lives on `research.html` only, rather than being
-  repeated on the home page, because a recruiter reads it as noise;
-- `cv.html` comes before `research.html` in every navigation menu.
+  repeated on the home page or the projects page, because a recruiter reads it as noise;
+- the home page (the CV) comes before `projects.html` and `research.html` in every navigation menu; the old `cv.html` is only a redirect to the home page.
 
 ## Content conventions
 
@@ -34,9 +34,9 @@ reads well states capability as value, sources every number, and states limits a
 plainly as results.
 
 1. **Capability is written as value, not as a tool list.** The "What I bring"
-   section on the home page (`#contribute`) exists for this reason, and each of
+   section on the home page (`#contribute`, directly under the hero) exists for this reason, and each of
    its four items links to the evidence: the CV lines that show it
-   (`cv.html#evidence-…`), the Tableau project, or the runnable example. The tool
+   (`#evidence-…` on the same page), the Tableau project (`projects.html#tableau`), or the runnable example. The tool
    inventory lives in the CV's Technical skills section, which is fine for keyword
    matching, but a reader should not have to infer what the author can do from a
    list of libraries.
@@ -50,12 +50,12 @@ plainly as results.
    soften, and it is the reason the research agenda section reads as a plan
    rather than a set of findings.
 4. **Each fact has one home.** The CV holds the record (dates, marks, bullets,
-   the internship, skills); `research.html` holds the evidence for both projects;
-   the home page says each thing once, in a line, and links to where it is
-   documented. Before adding a sentence to the home page, check whether another
-   page already says it, and link instead. The October 2026 redesign removed the
-   home page's experience, education and skills sections for this reason: they
-   repeated the CV nearly word for word.
+   the internship, skills); `research.html` holds the evidence for the graduate research and
+   `projects.html` the other projects; the home page says each project once, in a
+   line, and links to where it is documented. Before adding a sentence to the home page, check whether another
+   page already says it, and link instead. The October 2026 redesign made the home page the CV itself (the
+   old `cv.html` now redirects to it) and moved the Tableau and TechStarterWeb
+   write-ups from `research.html` to `projects.html`, so no page repeats another.
 
 What deliberately does **not** appear: service-selling framing ("how I can help
 you"), scale metrics the author does not have, awards and social feeds that would
@@ -66,9 +66,10 @@ sites are useful for structure, not for claims.
 ## Layout
 
 ```text
-index.html                     Home: hero, what I bring (each item linked to its evidence), selected work with an overview timeline, contact
-research.html                  Research and projects: the final-year research (six steps, question, data, method, results, limitations, agenda, reproducibility, sources), then the Tableau coursework project (#tableau) and the TechStarterWeb studio website (#techstarterweb); data, method and reproducibility details open on request
-cv.html                        CV: a two-minute tour, then the complete record, profile through to notes, with an evidence index above Skills; the internship certificate opens on request
+index.html                     Home and CV: hero (portrait, credentials strip, download buttons, contact line), what I bring (each item linked to its evidence), a two-minute tour, the complete record with an overview timeline and an evidence index above Skills, contact; the internship certificate opens on request
+projects.html                  Projects: TechStarterWeb (#techstarterweb, with its flow and layer figures), the Tableau coursework project (#tableau), layered-ai-dev-workflow (#workflow) and a summary card for the research (#research-summary)
+research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, agenda, reproducibility, sources); data, method and reproducibility details open on request
+cv.html                        Redirect to the home page (keeps old links, including hashes, working); not indexed
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
 assets/css/styles.css          Main stylesheet: light and dark themes, print styles
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
@@ -184,10 +185,10 @@ than a proper noun is wired into the translation workflow:
 
 | Detail | Where |
 | --- | --- |
-| Location: New Taipei City, Taiwan | `cv.html` hero, key `cv.contact.location` |
-| Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `cv.html` hero and the `index.html` contact card |
-| Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree to be conferred 12 November 2026 | `cv.html` (`cv.edu.meta`); the home page shows the classification, GPA, and conferral date without the weighted mark |
-| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `cv.html` (`cv.exp.*`), `index.html` (`home.exp.e3*`) |
+| Location: New Taipei City, Taiwan | `index.html` hero, key `cv.contact.location` |
+| Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `index.html` hero and its contact section |
+| Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree to be conferred 12 November 2026 | `index.html` (`cv.edu.meta`); the hero shows the classification, GPA, and conferral date without the weighted mark |
+| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
@@ -223,9 +224,9 @@ table row. The open buttons themselves are hidden in print.
 
 ### Business analytics project
 
-The Tableau project is presented as the second project on `research.html`
+The Tableau project is presented as the second project on `projects.html`
 (`#tableau`), with the interactive Tableau Public story loaded only when the
-reader opens it, and summarised in one line on the home page.
+reader opens it, and linked from the home page.
 
 The story has a fixed size in Tableau (1150 × 964 plus a 27-pixel toolbar, with
 the workbook tabs hidden by `:tabs=no`), and a narrower frame crops it on both
@@ -260,7 +261,7 @@ limits, in the same spirit as the research project's limitations.
 
 `cv-onepage.html` is the version to send with an application. It is a separate
 page rather than a second print stylesheet because the two documents make
-opposite trade-offs: `cv.html` is the complete record, whereas this one has to
+opposite trade-offs: `index.html` is the complete record, whereas this one has to
 fit on one sheet.
 
 The constraints are deliberate:
@@ -291,8 +292,8 @@ HTML rather than maintained by hand, so they cannot drift away from the pages:
 | --- | --- | --- |
 | `Chao_YuChen_CV_EN.pdf` | `cv-onepage.html` | one A4 page |
 | `Chao_YuChen_CV_ZH.pdf` | `cv-onepage.html?lang=zh` | one A4 page |
-| `Chao_YuChen_CV_Full_EN.pdf` | `cv.html` | the complete record |
-| `Chao_YuChen_CV_Full_ZH.pdf` | `cv.html?lang=zh` | the complete record |
+| `Chao_YuChen_CV_Full_EN.pdf` | `index.html` | the complete record |
+| `Chao_YuChen_CV_Full_ZH.pdf` | `index.html?lang=zh` | the complete record |
 
 The full CVs run to four or five pages depending on the language, so no page
 count is promised in the copy: only the one-page CV asserts a single sheet, and
@@ -394,7 +395,7 @@ in "Step-through stories" below.
 
 ## Step-through stories
 
-`research.html` opens with the findings in six steps, and `cv.html` with the CV
+`research.html` opens with the findings in six steps, and `index.html` with the CV
 told in six steps, both driven by `assets/js/story.js`. The techniques come from
 Slidev slide decks: a step reveals its annotations one click at a time, a
 hand-drawn mark on the chart follows each click, a presentation mode advances
@@ -403,14 +404,14 @@ one click per key press, and any step and click can be linked to.
 | Feature | Where | What it does |
 | --- | --- | --- |
 | Six-step findings | `research.html#story` | Read by scrolling, or press **P** (the Present button) for one annotation per key press: → or Space forward, ← back, Home and End, **F** full screen, Esc to leave. Each step links to the table rows its numbers come from (tagged `data-cite-id`) and a bar brings the reader back. |
-| Two-minute tour | `cv.html#intro` | The same engine over the CV, with a timeline whose marks follow the steps and a presenter timer (**T**) whose per-step budget, in seconds, is `data-deck-timer` on the deck. |
-| Overview timeline | `index.html`, Selected work | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the two pages cannot disagree about dates. An item marked `overviewOnly` (TechStarterWeb) appears here but not in the six-step tour, which stays as told. |
-| Cohort strips | `cv.html`, under the two assessed marks | The mark beside the class mean, upper quartile and maximum already stated in `cv.research.grade1` and `cv.research.grade2`. |
-| Evidence index | `cv.html`, above Skills | One button per capability marks the CV lines that show it (`data-ev="key"` on those lines); pressing again moves to the next line. |
+| Two-minute tour | `index.html#intro` | The same engine over the CV, with a timeline whose marks follow the steps and a presenter timer (**T**) whose per-step budget, in seconds, is `data-deck-timer` on the deck. |
+| Overview timeline | `index.html`, Profile | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the overview and the tour cannot disagree about dates. An item marked `overviewOnly` (TechStarterWeb) appears in the overview but not in the six-step tour, which stays as told. |
+| Cohort strips | `index.html`, under the two assessed marks | The mark beside the class mean, upper quartile and maximum already stated in `cv.research.grade1` and `cv.research.grade2`. |
+| Evidence index | `index.html`, above Skills | One button per capability marks the CV lines that show it (`data-ev="key"` on those lines); pressing again moves to the next line. |
 
 Deep links follow Slidev's `?clicks=` idea: `research.html#step-4.2` opens step 4
-with its first two marks drawn, `cv.html#intro-3` opens step 3 of the tour, and
-`cv.html#evidence-panel` lights up one capability. In presentation mode the
+with its first two marks drawn, `index.html#intro-3` opens step 3 of the tour, and
+`index.html#evidence-panel` lights up one capability. In presentation mode the
 address follows each click, as it does in Slidev; reading by scrolling leaves the
 address alone, and the copy-link button writes the current position instead.
 
@@ -428,7 +429,7 @@ Five rules keep it consistent with the rest of the site:
   elements, so `main.js` translates them like any other key and `story.js`
   redraws when `main.js` announces a `site:languagechange` event.
 - **Screen only.** Everything `story.js` adds is `.screen-only` or styled out of
-  print, so `cv.html` prints the same text as before and the PDFs in
+  print, so `index.html` prints the same CV text as before and the PDFs in
   `assets/pdf/` do not need rebuilding for this feature.
 - **Progressive enhancement.** Without JavaScript the sections are hidden
   (`html:not(.js)`) and the pages read as before. If `story.js` fails to load or
@@ -514,7 +515,7 @@ The rules it keeps:
   a hero is on screen, the tab is showing, and no presentation is open, and a
   resting pointer costs nothing.
 - **Print is untouched.** Canvases are `.screen-only` and the tide lines, glass
-  header and spacing are inside `@media screen`, so `cv.html` prints the same
+  header and spacing are inside `@media screen`, so `index.html` prints the same
   text and page count and the PDFs in `assets/pdf/` need no rebuild.
 - **Colours live in CSS** as `--flow-a`, `--flow-b`, `--flow-head` and
   `--flow-alpha`, with dark-theme values beside the light ones.
@@ -538,7 +539,7 @@ Three files support discovery, and all three are verified live:
 | File | Purpose |
 | --- | --- |
 | `robots.txt` | Allows crawling, points to the sitemap, and keeps `/tools/` and the README out of search results. |
-| `sitemap.xml` | Lists the four content pages with a `lastmod` date. |
+| `sitemap.xml` | Lists the four content pages (home, projects, research and the one-page CV; `cv.html` is a redirect and is left out) with a `lastmod` date. |
 | `404.html` | A branded not-found page with links back to the content. Uses absolute asset paths because a 404 is served for URLs at any depth. |
 
 The site is indexable by default: there is no `noindex` on the content pages (the

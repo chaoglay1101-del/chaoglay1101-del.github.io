@@ -2,7 +2,7 @@
 
 Checks performed:
 
-* every key referenced by index.html, research.html and cv.html is present in the
+* every key referenced by index.html, projects.html and research.html is present in the
   Traditional Chinese pack, and no stale key sits unused in the pack;
 * markup hazards are absent. Keys rendered with ``textContent`` or as an
   attribute must not carry HTML entities (they would appear literally as
@@ -27,7 +27,7 @@ import re
 import sys
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "research.html", "cv.html", "cv-onepage.html", "404.html")
+PAGES = ("index.html", "projects.html", "research.html", "cv-onepage.html", "404.html")
 SCRIPT = SITE / "assets" / "js" / "i18n.js"
 MAIN_SCRIPT = SITE / "assets" / "js" / "main.js"
 OUT = SITE / "tools" / "_i18n_report.txt"

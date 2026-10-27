@@ -1,7 +1,7 @@
 /* ==========================================================================
    Personal website — step-through stories
    research.html: the findings in six steps, each with its chart.
-   cv.html: the CV in two minutes, a timeline, cohort strips and an evidence
+   index.html (the CV): the CV in two minutes, a timeline, cohort strips and an evidence
    index that marks the lines proving each skill.
 
    Ideas borrowed from Slidev decks: content revealed one click at a time
@@ -1234,7 +1234,7 @@
       })();
     }
 
-    /* --- Evidence index (cv.html): mark the lines that prove a skill ----------------- */
+    /* --- Evidence index (index.html): mark the lines that prove a skill ----------------- */
 
     var evidence = null;
     if (evidenceIndex) {

@@ -29,8 +29,8 @@ SITE = pathlib.Path(__file__).resolve().parents[1]
 REQUIRED = (
     ".nojekyll",
     "index.html",
-    "cv.html",
     "cv-onepage.html",
+    "projects.html",
     "research.html",
     "404.html",
     "robots.txt",
