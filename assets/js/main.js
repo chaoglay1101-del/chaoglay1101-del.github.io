@@ -251,18 +251,21 @@
 
   if (navToggle) {
     var primaryNav = document.getElementById(navToggle.getAttribute("aria-controls"));
+    var navList = primaryNav && primaryNav.querySelector(".nav-list");
     navToggle.addEventListener("click", function () {
       var isOpen = navToggle.getAttribute("aria-expanded") === "true";
       navToggle.setAttribute("aria-expanded", String(!isOpen));
-      if (primaryNav) {
-        primaryNav.classList.toggle("is-open", !isOpen);
+      if (navList) {
+        navList.classList.toggle("is-open", !isOpen);
       }
     });
     if (primaryNav) {
       primaryNav.addEventListener("click", function (event) {
         if (event.target.closest("a")) {
           navToggle.setAttribute("aria-expanded", "false");
-          primaryNav.classList.remove("is-open");
+          if (navList) {
+            navList.classList.remove("is-open");
+          }
         }
       });
     }
