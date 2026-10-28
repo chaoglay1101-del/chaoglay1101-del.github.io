@@ -1022,41 +1022,188 @@ figcaption {
 
 /* --- Home, project index and collapsible detail --------------------------- */
 
-/* What I bring: four statements, two by two, each ending in its evidence. */
-.value-grid {
-  display: grid;
-  gap: 1.6rem 2.75rem;
-  grid-template-columns: minmax(0, 1fr);
+/* What I bring: a capability matrix. A dot is a link to the evidence; hovering or
+   focusing inside a row lights its dots. Below 48rem it becomes a list, one block
+   per row, with the evidence labels written out. */
+.hero-kicker {
+  margin: 0 0 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
-@media (min-width: 40rem) {
-  .value-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.hero-kicker a:not([target="_blank"])::after {
+  content: " \2192";
+}
+
+.matrix {
+  width: 100%;
+  min-width: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.93rem;
+}
+
+.matrix thead th {
+  padding: 0.4rem 0.5rem 0.7rem;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted);
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.matrix tbody th,
+.matrix td {
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+
+.matrix tbody th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.matrix td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.matrix tbody th {
+  vertical-align: middle;
+}
+
+.matrix tbody tr:last-child th,
+.matrix tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.matrix td a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a),
+main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a):hover,
+main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a):focus-visible {
+  background-image: none;
+}
+
+.mx-dot {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-soft);
+  transition: box-shadow var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+}
+
+.matrix tbody tr:hover th,
+.matrix tbody tr:hover td,
+.matrix tbody tr:focus-within th,
+.matrix tbody tr:focus-within td {
+  background: var(--accent-soft);
+}
+
+.matrix tbody tr:hover .mx-dot,
+.matrix tbody tr:focus-within .mx-dot {
+  background: var(--accent-ink);
+  box-shadow: 0 0 0 5px var(--accent-soft);
+  transform: scale(1.2);
+}
+
+.matrix td a:hover .mx-dot,
+.matrix td a:focus-visible .mx-dot {
+  box-shadow: 0 0 0 5px var(--accent);
+}
+
+.mx-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 47.99rem) {
+  .matrix,
+  .matrix tbody,
+  .matrix tr,
+  .matrix th,
+  .matrix td {
+    display: block;
+  }
+
+  .matrix thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .matrix tbody tr {
+    padding: 0.8rem 0 0.6rem;
+    border-top: 2px solid var(--line);
+  }
+
+  .matrix tbody th,
+  .matrix td {
+    padding: 0.1rem 0;
+    border: 0;
+    text-align: left;
+    background: none;
+  }
+
+  .matrix tbody th {
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .matrix tbody tr:hover th,
+  .matrix tbody tr:hover td,
+  .matrix tbody tr:focus-within th,
+  .matrix tbody tr:focus-within td {
+    background: none;
+  }
+
+  .matrix td.mx-off {
+    display: none;
+  }
+
+  .matrix td a {
+    display: inline-flex;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    min-height: 2.5rem;
+    font-weight: 600;
+  }
+
+  .mx-label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
   }
 }
 
-.value-item {
-  padding-top: 1rem;
-  border-top: 2px solid var(--line);
-}
-
-.value-item h3 {
-  font-size: 1.12rem;
-  margin: 0.15rem 0 0.45rem;
-}
-
-.value-item p {
-  color: var(--ink-soft);
-  margin-bottom: 0.6rem;
-}
-
-.value-link,
 .work-links a {
   font-weight: 600;
   font-size: 0.93rem;
 }
 
-.value-link:not([target="_blank"])::after,
 .work-links a:not([target="_blank"])::after {
   content: " \2192";
 }

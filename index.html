@@ -91,6 +91,7 @@
 
   <section class="hero" data-flow="1">
     <div class="container">
+      <p class="hero-kicker no-print"><a href="research.html" data-i18n="home.hero.research">Research</a></p>
       <div class="btn-group no-print">
         <a class="btn btn-primary" href="assets/pdf/Chao_YuChen_CV_EN.pdf" download data-cv-download="Chao_YuChen_CV" data-i18n="home.hero.ctaCv">Download CV (PDF)</a>
         <a class="btn" href="assets/pdf/Chao_YuChen_CV_Full_EN.pdf" download data-cv-download="Chao_YuChen_CV_Full" data-i18n="cv.downloadFull">Download the full CV (PDF)</a>
@@ -100,7 +101,7 @@
         <div class="hero-text">
           <p class="hero-name" data-i18n="cv.eyebrow">Curriculum vitae</p>
           <h1 data-i18n="name.full">Yu-Chen Chao (趙于楨)</h1>
-          <p class="hero-role" data-i18n="home.hero.title">Accounting and finance graduate with a public bank-panel research report</p>
+          <p class="hero-role" data-i18n="home.hero.title">Accounting and finance graduate who analyses financial data and builds the tools around it.</p>
           <p class="small" data-i18n="home.hero.role">BSc (Hons) Accounting and Finance, University of Birmingham · Class II Division I · to be conferred 12 November 2026</p>
           <p class="muted small">
             <span data-i18n="cv.contact.location">New Taipei City, Taiwan</span>
@@ -134,39 +135,75 @@
     </div>
   </section>
 
-  <section class="section no-print" id="contribute">
+  <section class="section no-print" id="contribute" aria-labelledby="contribute-heading">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow" data-i18n="home.contribute.eyebrow">Capability</span>
-        <h2 data-i18n="home.contribute.heading">What I bring</h2>
-        <p data-i18n="home.contribute.lede">Four things I have already taken from raw input to a finished, checkable output — rather than tools I have read about.</p>
+        <h2 id="contribute-heading" data-i18n="home.contribute.heading">What I bring</h2>
+        <p data-i18n="home.contribute.lede">Each row is something I can do; each dot links to the work that shows it.</p>
       </div>
-      <div class="value-grid">
-        <div class="value-item">
-          <span class="card-tag" data-i18n="home.contribute.c1tag">Data work</span>
-          <h3 data-i18n="home.contribute.c1title">Financial data from raw file to a finished table</h3>
-          <p data-i18n="home.contribute.c1body">A restricted bank panel and an IMF indicator, merged by country and year into a complete-case sample with documented definitions.</p>
-          <a class="value-link" href="#evidence-pipeline" data-i18n="home.contribute.cvLink">Where it shows below</a>
-        </div>
-        <div class="value-item">
-          <span class="card-tag" data-i18n="home.contribute.c2tag">Measurement</span>
-          <h3 data-i18n="home.contribute.c2title">Econometrics that survives being questioned</h3>
-          <p data-i18n="home.contribute.c2body">Fixed effects with clustered standard errors, then log, interaction and subsample checks before a result is reported.</p>
-          <a class="value-link" href="#evidence-panel" data-i18n="home.contribute.cvLink">Where it shows below</a>
-        </div>
-        <div class="value-item">
-          <span class="card-tag" data-i18n="home.contribute.c3tag">Communication</span>
-          <h3 data-i18n="home.contribute.c3title">Analysis a non-specialist can act on</h3>
-          <p data-i18n="home.contribute.c3body">A five-dashboard Tableau story with a stated insight and a commercial recommendation on every page.</p>
-          <a class="value-link" href="projects.html#tableau" data-i18n="home.contribute.c3link">See the Tableau project</a>
-        </div>
-        <div class="value-item">
-          <span class="card-tag" data-i18n="home.contribute.c4tag">Reproducibility</span>
-          <h3 data-i18n="home.contribute.c4title">Work that can be rerun, not just read</h3>
-          <p data-i18n="home.contribute.c4body">A locked Python environment, automated tests and a synthetic panel that rerun the estimation workflow in about a minute.</p>
-          <a class="value-link" href="https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins/blob/main/examples/run_example.py" rel="noopener noreferrer" target="_blank" data-i18n="home.contribute.c4link">Run the example</a>
-        </div>
-      </div>
+      <table class="matrix reveal" aria-labelledby="contribute-heading">
+        <thead>
+          <tr>
+            <th scope="col"><span class="visually-hidden" data-i18n="home.contribute.corner">Capability</span></th>
+            <th scope="col" data-i18n="home.contribute.col1">Graduate research</th>
+            <th scope="col" data-i18n="home.contribute.col2">Tableau project</th>
+            <th scope="col" data-i18n="home.contribute.col3">Evershine internship</th>
+            <th scope="col" data-i18n="home.contribute.col4">TechStarterWeb</th>
+            <th scope="col" data-i18n="home.contribute.col5">AI collaboration workflow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-i18n="home.contribute.row1">Financial data analysis</th>
+            <td class="mx-on"><a href="#evidence-pipeline"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
+            <td class="mx-on"><a href="projects.html#tableau"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col2">Tableau project</span></a></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="home.contribute.row2">Econometrics and reproducible analysis</th>
+            <td class="mx-on"><a href="#evidence-panel"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="home.contribute.row3">Data visualisation and communication</th>
+            <td class="mx-on"><a href="research.html#story"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
+            <td class="mx-on"><a href="projects.html#tableau"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col2">Tableau project</span></a></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="home.contribute.row4">Documentation and compliance</th>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-on"><a href="#evidence-compliance"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col3">Evershine internship</span></a></td>
+            <td class="mx-on"><a href="#evidence-docs"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
+            <td class="mx-off" aria-hidden="true"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="home.contribute.row5">Website product development</th>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-on"><a href="projects.html#techstarterweb"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
+            <td class="mx-off" aria-hidden="true"></td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="home.contribute.row6">AI agent collaboration and automation</th>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-off" aria-hidden="true"></td>
+            <td class="mx-on"><a href="projects.html#techstarterweb"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
+            <td class="mx-on"><a href="projects.html#workflow"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col5">AI collaboration workflow</span></a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
