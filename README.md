@@ -80,7 +80,6 @@ assets/css/motion.css          Page transitions, scroll entrance and hover state
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
 assets/js/main.js              Theme toggle, language toggle, mobile navigation, print button, ?lang= deep link, current year; opens collapsed sections for links and printing
 assets/js/story.js             Step-through stories (one or several decks per page), their charts, the cohort strips and the evidence index (see "Step-through stories")
-assets/js/flow.js              The current lines behind the heroes and footers (see "Flow texture")
 assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
 assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
@@ -504,32 +503,21 @@ editor, and add its JSON key as the repository secret `GOOGLE_SERVICE_ACCOUNT`.
 
 ## Flow texture
 
-The site is about payment flows, so its texture is a current. It has three
-parts, all on screen only:
+The site is about payment flows, so its texture is a current. It has two
+parts, both on screen only:
 
 | Part | Where | What it does |
 | --- | --- | --- |
-| Current lines | Every page hero and footer (`data-flow` on the element) | `flow.js` draws evenly spaced streamlines of a smooth, mostly rightward field, the way a wind or ocean-current map does. In a hero a front sweeps them in on load, then faint glints run along them while the hero is on screen. The pointer parts the lines around it, and a click or tap sends a ripple through them. The number in `data-flow` seeds the field, so each page has its own current; `data-flow-still` (the footers) skips the intro and the glints. |
 | Tide lines | Between sections and above the footer | One gentle wave, tiled, in place of a straight rule; alternate sections are offset by half a wave. |
-| Frosted header | The sticky header | Translucent with a blur, so the lines show through it while scrolling. |
+| Frosted header | The sticky header | Translucent with a blur, so the page shows through it while scrolling. |
+
+The current lines behind the heroes and footers (`flow.js`) were removed on 3 November 2026 at the owner's request: they made the hero look busy.
 
 The rules it keeps:
 
-- **Text first.** A CSS mask keeps the lines faint behind the hero text and
-  full strength only in the open space to its right; on a phone they stay faint
-  throughout.
-- **Nothing depends on it.** The canvases are `aria-hidden` and ignore the
-  pointer (the host listens, so every link and button works as before). Without
-  JavaScript, or if `flow.js` fails, the pages are exactly as they were.
-- **Motion is optional and bounded.** Under `prefers-reduced-motion` the lines
-  are drawn at once and nothing moves. Otherwise the animation runs only while
-  a hero is on screen, the tab is showing, and no presentation is open, and a
-  resting pointer costs nothing.
-- **Print is untouched.** Canvases are `.screen-only` and the tide lines, glass
-  header and spacing are inside `@media screen`, so `index.html` prints the same
-  text and page count and the PDFs in `assets/pdf/` need no rebuild.
-- **Colours live in CSS** as `--flow-a`, `--flow-b`, `--flow-head` and
-  `--flow-alpha`, with dark-theme values beside the light ones.
+- **Print is untouched.** The tide lines, glass header and spacing are inside
+  `@media screen`, so `index.html` prints the same text and page count and the
+  PDFs in `assets/pdf/` need no rebuild.
 
 ## Motion
 
