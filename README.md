@@ -191,7 +191,8 @@ than a proper noun is wired into the translation workflow:
 | --- | --- |
 | Location: New Taipei City, Taiwan | `index.html` hero, key `cv.contact.location` |
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `index.html` hero and its contact section |
-| Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree to be conferred 12 November 2026 | `index.html` (`cv.edu.meta`); the hero shows the classification, GPA, and conferral date without the weighted mark |
+| Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree conferred 12 November 2026 | `index.html` (`cv.edu.meta`); the hero shows the classification, GPA, and conferral date without the weighted mark |
+| Phone: printed only. It is on the PDFs and on a printed page, and is not shown on screen | `.cv-phone` in `assets/css/styles.css` prints it in the contact line of `index.html` and `cv-onepage.html`; the HTML holds only an empty `<span class="cv-phone">`, so the number is not in the markup |
 | Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
@@ -270,9 +271,11 @@ fit on one sheet.
 
 The constraints are deliberate:
 
-- **One A4 page.** The content is sized to leave roughly 40 mm of slack, so
-  ordinary differences in printer margins or font metrics cannot push it onto a
-  second page. Confirm with Ctrl+P, keeping the scale at 100% and the margins at
+- **One A4 page, and the English sheet is full.** Measured on the PDFs of
+  11 November 2026, the English text ends about 2.5 mm above the bottom margin
+  and the Chinese about 15 mm, so adding a line means removing one somewhere
+  else. The build is what catches a second page (see "Downloadable PDFs"); to
+  check by hand, press Ctrl+P and keep the scale at 100% and the margins at
   their default.
 - **Applicant-tracking-system friendly.** Single column, no tables, no icons and
   no artwork, because automated parsers read the text layer and some handle
@@ -299,10 +302,15 @@ HTML rather than maintained by hand, so they cannot drift away from the pages:
 | `Chao_YuChen_CV_Full_EN.pdf` | `index.html` | the complete record |
 | `Chao_YuChen_CV_Full_ZH.pdf` | `index.html?lang=zh` | the complete record |
 
-The full CVs run to four or five pages depending on the language, so no page
+The full CVs run to several pages and the count differs by language, so no page
 count is promised in the copy: only the one-page CV asserts a single sheet, and
 the build is what checks it. Any page count written into a label will go stale
 the next time a bullet is added.
+
+Both documents state `size: A4` in their print styles (`cv-print.css` for the
+one-page CV, the print block of `styles.css` for the full one). Without it the
+browser uses the build machine's default paper, which is how the full CVs were
+US Letter until November 2026.
 
 Rebuilding rewrites the PDFs even when nothing changed, because the browser
 stamps a creation date into the file. When the CV pages themselves have not
