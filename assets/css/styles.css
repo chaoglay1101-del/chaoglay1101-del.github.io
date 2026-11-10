@@ -2337,6 +2337,7 @@ html.is-presenting body { overflow: hidden; }
   }
 
   @page {
+    size: A4;
     margin: 14mm 15mm;
   }
 
