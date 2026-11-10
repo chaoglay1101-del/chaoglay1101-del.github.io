@@ -273,7 +273,7 @@ The constraints are deliberate:
 
 - **One A4 page, and the English sheet is full.** Measured on the PDFs of
   11 November 2026, the English text ends about 2.5 mm above the bottom margin
-  and the Chinese about 15 mm, so adding a line means removing one somewhere
+  and the Chinese about 20 mm, so adding a line means removing one somewhere
   else. The build is what catches a second page (see "Downloadable PDFs"); to
   check by hand, press Ctrl+P and keep the scale at 100% and the margins at
   their default.
