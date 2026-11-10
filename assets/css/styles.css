@@ -556,6 +556,25 @@ html[data-theme="dark"] .btn-primary {
   margin-top: 1.25rem;
 }
 
+/* The phone number is printed, not shown on screen. It reaches the PDFs an
+   application sends and a printed page, but a visitor, or a scraper reading
+   the HTML, does not get it: the number lives here, not in the markup. The
+   leading dot (\00B7) is the separator the contact line uses between its
+   items; the first space after the escape ends it, the second is printed. */
+.cv-phone {
+  display: none;
+}
+
+@media print {
+  .cv-phone {
+    display: inline;
+  }
+
+  .cv-phone::before {
+    content: "\00B7  +65 85050726";
+  }
+}
+
 .fact-strip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
