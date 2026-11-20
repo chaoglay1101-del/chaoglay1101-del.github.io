@@ -8,7 +8,7 @@ TechStarterWeb 工作室的 repo（Company-web、personal-site-template）和它
 
 只要這次的任務改了頁面、腳本、樣式、workflow 或 GitHub Pages 設定，在同一個任務裡、提交之前，照 `.claude/skills/sync-spec/SKILL.md` 更新規格書，不要留到之後。
 
-- 同一個 PR 要更新 `spec-sync.json`：`spec_version` 改成規格書的新版本號；規格書不受影響時（例如只改一句文案）版本不變，`last_change` 以「規格書不受影響：」開頭寫原因。Site checks 的 spec-sync 沒過就不能合併。
+- 規格書有改：同一個 PR 把 `spec-sync.json` 的 `spec_version` 改成規格書的新版本號。規格書不受影響時（例如只改一句文案）`spec-sync.json` 不用動，在 PR 說明（或 commit 訊息）寫一行「規格書不受影響：原因」。這次改了什麼寫在 PR 說明，不要寫進 `spec-sync.json`：每個 PR 都改同一行，同時開著的 PR 會互相衝突。Site checks 的 spec-sync 沒過就不能合併。
 - 第 10 節的版本紀錄由 GitHub Action 自動加（`.github/workflows/spec-version-log.yml`，內容後面附「（規格書 v版本號）」），代理人只改內文。Action 還沒設定金鑰時，才由代理人手動加那一列。
 - 人工直接改了網站之後，在 Claude Code 裡執行 `/sync-spec`，讓代理人補上內文。
 

@@ -19,7 +19,7 @@ description: 把個人網站（chaoglay1101-del.github.io）的變更同步到 G
    - 版本號與日期（文件第二行「版本 x.y｜日期」）有改內文時加 0.1。
 4. **第 10 節版本紀錄。** 由 GitHub Action 在推到 main 後自動加，內容後面附「（規格書 v版本號）」。只有在 Action 沒設定金鑰（README「Version management」）時，才手動加一列：時間（UTC+8，`10/24 20:58`）｜commit 短碼｜內容（規格書 v版本號）。
 5. **驗證。** 再用 Drive `read_file_content` 讀一次，確認每一處都改到、沒有改錯地方。
-6. **更新 `spec-sync.json`（和改動同一個 PR）。** `spec_version` 改成規格書第二行的新版本號，`last_change` 寫一句這次改了什麼。規格書不受影響時版本不變，`last_change` 以「規格書不受影響：」開頭寫原因。Site checks 的 spec-sync 會擋下沒更新的 PR。
+6. **更新 `spec-sync.json`（和改動同一個 PR）。** `spec_version` 改成規格書第二行的新版本號；這次改了什麼寫在 PR 說明。規格書不受影響時 `spec-sync.json` 不用動，在 PR 說明（或 commit 訊息）寫一行「規格書不受影響：原因」。不要在 `spec-sync.json` 寫每次的說明：每個 PR 都改同一行，同時開著的 PR 會互相衝突。Site checks 的 spec-sync 會擋下兩者都沒有的 PR。
 7. **回報。** 用繁體中文列出改了哪幾節，附文件連結；沒改的也說明原因。
 
 ## 改動 → 規格書章節
@@ -36,7 +36,7 @@ description: 把個人網站（chaoglay1101-del.github.io）的變更同步到 G
 | `CLAUDE.md`、`AGENTS.md`、hook、spec-sync、版本紀錄、直接推 main 提醒 | 8 |
 | 做完待辦或發現新待辦 | 9 |
 
-只改一句文案、修錯字、換 PDF 時，規格書通常不受影響：`spec-sync.json` 寫「規格書不受影響：原因」即可。
+只改一句文案、修錯字、換 PDF 時，規格書通常不受影響：PR 說明寫「規格書不受影響：原因」即可。
 
 ## 不要做的事
 
