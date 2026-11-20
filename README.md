@@ -211,11 +211,12 @@ Business Analytics module result is 70/100:
 
 | Transcript module | Transcript result | Separate assessment detail |
 | --- | --- | --- |
-| Accounting and Finance Research Project | 77/100 · Pass | Research project component: 80/100 (65% of module); 13 points above the component class average (67); class maximum 84 |
-| Business Analytics | 70/100 · Pass | 6.3 points above the class average (63.7); class maximum 76; Tableau story project |
+| Accounting and Finance Research Project | 77/100 · Pass | Research project component: 80/100 (65% of module); 13 points above the component class average (67); class upper quartile 73; class maximum 84 |
+| Business Analytics | 70/100 · Pass | 6.3 points above the class average (63.7); equal to the class upper quartile (70); class maximum 76; Tableau story project |
 
-Class averages and maxima are shown as supplied supplemental coursework data;
-the transcript module totals remain the official recorded results.
+Class averages, upper quartiles, and maxima are shown as supplied supplemental
+coursework data; the transcript module totals remain the official recorded
+results.
 
 ### Detail on request
 
