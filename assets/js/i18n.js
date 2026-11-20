@@ -342,6 +342,7 @@ window.SITE_I18N = {
     "projects.tab.s5.body": "<mark class=\"mk mk--find\" data-mark=\"1\">數位支付使用率高於簽帳金融卡持有率</mark>的發現，引出了畢業專題要檢驗的問題：當支付離開卡片通路，銀行的手續費收入會如何變化。",
     "projects.tab.s5.title": "引出了我的畢業專題",
     "projects.title": "專案",
+    "projects.tsw.more": "工作室的其他工作",
     "projects.tsw.s1.body": "<mark class=\"mk mk--find\" data-mark=\"1\">公開頁面以三種語言接收詢價</mark>；<mark class=\"mk mk--find\" data-mark=\"2\">登入後的後台</mark>把每一筆詢價變成訂單，並有<mark class=\"mk mk--key\" data-mark=\"3\">狀態與每次修改的紀錄</mark>。",
     "projects.tsw.s1.title": "一個網站，同時服務客戶與工作室",
     "projects.tsw.s2.body": "只有團隊的信箱能登入後台，<mark class=\"mk mk--find\" data-mark=\"1\">透過 Cloudflare Access 以一次性 Email 驗證碼登入</mark>。<mark class=\"mk mk--find\" data-mark=\"2\">網站已用自己的網域上線</mark>，並接上 Google Search Console 與流量統計。",
