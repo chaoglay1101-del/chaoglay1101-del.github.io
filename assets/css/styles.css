@@ -1774,6 +1774,9 @@ mark.mk {
   .js .story .step-text { opacity: var(--step-dim, 0.85); transition: opacity 0.45s ease; }
   .js .story .step.is-active .step-text { opacity: 1; }
   .js .story--cv .step { min-height: 64vh; }
+  .js .story--project .step { min-height: 46vh; }
+  .js .story--project .step:first-child { min-height: 40vh; }
+  .js .story--project .step:last-child { min-height: 60vh; }
 }
 
 @media (max-width: 899px) {

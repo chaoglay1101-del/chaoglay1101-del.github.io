@@ -320,6 +320,7 @@
  "projects.tab.s5.body": "<mark class=\"mk mk--find\" data-mark=\"1\">Digital payment use running ahead of debit-card ownership</mark> raised the question my final-year project tested: what happens to banks' fee income as payments move away from cards.",
  "projects.tab.s5.title": "It led to my final-year research",
  "projects.title": "Projects",
+ "projects.tsw.more": "More from the studio work",
  "projects.tsw.s1.body": "<mark class=\"mk mk--find\" data-mark=\"1\">The public pages take enquiries in three languages</mark>; <mark class=\"mk mk--find\" data-mark=\"2\">a back office behind sign-in</mark> turns each one into an order with <mark class=\"mk mk--key\" data-mark=\"3\">a status and a log of every change</mark>.",
  "projects.tsw.s1.title": "One site for clients and for the studio",
  "projects.tsw.s2.body": "Only the team's addresses can sign in to the back office, <mark class=\"mk mk--find\" data-mark=\"1\">through Cloudflare Access with one-time email codes</mark>. <mark class=\"mk mk--find\" data-mark=\"2\">The site is live on its own domain</mark>, with Google Search Console and visit statistics.",
