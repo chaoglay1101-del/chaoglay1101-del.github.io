@@ -95,7 +95,7 @@
           <p class="hero-name" data-i18n="cv.eyebrow">Curriculum vitae</p>
           <h1 data-i18n="name.full">Yu-Chen Chao (趙于楨)</h1>
           <p class="hero-role" data-i18n="home.hero.title">Accounting and finance graduate who analyses financial data and builds the tools around it.</p>
-          <p class="small" data-i18n="home.hero.role">BSc (Hons) Accounting and Finance, University of Birmingham · Class II Division I · to be conferred 12 November 2026</p>
+          <p class="small" data-i18n="home.hero.role">BSc (Hons) Accounting and Finance, University of Birmingham · Class II Division I · conferred 12 November 2026</p>
           <div class="btn-group no-print">
             <a class="btn btn-primary" href="assets/pdf/Chao_YuChen_CV_EN.pdf" download data-cv-download="Chao_YuChen_CV" data-i18n="home.hero.ctaCv">Download CV (PDF)</a>
             <a class="btn" href="assets/pdf/Chao_YuChen_CV_Full_EN.pdf" download data-cv-download="Chao_YuChen_CV_Full" data-i18n="cv.downloadFull">Download the full CV (PDF)</a>
@@ -104,8 +104,7 @@
           <p class="hero-kicker no-print"><a href="research.html" data-i18n="home.hero.research">Research</a></p>
           <p class="muted small">
             <span data-i18n="cv.contact.location">New Taipei City, Taiwan</span>
-            ·
-            <a href="tel:+6585050726">+65 85050726</a>
+            <span class="cv-phone"></span>
             ·
             <a href="mailto:chaoglay1101@gmail.com">chaoglay1101@gmail.com</a>
             ·
@@ -221,7 +220,7 @@
             <div class="step-text">
               <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="cv.tour.s1.kicker">Who I am</span></p>
               <h3 id="intro-s1-title" data-i18n="cv.tour.s1.title">Accounting and finance graduate, doing empirical research on digital payments</h3>
-              <p data-i18n-html="cv.tour.s1.body">BSc (Hons) Accounting and Finance from the University of Birmingham, taught in English at its Singapore campus: <mark class="mk mk--key" data-mark="1">Class II (Division I), GPA 3.25</mark>, with the degree to be conferred on 12 November 2026. <mark class="mk mk--find" data-mark="2">I am seeking graduate roles in financial data analysis and master's study in finance or business analytics.</mark></p>
+              <p data-i18n-html="cv.tour.s1.body">BSc (Hons) Accounting and Finance from the University of Birmingham, taught in English at its Singapore campus: <mark class="mk mk--key" data-mark="1">Class II (Division I), GPA 3.25</mark>, with the degree conferred on 12 November 2026. <mark class="mk mk--find" data-mark="2">I am seeking graduate roles in financial data analysis and master's study in finance or business analytics.</mark></p>
             </div>
           </article>
           <article class="step" id="intro-2" data-clicks="2" aria-labelledby="intro-s2-title">
@@ -364,7 +363,7 @@
       <div class="card">
         <span class="card-tag" data-i18n="cv.edu.tag">Degree</span>
         <h3 data-i18n="cv.edu.degree">BSc (Hons) Accounting and Finance — University of Birmingham</h3>
-        <p class="card-meta" data-i18n-html="cv.edu.meta">September 2024 – June 2026 · Degree to be conferred 12 November 2026 · Class II (Division I) · Overall weighted mark 61/100 · GPA 3.25</p>
+        <p class="card-meta" data-i18n-html="cv.edu.meta">September 2024 – June 2026 · Degree conferred 12 November 2026 · Class II (Division I) · Overall weighted mark 61/100 · GPA 3.25</p>
         <p data-i18n="cv.edu.language">University of Birmingham · Singapore · Campus: Totally Taught Abroad · Language of instruction: English.</p>
       </div>
       <div class="card">
@@ -445,6 +444,8 @@
           <button class="chip-btn" type="button" data-evidence="story" aria-pressed="false"><span data-i18n="cv.evidence.story">Data storytelling</span><span class="ev-count" aria-hidden="true"></span></button>
           <button class="chip-btn" type="button" data-evidence="docs" aria-pressed="false"><span data-i18n="cv.evidence.docs">Documentation and SOPs</span><span class="ev-count" aria-hidden="true"></span></button>
           <button class="chip-btn" type="button" data-evidence="compliance" aria-pressed="false"><span data-i18n="cv.evidence.compliance">Compliance documents</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="web" aria-pressed="false"><span data-i18n="cv.evidence.web">Web stack and delivery</span><span class="ev-count" aria-hidden="true"></span></button>
+          <button class="chip-btn" type="button" data-evidence="agents" aria-pressed="false"><span data-i18n="cv.evidence.agents">AI agent workflow</span><span class="ev-count" aria-hidden="true"></span></button>
         </div>
         <p class="evidence-status" data-evidence-status aria-live="polite"></p>
       </div>
@@ -481,6 +482,22 @@
             <li data-i18n="cv.skills.c4d">Cross-border tax and compliance documentation.</li>
           </ul>
         </div>
+        <div class="card">
+          <h3 data-i18n="cv.skills.c5">Web stack, delivered with AI coding agents</h3>
+          <ul class="card-list">
+            <li data-i18n="cv.skills.c5b">Astro sites on Cloudflare Workers, with a Cloudflare D1 (SQLite) database and Cloudflare Access sign-in.</li>
+            <li data-i18n="cv.skills.c5c">JavaScript on Node.js for Worker APIs and build scripts; tests with Node's test runner and Playwright; continuous integration with GitHub Actions.</li>
+            <li data-i18n="cv.skills.c5d">Launch and upkeep: domains and redirects, three-language pages, structured data, sitemaps, and Search Console.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 data-i18n="cv.skills.c6">AI agent workflow and automation</h3>
+          <ul class="card-list">
+            <li data-i18n="cv.skills.c6b">Specifications, task cards and handoff notes that let several agent sessions work on one repository.</li>
+            <li data-i18n="cv.skills.c6c">Rules enforced by scripts and CI: file locks, version numbers and spec updates are checked on every pull request.</li>
+            <li data-i18n="cv.skills.c6d">Routine work routed to cheaper models, with usage logged.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -494,12 +511,15 @@
           <h3 data-i18n="cv.exp.title2">Co-founder and technical lead</h3>
           <p class="timeline-org" data-i18n="cv.exp.org2">TechStarterWeb Consulting · web studio for clients in Taiwan, Hong Kong and Singapore</p>
           <ul class="card-list">
-            <li data-i18n="cv.exp.c1">Built the studio's website and order back office: a public site in Traditional Chinese, Simplified Chinese and English whose enquiry form feeds a signed-in back office for statuses, notes and an activity log.</li>
-            <li data-i18n="cv.exp.c2">Stack: Astro on Cloudflare Workers, a Cloudflare D1 database, Cloudflare Access sign-in with one-time email codes, and OpenCC for the Simplified Chinese pages.</li>
+            <li data-i18n="cv.exp.c1" data-ev="web">Built the studio's website and order back office: a public site in Traditional Chinese, Simplified Chinese and English whose enquiry form feeds a signed-in back office for statuses, notes and an activity log.</li>
+            <li data-i18n="cv.exp.c2" data-ev="web">Stack: Astro on Cloudflare Workers, a Cloudflare D1 database, Cloudflare Access sign-in with one-time email codes, and OpenCC for the Simplified Chinese pages.</li>
             <li data-i18n="cv.exp.c3" data-ev="docs">Ran the launch (domain, redirects, mailbox, Search Console) and wrote the delivery SOPs that split each client project into required and adjustable items.</li>
-            <li data-i18n="cv.exp.c4">Designed how the AI agents work together: a lead agent splits work into task cards, worker agents and a low-cost model carry them out, and scripts and CI check file locks, version numbers and spec updates. From 24 to 27 October 2026, 135 pull requests were opened and 130 merged.</li>
-            <li data-i18n="cv.exp.c5">Built a prototype pipeline: one click in the back office creates a client's repository from a template and publishes a no-index preview; a test order went live in about two and a half minutes.</li>
-            <li data-i18n="cv.exp.c6">Open-sourced the workflow, with tests, as layered-ai-dev-workflow on GitHub.</li>
+            <li data-i18n="cv.exp.c4" data-ev="agents">Designed how the AI agents work together: a lead agent splits work into task cards, worker agents and a low-cost model carry them out, and scripts and CI check file locks, version numbers and spec updates.</li>
+            <li data-i18n="cv.exp.c5" data-ev="web">Built a prototype pipeline: one click in the back office creates a client's repository from a template and publishes a no-index preview; a test order went live in about two and a half minutes.</li>
+            <li data-i18n="cv.exp.c6" data-ev="agents">Open-sourced the workflow, with tests, as layered-ai-dev-workflow on GitHub.</li>
+            <li data-i18n="cv.exp.c7" data-ev="web">Added a client pipeline: an intake form, a copy draft the client comments on, automatic edits delivered as a pull request, and a private page for change requests and launch approval. So far it has run on internal test orders only.</li>
+            <li data-i18n="cv.exp.c8" data-ev="web">Built a back-office kit for merchant sites: shop orders go into the client's own database, and the merchant confirms orders, sets market prices, tracks stock and prints picking lists. Tested end to end by simulating five kinds of merchant.</li>
+            <li data-i18n="cv.exp.c9" data-ev="agents">Put security rules into tests and CI: Turnstile bot protection on the enquiry form, secret scanning on every pull request, and a test that fails any SQL statement built from variables.</li>
           </ul>
           <p class="work-links no-print">
             <a href="projects.html#techstarterweb" data-i18n="cv.exp.tswLink">Project details</a>
