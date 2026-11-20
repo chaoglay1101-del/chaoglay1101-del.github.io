@@ -25,13 +25,13 @@ Claude Code 另外會讀 `CLAUDE.md`；兩份規則相同，以這份的檢查�
 4. 文件第二行的「版本 x.y｜日期」：有改內文就加 0.1，日期改成今天。
 5. 第 10 節「版本紀錄」：推到 main 後 GitHub Action 會自動加一列。**如果 GitHub 沒有設定 Secret `GOOGLE_SERVICE_ACCOUNT`（目前還沒設定），由你手動加一列**：時間（UTC+8，例如 `10/24 21:47`）｜commit 短碼｜一句話內容（規格書 v版本號）。同一個 commit 已經在表裡就不要重複加。
 6. 改完後重新讀一次全文，確認每一處都改到、沒有改錯地方。
-7. 更新 repo 根目錄的 `spec-sync.json`，和改動放在同一個 PR：`spec_version` 改成規格書的新版本號（要比原本大），`last_change` 寫一句這次改了什麼；規格書真的不受影響時版本不變，`last_change` 以「規格書不受影響：」開頭寫原因。不要為了讓檢查通過而只改這個檔案、不改規格書。
+7. 規格書有改：把 repo 根目錄 `spec-sync.json` 的 `spec_version` 改成規格書的新版本號（要比原本大），和改動放在同一個 PR。規格書真的不受影響時 `spec-sync.json` 不用動，在 PR 說明（或 commit 訊息）寫一行「規格書不受影響：原因」。這次改了什麼寫在 PR 說明，不要寫進 `spec-sync.json`（每個 PR 都改同一行，同時開著的 PR 會互相衝突）。不要為了讓檢查通過而只改版本號、不改規格書。
 
 ### 回報前逐項確認（每一項都要在回報裡寫出結果）
 
 - [ ] 我改了哪些檔案或設定
 - [ ] 規格書改了哪幾節（沒改的話寫原因）
-- [ ] 版本號已經加 0.1，`spec-sync.json` 的 `spec_version` 和規格書一致
+- [ ] 版本號已經加 0.1，`spec-sync.json` 的 `spec_version` 和規格書一致（規格書不受影響時：PR 說明有「規格書不受影響：原因」）
 - [ ] 第 10 節版本紀錄有這次的 commit（自動或手動）
 - [ ] 改完後有重新讀過規格書確認
 - [ ] README「Validation」的檢查和 `node --test "tools/tests/*.test.js"` 都通過
