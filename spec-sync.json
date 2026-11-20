@@ -1,6 +1,6 @@
 {
   "spec_version": "1.6",
-  "last_change": "規格書不受影響：改版 4/9（首頁作品卡與技能），L1 最後統一更新",
+  "last_change": "規格書不受影響：改版 6/9（螢光筆只在簡報模式畫）；改版 4/9（首頁作品卡與技能），L1 最後統一更新",
   "spec_doc": "https://docs.google.com/document/d/1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY/edit",
   "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大），last_change 寫一句這次改了什麼。規格書內容不受影響時（例如只改一句文案），spec_version 不變，last_change 以「規格書不受影響：」開頭寫原因。CI 會檢查。"
 }
