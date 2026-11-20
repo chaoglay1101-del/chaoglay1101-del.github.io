@@ -1572,10 +1572,10 @@ mark.mk {
   padding-bottom: 0.06em;
 }
 
-.mk.is-on { color: var(--ink); }
-.mk--find.is-on,
-.mk--warn.is-on { background-size: 100% 100%; }
-.mk--key.is-on { background-size: 100% 0.13em; }
+.story.is-presenting .mk.is-on { color: var(--ink); }
+.story.is-presenting .mk--find.is-on,
+.story.is-presenting .mk--warn.is-on { background-size: 100% 100%; }
+.story.is-presenting .mk--key.is-on { background-size: 100% 0.13em; }
 
 .mk--box {
   position: relative;
@@ -1595,7 +1595,7 @@ mark.mk {
   pointer-events: none;
 }
 
-.mk--box.is-on::after { clip-path: inset(0 0 0 0); }
+.story.is-presenting .mk--box.is-on::after { clip-path: inset(0 0 0 0); }
 
 /* Layout: steps on the left, one sticky stage on the right; under 900px each
    research step shows its own chart and the CV timeline sticks to the top. */
