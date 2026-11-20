@@ -433,6 +433,7 @@ window.SITE_I18N = {
     "research.facts.observations": "個銀行年度觀察值",
     "research.facts.period": "個年度觀察值",
     "research.formalTitle": "論文正式題目：The Impact of Digital Payment Pressure on Banks' Fee-Based Income: Evidence from ASEAN Banking Markets",
+    "research.glance.heading": "重點摘要",
     "research.hyp.col1": "假說",
     "research.hyp.col2": "理論依據",
     "research.hyp.col3": "預測",
