@@ -1,6 +1,6 @@
 {
   "spec_version": "1.6",
-  "last_change": "規格書不受影響：修正 tools/_extract_en.py、_check_stale.py、_check_i18n.py、_preview_zh.py 寫檔時沒指定換行字元，導致 Windows 本機產生的 _en_keys.json 用 CRLF、CI（Ubuntu）用 LF，讓『English key list is up to date』這關誤判成沒跑過腳本；改成一律寫 LF，純粹是腳本寫檔方式的修正，不影響規格書記錄的行為",
+  "last_change": "規格書不受影響：在 tools/_verify_html.py 新增標題層級檢查（同頁出現兩個 <h1>，或標題層級跳級，例如 h2 後面直接接 h4），只是把現有五頁都已經符合的標題結構釘成自動規則，沒有改任何頁面的標題文字或層級，不影響規格書記錄的行為",
   "spec_doc": "https://docs.google.com/document/d/1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY/edit",
   "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大），last_change 寫一句這次改了什麼。規格書內容不受影響時（例如只改一句文案），spec_version 不變，last_change 以「規格書不受影響：」開頭寫原因。CI 會檢查。"
 }
