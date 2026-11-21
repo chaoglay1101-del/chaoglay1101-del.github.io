@@ -43,5 +43,5 @@ for name in PAGES:
                 out.setdefault(key, clean(am.group(1)))
 
 dest = SITE / "tools" / "_en_keys.json"
-dest.write_text(json.dumps(out, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+dest.write_text(json.dumps(out, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8", newline="\n")
 print("captured", len(out), "keys ->", dest.name)
