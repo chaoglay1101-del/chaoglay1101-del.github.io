@@ -148,7 +148,7 @@ def main() -> int:
     for key in sorted(kinds):
         lines.append(f"  {key}  [{'|'.join(sorted(kinds[key]))}]")
 
-    OUT.write_text("\n".join(lines), encoding="utf-8")
+    OUT.write_text("\n".join(lines), encoding="utf-8", newline="\n")
     print(f"wrote {OUT.relative_to(SITE)}")
     print("RESULT:", "ALL GOOD" if problems == 0 else f"{problems} problem group(s); see report")
     return 0 if problems == 0 else 1
