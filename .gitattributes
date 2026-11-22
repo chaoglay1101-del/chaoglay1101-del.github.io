@@ -1,0 +1,3 @@
+# 一律用 LF 存進 repo。Windows 上的代理人寫出 CRLF 時，git add 會自動換掉，
+# 不會讓產生的檔案（例如 tools/_en_keys.json）整份變成改過、和其他 PR 衝突。
+* text=auto eol=lf

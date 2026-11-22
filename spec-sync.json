@@ -1,6 +1,5 @@
 {
-  "spec_version": "1.7",
-  "last_change": "規格書不受影響：只改實習經歷的文案（完整 CV 實習條目由 3 條改成 4 條、首頁導覽第 5 步、一頁式 CV 兩條），依本人提供的實習紀錄補上 BOI Form 501 附表整理、長期財務預測審閱與待補報表清單；不寫客戶、檔名或金額。版面、元件與架構沒變，規格書沒有記錄實習條目內容",
+  "spec_version": "1.8",
   "spec_doc": "https://docs.google.com/document/d/1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY/edit",
-  "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大），last_change 寫一句這次改了什麼。規格書內容不受影響時（例如只改一句文案），spec_version 不變，last_change 以「規格書不受影響：」開頭寫原因。CI 會檢查。"
+  "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大）。規格書內容不受影響時（例如只改一句文案），這個檔案不用改，在 PR 說明寫一行「規格書不受影響：原因」。這次改了什麼寫在 PR 說明，不寫在這裡：每個 PR 都改同一行會互相衝突。CI 會檢查。"
 }
