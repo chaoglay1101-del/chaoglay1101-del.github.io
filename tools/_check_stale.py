@@ -142,7 +142,7 @@ def main() -> int:
         for key in reviewed:
             lines.append(f"  {key}")
 
-    OUT.write_text("\n".join(lines), encoding="utf-8")
+    OUT.write_text("\n".join(lines), encoding="utf-8", newline="\n")
     print(f"wrote {OUT.relative_to(REPO)}")
     print(f"English changed: {len(changed_en)}  reviewed: {len(reviewed)}  stale: {len(stale)}")
     print("RESULT:", "ALL GOOD" if not stale else f"{len(stale)} string(s) need updating")

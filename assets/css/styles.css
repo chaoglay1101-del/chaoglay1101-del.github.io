@@ -1331,6 +1331,36 @@ main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a):focus-vi
   margin: 0.5rem 0 0;
 }
 
+/* At a glance: six question/answer pairs, read top to bottom on mobile. */
+.glance {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.3rem;
+  margin: 0;
+}
+
+.glance div + div {
+  margin-top: 0.75rem;
+}
+
+.glance dt {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.glance dd {
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .glance div {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+  }
+}
+
 /* Contact: three plain columns. */
 .contact-grid {
   display: grid;
@@ -1744,6 +1774,9 @@ mark.mk {
   .js .story .step-text { opacity: var(--step-dim, 0.85); transition: opacity 0.45s ease; }
   .js .story .step.is-active .step-text { opacity: 1; }
   .js .story--cv .step { min-height: 64vh; }
+  .js .story--project .step { min-height: 46vh; }
+  .js .story--project .step:first-child { min-height: 40vh; }
+  .js .story--project .step:last-child { min-height: 60vh; }
 }
 
 @media (max-width: 899px) {
@@ -2426,6 +2459,152 @@ html.is-presenting body { overflow: hidden; }
 
   .grid {
     gap: 0.6rem;
+  }
+}
+
+/* --- Screen typography and spacing --------------------------------------- */
+
+@media screen {
+  :root:not(:has(.cv-sheet)) {
+    --muted: #4d6073;
+    --accent-alt: #0b7568;
+    --fs-body: 1rem;
+    --lh-body: 1.65;
+    --fs-caption: 0.8125rem;
+    --lh-caption: 1.5;
+  }
+
+  html[data-theme="dark"]:not(:has(.cv-sheet)) {
+    --muted: #b6c7d7;
+    --accent-alt: #63d3c0;
+  }
+
+  body:not(:has(.cv-sheet)) {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  body:not(:has(.cv-sheet)) :is(
+    .eyebrow, .brand-role, .hero-name, .hero-kicker, .fact-label,
+    .card-tag, .card-meta, .chip, .badge, caption, thead th, .matrix thead th,
+    .timeline-when, .timeline .timeline-org, .timeline .timeline-grade,
+    figcaption, .embedded-work figcaption, .scene figcaption, .stage-caption,
+    .link-list .link-note, .work-when, .project-index-kind, .step-kicker,
+    .step-num, .story-cite, .scene-title, .scene-num, .ledger-group h4,
+    .ledger-item span, .cohort-legend, .site-footer h2, .footer-legal,
+    .flow-life-note, .flow-chip, .funnel-k
+  ) {
+    font-size: var(--fs-caption);
+    line-height: var(--lh-caption);
+  }
+
+  .hero:has(.hero-text [data-i18n="home.hero.role"]) {
+    padding-block: 2.5rem 2rem;
+  }
+
+  .hero-text:has([data-i18n="home.hero.role"]) > .btn-group {
+    margin-top: 1rem;
+  }
+
+  .hero-text:has([data-i18n="home.hero.role"]) > .btn-group + .hero-kicker,
+  .hero-text:has([data-i18n="home.hero.role"]) > .hero-kicker + p {
+    margin-top: 0.6rem;
+  }
+
+  .hero-text:has([data-i18n="home.hero.role"]) > p:last-child {
+    margin-bottom: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .fact-strip:has([data-i18n="home.facts.gpa"]) {
+    margin-top: 1.25rem;
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  html:not([data-theme]):not(:has(.cv-sheet)) {
+    --muted: #b6c7d7;
+    --accent-alt: #63d3c0;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  body:not(:has(.cv-sheet)) .section {
+    padding-block: 2rem;
+  }
+
+  .hero:has(.hero-text [data-i18n="home.hero.role"]) {
+    padding-block: 1.5rem;
+  }
+
+  .hero-layout:has(> .hero-text [data-i18n="home.hero.role"]) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 4rem;
+    gap: 0 0.75rem;
+  }
+
+  .hero-layout > .hero-text:has([data-i18n="home.hero.role"]) {
+    display: contents;
+  }
+
+  .hero-text:has([data-i18n="home.hero.role"]) > * {
+    grid-column: 1 / -1;
+  }
+
+  .hero-text:has([data-i18n="home.hero.role"]) > .hero-name,
+  .hero-text:has([data-i18n="home.hero.role"]) > h1 {
+    grid-column: 1;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-text:has([data-i18n="home.hero.role"]) > .hero-name {
+    grid-row: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-text:has([data-i18n="home.hero.role"]) > h1 {
+    grid-row: 2;
+    font-size: clamp(1.75rem, 7vw, 2.1rem);
+  }
+
+  .hero-layout:has(> .hero-text [data-i18n="home.hero.role"]) > .cv-photo-page {
+    grid-area: 1 / 2 / 3 / 3;
+    width: 4rem;
+    height: 5rem;
+    object-fit: cover;
+  }
+
+  .fact-strip:has([data-i18n="home.facts.gpa"]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 0.75rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .fact-strip > li:has([data-i18n="home.facts.gpa"]) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .story-section .story:not(.story--cv, .story--project, .is-presenting) .step {
+    padding-block: 0.9375rem;
+  }
+
+  .story-section .story:not(.story--cv, .story--project, .is-presenting) .step h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .story-section .story:not(.story--cv, .story--project, .is-presenting) .step-text > :last-child:not(h3) {
+    margin-bottom: 0;
+  }
+
+  .story-section .story:not(.story--cv, .story--project, .is-presenting) .step :is(.step-visual, .scene) {
+    margin-block: 0.75rem 0;
+  }
+
+  .story-section .story:not(.story--cv, .story--project, .is-presenting) .step .step-visual .scene {
+    margin-block-start: 0;
   }
 }
 

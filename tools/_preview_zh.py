@@ -104,7 +104,7 @@ def main() -> int:
         chunks.append(f"### {name}")
         chunks.append("=" * 72)
         chunks.append(readable(apply_pack(source, pack)))
-    OUT.write_text("\n".join(chunks) + "\n", encoding="utf-8")
+    OUT.write_text("\n".join(chunks) + "\n", encoding="utf-8", newline="\n")
     print(f"wrote {OUT.relative_to(SITE)}")
     return 0
 
