@@ -80,6 +80,10 @@
           <span class="project-index-kind" data-i18n="projects.index.p3kind">Open source · from TechStarterWeb</span>
           <span class="project-index-title" data-i18n="projects.index.p3">layered-ai-dev-workflow: working with AI coding agents</span>
         </a>
+        <a href="#github-toolbox">
+          <span class="project-index-kind" data-i18n="projects.index.p4kind">Personal project</span>
+          <span class="project-index-title" data-i18n="projects.index.p4">GitHub toolbox: confirm-first installs and update tracking</span>
+        </a>
       </nav>
     </div>
   </section>
@@ -430,6 +434,26 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section project-section" id="github-toolbox">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="projects.ghtb.eyebrow">Personal project</span>
+        <h2 data-i18n="projects.ghtb.title">A GitHub toolbox that shows the real command before anything runs</h2>
+        <p data-i18n="projects.ghtb.body">A local web app I built for Windows: it turns "what do I want to get better at" into a specific, confirmed install, and turns "is everything still set up correctly" into one check instead of several separate ones.</p>
+        <p class="card-meta" data-i18n="projects.ghtb.meta">Python standard library only · local web UI · winget / npm / uv</p>
+      </div>
+      <ul class="card-list">
+        <li data-i18n="projects.ghtb.c1">Confirm before anything runs: every install, update, removal or settings change lists the exact commands first; nothing executes until I approve it.</li>
+        <li data-i18n="projects.ghtb.c2">No more watching one install finish before starting the next: asking for several tools, an update, or a settings change queues them, and they run one after another.</li>
+        <li data-i18n="projects.ghtb.c3">One check instead of several separate ones: a local health check confirms installed tools still run and settings are still applied, instead of checking each tool on its own when something feels off.</li>
+        <li data-i18n="projects.ghtb.c4">Updates checked together: the toolbox itself and every installed tool are checked for new versions in the same pass, instead of opening each tool's own updater.</li>
+        <li data-i18n="projects.ghtb.c5">New releases tracked without a daily check-in: a second part of the project scans followed GitHub repositories on a schedule, scores what changed so only the notable updates surface, and sends a desktop notification.</li>
+      </ul>
+      <p class="small muted" data-i18n="projects.ghtb.limits">Windows only, and limited to tools its installers (winget, npm and uv) can handle.</p>
+      <p class="small muted" data-i18n="projects.ghtb.private">Private repository; not published.</p>
     </div>
   </section>
 
