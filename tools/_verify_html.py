@@ -6,7 +6,7 @@ Checks that matter for this site:
   ``assets/js/i18n.js`` once left the language toggle silently broken);
 * the ``og:image`` share card resolves, because a broken link preview fails
   silently everywhere;
-* external links open in a new tab with ``rel="noopener"``;
+* external links open in a new tab with ``rel="noopener noreferrer"``;
 * the language and theme controls are present, and the navigation toggle is
   present on pages that actually have a navigation menu.
 """
@@ -36,8 +36,10 @@ def external_link_problems(text: str) -> list[str]:
             continue
         if 'target="_blank"' not in tag:
             found.append(f"missing target=_blank: {href.group(1)}")
-        if not re.search(r'\brel="[^"]*\bnoopener\b', tag):
-            found.append(f"missing rel=noopener: {href.group(1)}")
+        has_noopener = re.search(r'\brel="[^"]*\bnoopener\b', tag)
+        has_noreferrer = re.search(r'\brel="[^"]*\bnoreferrer\b', tag)
+        if not (has_noopener and has_noreferrer):
+            found.append(f"missing rel=noopener noreferrer: {href.group(1)}")
     return found
 
 
