@@ -28,7 +28,7 @@
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/story.js" defer onerror="document.documentElement.classList.add('story-off')"></script>
 </head>
-<body>
+<body class="research-page">
 <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to main content</a>
 
 <header class="site-header">
@@ -86,7 +86,7 @@
         </li>
         <li>
           <span class="fact-value">2014–2022</span>
-          <span class="fact-label" data-i18n="research.facts.period">annual observations</span>
+          <span class="fact-label" data-i18n="research.facts.period">study period</span>
         </li>
       </ul>
     </div>
@@ -293,7 +293,7 @@
         <span data-s="l.next" data-i18n="research.story.str.lNext">Next design</span>
         <span data-s="l.y1" data-i18n="research.story.str.lY1">A negative pooled association in the log model</span>
         <span data-s="l.y1d" data-i18n="research.story.str.lY1d">−0.0102, p = 0.048; Driscoll–Kraay p = 0.004</span>
-        <span data-s="l.y2" data-i18n="research.story.str.lY2">It shows in fees, not in lending</span>
+        <span data-s="l.y2" data-i18n="research.story.str.lY2">Significant for fees, not for the lending margin</span>
         <span data-s="l.y2d" data-i18n="research.story.str.lY2d">Net-interest-margin placebo 0.0041, p = 0.45</span>
         <span data-s="l.y3" data-i18n="research.story.str.lY3">Larger and negative with a one-year lag</span>
         <span data-s="l.y3d" data-i18n="research.story.str.lY3d">−0.0159, p = 0.062</span>
@@ -369,7 +369,7 @@
         </div>
       </div>
       <h3 data-i18n="research.hyp.heading">Two competing hypotheses, and two refinements</h3>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Research hypotheses" data-i18n-attr="aria-label:research.tables.hypotheses">
         <table>
           <thead>
             <tr>
@@ -421,7 +421,7 @@
       </div>
       <details class="more">
         <summary data-i18n="research.more.data">Show the sample, variables and indicator</summary>
-        <div class="table-wrap">
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Final analysis sample" data-i18n-attr="aria-label:research.tables.sample">
           <table>
             <caption data-i18n="research.data.sampleCaption">Final analysis sample.</caption>
             <thead>
@@ -551,7 +551,7 @@
         <h2 data-i18n="research.results.heading">Limited linear evidence, a significant logarithmic association</h2>
         <p data-i18n="research.results.lede">All models use the same 344 bank-year observations, so the specifications are directly comparable.</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Main model results" data-i18n-attr="aria-label:research.tables.results">
         <table>
           <caption data-i18n="research.results.caption">Digital-payment coefficient by specification. Bank-clustered standard errors. * p &lt; 0.10, ** p &lt; 0.05.</caption>
           <thead>
@@ -566,7 +566,7 @@
           </thead>
           <tbody>
             <tr data-cite-id="r1">
-              <th scope="row" data-i18n="research.results.r1spec">Main model, scaled measure</th>
+              <th scope="row" data-i18n="research.results.r1spec">(1) Main model, scaled measure</th>
               <td class="num">−0.000292*</td>
               <td class="num">(0.000177)</td>
               <td class="num">344</td>
@@ -574,7 +574,7 @@
               <td><span class="badge badge-sig" data-i18n="research.results.badgeMarginal">Marginal</span> <span data-i18n="research.results.r1">Negative association with marginal statistical evidence.</span></td>
             </tr>
             <tr data-cite-id="r2">
-              <th scope="row" data-i18n="research.results.r2spec">Main model with controls</th>
+              <th scope="row" data-i18n="research.results.r2spec">(2) Main model with controls</th>
               <td class="num">−0.000264</td>
               <td class="num">(0.000201)</td>
               <td class="num">344</td>
@@ -582,7 +582,7 @@
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r2">Negative sign but no statistical evidence.</span></td>
             </tr>
             <tr data-cite-id="r3">
-              <th scope="row" data-i18n="research.results.r3spec">Full controls model</th>
+              <th scope="row" data-i18n="research.results.r3spec">(3) Full controls model</th>
               <td class="num">−0.000208</td>
               <td class="num">(0.000333)</td>
               <td class="num">344</td>
@@ -590,7 +590,7 @@
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r3">Negative sign but no statistical evidence.</span></td>
             </tr>
             <tr data-cite-id="r4">
-              <th scope="row" data-i18n="research.results.r4spec">Log baseline model</th>
+              <th scope="row" data-i18n="research.results.r4spec">(4) Log baseline model</th>
               <td class="num">−0.010171**</td>
               <td class="num">(0.005116)</td>
               <td class="num">344</td>
@@ -598,7 +598,7 @@
               <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r4">Negative, statistically significant pooled association.</span></td>
             </tr>
             <tr data-cite-id="r4b">
-              <th scope="row" data-i18n="research.results.r4bspec">Size interaction model</th>
+              <th scope="row" data-i18n="research.results.r4bspec">(5) Size interaction model</th>
               <td class="num">−0.006507</td>
               <td class="num">(0.005227)</td>
               <td class="num">344</td>
@@ -606,12 +606,12 @@
               <td><span class="badge badge-no" data-i18n="research.results.badgeNotSig">Not significant</span> <span data-i18n="research.results.r4b">Neither the Large Bank dummy nor its interaction with log pressure (−0.003930) is significant.</span></td>
             </tr>
             <tr data-cite-id="r5">
-              <th scope="row" data-i18n="research.results.r5spec">Nonlinear model</th>
+              <th scope="row" data-i18n="research.results.r5spec">(6) Nonlinear model</th>
               <td class="num">−0.010829**</td>
               <td class="num">(0.005432)</td>
               <td class="num">344</td>
               <td class="num">0.0766</td>
-              <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r5">Negative linear term; the squared term (−0.001988) is not significant, so there is no U-shaped recovery.</span></td>
+              <td><span class="badge badge-sig" data-i18n="research.results.badgeSig">Significant</span> <span data-i18n="research.results.r5">Negative linear term; the squared term (−0.001988) is not significant, so the results provide no statistical evidence of a U-shaped recovery.</span></td>
             </tr>
           </tbody>
         </table>
@@ -627,7 +627,7 @@
         </ul>
       </div>
       <h3 data-i18n="research.robust.heading">Robustness and diagnostics</h3>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Robustness checks" data-i18n-attr="aria-label:research.tables.robustness">
         <table>
           <thead>
             <tr>
@@ -639,12 +639,12 @@
           <tbody>
             <tr data-cite-id="t1"><th scope="row" data-i18n="research.robust.t1">Driscoll–Kraay SE (Model 4)</th><td data-i18n="research.robust.e1">−0.0102, SE 0.0035, p = 0.004 (bank-clustered p = 0.048)</td><td data-i18n="research.robust.r1">Still significant when cross-sectional dependence is allowed</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t2">Driscoll–Kraay SE (Model 6 linear term)</th><td data-i18n="research.robust.e2">−0.0108, SE 0.0032, p = 0.001 (bank-clustered p = 0.047)</td><td data-i18n="research.robust.r2">Same</td></tr>
-            <tr data-cite-id="t3"><th scope="row" data-i18n="research.robust.t3">Mundlak decomposition: within</th><td>−0.0049, SE 0.0079, p = 0.53</td><td data-i18n="research.robust.r3">No within-country association</td></tr>
+            <tr data-cite-id="t3"><th scope="row" data-i18n="research.robust.t3">Mundlak decomposition: within</th><td>−0.0049, SE 0.0079, p = 0.53</td><td data-i18n="research.robust.r3">No statistically significant within-country association</td></tr>
             <tr data-cite-id="t4"><th scope="row" data-i18n="research.robust.t4">Mundlak decomposition: between</th><td>−0.0124, SE 0.0175, p = 0.48</td><td data-i18n="research.robust.r4">Same sign and size as the pooled estimate; imprecise with three countries</td></tr>
             <tr data-cite-id="t5"><th scope="row" data-i18n="research.robust.t5">Within-only fixed effects</th><td>−0.0035, SE 0.0083, p = 0.67</td><td data-i18n="research.robust.r5">Not significant</td></tr>
             <tr data-cite-id="t6"><th scope="row" data-i18n="research.robust.t6">Country subsamples, no year effects</th><td data-i18n="research.robust.e6">Indonesia −0.001420 (0.014970); Malaysia +0.005521 (0.005378); Thailand +0.001687* (0.000870)</td><td data-i18n="research.robust.r6">Not uniform; Thailand weakly positive</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t7">Exclude 2020</th><td data-i18n="research.robust.e7">Model 4 −0.008006 (0.004941), p = 0.106, n = 305</td><td data-i18n="research.robust.r7">Similar size, less precise</td></tr>
-            <tr data-cite-id="t8"><th scope="row" data-i18n="research.robust.t8">Net interest margin placebo</th><td>0.004125 (0.005450), p = 0.45, n = 335</td><td data-i18n="research.robust.r8">No effect on the lending margin: the pressure shows in the fee channel</td></tr>
+            <tr data-cite-id="t8"><th scope="row" data-i18n="research.robust.t8">Net interest margin placebo</th><td>0.004125 (0.005450), p = 0.45, n = 335</td><td data-i18n="research.robust.r8">No significant association with the lending margin; the association is specific to fee income</td></tr>
             <tr data-cite-id="t9"><th scope="row" data-i18n="research.robust.t9">One-year lag of regressor</th><td>−0.015901* (0.008475), p = 0.062, n = 305</td><td data-i18n="research.robust.r9">Larger and negative; eases the reverse-causality concern</td></tr>
             <tr><th scope="row" data-i18n="research.robust.t10">Exclude Islamic and digital-challenger banks</th><td data-i18n="research.robust.e10">−0.004328 (0.002631), p = 0.101, n = 273, 31 banks</td><td data-i18n="research.robust.r10">Smaller; part of the pooled size comes from this high-margin segment</td></tr>
           </tbody>
@@ -715,8 +715,8 @@
         <p data-i18n="research.repro.lede">The repository separates what can be rerun from what can only be inspected.</p>
       </div>
       <details class="more">
-        <summary data-i18n="research.more.repro">Show what can be rerun and what comes next</summary>
-        <div class="table-wrap">
+        <summary data-i18n="research.more.repro">Show what can be rerun</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Reproducibility by component" data-i18n-attr="aria-label:research.tables.reproducibility">
           <table>
             <thead>
               <tr>
@@ -750,25 +750,16 @@
           </table>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid">
           <div class="card">
             <span class="card-tag" data-i18n="research.repro.c1tag">Run it yourself</span>
             <h3 data-i18n="research.repro.c1title">Public demonstration in three commands</h3>
-            <div class="formula">uv sync --group dev
+            <div class="formula formula--commands">uv sync --group dev
   uv run python examples/run_example.py
   uv run pytest</div>
             <p class="small muted" data-i18n-html="research.repro.c1note">The example uses deterministic synthetic data. It demonstrates the Python and <code>linearmodels</code> workflow; it is not evidence for the thesis.</p>
           </div>
-          <div class="card">
-            <span class="card-tag" data-i18n="research.repro.c2tag">Next steps</span>
-            <h3 data-i18n="research.repro.c2title">Where the research should go next</h3>
-            <ul class="card-list">
-              <li data-i18n="research.repro.c2v1">Disaggregate non-interest income into payments, cards, merchant services, and wealth management.</li>
-              <li data-i18n="research.repro.c2v2">Broaden country coverage to restore the ASEAN-5 design.</li>
-              <li data-i18n="research.repro.c2v3">Move towards identification: staggered payment-licensing reforms as quasi-experiments, difference-in-differences or event-study designs, an external instrument for digital adoption, and dynamic panel methods. (A one-year lag of the regressor is already reported in the thesis.)</li>
-              <li data-i18n="research.repro.c2v4">Strengthen inference with few clusters: a wild-cluster bootstrap now, and country-level clustering once more countries are added. (Driscoll–Kraay standard errors are already reported in the thesis.)</li>
-            </ul>
-          </div>
+          <p data-i18n-html="research.repro.agendaLink">The <a href="#agenda">research agenda</a> above sets out where this work should go next.</p>
         </div>
       </details>
     </div>
@@ -854,7 +845,7 @@
       </div>
     </div>
     <div class="footer-legal">
-      <p>© <span data-current-year>2026</span> <span data-i18n="name.short">Yu-Chen Chao</span>. <span data-i18n="footer.rights">Site content is my own; the research code is published under the MIT License.</span></p>
+      <p>© <span data-current-year>2026</span> <span data-i18n="name.short">Yu-Chen Chao</span> · <span data-i18n="footer.rights">Site content is my own; the research code is published under the MIT License.</span></p>
       <p data-i18n="footer.data">The research uses restricted bank data. No restricted observations, bank identifiers, or third-party datasets are published on this site.</p>
     </div>
   </div>

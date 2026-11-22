@@ -39,7 +39,7 @@ META_RE = re.compile(r'data-i18n-meta="([^"]+)"')
 ATTR_RE = re.compile(r'data-i18n-attr="([^"]+)"')
 ENTITY_RE = re.compile(r"&(?:[a-zA-Z]+|#\d+);")
 # Inline markup allowed inside data-i18n-html values; each tag must be balanced.
-INLINE_TAGS = ("code", "strong", "em", "span", "sub", "sup")
+INLINE_TAGS = ("a", "code", "strong", "em", "span", "sub", "sup")
 MARKUP_RE = re.compile(r"</?[a-zA-Z][^>]*>")
 LOOKUP_RE = re.compile(r"\blookup\(([^)]*)\)")
 KEY_LITERAL_RE = re.compile(r'"([A-Za-z][\w.-]*)"')
@@ -133,7 +133,8 @@ def main() -> int:
                 hazards.append(f"    {key}  [{mode_label}] entity {entity.group(0)} would render literally")
             if "html" in modes:
                 for tag in INLINE_TAGS:
-                    if value.count(f"<{tag}>") != value.count(f"</{tag}>"):
+                    opening_tags = re.findall(rf"<{tag}(?:\s[^>]*)?>", value)
+                    if len(opening_tags) != value.count(f"</{tag}>"):
                         hazards.append(f"    {key}  [html] unbalanced <{tag}> tags")
             elif MARKUP_RE.search(value):
                 hazards.append(f"    {key}  [{mode_label}] contains markup that would be shown as text")

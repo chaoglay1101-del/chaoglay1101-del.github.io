@@ -93,15 +93,18 @@
       <div class="hero-layout">
         <div class="hero-text">
           <p class="hero-name" data-i18n="cv.eyebrow">Curriculum vitae</p>
-          <h1 data-i18n="name.full">Yu-Chen Chao (趙于楨)</h1>
+          <h1 data-i18n-html="name.fullHtml">Yu-Chen Chao <span class="nowrap">(趙于楨)</span></h1>
           <p class="hero-role" data-i18n="home.hero.title">Accounting and finance graduate who analyses financial data and builds the tools around it.</p>
           <p class="small" data-i18n="home.hero.role">BSc (Hons) Accounting and Finance, University of Birmingham · Class II (Division I) · conferred 12 November 2026</p>
           <div class="btn-group no-print">
             <a class="btn btn-primary" href="assets/pdf/Chao_YuChen_CV_EN.pdf" download data-cv-download="Chao_YuChen_CV" data-i18n="home.hero.ctaCv">Download CV (PDF)</a>
-            <a class="btn" href="assets/pdf/Chao_YuChen_CV_Full_EN.pdf" download data-cv-download="Chao_YuChen_CV_Full" data-i18n="cv.downloadFull">Download the full CV (PDF)</a>
-            <button class="btn" type="button" data-action="print" data-i18n="cv.print">Print or save as PDF</button>
+            <a class="btn" href="research.html" data-i18n="home.hero.research">Read the research</a>
           </div>
-          <p class="hero-kicker no-print"><a href="research.html" data-i18n="home.hero.research">Research</a></p>
+          <p class="hero-kicker no-print">
+            <a href="assets/pdf/Chao_YuChen_CV_Full_EN.pdf" download data-cv-download="Chao_YuChen_CV_Full" data-i18n="home.contact.pdfFull">Full CV (PDF)</a>
+            ·
+            <button class="hero-print-link" type="button" data-action="print" data-i18n="cv.print">Print or save as PDF</button>
+          </p>
           <p class="muted small">
             <span data-i18n="cv.contact.location">New Taipei City, Taiwan</span>
             <span class="cv-phone"></span>
@@ -154,15 +157,15 @@
         <tbody>
           <tr>
             <th scope="row" data-i18n="home.contribute.row1">Financial data analysis</th>
-            <td class="mx-on"><a href="#evidence-pipeline"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
-            <td class="mx-on"><a href="projects.html#tableau"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col2">Tableau project</span></a></td>
+            <td class="mx-on"><a href="#evidence-pipeline" aria-label="Financial data analysis — Graduate research" data-i18n-attr="aria-label:home.contribute.link11"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
+            <td class="mx-on"><a href="projects.html#tableau" aria-label="Financial data analysis — Tableau project" data-i18n-attr="aria-label:home.contribute.link12"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col2">Tableau project</span></a></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
           </tr>
           <tr>
             <th scope="row" data-i18n="home.contribute.row2">Econometrics and reproducible analysis</th>
-            <td class="mx-on"><a href="#evidence-panel"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
+            <td class="mx-on"><a href="#evidence-panel" aria-label="Econometrics and reproducible analysis — Graduate research" data-i18n-attr="aria-label:home.contribute.link21"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
@@ -170,8 +173,8 @@
           </tr>
           <tr>
             <th scope="row" data-i18n="home.contribute.row3">Data visualisation and communication</th>
-            <td class="mx-on"><a href="research.html#story"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
-            <td class="mx-on"><a href="projects.html#tableau"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col2">Tableau project</span></a></td>
+            <td class="mx-on"><a href="research.html#story" aria-label="Data visualisation and communication — Graduate research" data-i18n-attr="aria-label:home.contribute.link31"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col1">Graduate research</span></a></td>
+            <td class="mx-on"><a href="projects.html#tableau" aria-label="Data visualisation and communication — Tableau project" data-i18n-attr="aria-label:home.contribute.link32"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col2">Tableau project</span></a></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
@@ -180,8 +183,8 @@
             <th scope="row" data-i18n="home.contribute.row4">Documentation and compliance</th>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
-            <td class="mx-on"><a href="#evidence-compliance"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col3">Evershine internship</span></a></td>
-            <td class="mx-on"><a href="#evidence-docs"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
+            <td class="mx-on"><a href="#evidence-compliance" aria-label="Documentation and compliance — Evershine internship" data-i18n-attr="aria-label:home.contribute.link43"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col3">Evershine internship</span></a></td>
+            <td class="mx-on"><a href="#evidence-docs" aria-label="Documentation and compliance — TechStarterWeb" data-i18n-attr="aria-label:home.contribute.link44"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
             <td class="mx-off" aria-hidden="true"></td>
           </tr>
           <tr>
@@ -189,7 +192,7 @@
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
-            <td class="mx-on"><a href="projects.html#techstarterweb"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
+            <td class="mx-on"><a href="projects.html#techstarterweb" aria-label="Website product development — TechStarterWeb" data-i18n-attr="aria-label:home.contribute.link54"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
             <td class="mx-off" aria-hidden="true"></td>
           </tr>
           <tr>
@@ -197,8 +200,8 @@
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
             <td class="mx-off" aria-hidden="true"></td>
-            <td class="mx-on"><a href="projects.html#techstarterweb"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
-            <td class="mx-on"><a href="projects.html#workflow"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col5">AI collaboration workflow</span></a></td>
+            <td class="mx-on"><a href="projects.html#techstarterweb" aria-label="AI agent collaboration and automation — TechStarterWeb" data-i18n-attr="aria-label:home.contribute.link64"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col4">TechStarterWeb</span></a></td>
+            <td class="mx-on"><a href="projects.html#workflow" aria-label="AI agent collaboration and automation — AI collaboration workflow" data-i18n-attr="aria-label:home.contribute.link65"><span class="mx-dot" aria-hidden="true"></span><span class="mx-label" data-i18n="home.contribute.col5">AI collaboration workflow</span></a></td>
           </tr>
         </tbody>
       </table>
@@ -274,7 +277,7 @@
             <div class="stage-card">
               <div class="scene-head"><span class="scene-title" data-i18n="cv.tour.timelineTitle">Education, research and practice, 2023–2027</span></div>
               <div class="stage-visual" data-visual="timeline"></div>
-              <p class="stage-caption" data-i18n="cv.tour.timelineCaption">Dates as on this CV. The final-year project is drawn across the 2025–26 academic year; hover or tab to a bar for its dates.</p>
+              <p class="stage-caption" data-i18n="cv.tour.timelineCaption">Dates as on this CV. The final-year project is drawn across the 2025–26 academic year; hover, tap or tab to a bar for its dates.</p>
             </div>
           </div>
         </div>
@@ -350,7 +353,7 @@
       <h2 data-i18n="cv.profile.heading">Profile</h2>
       <figure class="work-timeline screen-only">
         <div class="work-timeline-plot" data-timeline></div>
-        <figcaption class="small muted" data-i18n="home.work.tlNote">Overview of the dates in this CV; hover over or tab to a bar for details.</figcaption>
+        <figcaption class="small muted" data-i18n="home.work.tlNote">Overview of the dates in this CV; hover, tap or tab to a bar for details.</figcaption>
       </figure>
       <p data-i18n="cv.profile.target">I am seeking graduate roles in financial data analysis, banking analytics, and FinTech strategy, and master's study in finance or business analytics.</p>
       <p data-i18n="cv.profile.body">Accounting and finance graduate with a completed empirical research project on digital payment pressure and bank net fee margins in an ASEAN-3 bank panel (39 banks, 344 bank-year observations, 2014–2022). Comfortable across the whole research workflow: building a clean panel dataset, documenting variable definitions, estimating fixed-effects models with clustered standard errors, testing robustness, and communicating what the evidence does and does not support. Additional experience in Tableau data storytelling and cross-border tax work.</p>
@@ -401,16 +404,6 @@
         </div>
       </div>
       <p class="work-links"><a href="projects.html" data-i18n="nav.projects">Projects</a></p>
-    </div>
-  </section>
-
-  <section class="section" id="home-skills">
-    <div class="container">
-      <h2 data-i18n="op.skillsHeading">Skills and languages</h2>
-      <p data-i18n-html="op.skills1"><strong>Programming:</strong> Python 3.14 (pandas, NumPy, statsmodels, linearmodels, matplotlib, openpyxl), pytest, uv, Git and GitHub with a continuous-integration workflow.</p>
-      <p data-i18n-html="op.skills2"><strong>Econometrics:</strong> panel data with bank and year fixed effects, bank-clustered standard errors, winsorisation, log and interaction specifications, subsample robustness.</p>
-      <p data-i18n-html="op.skills3"><strong>Analysis and reporting:</strong> Tableau dashboards and data stories, advanced Excel, financial statement and bank margin analysis, cross-border tax documentation.</p>
-      <p data-i18n-html="op.lang1"><strong>Languages:</strong> Chinese (Mandarin), native; English, the language of instruction for the degree.</p>
     </div>
   </section>
 
@@ -493,7 +486,7 @@
         <div class="card">
           <h3 data-i18n="cv.skills.c1">Programming and libraries</h3>
           <ul class="card-list">
-            <li>Python 3.14 — pandas, NumPy, linearmodels, statsmodels, matplotlib, openpyxl, requests, BeautifulSoup4, python-docx.</li>
+            <li data-i18n="cv.skills.c1a">Python 3.14 — pandas, NumPy, linearmodels, statsmodels, matplotlib, openpyxl, requests, BeautifulSoup4, python-docx.</li>
             <li data-i18n-html="cv.skills.c1b">Reproducible environments with <code>uv</code> and dependency lock files; automated tests with <code>pytest</code>.</li>
             <li data-i18n="cv.skills.c1c">Version control and collaboration with Git and GitHub, including a continuous-integration workflow.</li>
           </ul>
@@ -597,7 +590,7 @@
 
   <section class="section" id="cv-projects">
     <div class="container">
-      <h2 data-i18n="cv.projects.heading">Selected projects and links</h2>
+      <h2 data-i18n="cv.projects.heading">Code and links</h2>
       <p class="work-links no-print">
         <span data-i18n="cv.projects.pageLead">Details on the Projects page:</span>
         <a href="projects.html#techstarterweb" data-i18n="cv.projects.pTsw">TechStarterWeb</a>
@@ -678,6 +671,7 @@
           <ul class="link-list">
             <li>
               <a href="assets/pdf/Chao_YuChen_CV_EN.pdf" download data-cv-download="Chao_YuChen_CV" data-i18n="home.contact.pdfOne">One-page CV (PDF)</a>
+              <span class="link-note" data-i18n="home.contact.pdfOneNote">One A4 page for applications.</span>
             </li>
             <li>
               <a href="assets/pdf/Chao_YuChen_CV_Full_EN.pdf" download data-cv-download="Chao_YuChen_CV_Full" data-i18n="home.contact.pdfFull">Full CV (PDF)</a>
@@ -731,7 +725,7 @@
       </div>
     </div>
     <div class="footer-legal">
-      <p>© <span data-current-year>2026</span> <span data-i18n="name.short">Yu-Chen Chao</span>. <span data-i18n="footer.rights">Site content is my own; the research code is published under the MIT License.</span></p>
+      <p>© <span data-current-year>2026</span> <span data-i18n="name.short">Yu-Chen Chao</span> · <span data-i18n="footer.rights">Site content is my own; the research code is published under the MIT License.</span></p>
       <p data-i18n="footer.data">The research uses restricted bank data. No restricted observations, bank identifiers, or third-party datasets are published on this site.</p>
     </div>
   </div>
