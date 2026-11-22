@@ -91,6 +91,10 @@
   border: 1px solid var(--cv-line);
 }
 
+.cv-sheet :is(h1, h2, h3, h4) {
+  color: var(--cv-ink);
+}
+
 .cv-name {
   margin: 0;
   font-size: 20pt;

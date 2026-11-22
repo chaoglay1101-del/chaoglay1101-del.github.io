@@ -806,6 +806,32 @@ a[target="_blank"]::after {
   background: var(--surface);
 }
 
+@media screen {
+  .research-page .table-wrap {
+    container-type: inline-size;
+    --table-shadow: color-mix(in srgb, var(--ink) 24%, transparent);
+    background:
+      linear-gradient(to right, var(--surface) 30%, transparent) left / 2rem 100% local,
+      linear-gradient(to left, var(--surface) 30%, transparent) right / 2rem 100% local,
+      radial-gradient(farthest-side at left, var(--table-shadow), transparent) left / 0.8rem 100% scroll,
+      radial-gradient(farthest-side at right, var(--table-shadow), transparent) right / 0.8rem 100% scroll,
+      var(--surface);
+    background-repeat: no-repeat;
+  }
+
+  .research-page .table-wrap tbody th {
+    min-width: 8rem;
+  }
+
+  .research-page .table-wrap caption {
+    box-sizing: border-box;
+    position: sticky;
+    inset-inline-start: 0;
+    width: 100cqi;
+    overflow-wrap: break-word;
+  }
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -958,6 +984,20 @@ figure svg {
   background: var(--surface);
 }
 
+@media screen {
+  html[data-theme="dark"] .research-page img[src="assets/img/research-design.svg"] {
+    filter: brightness(0.85);
+    border-color: color-mix(in srgb, var(--line) 55%, transparent);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  html:not([data-theme]) .research-page img[src="assets/img/research-design.svg"] {
+    filter: brightness(0.85);
+    border-color: color-mix(in srgb, var(--line) 55%, transparent);
+  }
+}
+
 figcaption {
   margin-top: 0.65rem;
   font-size: 0.87rem;
@@ -974,6 +1014,9 @@ figcaption {
   overflow-x: auto;
   margin: 1.25rem 0;
 }
+
+/* One command per line, as typed in a terminal. */
+.formula--commands { white-space: pre-line; }
 
 /* --- Link lists --------------------------------------------------------- */
 
@@ -1084,8 +1127,15 @@ figcaption {
   font-weight: 600;
 }
 
-.hero-kicker a:not([target="_blank"])::after {
-  content: " \2192";
+.hero-print-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
 }
 
 .matrix {
@@ -1402,10 +1452,14 @@ main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a):focus-vi
   margin-top: 0.9rem;
 }
 
-/* Four projects: two by two, so the fourth does not sit alone on a row. */
+/* The research card has its own row above the four remaining projects. */
 @media (min-width: 52rem) {
-  .project-index--four {
+  .project-index--five {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-index--five > :first-child {
+    grid-column: 1 / -1;
   }
 }
 
@@ -1766,17 +1820,20 @@ mark.mk {
   }
 
   .js .story-stage { display: block; }
-  .js .story .step { min-height: 76vh; display: flex; align-items: center; padding-block: 3rem; }
+  .js .story .step { display: flex; align-items: center; padding-block: 3rem; }
   .js .story .step + .step { border-top: 0; }
-  .js .story .step:first-child { min-height: 62vh; align-items: flex-start; padding-top: 0.5rem; }
-  .js .story .step:last-child { min-height: 86vh; }
+  .js .story .step:first-child { align-items: flex-start; padding-top: 0.5rem; }
   /* --step-dim is set per theme so a faded step still reads at 4.5:1. */
   .js .story .step-text { opacity: var(--step-dim, 0.85); transition: opacity 0.45s ease; }
   .js .story .step.is-active .step-text { opacity: 1; }
-  .js .story--cv .step { min-height: 64vh; }
-  .js .story--project .step { min-height: 46vh; }
-  .js .story--project .step:first-child { min-height: 40vh; }
-  .js .story--project .step:last-child { min-height: 60vh; }
+  /* Step heights apply to scrolling only; presentation mode sizes steps itself. */
+  .js .story:not(.is-presenting) .step { min-height: 52vh; }
+  .js .story:not(.is-presenting) .step:first-child { min-height: 44vh; }
+  .js .story:not(.is-presenting) .step:last-child { min-height: 64vh; }
+  .js .story--cv:not(.is-presenting) .step { min-height: 44vh; }
+  .js .story--project:not(.is-presenting) .step { min-height: 36vh; }
+  .js .story--project:not(.is-presenting) .step:first-child { min-height: 32vh; }
+  .js .story--project:not(.is-presenting) .step:last-child { min-height: 48vh; }
 }
 
 @media (max-width: 899px) {
@@ -1819,7 +1876,8 @@ mark.mk {
 .viz .t-halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
 .viz path,
 .viz circle,
-.viz line { pointer-events: none; }
+.viz line,
+.viz rect:not(.hit) { pointer-events: none; }
 .viz .rule { stroke: var(--line-strong); stroke-width: 1; fill: none; }
 .viz .gridline { stroke: var(--line); stroke-width: 1; fill: none; }
 .viz .row-guide { stroke: var(--line); stroke-width: 1; fill: none; }
@@ -2554,7 +2612,7 @@ html.is-presenting body { overflow: hidden; }
   .hero-text:has([data-i18n="home.hero.role"]) > .hero-name,
   .hero-text:has([data-i18n="home.hero.role"]) > h1 {
     grid-column: 1;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
 
   .hero-text:has([data-i18n="home.hero.role"]) > .hero-name {
@@ -2583,6 +2641,22 @@ html.is-presenting body { overflow: hidden; }
 
   .fact-strip > li:has([data-i18n="home.facts.gpa"]) {
     grid-column: 1 / -1;
+  }
+
+  .research-page .hero .fact-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .site-header .brand-role {
+    display: none;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  button kbd {
+    display: none;
   }
 }
 
@@ -2707,9 +2781,10 @@ html.story-off .project-section .section-head [data-story] { display: none; }
   html.story-off .story--project .step-text { opacity: 1; }
 
   /* Shorter steps than the research page: a project is four or five of them. */
-  .js .story--project.is-ready .step { min-height: 50vh; padding-block: 2rem; }
-  .js .story--project.is-ready .step:first-child { min-height: 44vh; }
-  .js .story--project.is-ready .step:last-child { min-height: 60vh; }
+  .js .story--project.is-ready .step { padding-block: 2rem; }
+  .js .story--project.is-ready:not(.is-presenting) .step { min-height: 39vh; }
+  .js .story--project.is-ready:not(.is-presenting) .step:first-child { min-height: 35vh; }
+  .js .story--project.is-ready:not(.is-presenting) .step:last-child { min-height: 48vh; }
 }
 
 .story--project .step-text { max-width: 30rem; }

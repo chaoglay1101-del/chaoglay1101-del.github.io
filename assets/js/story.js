@@ -584,11 +584,13 @@
       // a second row of label slots above and below each lane.
       var overview = focusStep === "all";
       var m = { t: overview && narrow ? 34 : 18, b: 30, l: narrow ? laneLabelW : laneLabelW + 6, r: 8 };
-      var laneH = narrow ? (overview ? 58 : 34) : 50;
+      // 56 on wide screens: at 50, "Degree conferred" (below its point) touched the research label underneath.
+      var laneH = narrow ? (overview ? 58 : 34) : 56;
       var H = m.t + laneH * TIMELINE.lanes.length + m.b;
       var x = lin(TIMELINE.from, TIMELINE.to, m.l, W - m.r);
       var items = TIMELINE.items.filter(function (it) { return overview || !it.overviewOnly; });
       var svg = svgRoot(W, H, s(overview ? "tl.ariaAll" : "tl.aria"));
+      svg.classList.add("viz--timeline");
       var hits = S("g", null);
       svg.appendChild(hits);
       var focus = overview ? items.map(function (it) { return it.id; }) : (TIMELINE.focus[focusStep] || []);
@@ -788,6 +790,13 @@
       }
     });
     document.addEventListener("focusout", hideTip);
+    document.addEventListener("click", function (event) {
+      var target = event.target.closest && event.target.closest(".viz--timeline [data-tip-v]");
+      // A tap elsewhere closes the tip: touch screens send no pointermove to hide it.
+      if (!target) { hideTip(); return; }
+      var box = target.getBoundingClientRect();
+      showTip(target.getAttribute("data-tip-t"), target.getAttribute("data-tip-v"), box.left + box.width / 2, box.top);
+    });
     window.addEventListener("scroll", hideTip, { passive: true });
 
     var toastEl = document.createElement("div");
