@@ -125,7 +125,7 @@
  "cv.tour.heading": "This CV in six steps",
  "cv.tour.lede": "The same record as below, told in order: where the research question came from, what I built, what it found, and what I want to study next. Present it to step through one highlight at a time.",
  "cv.tour.present": "Present the two-minute version",
- "cv.tour.s1.body": "BSc (Hons) Accounting and Finance from the University of Birmingham, taught in English at its Singapore campus: <mark class=\"mk mk--key\" data-mark=\"1\">Class II (Division I), GPA 3.25</mark>, with the degree conferred on 12 November 2026. <mark class=\"mk mk--find\" data-mark=\"2\">I am seeking graduate roles in financial data analysis and master's study in finance or business analytics.</mark>",
+ "cv.tour.s1.body": "BSc (Hons) Accounting and Finance from the University of Birmingham, taught in English at its Singapore campus: <mark class=\"mk mk--key\" data-mark=\"1\">Class II (Division I), GPA 3.25</mark>, with the degree conferred on 12 November 2026. <mark class=\"mk mk--find\" data-mark=\"2\">I am seeking graduate roles in financial data analysis, banking analytics, and FinTech strategy, and master's study in finance or business analytics.</mark>",
  "cv.tour.s1.kicker": "Who I am",
  "cv.tour.s1.title": "Accounting and finance graduate, doing empirical research on digital payments",
  "cv.tour.s2.body": "In my Business Analytics Tableau story, submitted in December 2025, <mark class=\"mk mk--find\" data-mark=\"1\">digital payment use ran ahead of debit-card ownership</mark>. That raised the question my final-year project tested: <mark class=\"mk mk--key\" data-mark=\"2\">what happens to banks' fee income as payments move away from cards?</mark>",

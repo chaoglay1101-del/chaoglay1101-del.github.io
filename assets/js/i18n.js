@@ -147,7 +147,7 @@ window.SITE_I18N = {
     "cv.tour.heading": "用六個步驟​讀這份履歷",
     "cv.tour.lede": "內容和下方的履歷相同，只是依序說出來：研究問題從哪裡來、我做了什麼、發現了什麼，以及接下來想研究什麼。切換成簡報模式，就能一次推進一個重點。",
     "cv.tour.present": "以簡報模式播放兩分鐘版本",
-    "cv.tour.s1.body": "伯明罕大學會計與金融榮譽理學士，於新加坡校區以英語授課：<mark class=\"mk mk--key\" data-mark=\"1\">二級甲等（Class II, Division I），GPA 3.25</mark>，學位於 2026 年 11 月 12 日授予。<mark class=\"mk mk--find\" data-mark=\"2\">我正在尋找財務資料分析相關職位，以及財務金融或商業分析領域的碩士學程。</mark>",
+    "cv.tour.s1.body": "伯明罕大學會計與金融榮譽理學士，於新加坡校區以英語授課：<mark class=\"mk mk--key\" data-mark=\"1\">二級甲等（Class II, Division I），GPA 3.25</mark>，學位於 2026 年 11 月 12 日授予。<mark class=\"mk mk--find\" data-mark=\"2\">我正在尋找財務資料分析、銀行數據分析與金融科技策略相關的畢業生職位，以及財務金融或商業分析領域的碩士學程。</mark>",
     "cv.tour.s1.kicker": "我是誰",
     "cv.tour.s1.title": "會計與金融畢業，​做數位支付的實證研究",
     "cv.tour.s2.body": "我在 2025 年 12 月繳交的商業分析 Tableau 故事中，發現<mark class=\"mk mk--find\" data-mark=\"1\">數位支付使用率高於簽帳金融卡持有率</mark>。這引出了畢業專題要檢驗的問題：<mark class=\"mk mk--key\" data-mark=\"2\">當支付離開卡片通路，銀行的手續費收入會如何變化？</mark>",
