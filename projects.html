@@ -64,23 +64,162 @@
         <p class="lede" data-i18n="projects.lede">Practice and coursework projects: what each one is, what I did, what it does not do yet, and where to see it. The graduate research has its own page.</p>
       </div>
       <nav class="project-index project-index--four" aria-label="Projects on this page" data-i18n-attr="aria-label:research.index.label">
-        <a href="#techstarterweb">
-          <span class="project-index-kind" data-i18n="research.index.p3kind">Web studio · since October 2026</span>
-          <span class="project-index-title" data-i18n="research.index.p3">TechStarterWeb: studio website and order back office</span>
+        <a href="#research-summary">
+          <span class="project-index-kind" data-i18n="research.index.p1kind">Final-year research · 2025–2026</span>
+          <span class="project-index-title" data-i18n="research.index.p1">Digital payment pressure and bank net fee margins</span>
         </a>
         <a href="#tableau">
           <span class="project-index-kind" data-i18n="research.index.p2kind">Business Analytics coursework · December 2025</span>
           <span class="project-index-title" data-i18n="research.index.p2">Mobile money adoption in the Global South (Tableau)</span>
         </a>
+        <a href="#techstarterweb">
+          <span class="project-index-kind" data-i18n="research.index.p3kind">Web studio · since October 2026</span>
+          <span class="project-index-title" data-i18n="research.index.p3">TechStarterWeb: studio website and order back office</span>
+        </a>
         <a href="#workflow">
           <span class="project-index-kind" data-i18n="projects.index.p3kind">Open source · from TechStarterWeb</span>
           <span class="project-index-title" data-i18n="projects.index.p3">layered-ai-dev-workflow: working with AI coding agents</span>
         </a>
-        <a href="#research-summary">
-          <span class="project-index-kind" data-i18n="research.index.p1kind">Final-year research · 2025–2026</span>
-          <span class="project-index-title" data-i18n="research.index.p1">Digital payment pressure and bank net fee margins</span>
+        <a href="#github-toolbox">
+          <span class="project-index-kind" data-i18n="projects.index.p4kind">Personal project</span>
+          <span class="project-index-title" data-i18n="projects.index.p4">GitHub toolbox: confirm-first installs and update tracking</span>
         </a>
       </nav>
+    </div>
+  </section>
+
+  <section class="section project-section" id="research-summary">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="projects.rs.eyebrow">Graduate research</span>
+        <h2 data-i18n="home.work.r1title">Digital payment pressure and bank net fee margins</h2>
+        <p data-i18n="home.work.r1body">A panel of 39 commercial banks in Indonesia, Malaysia and Thailand, 2014–2022. The log specification shows a negative, statistically significant pooled association that comes mainly from differences between countries: a conditional association, not a causal effect.</p>
+      </div>
+      <p class="work-links">
+        <a href="research.html" data-i18n="projects.rs.link">Read the research page</a>
+        <a href="research.html#story" data-i18n="home.work.r1link">Findings in six steps</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section project-section" id="tableau">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="research.tab.eyebrow">Business Analytics coursework</span>
+        <h2 id="tableau-heading" data-i18n="research.tab.heading">Mobile money adoption in the Global South</h2>
+        <p data-i18n="research.tab.lede">An individual Tableau story, submitted in December 2025: five dashboards on how mobile money is spreading across the Global South, built from World Bank Global Findex and GSMA data.</p>
+        <p class="card-meta" data-i18n="research.tab.meta">Tableau · Excel · Python · World Bank Findex and GSMA data</p>
+        <button class="btn btn-primary btn-small" type="button" data-story="present" data-from-start><span data-i18n="projects.present">Present this project</span> <kbd>P</kbd></button>
+      </div>
+      <div class="story story--project" id="tableau-deck" data-deck="tableau" data-deck-prefix="tableau" data-deck-title="#tableau-heading" tabindex="-1">
+        <div class="story-steps">
+          <article class="step" id="tableau-1" data-clicks="2" aria-labelledby="tableau-1-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="projects.k.data">The data</span></p>
+              <h3 id="tableau-1-title" data-i18n="projects.tab.s1.title">From 437 coded fields to 24 measures</h3>
+              <p data-i18n-html="projects.tab.s1.body"><mark class="mk mk--find" data-mark="1">An extract of 437 coded Findex fields across 174 economies was mapped down to 24 business-readable measures.</mark> <mark class="mk mk--find" data-mark="2">The 2011 and 2022 waves were dropped for thin coverage, leaving 171 economies.</mark></p>
+            </div>
+            <figure class="scene scene--static scene--funnel" aria-labelledby="tab-s1-fig">
+              <div class="scene-head"><span class="scene-title" id="tab-s1-fig" data-i18n="projects.tab.fig1">Data preparation</span></div>
+              <ul class="funnel">
+                <li class="funnel-row" data-mark="1">
+                  <span class="funnel-k" data-i18n="projects.tab.fFields">Coded fields to measures</span>
+                  <span class="funnel-v"><span class="funnel-num">437</span><i class="funnel-line" aria-hidden="true"></i><span class="funnel-num funnel-num--to">24</span></span>
+                </li>
+                <li class="funnel-row" data-mark="2">
+                  <span class="funnel-k" data-i18n="projects.tab.fEcon">Economies</span>
+                  <span class="funnel-v"><span class="funnel-num">174</span><i class="funnel-line" aria-hidden="true"></i><span class="funnel-num funnel-num--to">171</span></span>
+                </li>
+                <li class="funnel-row" data-mark="2">
+                  <span class="funnel-k" data-i18n="projects.tab.fWaves">Survey waves</span>
+                  <ol class="waves">
+                  <li class="wave is-dropped">2011<span class="visually-hidden"> (<span data-i18n="projects.tab.fDropped">dropped</span>)</span></li>
+                  <li class="wave">2014</li>
+                  <li class="wave">2017</li>
+                  <li class="wave">2021</li>
+                  <li class="wave is-dropped">2022<span class="visually-hidden"> (<span data-i18n="projects.tab.fDropped">dropped</span>)</span></li>
+                  <li class="wave">2024</li>
+                  </ol>
+                </li>
+              </ul>
+            </figure>
+          </article>
+          <article class="step" id="tableau-2" data-clicks="3" aria-labelledby="tableau-2-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">2</span><span data-i18n="projects.k.story">The story</span></p>
+              <h3 id="tableau-2-title" data-i18n="projects.tab.s2.title">Five dashboards, each with an insight and a recommendation</h3>
+              <p data-i18n-html="projects.tab.s2.body"><mark class="mk mk--find" data-mark="1">A cover opens the story</mark>, <mark class="mk mk--find" data-mark="2">five interactive dashboards follow</mark>, and <mark class="mk mk--key" data-mark="3">a conclusion closes it</mark>.</p>
+            </div>
+            <figure class="scene scene--static scene--order" aria-labelledby="tab-s2-fig">
+              <div class="scene-head"><span class="scene-title" id="tab-s2-fig" data-i18n="projects.tab.fig2">The story, in order</span></div>
+              <ol class="order">
+                <li class="order-item order-item--end" data-mark="1"><span class="flow-dot flow-dot--plain" aria-hidden="true"></span><span data-i18n="projects.tab.cover">Cover</span></li>
+                <li class="order-item" data-mark="2" style="--i:0"><span class="flow-dot" aria-hidden="true"></span><span>Mobile Money Boom</span></li>
+                <li class="order-item" data-mark="2" style="--i:1"><span class="flow-dot" aria-hidden="true"></span><span>Leapfrogging the Plastic Era</span></li>
+                <li class="order-item" data-mark="2" style="--i:2"><span class="flow-dot" aria-hidden="true"></span><span>The Catch-Up</span></li>
+                <li class="order-item" data-mark="2" style="--i:3"><span class="flow-dot" aria-hidden="true"></span><span>The Usage Paradox</span></li>
+                <li class="order-item" data-mark="2" style="--i:4"><span class="flow-dot" aria-hidden="true"></span><span>Platform Transformation</span></li>
+                <li class="order-item order-item--end" data-mark="3"><span class="flow-dot flow-dot--plain" aria-hidden="true"></span><span data-i18n="projects.tab.conclusion">Conclusion</span></li>
+              </ol>
+            </figure>
+          </article>
+          <article class="step" id="tableau-3" data-clicks="3" aria-labelledby="tableau-3-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">3</span><span data-i18n="research.tab.foundHeading">What it found</span></p>
+              <h3 id="tableau-3-title" data-i18n="projects.tab.s3.title">Mobile money leads in Sub-Saharan Africa</h3>
+              <p data-i18n-html="projects.tab.s3.body">Adoption <mark class="mk mk--find" data-mark="1">expanded steadily from 2014</mark>. Digital payment use <mark class="mk mk--find" data-mark="2">runs ahead of debit-card ownership</mark>, and <mark class="mk mk--key" data-mark="3">savings trail both</mark>.</p>
+            </div>
+          </article>
+          <article class="step" id="tableau-4" data-clicks="2" aria-labelledby="tableau-4-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">4</span><span data-i18n="projects.k.limits">Limits</span></p>
+              <h3 id="tableau-4-title" data-i18n="projects.tab.s4.title">What the data cannot show</h3>
+              <p data-i18n-html="projects.tab.s4.body">My critical assessment of each dashboard names the limits: <mark class="mk mk--warn" data-mark="1">no transaction-level detail</mark> and <mark class="mk mk--warn" data-mark="2">no qualitative evidence</mark>.</p>
+            </div>
+          </article>
+          <article class="step" id="tableau-5" data-clicks="1" aria-labelledby="tableau-5-title">
+            <div class="step-text">
+              <p class="step-kicker"><span class="step-num" aria-hidden="true">5</span><span data-i18n="research.tab.ledHeading">Where it led</span></p>
+              <h3 id="tableau-5-title" data-i18n="projects.tab.s5.title">It led to my final-year research</h3>
+              <p data-i18n-html="projects.tab.s5.body"><mark class="mk mk--find" data-mark="1">Digital payment use running ahead of debit-card ownership</mark> raised the question my final-year project tested: what happens to banks' fee income as payments move away from cards.</p>
+              <a class="story-cite" href="research.html#story" data-i18n="research.tab.ledLink">Back to the final-year research</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="story-stage">
+          <div class="stage-inner">
+            <div class="stage-top">
+              <ol class="stage-pills" aria-label="Steps" data-i18n-attr="aria-label:story.ui.steps"></ol>
+              <div class="stage-actions">
+                <button class="btn btn-small" type="button" data-story="copy-link"><span data-i18n="story.ui.copy">Copy link</span></button>
+                <button class="btn btn-small btn-primary" type="button" data-story="present"><span data-i18n="story.ui.present">Present</span> <kbd>P</kbd></button>
+              </div>
+            </div>
+            <div class="stage-scenes"></div>
+          </div>
+        </div>
+      </div>
+      <p class="work-links">
+        <a href="https://public.tableau.com/views/BANALAssignment2/STORY" rel="noopener noreferrer" target="_blank" data-i18n="research.tab.linkPublic">Tableau Public story</a>
+        <a href="https://github.com/chaoglay1101-del/mobile-money-adoption-tableau" rel="noopener noreferrer" target="_blank" data-i18n="research.tab.linkRepo">Repository</a>
+      </p>
+      <details class="more screen-only">
+        <summary data-i18n="research.tab.embedSummary">Open the interactive story on this page</summary>
+        <figure class="embedded-work tableau-showcase">
+          <div class="tableau-fit">
+            <iframe
+              class="tableau-frame"
+              src="https://public.tableau.com/views/BANALAssignment2/STORY?:showVizHome=no&amp;:embed=y&amp;:tabs=no"
+              title="Mobile Money Adoption in the Global South — Tableau story"
+              data-i18n-attr="title:research.tab.embedTitle"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+          <figcaption class="tableau-note" data-i18n="research.tab.embedNote">Scaled to fit this screen. The Tableau Public story link above opens it at full size.</figcaption>
+        </figure>
+      </details>
     </div>
   </section>
 
@@ -207,131 +346,20 @@
           </div>
         </div>
       </div>
+      <details class="more">
+        <summary data-i18n="projects.tsw.more">More from the studio work</summary>
+        <ul class="card-list">
+          <li data-i18n="cv.exp.c2">Stack: Astro on Cloudflare Workers, a Cloudflare D1 database, Cloudflare Access sign-in with one-time email codes, and OpenCC for the Simplified Chinese pages.</li>
+          <li data-i18n="cv.exp.c5">Built a prototype pipeline: one click in the back office creates a client's repository from a template and publishes a no-index preview; a test order went live in about two and a half minutes.</li>
+          <li data-i18n="cv.exp.c7">Added a client pipeline: an intake form, a copy draft the client comments on, automatic edits delivered as a pull request, and a private page for change requests and launch approval. So far it has run on internal test orders only.</li>
+          <li data-i18n="cv.exp.c8">Built a back-office kit for merchant sites: shop orders go into the client's own database, and the merchant confirms orders, sets market prices, tracks stock and prints picking lists. Tested end to end by simulating five kinds of merchant.</li>
+          <li data-i18n="cv.exp.c9">Put security rules into tests and CI: Turnstile bot protection on the enquiry form, secret scanning on every pull request, and a test that fails any SQL statement built from variables.</li>
+        </ul>
+      </details>
       <p class="work-links">
         <a href="https://techstarterweb.com/" rel="noopener noreferrer" target="_blank" data-i18n="research.tsw.linkSite">techstarterweb.com</a>
         <a href="index.html#cv-experience" data-i18n="research.tsw.linkCv">The CV entry</a>
       </p>
-    </div>
-  </section>
-
-  <section class="section project-section" id="tableau">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow" data-i18n="research.tab.eyebrow">Business Analytics coursework</span>
-        <h2 id="tableau-heading" data-i18n="research.tab.heading">Mobile money adoption in the Global South</h2>
-        <p data-i18n="research.tab.lede">An individual Tableau story, submitted in December 2025: five dashboards on how mobile money is spreading across the Global South, built from World Bank Global Findex and GSMA data.</p>
-        <p class="card-meta" data-i18n="research.tab.meta">Tableau · Excel · Python · World Bank Findex and GSMA data</p>
-        <button class="btn btn-primary btn-small" type="button" data-story="present" data-from-start><span data-i18n="projects.present">Present this project</span> <kbd>P</kbd></button>
-      </div>
-      <div class="story story--project" id="tableau-deck" data-deck="tableau" data-deck-prefix="tableau" data-deck-title="#tableau-heading" tabindex="-1">
-        <div class="story-steps">
-          <article class="step" id="tableau-1" data-clicks="2" aria-labelledby="tableau-1-title">
-            <div class="step-text">
-              <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="projects.k.data">The data</span></p>
-              <h3 id="tableau-1-title" data-i18n="projects.tab.s1.title">From 437 coded fields to 24 measures</h3>
-              <p data-i18n-html="projects.tab.s1.body"><mark class="mk mk--find" data-mark="1">An extract of 437 coded Findex fields across 174 economies was mapped down to 24 business-readable measures.</mark> <mark class="mk mk--find" data-mark="2">The 2011 and 2022 waves were dropped for thin coverage, leaving 171 economies.</mark></p>
-            </div>
-            <figure class="scene scene--static scene--funnel" aria-labelledby="tab-s1-fig">
-              <div class="scene-head"><span class="scene-title" id="tab-s1-fig" data-i18n="projects.tab.fig1">Data preparation</span></div>
-              <ul class="funnel">
-                <li class="funnel-row" data-mark="1">
-                  <span class="funnel-k" data-i18n="projects.tab.fFields">Coded fields to measures</span>
-                  <span class="funnel-v"><span class="funnel-num">437</span><i class="funnel-line" aria-hidden="true"></i><span class="funnel-num funnel-num--to">24</span></span>
-                </li>
-                <li class="funnel-row" data-mark="2">
-                  <span class="funnel-k" data-i18n="projects.tab.fEcon">Economies</span>
-                  <span class="funnel-v"><span class="funnel-num">174</span><i class="funnel-line" aria-hidden="true"></i><span class="funnel-num funnel-num--to">171</span></span>
-                </li>
-                <li class="funnel-row" data-mark="2">
-                  <span class="funnel-k" data-i18n="projects.tab.fWaves">Survey waves</span>
-                  <ol class="waves">
-                  <li class="wave is-dropped">2011<span class="visually-hidden"> (<span data-i18n="projects.tab.fDropped">dropped</span>)</span></li>
-                  <li class="wave">2014</li>
-                  <li class="wave">2017</li>
-                  <li class="wave">2021</li>
-                  <li class="wave is-dropped">2022<span class="visually-hidden"> (<span data-i18n="projects.tab.fDropped">dropped</span>)</span></li>
-                  <li class="wave">2024</li>
-                  </ol>
-                </li>
-              </ul>
-            </figure>
-          </article>
-          <article class="step" id="tableau-2" data-clicks="3" aria-labelledby="tableau-2-title">
-            <div class="step-text">
-              <p class="step-kicker"><span class="step-num" aria-hidden="true">2</span><span data-i18n="projects.k.story">The story</span></p>
-              <h3 id="tableau-2-title" data-i18n="projects.tab.s2.title">Five dashboards, each with an insight and a recommendation</h3>
-              <p data-i18n-html="projects.tab.s2.body"><mark class="mk mk--find" data-mark="1">A cover opens the story</mark>, <mark class="mk mk--find" data-mark="2">five interactive dashboards follow</mark>, and <mark class="mk mk--key" data-mark="3">a conclusion closes it</mark>.</p>
-            </div>
-            <figure class="scene scene--static scene--order" aria-labelledby="tab-s2-fig">
-              <div class="scene-head"><span class="scene-title" id="tab-s2-fig" data-i18n="projects.tab.fig2">The story, in order</span></div>
-              <ol class="order">
-                <li class="order-item order-item--end" data-mark="1"><span class="flow-dot flow-dot--plain" aria-hidden="true"></span><span data-i18n="projects.tab.cover">Cover</span></li>
-                <li class="order-item" data-mark="2" style="--i:0"><span class="flow-dot" aria-hidden="true"></span><span>Mobile Money Boom</span></li>
-                <li class="order-item" data-mark="2" style="--i:1"><span class="flow-dot" aria-hidden="true"></span><span>Leapfrogging the Plastic Era</span></li>
-                <li class="order-item" data-mark="2" style="--i:2"><span class="flow-dot" aria-hidden="true"></span><span>The Catch-Up</span></li>
-                <li class="order-item" data-mark="2" style="--i:3"><span class="flow-dot" aria-hidden="true"></span><span>The Usage Paradox</span></li>
-                <li class="order-item" data-mark="2" style="--i:4"><span class="flow-dot" aria-hidden="true"></span><span>Platform Transformation</span></li>
-                <li class="order-item order-item--end" data-mark="3"><span class="flow-dot flow-dot--plain" aria-hidden="true"></span><span data-i18n="projects.tab.conclusion">Conclusion</span></li>
-              </ol>
-            </figure>
-          </article>
-          <article class="step" id="tableau-3" data-clicks="3" aria-labelledby="tableau-3-title">
-            <div class="step-text">
-              <p class="step-kicker"><span class="step-num" aria-hidden="true">3</span><span data-i18n="research.tab.foundHeading">What it found</span></p>
-              <h3 id="tableau-3-title" data-i18n="projects.tab.s3.title">Mobile money leads in Sub-Saharan Africa</h3>
-              <p data-i18n-html="projects.tab.s3.body">Adoption <mark class="mk mk--find" data-mark="1">expanded steadily from 2014</mark>. Digital payment use <mark class="mk mk--find" data-mark="2">runs ahead of debit-card ownership</mark>, and <mark class="mk mk--key" data-mark="3">savings trail both</mark>.</p>
-            </div>
-          </article>
-          <article class="step" id="tableau-4" data-clicks="2" aria-labelledby="tableau-4-title">
-            <div class="step-text">
-              <p class="step-kicker"><span class="step-num" aria-hidden="true">4</span><span data-i18n="projects.k.limits">Limits</span></p>
-              <h3 id="tableau-4-title" data-i18n="projects.tab.s4.title">What the data cannot show</h3>
-              <p data-i18n-html="projects.tab.s4.body">My critical assessment of each dashboard names the limits: <mark class="mk mk--warn" data-mark="1">no transaction-level detail</mark> and <mark class="mk mk--warn" data-mark="2">no qualitative evidence</mark>.</p>
-            </div>
-          </article>
-          <article class="step" id="tableau-5" data-clicks="1" aria-labelledby="tableau-5-title">
-            <div class="step-text">
-              <p class="step-kicker"><span class="step-num" aria-hidden="true">5</span><span data-i18n="research.tab.ledHeading">Where it led</span></p>
-              <h3 id="tableau-5-title" data-i18n="projects.tab.s5.title">It led to my final-year research</h3>
-              <p data-i18n-html="projects.tab.s5.body"><mark class="mk mk--find" data-mark="1">Digital payment use running ahead of debit-card ownership</mark> raised the question my final-year project tested: what happens to banks' fee income as payments move away from cards.</p>
-              <a class="story-cite" href="research.html#story" data-i18n="research.tab.ledLink">Back to the final-year research</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="story-stage">
-          <div class="stage-inner">
-            <div class="stage-top">
-              <ol class="stage-pills" aria-label="Steps" data-i18n-attr="aria-label:story.ui.steps"></ol>
-              <div class="stage-actions">
-                <button class="btn btn-small" type="button" data-story="copy-link"><span data-i18n="story.ui.copy">Copy link</span></button>
-                <button class="btn btn-small btn-primary" type="button" data-story="present"><span data-i18n="story.ui.present">Present</span> <kbd>P</kbd></button>
-              </div>
-            </div>
-            <div class="stage-scenes"></div>
-          </div>
-        </div>
-      </div>
-      <p class="work-links">
-        <a href="https://public.tableau.com/views/BANALAssignment2/STORY" rel="noopener noreferrer" target="_blank" data-i18n="research.tab.linkPublic">Tableau Public story</a>
-        <a href="https://github.com/chaoglay1101-del/mobile-money-adoption-tableau" rel="noopener noreferrer" target="_blank" data-i18n="research.tab.linkRepo">Repository</a>
-      </p>
-      <details class="more screen-only">
-        <summary data-i18n="research.tab.embedSummary">Open the interactive story on this page</summary>
-        <figure class="embedded-work tableau-showcase">
-          <div class="tableau-fit">
-            <iframe
-              class="tableau-frame"
-              src="https://public.tableau.com/views/BANALAssignment2/STORY?:showVizHome=no&amp;:embed=y&amp;:tabs=no"
-              title="Mobile Money Adoption in the Global South — Tableau story"
-              data-i18n-attr="title:research.tab.embedTitle"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="strict-origin-when-cross-origin"></iframe>
-          </div>
-          <figcaption class="tableau-note" data-i18n="research.tab.embedNote">Scaled to fit this screen. The Tableau Public story link above opens it at full size.</figcaption>
-        </figure>
-      </details>
     </div>
   </section>
 
@@ -349,12 +377,12 @@
             <div class="step-text">
               <p class="step-kicker"><span class="step-num" aria-hidden="true">1</span><span data-i18n="projects.k.idea">The idea</span></p>
               <h3 id="workflow-1-title" data-i18n="projects.wf.s1.title">A lead agent plans, worker agents build, CI checks</h3>
-              <p data-i18n-html="projects.wf.s1.body"><mark class="mk mk--find" data-mark="1">A lead agent turns a to-do into a task card</mark>, <mark class="mk mk--find" data-mark="2">worker agents write the code</mark>, and <mark class="mk mk--key" data-mark="3">scripts and CI check whatever a rule can decide</mark>.</p>
+              <p data-i18n-html="projects.wf.s1.body"><mark class="mk mk--find" data-mark="1">A lead agent opens a task card with a file lock</mark>, <mark class="mk mk--find" data-mark="2">worker agents write the code</mark>, and <mark class="mk mk--key" data-mark="3">scripts and CI check whatever a rule can decide</mark>.</p>
             </div>
             <figure class="scene scene--static scene--chain" aria-labelledby="wf-s1-fig">
-              <div class="scene-head"><span class="scene-title" id="wf-s1-fig" data-i18n="projects.wf.fig1">From a to-do to a checked pull request</span></div>
+              <div class="scene-head"><span class="scene-title" id="wf-s1-fig" data-i18n="projects.wf.fig1">From a task card to a checked pull request</span></div>
               <ol class="flow-life">
-                <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life1">To-do</strong></span></li>
+                <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="projects.wf.issueTemplate">Issue template</strong></span></li>
                 <li class="flow-life-step" data-mark="1"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life2">Task card</strong></span></li>
                 <li class="flow-life-step" data-mark="2"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life5">Pull request</strong></span></li>
                 <li class="flow-life-step" data-mark="3"><span class="flow-dot" aria-hidden="true"></span><span class="flow-life-body"><strong class="flow-life-label" data-i18n="research.tsw.life6">CI checks</strong></span></li>
@@ -409,17 +437,23 @@
     </div>
   </section>
 
-  <section class="section project-section" id="research-summary">
+  <section class="section project-section" id="github-toolbox">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow" data-i18n="projects.rs.eyebrow">Graduate research</span>
-        <h2 data-i18n="home.work.r1title">Digital payment pressure and bank net fee margins</h2>
-        <p data-i18n="home.work.r1body">A panel of 39 commercial banks in Indonesia, Malaysia and Thailand, 2014–2022. The log specification shows a negative, statistically significant pooled association that comes mainly from differences between countries: a conditional association, not a causal effect.</p>
+        <span class="eyebrow" data-i18n="projects.ghtb.eyebrow">Personal project</span>
+        <h2 data-i18n="projects.ghtb.title">A GitHub toolbox that shows the real command before anything runs</h2>
+        <p data-i18n="projects.ghtb.body">A local web app I built for Windows: it turns "what do I want to get better at" into a specific, confirmed install, and turns "is everything still set up correctly" into one check instead of several separate ones.</p>
+        <p class="card-meta" data-i18n="projects.ghtb.meta">Python standard library only · local web UI · winget / npm / uv</p>
       </div>
-      <p class="work-links">
-        <a href="research.html" data-i18n="projects.rs.link">Read the research page</a>
-        <a href="research.html#story" data-i18n="home.work.r1link">Findings in six steps</a>
-      </p>
+      <ul class="card-list">
+        <li data-i18n="projects.ghtb.c1">Confirm before anything runs: every install, update, removal or settings change lists the exact commands first; nothing executes until I approve it.</li>
+        <li data-i18n="projects.ghtb.c2">No more watching one install finish before starting the next: asking for several tools, an update, or a settings change queues them, and they run one after another.</li>
+        <li data-i18n="projects.ghtb.c3">One check instead of several separate ones: a local health check confirms installed tools still run and settings are still applied, instead of checking each tool on its own when something feels off.</li>
+        <li data-i18n="projects.ghtb.c4">Updates checked together: the toolbox itself and every installed tool are checked for new versions in the same pass, instead of opening each tool's own updater.</li>
+        <li data-i18n="projects.ghtb.c5">New releases tracked without a daily check-in: a second part of the project scans followed GitHub repositories on a schedule, scores what changed so only the notable updates surface, and sends a desktop notification.</li>
+      </ul>
+      <p class="small muted" data-i18n="projects.ghtb.limits">Windows only, and limited to tools its installers (winget, npm and uv) can handle.</p>
+      <p class="small muted" data-i18n="projects.ghtb.private">Private repository; not published.</p>
     </div>
   </section>
 

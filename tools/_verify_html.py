@@ -68,16 +68,41 @@ def social_images(text: str) -> list[str]:
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input",
         "link", "meta", "param", "source", "track", "wbr"}
 
+# Heading levels are the only cue a screen-reader user has when jumping
+# through a page's structure; <title> inside an inline SVG is a different
+# element entirely and is intentionally excluded.
+HEADING_TAG_RE = re.compile(r"^h([1-6])$")
+
+
+def heading_structure_problems(headings: list[tuple[str, int, int]]) -> list[str]:
+    """Flag more than one <h1>, or a jump that skips a heading level."""
+    found = []
+    h1s = [h for h in headings if h[1] == 1]
+    if len(h1s) > 1:
+        lines = ", ".join(str(h[2]) for h in h1s)
+        found.append(f"two or more <h1> tags (lines {lines})")
+    for prev, curr in zip(headings, headings[1:]):
+        if curr[1] - prev[1] > 1:
+            found.append(
+                f"heading jumps from <{prev[0]}> (line {prev[2]}) to "
+                f"<{curr[0]}> (line {curr[2]}) without an intermediate level"
+            )
+    return found
+
 
 class Checker(html.parser.HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.stack = []
         self.errors = []
+        self.headings = []  # [(tag, level, lineno), ...] in document order
 
     def handle_starttag(self, tag, attrs):
         if tag not in VOID:
             self.stack.append(tag)
+        match = HEADING_TAG_RE.match(tag)
+        if match:
+            self.headings.append((tag, int(match.group(1)), self.getpos()[0]))
 
     def handle_endtag(self, tag):
         if tag in VOID:
@@ -104,6 +129,7 @@ for name in PAGES:
     absent = [action for action in needed if f'data-action="{action}"' not in text]
     external = external_link_problems(text)
     stray = stray_target_problems(text)
+    heading_problems = heading_structure_problems(parser.headings)
 
     print("=" * 60, name)
     print("  valid utf-8:", "yes")
@@ -111,6 +137,7 @@ for name in PAGES:
     print("  '??' remaining:", text.count("??"))
     print("  parser errors:", parser.errors or "none")
     print("  unclosed tags:", unclosed or "none")
+    print("  heading structure:", heading_problems or "ok")
     print("  i18n keys referenced:", len(set(re.findall(r'data-i18n[a-z-]*="([^"]+)"', text))))
 
     missing = []
@@ -156,6 +183,7 @@ for name in PAGES:
         or absent
         or external
         or stray
+        or heading_problems
     ):
         problems += 1
 

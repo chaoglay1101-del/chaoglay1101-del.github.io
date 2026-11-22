@@ -1,6 +1,5 @@
 {
-  "spec_version": "1.6",
-  "last_change": "規格書不受影響：首頁『兩分鐘導覽』(cv.tour.s1.body) 的求職目標敘述跟下方完整 Profile 段落 (cv.profile.target) 原本不一致（導覽只提一個方向，Profile 有三個），這次把導覽的中英文都補成跟 Profile 一樣的三個方向，純粹是同步重複敘述的字句，不影響規格書記錄的行為",
+  "spec_version": "1.8",
   "spec_doc": "https://docs.google.com/document/d/1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY/edit",
-  "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大），last_change 寫一句這次改了什麼。規格書內容不受影響時（例如只改一句文案），spec_version 不變，last_change 以「規格書不受影響：」開頭寫原因。CI 會檢查。"
+  "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大）。規格書內容不受影響時（例如只改一句文案），這個檔案不用改，在 PR 說明寫一行「規格書不受影響：原因」。這次改了什麼寫在 PR 說明，不寫在這裡：每個 PR 都改同一行會互相衝突。CI 會檢查。"
 }
