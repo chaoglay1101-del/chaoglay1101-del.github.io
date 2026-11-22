@@ -8,6 +8,8 @@ on:
   push:
     branches: [main]
   pull_request:
+    # edited：在 PR 說明補上「規格書不受影響：原因」後，spec-sync 會重跑
+    types: [opened, synchronize, reopened, edited]
   workflow_dispatch:
 
 permissions:
@@ -84,4 +86,6 @@ jobs:
         run: node --test "tools/tests/*.test.js"
 
       - name: Check that the spec was synced
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
         run: node tools/_check_spec_sync.mjs ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'HEAD^1' }}
