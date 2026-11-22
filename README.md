@@ -193,7 +193,7 @@ than a proper noun is wired into the translation workflow:
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `index.html` hero and its contact section |
 | Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree conferred 12 November 2026 | `index.html` (`cv.edu.meta`); the hero shows the classification, GPA, and conferral date without the weighted mark |
 | Phone: printed only. It is on the PDFs and on a printed page, and is not shown on screen | `.cv-phone` in `assets/css/styles.css` prints it in the contact line of `index.html` and `cv-onepage.html`; the HTML holds only an empty `<span class="cv-phone">`, so the number is not in the markup |
-| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `index.html` (`cv.exp.*`) |
+| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippine BOI tax incentive applications (BOI Form 501 schedules, review of long-term financial projections, list of missing statements) and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
@@ -497,7 +497,7 @@ in step:
 | Piece | What it does |
 | --- | --- |
 | `CLAUDE.md`, `AGENTS.md`, `.claude/skills/sync-spec/SKILL.md` | Tell any coding agent to update the affected spec sections in the same task, with a map from files to sections. After editing by hand, run `/sync-spec` in Claude Code. |
-| `spec-sync.json` and the `spec-sync` job in "Site checks" | A pull request that changes pages or code must raise `spec_version` to the spec's new version, or keep it and start `last_change` with 「規格書不受影響：」 and a reason. README, the agent rules, `tools/tests/`, the CV PDFs and `tools/_en_keys.json` are exempt. `git log -p spec-sync.json` shows which spec version each commit matches. |
+| `spec-sync.json` and the `spec-sync` job in "Site checks" | A pull request that changes pages or code must raise `spec_version` to the spec's new version, or leave the file alone and put a line starting 「規格書不受影響：」 with a reason in the pull request description or a commit message. The description of each change lives in the pull request, not in this file, because a line every pull request rewrites makes every open pull request conflict with the next merge. README, the agent rules, `tools/tests/`, the CV PDFs, `tools/_en_keys.json` and `.gitattributes` are exempt. `git log -p spec-sync.json` shows which spec version each commit matches. |
 | `.github/workflows/spec-version-log.yml` | After each push to `main`, appends a row (time, commit, description with the spec version) to section 10 of the spec. Skipped, not failed, until the secret below exists. |
 | `.claude/hooks/block-main-push.mjs`, `.github/workflows/direct-push-alert.yml` | Claude Code refuses a `git push` to `main`; any other direct push to `main` opens an issue listing the commits that skipped review. Commits made by the "Build CV PDFs" workflow are expected and do not raise one. |
 
