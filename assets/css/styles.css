@@ -1331,6 +1331,36 @@ main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a):focus-vi
   margin: 0.5rem 0 0;
 }
 
+/* At a glance: six question/answer pairs, read top to bottom on mobile. */
+.glance {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.3rem;
+  margin: 0;
+}
+
+.glance div + div {
+  margin-top: 0.75rem;
+}
+
+.glance dt {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.glance dd {
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .glance div {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+  }
+}
+
 /* Contact: three plain columns. */
 .contact-grid {
   display: grid;
