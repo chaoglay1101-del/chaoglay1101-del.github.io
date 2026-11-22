@@ -71,7 +71,7 @@ sites are useful for structure, not for claims.
 
 ```text
 index.html                     Home and CV: hero (name, positioning line and degree line, then the download buttons with a small Research link, then the contact line; portrait beside; credentials strip below), the "What I bring" capability matrix (each dot linked to its evidence), a two-minute tour, the complete record with an overview timeline and an evidence index above Skills, contact; the internship certificate opens on request
-projects.html                  Projects: TechStarterWeb (#techstarterweb), the Tableau coursework project (#tableau) and layered-ai-dev-workflow (#workflow), each a short step-through deck with its own figures and a link to the full write-up on GitHub, then a summary card for the research (#research-summary)
+projects.html                  Projects: TechStarterWeb (#techstarterweb), the Tableau coursework project (#tableau) and layered-ai-dev-workflow (#workflow), each a short step-through deck with its own figures and a link to the full write-up on GitHub, then summary cards for the research (#research-summary) and a personal GitHub toolbox project (#github-toolbox, private repository, no public write-up)
 research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, agenda, reproducibility, sources); data, method and reproducibility details open on request
 cv.html                        Redirect to the home page (keeps old links, including hashes, working); not indexed
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
