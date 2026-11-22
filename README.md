@@ -71,7 +71,7 @@ sites are useful for structure, not for claims.
 
 ```text
 index.html                     Home and CV: hero (name, positioning line and degree line, then the download buttons with a small Research link, then the contact line; portrait beside; credentials strip below), the "What I bring" capability matrix (each dot linked to its evidence), a two-minute tour, the complete record with an overview timeline and an evidence index above Skills, contact; the internship certificate opens on request
-projects.html                  Projects: TechStarterWeb (#techstarterweb), the Tableau coursework project (#tableau) and layered-ai-dev-workflow (#workflow), each a short step-through deck with its own figures and a link to the full write-up on GitHub, then a summary card for the research (#research-summary)
+projects.html                  Projects: TechStarterWeb (#techstarterweb), the Tableau coursework project (#tableau) and layered-ai-dev-workflow (#workflow), each a short step-through deck with its own figures and a link to the full write-up on GitHub, then summary cards for the research (#research-summary) and a personal GitHub toolbox project (#github-toolbox, private repository, no public write-up)
 research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, agenda, reproducibility, sources); data, method and reproducibility details open on request
 cv.html                        Redirect to the home page (keeps old links, including hashes, working); not indexed
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
@@ -193,7 +193,7 @@ than a proper noun is wired into the translation workflow:
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `index.html` hero and its contact section |
 | Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree conferred 12 November 2026 | `index.html` (`cv.edu.meta`); the hero shows the classification, GPA, and conferral date without the weighted mark |
 | Phone: printed only. It is on the PDFs and on a printed page, and is not shown on screen | `.cv-phone` in `assets/css/styles.css` prints it in the contact line of `index.html` and `cv-onepage.html`; the HTML holds only an empty `<span class="cv-phone">`, so the number is not in the markup |
-| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `index.html` (`cv.exp.*`) |
+| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippine BOI tax incentive applications (BOI Form 501 schedules, review of long-term financial projections, list of missing statements) and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have

@@ -43,6 +43,5 @@ for name in PAGES:
                 out.setdefault(key, clean(am.group(1)))
 
 dest = SITE / "tools" / "_en_keys.json"
-# newline="\n"：在 Windows 也寫 LF，不然整個檔案每一行都算改過
-dest.write_text(json.dumps(out, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8", newline="\n")
+dest.write_text(json.dumps(out, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8", newline="\n")  # 一律 LF：Windows 預設寫 CRLF，CI（Linux）比對會整份不同
 print("captured", len(out), "keys ->", dest.name)
