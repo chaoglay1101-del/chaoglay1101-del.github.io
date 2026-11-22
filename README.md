@@ -193,7 +193,7 @@ than a proper noun is wired into the translation workflow:
 | Email: `chaoglay1101@gmail.com` (real `mailto:` link) | `index.html` hero and its contact section |
 | Degree: September 2024 – June 2026, Class II (Division I), overall weighted mark 61/100, GPA 3.25, degree conferred 12 November 2026 | `index.html` (`cv.edu.meta`); the hero shows the classification, GPA, and conferral date without the weighted mark |
 | Phone: printed only. It is on the PDFs and on a printed page, and is not shown on screen | `.cv-phone` in `assets/css/styles.css` prints it in the contact line of `index.html` and `cv-onepage.html`; the HTML holds only an empty `<span class="cv-phone">`, so the number is not in the markup |
-| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippines tax incentive applications and SOP flowcharts | `index.html` (`cv.exp.*`) |
+| Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippine BOI tax incentive applications (BOI Form 501 schedules, review of long-term financial projections, list of missing statements) and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
