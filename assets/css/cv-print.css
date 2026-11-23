@@ -91,6 +91,10 @@
   border: 1px solid var(--cv-line);
 }
 
+html[lang="en"] .cv-photo {
+  display: none;
+}
+
 .cv-sheet :is(h1, h2, h3, h4) {
   color: var(--cv-ink);
 }
@@ -116,6 +120,7 @@
 }
 
 .cv-contact a {
+  white-space: nowrap;
   color: inherit;
   text-decoration: none;
 }

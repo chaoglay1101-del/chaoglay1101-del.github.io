@@ -1,7 +1,7 @@
 """Build the downloadable CV PDFs from the HTML pages with a headless browser.
 
 The CV pages are HTML because the site has no build step, but recruiters and
-admissions systems want a file, and "open the page and press print" loses
+applicant tracking systems want a file, and "open the page and press print" loses
 people. Chrome and Edge can each write a PDF straight from a ``file://`` URL, so
 the PDFs are regenerated from the pages they came from instead of becoming a
 second copy that drifts.
@@ -12,7 +12,7 @@ preference to fight with.
 
 Filenames use the document convention of the wider project (name first,
 underscores) rather than the site's asset convention, because the filename is
-what an applicant tracking system reads and an admissions office sees.
+what an applicant tracking system reads and a recruiter sees.
 
 Run from the repository root on a machine with Chrome or Edge:
 
