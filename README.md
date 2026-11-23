@@ -563,7 +563,7 @@ Three files support discovery, and all three are verified live:
 
 | File | Purpose |
 | --- | --- |
-| `robots.txt` | Allows crawling, points to the sitemap, and keeps `/tools/` and the README out of search results. |
+| `robots.txt` | Allows crawling by default, points to the sitemap, and disallows crawling `/tools/`, `/README.md`, `/AGENTS.md`, `/CLAUDE.md`, and `/spec-sync.json`. |
 | `sitemap.xml` | Lists the four content pages (home, projects, research and the one-page CV; `cv.html` is a redirect and is left out) with a `lastmod` date. |
 | `404.html` | A branded not-found page with links back to the content. Uses absolute asset paths because a 404 is served for URLs at any depth. |
 
