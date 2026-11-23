@@ -12,6 +12,15 @@ TechStarterWeb 工作室的 repo（Company-web、personal-site-template）和它
 - 第 10 節的版本紀錄由 GitHub Action 自動加（`.github/workflows/spec-version-log.yml`，內容後面附「（規格書 v版本號）」），代理人只改內文。Action 還沒設定金鑰時，才由代理人手動加那一列。
 - 人工直接改了網站之後，在 Claude Code 裡執行 `/sync-spec`，讓代理人補上內文。
 
+## 多 AI 協作（2026-11-24 起）
+
+分工照本人 agent-hub 的原則：**一個大腦，兩個不同公司的審查者**。Claude（本人的互動對話）整合意見、寫結論；Codex、Gemini 被找來討論時只提意見、不改檔；本人拍板。
+
+- **什麼時候交討**：改版方向、頁面架構、對外定位這類會寫進規格書、不容易改回來的決定，開工前先交討。改錯字、調樣式、補檢查這類小事照常做，附來源連結就好。自我迭代執行器的卡不交討。
+- **怎麼做**：照 agent-hub 的 `docs/evidence-debate-method.md`。先做證據包（每條編號 [E1]…、附出處、標等級，正反都找），再用 agent-hub 的 `scripts/ask-ai.mjs both --repo <這個 repo>` 把題目和證據包同時交給兩邊（唯讀）。結論分「已查證」和「推論」；題目裡寫了本人的立場時，提醒錨定風險。
+- **存哪裡**：agent-hub 的 `docs/debates/<日期>-<主題>/`。這個 repo 公開，討論紀錄不放這裡。
+- **合併前審查**：PR 由 agent-hub 自動請 Codex、Gemini 審查，結果在本人的彙報裡；只是意見，不擋合併。
+
 ## 開發
 
 - 提交前跑 README「Validation」列的檢查，以及 `node --test "tools/tests/*.test.js"`。
