@@ -12,13 +12,19 @@ follows the operating-system preference until the visitor chooses otherwise.
 
 ## Who the site is for
 
-The site serves two audiences at once, and the page order is arranged for both:
+The site is written for employers hiring graduates into financial data analysis,
+banking analytics and FinTech roles, and the page order is arranged for the two
+people who read it there:
 
 | Audience | What they need first | Where they find it |
 | --- | --- | --- |
 | Recruiters | The credential, then a CV file, within the first screen | The hero credentials strip, the `Download CV (PDF)` button, the home page (which is the CV), `cv-onepage.html`, and the files in `assets/pdf/` |
-| Admissions committees | The written work and the direction of future research | `research.html` (the graduate research only), especially the Research agenda section, plus the public research report in the code repository |
-| Either | What the author is looking for | The CV profile (`index.html#profile`), and the "Next: master's" end of the overview timeline in it |
+| Hiring managers | Evidence of analytical and technical work they can check | `research.html` (the graduate research only) with the public research report in the code repository, and `projects.html` |
+| Either | What the author is looking for | The CV profile (`index.html#profile`) |
+
+Graduate-study plans were taken off the site on 23 November 2026 (the owner's
+decision, for now). The research agenda section that framed the research as
+preparation for a master's degree is in the git history if it is wanted back.
 
 Two consequences are deliberate, and both should stay in mind when editing:
 
@@ -51,8 +57,8 @@ plainly as results.
    does not go on the site.
 3. **Limits get the same space as results.** Both projects say in writing what
    the evidence cannot support. This is a differentiator, not a weakness to
-   soften, and it is the reason the research agenda section reads as a plan
-   rather than a set of findings.
+   soften, and it is why the limitations section is written as carefully as
+   the results.
 4. **Each fact has one home.** The CV holds the record (dates, marks, bullets,
    the internship, skills); `research.html` holds the evidence for the graduate research and
    `projects.html` the other projects; the home page says each project once, in a
@@ -70,9 +76,9 @@ sites are useful for structure, not for claims.
 ## Layout
 
 ```text
-index.html                     Home and CV: hero (name, positioning line and degree line, then the download buttons with a small Research link, then the contact line; portrait beside; credentials strip below), the "What I bring" capability matrix (each dot linked to its evidence), a two-minute tour, the complete record with an overview timeline and an evidence index above Skills, contact; the internship certificate opens on request
+index.html                     Home and CV: hero (name, positioning line and degree line, then the Download CV and Read the research buttons with the full CV and print as small links, then the contact line; portrait beside; credentials strip below), the "What I bring" capability matrix (each dot linked to its evidence), a two-minute tour, the complete record with an overview timeline and an evidence index above Skills, contact; the internship certificate opens on request
 projects.html                  Projects: TechStarterWeb (#techstarterweb), the Tableau coursework project (#tableau) and layered-ai-dev-workflow (#workflow), each a short step-through deck with its own figures and a link to the full write-up on GitHub, then summary cards for the research (#research-summary) and a personal GitHub toolbox project (#github-toolbox, private repository, no public write-up)
-research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, agenda, reproducibility, sources); data, method and reproducibility details open on request
+research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, reproducibility, sources); data, method and reproducibility details open on request
 cv.html                        Redirect to the home page (keeps old links, including hashes, working); not indexed
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
 assets/css/styles.css          Main stylesheet: light and dark themes, motion tokens, the project-deck figures, print styles
