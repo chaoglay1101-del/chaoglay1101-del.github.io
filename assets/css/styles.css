@@ -2613,13 +2613,15 @@ html.is-presenting body { overflow: hidden; }
     padding-block: 1.5rem;
   }
 
-  .hero-layout:has(> .hero-text [data-i18n="home.hero.role"]) {
+  /* Name and portrait side by side on phones; only when a portrait is on the page
+     (it was taken down on 23 November 2026 until a formal photo replaces it). */
+  .hero-layout:has(> .hero-text [data-i18n="home.hero.role"]):has(> .cv-photo-page) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 4rem;
     gap: 0 0.75rem;
   }
 
-  .hero-layout > .hero-text:has([data-i18n="home.hero.role"]) {
+  .hero-layout:has(> .cv-photo-page) > .hero-text:has([data-i18n="home.hero.role"]) {
     display: contents;
   }
 

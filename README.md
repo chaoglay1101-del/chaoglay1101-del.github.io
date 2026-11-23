@@ -296,9 +296,14 @@ The constraints are deliberate:
   cannot produce a dark CV.
 - **Send the PDF file, not the URL.** The files in `assets/pdf/` are what an
   application actually sends; see "Downloadable PDFs" below.
-- **Portrait included.** `assets/img/profile.jpg` is a 4:5 crop (640×800) shown
-  at 27 mm wide on the printed sheet and beside the name block. It is a local
-  file, never a stock image or a placeholder.
+- **No portrait for now.** The casual photo was taken down on 23 November 2026
+  (the owner's decision after the HR review) until a formal head-and-shoulders
+  photo replaces it. To bring a photo back, add `assets/img/profile.jpg` (a 4:5
+  crop, 640×800) and restore the `<img class="cv-photo-page">` in the
+  `index.html` hero and the `<img class="cv-photo">` in the `cv-onepage.html`
+  header, each with `data-i18n-attr="alt:cv.photoAlt"` and the `cv.photoAlt`
+  key back in `i18n.js`; the layout rules are still in place. English pages
+  print without a photo either way.
 
 ### Downloadable PDFs
 
@@ -386,9 +391,11 @@ comply with anti-discrimination rules, and applicant tracking systems do not
 expect them. Singapore's Tripartite guidelines also tell employers not to ask
 for a photograph on application forms. Since 23 November 2026 the English
 pages print without the photo (`html[lang="en"]` rules in `cv-print.css` and the
-print styles), so both English PDFs have none; the Chinese pages keep it, and
-the home page still shows it on screen. Replacing the current casual photo with
-a formal head-and-shoulders one is on the owner's list.
+print styles), so both English PDFs have none. The casual photo itself was
+taken down from every page the same day, so for now no page and no PDF has a
+photo. Taiwanese employers do expect one on a Chinese CV, so a formal
+head-and-shoulders photo for the Chinese pages is on the owner's list (see
+"Portrait" above for how to put it back).
 
 ### The name
 
