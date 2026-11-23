@@ -1465,17 +1465,6 @@ main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a):focus-vi
   margin-top: 0.9rem;
 }
 
-/* The research card has its own row above the four remaining projects. */
-@media (min-width: 52rem) {
-  .project-index--five {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .project-index--five > :first-child {
-    grid-column: 1 / -1;
-  }
-}
-
 .project-index a {
   position: relative;
   display: flex;

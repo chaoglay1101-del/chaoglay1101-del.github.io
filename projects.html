@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-i18n="meta.projects.title">Projects — Yu-Chen Chao</title>
-<meta name="description" content="Projects by Yu-Chen Chao: the TechStarterWeb studio website and order back office, a Tableau story on mobile money adoption, the open-source layered-ai-dev-workflow, and a summary of the final-year research." data-i18n-meta="meta.projects.description">
+<meta name="description" content="Projects by Yu-Chen Chao: a summary of the final-year research, a Tableau story on mobile money adoption, a personal ETF investment tool, the TechStarterWeb studio website and order back office, and the open-source layered-ai-dev-workflow." data-i18n-meta="meta.projects.description">
 <link rel="canonical" href="https://chaoglay1101-del.github.io/projects.html">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Projects — Yu-Chen Chao" data-i18n-meta="meta.projects.title">
-<meta property="og:description" content="Projects by Yu-Chen Chao: the TechStarterWeb studio website and order back office, a Tableau story on mobile money adoption, the open-source layered-ai-dev-workflow, and a summary of the final-year research." data-i18n-meta="meta.projects.description">
+<meta property="og:description" content="Projects by Yu-Chen Chao: a summary of the final-year research, a Tableau story on mobile money adoption, a personal ETF investment tool, the TechStarterWeb studio website and order back office, and the open-source layered-ai-dev-workflow." data-i18n-meta="meta.projects.description">
 <meta property="og:url" content="https://chaoglay1101-del.github.io/projects.html">
 <meta property="og:site_name" content="Yu-Chen Chao">
 <meta property="og:locale" content="en_GB">
@@ -63,7 +63,7 @@
         <h1 data-i18n="projects.title">Projects</h1>
         <p class="lede" data-i18n="projects.lede">Practice and coursework projects: what each one is, what I did, what it does not do yet, and where to see it. The final-year research has its own page.</p>
       </div>
-      <nav class="project-index project-index--five" aria-label="Projects on this page" data-i18n-attr="aria-label:research.index.label">
+      <nav class="project-index" aria-label="Projects on this page" data-i18n-attr="aria-label:research.index.label">
         <a href="#research-summary">
           <span class="project-index-kind" data-i18n="research.index.p1kind">Final-year research · 2025–2026</span>
           <span class="project-index-title" data-i18n="research.index.p1">Digital payment pressure and bank net fee margins</span>
@@ -71,6 +71,10 @@
         <a href="#tableau">
           <span class="project-index-kind" data-i18n="research.index.p2kind">Business Analytics coursework · December 2025</span>
           <span class="project-index-title" data-i18n="research.index.p2">Mobile money adoption in the Global South (Tableau)</span>
+        </a>
+        <a href="#investment-tool">
+          <span class="project-index-kind" data-i18n="projects.index.p6kind">Personal project · since October 2026</span>
+          <span class="project-index-title" data-i18n="projects.index.p6">Personal ETF investment tool: from transaction log to a checked buy list</span>
         </a>
         <a href="#techstarterweb">
           <span class="project-index-kind" data-i18n="research.index.p3kind">Web studio · since October 2026</span>
@@ -220,6 +224,25 @@
           <figcaption class="tableau-note" data-i18n="research.tab.embedNote">Scaled to fit this screen. The Tableau Public story link above opens it at full size.</figcaption>
         </figure>
       </details>
+    </div>
+  </section>
+
+  <section class="section project-section" id="investment-tool">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="projects.inv.eyebrow">Personal project · since October 2026</span>
+        <h2 data-i18n="projects.inv.title">A personal ETF investment tool that turns my transaction log into a checked monthly buy list</h2>
+        <p data-i18n="projects.inv.body">A Python tool I built for my own long-term ETF investing in Taiwan and the US. Each month it recalculates what I hold and the cash available from my transaction records, then prepares a buy list that I review and place by hand.</p>
+        <p class="card-meta" data-i18n="projects.inv.meta">Python · pandas · exchange trading calendars · Streamlit (local only)</p>
+      </div>
+      <ul class="card-list">
+        <li data-i18n="projects.inv.c1">The transaction log is the single source of truth: cash and holdings are recalculated from it, and an entry that would leave cash negative or sell more than is held is rejected.</li>
+        <li data-i18n="projects.inv.c2">Market rules are written in: fees, taxes and trading units for each market, and the exchange trading calendars to flag stale prices and estimate settlement dates.</li>
+        <li data-i18n="projects.inv.c3">The monthly buy list keeps a cash reserve first, then splits the budget by how far each holding is below its target, with fees counted in the number of shares and US purchases grouped into one currency conversion.</li>
+        <li data-i18n="projects.inv.c4">Research checks built the same way as my final-year research: a backtest engine that only lets a decision see data up to that day and fills at the next day's open, and an event study that tests outside claims for abnormal returns against a market model.</li>
+      </ul>
+      <p class="small muted" data-i18n="projects.inv.limits">Limits: built for one personal, long-term, buy-only ETF plan. It does not connect to a broker and never places orders; backtests and event studies are checks on a method, not forecasts of returns.</p>
+      <p class="small muted" data-i18n="projects.inv.private">Private repository, because it holds my own transaction records; no amounts, holdings or results are published.</p>
     </div>
   </section>
 
