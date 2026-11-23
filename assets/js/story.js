@@ -560,21 +560,20 @@
 
     // Decimal years from the CV: April 2023 starts at 2023 + 3/12, June 2024 ends at 2024 + 6/12.
     var TIMELINE = {
-      from: 2023, to: 2028,
+      from: 2023, to: 2027.5,
       lanes: ["edu", "res", "prac"],
       items: [
         { id: "sim", lane: "edu", from: 2023 + 3 / 12, to: 2024 + 6 / 12 },     // April 2023 – June 2024
         { id: "bsc", lane: "edu", from: 2024 + 8 / 12, to: 2026 + 6 / 12 },     // September 2024 – June 2026
         { id: "conferral", lane: "edu", at: 2026 + 10 / 12 + 12 / 365 },         // 12 November 2026
-        { id: "next", lane: "edu", from: 2027, to: 2028, open: true },          // applying now
         { id: "research", lane: "res", from: 2025 + 8 / 12, to: 2026 + 6 / 12 }, // 2025–2026 final-year project
         { id: "intern", lane: "prac", from: 2025 + 6 / 12, to: 2025 + 9 / 12 },  // July – September 2025
         { id: "tableau", lane: "prac", at: 2025 + 11.5 / 12 },                    // submitted December 2025
         // TechStarterWeb, from 22 October 2026, ongoing. Overview only: the CV
-        // tour tells six steps and this is not one of them.
-        { id: "tsw", lane: "prac", from: 2026 + 9 / 12 + 21 / 365, to: 2027 + 6 / 12, open: true, overviewOnly: true }
+        // tour covers five steps that do not include it.
+        { id: "tsw", lane: "prac", from: 2026 + 9 / 12 + 21 / 365, to: 2027.5, open: true, overviewOnly: true }
       ],
-      focus: [["sim", "bsc", "conferral"], ["tableau", "research"], ["research"], ["research"], ["intern"], ["next"]]
+      focus: [["sim", "bsc", "conferral"], ["tableau", "research"], ["research"], ["research"], ["intern"]]
     };
 
     function chartTimeline(W, focusStep) {
@@ -587,7 +586,8 @@
       // 56 on wide screens: at 50, "Degree conferred" (below its point) touched the research label underneath.
       var laneH = narrow ? (overview ? 58 : 34) : 56;
       var H = m.t + laneH * TIMELINE.lanes.length + m.b;
-      var x = lin(TIMELINE.from, TIMELINE.to, m.l, W - m.r);
+      var to = overview ? TIMELINE.to : 2027;
+      var x = lin(TIMELINE.from, to, m.l, W - m.r);
       var items = TIMELINE.items.filter(function (it) { return overview || !it.overviewOnly; });
       var svg = svgRoot(W, H, s(overview ? "tl.ariaAll" : "tl.aria"));
       svg.classList.add("viz--timeline");
@@ -595,9 +595,9 @@
       svg.appendChild(hits);
       var focus = overview ? items.map(function (it) { return it.id; }) : (TIMELINE.focus[focusStep] || []);
       function laneY(lane) { return m.t + laneH * (TIMELINE.lanes.indexOf(lane) + 0.62); }
-      for (var year = TIMELINE.from; year <= TIMELINE.to; year++) {
+      for (var year = TIMELINE.from; year <= to; year++) {
         svg.appendChild(seg(x(year), m.t - 6, x(year), H - m.b + 4, "gridline"));
-        if (year < TIMELINE.to) { svg.appendChild(Tx(x(year + 0.5), H - 8, String(year), "t-axis", { "text-anchor": "middle" })); }
+        if (year < to) { svg.appendChild(Tx(x((year + Math.min(year + 1, to)) / 2), H - 8, String(year), "t-axis", { "text-anchor": "middle" })); }
       }
       TIMELINE.lanes.forEach(function (lane) {
         svg.appendChild(Tx(1, laneY(lane) + 4, s("tl.lane." + lane), "t-group"));
@@ -639,8 +639,7 @@
         [{ x0: ax - 16, x1: ax + 16, y0: tab.y - 15, y1: tab.y + 15 }, { x0: ax - 1, x1: ax + 18, y0: res.y + 7, y1: tab.y - 11 }],
         [boxAround(res, 11, 12)],
         [{ x0: res.bounds.x1 - 16, x1: res.bounds.x1 + 16, y0: res.y - 12, y1: res.y + 12 }],
-        [boxAround(itemById("intern"), 11, 12)],
-        [boxAround(itemById("next"), 11, 12)]
+        [boxAround(itemById("intern"), 11, 12)]
       ];
       (penBoxes[focusStep] || []).forEach(function (box) { taken.push(box); });
 
@@ -695,7 +694,6 @@
       svg.appendChild(around("research", 2, 63));
       svg.appendChild(pen(roughEllipse(res.bounds.x1, res.y, 14, 10.5, 64), 1, false, 3));
       svg.appendChild(around("intern", 4, 65));
-      svg.appendChild(around("next", 5, 66));
       return svg;
     }
 

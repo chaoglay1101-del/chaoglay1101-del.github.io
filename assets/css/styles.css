@@ -326,6 +326,10 @@ hr {
 
 /* --- Header and navigation ---------------------------------------------- */
 
+[id] {
+  scroll-margin-top: calc(var(--story-header, 66px) + 1rem);
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -1305,6 +1309,15 @@ main .matrix td.mx-on a:not(.btn):not(.skip-link):not(.project-index a):focus-vi
 .work-links a {
   font-weight: 600;
   font-size: 0.93rem;
+}
+
+.hero-kicker.work-links {
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+}
+
+.hero-kicker.work-links a {
+  font-size: inherit;
 }
 
 .work-links a:not([target="_blank"])::after {
@@ -2360,6 +2373,11 @@ html.is-presenting body { overflow: hidden; }
 /* --- Print (CV and research pages) -------------------------------------- */
 
 @media print {
+  .link-list > li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   html[data-theme] body.cv-page {
     --bg: #ffffff;
     --bg-elevated: #ffffff;
@@ -2476,6 +2494,10 @@ html.is-presenting body { overflow: hidden; }
     background: none;
   }
 
+  html[lang="en"] .cv-photo-page {
+    display: none;
+  }
+
   .card,
   .table-wrap,
   .cv-photo-page,
@@ -2573,10 +2595,6 @@ html.is-presenting body { overflow: hidden; }
     margin-bottom: 0;
     overflow-wrap: anywhere;
   }
-
-  .fact-strip:has([data-i18n="home.facts.gpa"]) {
-    margin-top: 1.25rem;
-  }
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -2595,13 +2613,15 @@ html.is-presenting body { overflow: hidden; }
     padding-block: 1.5rem;
   }
 
-  .hero-layout:has(> .hero-text [data-i18n="home.hero.role"]) {
+  /* Name and portrait side by side on phones; only when a portrait is on the page
+     (it was taken down on 23 November 2026 until a formal photo replaces it). */
+  .hero-layout:has(> .hero-text [data-i18n="home.hero.role"]):has(> .cv-photo-page) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 4rem;
     gap: 0 0.75rem;
   }
 
-  .hero-layout > .hero-text:has([data-i18n="home.hero.role"]) {
+  .hero-layout:has(> .cv-photo-page) > .hero-text:has([data-i18n="home.hero.role"]) {
     display: contents;
   }
 
@@ -2630,17 +2650,6 @@ html.is-presenting body { overflow: hidden; }
     width: 4rem;
     height: 5rem;
     object-fit: cover;
-  }
-
-  .fact-strip:has([data-i18n="home.facts.gpa"]) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem 0.75rem;
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-  }
-
-  .fact-strip > li:has([data-i18n="home.facts.gpa"]) {
-    grid-column: 1 / -1;
   }
 
   .research-page .hero .fact-strip {
