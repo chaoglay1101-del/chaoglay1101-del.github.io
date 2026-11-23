@@ -7,6 +7,8 @@ Checks that matter for this site:
 * the ``og:image`` share card resolves, because a broken link preview fails
   silently everywhere;
 * external links open in a new tab with ``rel="noopener"``;
+* every ``<img>`` has a non-empty ``alt`` (a missing one is reported with the
+  page, line and src);
 * the language and theme controls are present, and the navigation toggle is
   present on pages that actually have a navigation menu.
 """
@@ -72,8 +74,18 @@ class Checker(html.parser.HTMLParser):
         super().__init__(convert_charrefs=True)
         self.stack = []
         self.errors = []
+        self.img_problems = []
 
     def handle_starttag(self, tag, attrs):
+        if tag == "img":
+            attr = dict(attrs)
+            alt = attr.get("alt")
+            if alt is None or not alt.strip():
+                line = self.getpos()[0]
+                reason = "missing alt" if alt is None else "empty alt"
+                self.img_problems.append(
+                    f"line {line}: {reason}: {attr.get('src') or '(no src)'}"
+                )
         if tag not in VOID:
             self.stack.append(tag)
 
@@ -110,6 +122,9 @@ for name in PAGES:
     print("  parser errors:", parser.errors or "none")
     print("  unclosed tags:", unclosed or "none")
     print("  i18n keys referenced:", len(set(re.findall(r'data-i18n[a-z-]*="([^"]+)"', text))))
+    print("  <img> alt text:", "ok" if not parser.img_problems else "")
+    for item in parser.img_problems:
+        print(f"    {name} {item}")
 
     missing = []
     for ref in REF_RE.findall(text):
@@ -145,6 +160,7 @@ for name in PAGES:
 
     if (
         parser.errors
+        or parser.img_problems
         or unclosed
         or text.count("??")
         or missing
