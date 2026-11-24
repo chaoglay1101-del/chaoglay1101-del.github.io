@@ -205,6 +205,22 @@ than a proper noun is wired into the translation workflow:
 | Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippine BOI tax incentive applications (BOI Form 501 schedules, review of long-term financial projections, list of missing statements) and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
 
+External links used in the page markup (copied verbatim from the `href`
+values; the reference for any later link change or link check). Whether this
+is still the set the owner wants to show is pending the owner's confirmation:
+
+| Link | URL | Pages |
+| --- | --- | --- |
+| LinkedIn profile | `https://www.linkedin.com/in/yu-chen-chao/` | `index.html`, `projects.html`, `research.html`, `cv-onepage.html` |
+| GitHub account | `https://github.com/chaoglay1101-del` | `index.html`, `projects.html`, `research.html`, `cv-onepage.html` |
+| Repo: digital payment pressure and bank margins | `https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins` | `index.html`, `research.html` |
+| Repo: mobile money adoption (Tableau) | `https://github.com/chaoglay1101-del/mobile-money-adoption-tableau` | `index.html`, `projects.html` |
+| Repo: layered AI dev workflow | `https://github.com/chaoglay1101-del/layered-ai-dev-workflow` | `index.html`, `projects.html` |
+| Tableau Public story | `https://public.tableau.com/views/BANALAssignment2/STORY` | `index.html`, `projects.html`, `research.html` |
+
+Deep links into those repos (for example `docs/public-research-report.md` on
+`research.html`, `docs/case-study.md` on `projects.html`) are not listed here.
+
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
 been removed. The firm's office location was not supplied, so both pages list the
 firm name only rather than guessing a city. If any of these details should change,

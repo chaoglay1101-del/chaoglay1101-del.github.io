@@ -1,5 +1,6 @@
 {
   "spec_version": "1.11",
   "spec_doc": "https://docs.google.com/document/d/1ce9FORW4DWedktQm4Ji3p0cj_p5S_W-CAEd0Fv3Y1bY/edit",
+  "last_change": "規格書不受影響：只在 README 補外部連結對照表，頁面與程式碼都沒改",
   "how_to_update": "改到頁面或程式碼的 PR：更新規格書後，spec_version 改成規格書第二行的版本號（要比原本大）。規格書內容不受影響時（例如只改一句文案），這個檔案不用改，在 PR 說明寫一行「規格書不受影響：原因」。這次改了什麼寫在 PR 說明，不寫在這裡：每個 PR 都改同一行會互相衝突。CI 會檢查。"
 }
