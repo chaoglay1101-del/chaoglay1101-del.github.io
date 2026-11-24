@@ -1,8 +1,9 @@
 # Personal website
 
 Static, dependency-free portfolio site for **Yu-Chen Chao**: four hand-written
-pages (home, projects, research and a one-page CV) plus a redirect with a shared stylesheet, two small progressive-enhancement scripts, and a
-Traditional Chinese translation pack. There is no build step and no framework —
+pages (home, projects, research and a one-page CV), a redirect, and a branded
+not-found page, plus a shared stylesheet, two small progressive-enhancement
+scripts, and a Traditional Chinese translation pack. There is no build step and no framework —
 open the files and they work.
 
 Bilingual by design: English lives in the HTML (the source language), Chinese
@@ -84,6 +85,12 @@ projects.html                  Projects: final-year research summary (#research-
 research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, reproducibility, sources); data, method and reproducibility details open on request
 cv.html                        Redirect to the home page (keeps old links, including hashes, working); not indexed
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
+404.html                       Branded not-found page; absolute asset paths (see "Search engines")
+robots.txt                     Crawl rules and the sitemap pointer (see "Search engines")
+sitemap.xml                    Sitemap of the content pages (see "Search engines")
+.nojekyll                      Keeps GitHub Pages from running Jekyll (see "Publishing")
+spec-sync.json                 Spec version checked by the "spec-sync" job (see "Version management")
+AGENTS.md, CLAUDE.md           Rules for coding agents (see "Version management")
 assets/css/styles.css          Main stylesheet: light and dark themes, motion tokens, the project-deck figures, print styles
 assets/css/motion.css          Page transitions, scroll entrance and hover states (see "Motion"); not linked from cv-onepage.html
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
@@ -94,6 +101,7 @@ assets/img/                    Favicon, the research-design diagram, social shar
 assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
 tools/                         Maintenance, validation, and PDF build scripts (published, but kept out of search results)
 .github/workflows/             Site checks on every push, and the CV PDF build (see "Publishing")
+.claude/hooks/                 Claude Code hook that refuses a `git push` to main (see "Version management")
 ```
 
 ## Where the site lives
