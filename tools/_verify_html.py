@@ -6,11 +6,11 @@ Checks that matter for this site:
   ``assets/js/i18n.js`` once left the language toggle silently broken);
 * the ``og:image`` share card resolves, because a broken link preview fails
   silently everywhere;
-* external links open in a new tab with ``rel="noopener"``;
-* every ``<img>`` has a non-empty ``alt`` (a missing one is reported with the
-  page, line and src);
+* external links open in a new tab with ``rel="noopener noreferrer"``;
 * the language and theme controls are present, and the navigation toggle is
-  present on pages that actually have a navigation menu.
+  present on pages that actually have a navigation menu;
+* every ``<img>`` has a non-empty ``alt`` (a missing one is silent for sighted
+  visitors but leaves screen-reader users with a file name).
 """
 
 import html.parser
@@ -38,8 +38,10 @@ def external_link_problems(text: str) -> list[str]:
             continue
         if 'target="_blank"' not in tag:
             found.append(f"missing target=_blank: {href.group(1)}")
-        if not re.search(r'\brel="[^"]*\bnoopener\b', tag):
-            found.append(f"missing rel=noopener: {href.group(1)}")
+        has_noopener = re.search(r'\brel="[^"]*\bnoopener\b', tag)
+        has_noreferrer = re.search(r'\brel="[^"]*\bnoreferrer\b', tag)
+        if not (has_noopener and has_noreferrer):
+            found.append(f"missing rel=noopener noreferrer: {href.group(1)}")
     return found
 
 
@@ -68,26 +70,56 @@ def social_images(text: str) -> list[str]:
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input",
         "link", "meta", "param", "source", "track", "wbr"}
 
+# Heading levels are the only cue a screen-reader user has when jumping
+# through a page's structure; <title> inside an inline SVG is a different
+# element entirely and is intentionally excluded.
+HEADING_TAG_RE = re.compile(r"^h([1-6])$")
+
+
+def heading_structure_problems(headings: list[tuple[str, int, int]]) -> list[str]:
+    """Flag more than one <h1>, or a jump that skips a heading level."""
+    found = []
+    h1s = [h for h in headings if h[1] == 1]
+    if len(h1s) > 1:
+        lines = ", ".join(str(h[2]) for h in h1s)
+        found.append(f"two or more <h1> tags (lines {lines})")
+    for prev, curr in zip(headings, headings[1:]):
+        if curr[1] - prev[1] > 1:
+            found.append(
+                f"heading jumps from <{prev[0]}> (line {prev[2]}) to "
+                f"<{curr[0]}> (line {curr[2]}) without an intermediate level"
+            )
+    return found
+
+
+def img_alt_problems(images: list[tuple[int, str, str | None]]) -> list[str]:
+    """Every <img> needs a non-empty alt; report line number and src."""
+    found = []
+    for lineno, src, alt in images:
+        if alt is None:
+            found.append(f"<img> without alt (line {lineno}, src={src or '?'})")
+        elif not alt.strip():
+            found.append(f"<img> with empty alt (line {lineno}, src={src or '?'})")
+    return found
+
 
 class Checker(html.parser.HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.stack = []
         self.errors = []
-        self.img_problems = []
+        self.headings = []  # [(tag, level, lineno), ...] in document order
+        self.images = []  # [(lineno, src, alt or None), ...] in document order
 
     def handle_starttag(self, tag, attrs):
-        if tag == "img":
-            attr = dict(attrs)
-            alt = attr.get("alt")
-            if alt is None or not alt.strip():
-                line = self.getpos()[0]
-                reason = "missing alt" if alt is None else "empty alt"
-                self.img_problems.append(
-                    f"line {line}: {reason}: {attr.get('src') or '(no src)'}"
-                )
         if tag not in VOID:
             self.stack.append(tag)
+        if tag == "img":
+            values = dict(attrs)
+            self.images.append((self.getpos()[0], values.get("src") or "", values.get("alt")))
+        match = HEADING_TAG_RE.match(tag)
+        if match:
+            self.headings.append((tag, int(match.group(1)), self.getpos()[0]))
 
     def handle_endtag(self, tag):
         if tag in VOID:
@@ -114,6 +146,8 @@ for name in PAGES:
     absent = [action for action in needed if f'data-action="{action}"' not in text]
     external = external_link_problems(text)
     stray = stray_target_problems(text)
+    heading_problems = heading_structure_problems(parser.headings)
+    alt_problems = img_alt_problems(parser.images)
 
     print("=" * 60, name)
     print("  valid utf-8:", "yes")
@@ -121,10 +155,9 @@ for name in PAGES:
     print("  '??' remaining:", text.count("??"))
     print("  parser errors:", parser.errors or "none")
     print("  unclosed tags:", unclosed or "none")
+    print("  heading structure:", heading_problems or "ok")
+    print("  img alt:", alt_problems or f"ok ({len(parser.images)} <img> checked)")
     print("  i18n keys referenced:", len(set(re.findall(r'data-i18n[a-z-]*="([^"]+)"', text))))
-    print("  <img> alt text:", "ok" if not parser.img_problems else "")
-    for item in parser.img_problems:
-        print(f"    {name} {item}")
 
     missing = []
     for ref in REF_RE.findall(text):
@@ -160,7 +193,6 @@ for name in PAGES:
 
     if (
         parser.errors
-        or parser.img_problems
         or unclosed
         or text.count("??")
         or missing
@@ -170,6 +202,8 @@ for name in PAGES:
         or absent
         or external
         or stray
+        or heading_problems
+        or alt_problems
     ):
         problems += 1
 
