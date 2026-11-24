@@ -93,7 +93,7 @@ assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
 assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
 tools/                         Maintenance, validation, and PDF build scripts (published, but kept out of search results)
-.github/workflows/             Site checks on every push, and the CV PDF build (see "Publishing")
+.github/workflows/             Site checks on pushes to main and pull requests, and the CV PDF build (see "Publishing")
 ```
 
 ## Where the site lives
@@ -175,21 +175,34 @@ Rules for `assets/js/i18n.js`:
 ## Validation
 
 ```powershell
+python tools/_extract_en.py    # refresh the English key list
+git diff --exit-code tools/_en_keys.json
 python tools/_verify_html.py   # UTF-8, tag balance, local files, external links, share cards
 python tools/_check_keys.py    # page keys vs the English source list
 python tools/_check_i18n.py    # Chinese coverage and hazards
 python tools/_check_public.py  # every tracked file is meant to be public, and none is missing
-python tools/_check_stale.py <rev>  # Chinese left behind by a copy rewrite
-python tools/_list_i18n.py     # every key in document order
-python tools/_build_cv_pdfs.py # rebuild assets/pdf/ with headless Chrome or Edge
+node --test "tools/tests/*.test.js"
+node tools/_check_spec_sync.mjs <base>
 ```
 
-Each check exits non-zero when something needs attention, which is what lets
-the "Site checks" workflow (`.github/workflows/checks.yml`) run all of them on
-every push to `main`. `_check_i18n.py`, `_preview_zh.py` and `_check_stale.py`
-also write reports into `tools/`, which `.gitignore` keeps out of the site.
+`node --test "tools/tests/*.test.js"` runs the version-management script tests.
+`node tools/_check_spec_sync.mjs <base>` checks whether committed code changes
+have a spec version bump or a documented exemption. Replace `<base>` with the
+PR's target branch ref, such as `origin/main`. In CI, the script also reads the
+PR description for an exemption. For push and manual runs, CI passes `HEAD^1`.
 
-Plain `python` is enough: the scripts use the standard library only.
+The Python validation scripts use only the standard library. Install Node.js
+to run the tests and spec-sync check locally. The workflow uses Node.js 24.
+
+The workflow runs `python tools/_check_stale.py <rev>` only on pushes to
+`main`, using the pre-push commit when available and `HEAD~1` otherwise.
+This checks for Chinese translations left behind by English edits.
+`_check_i18n.py`, `_preview_zh.py` and `_check_stale.py` write reports into
+`tools/`, where `.gitignore` keeps them out of the site.
+
+For maintenance, run `python tools/_list_i18n.py` to list every key in document
+order or `python tools/_build_cv_pdfs.py` to rebuild `assets/pdf/` with headless
+Chrome or Edge.
 
 ## Personal details
 
@@ -491,9 +504,11 @@ Publishing is therefore merging into `main`, through a pull request (see
 1. Edit on a branch (in the browser choose "Create a new branch for this commit
    and start a pull request"; in github.dev or a clone, push a branch) and open a
    pull request.
-2. "Site checks" runs on the pull request. Merge once both of its jobs, `checks`
-   and `spec-sync`, are green; Pages does not wait for them, so a red cross after
-   merging would already be live.
+2. Wait for both "Site checks" jobs, `checks` and `spec-sync`, to pass before
+   merging. The workflow runs when a pull request is opened, updated with
+   commits, reopened, or edited. It also runs on pushes to `main` and can be
+   started manually from the Actions tab. See [Validation](#validation) for
+   the local commands.
 3. Pages deploys on its own; the "pages build and deployment" run in the Actions
    tab shows when it is live, usually within two minutes.
 
