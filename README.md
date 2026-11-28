@@ -1,8 +1,9 @@
 # Personal website
 
 Static, dependency-free portfolio site for **Yu-Chen Chao**: four hand-written
-pages (home, projects, research and a one-page CV) plus a redirect with a shared stylesheet, two small progressive-enhancement scripts, and a
-Traditional Chinese translation pack. There is no build step and no framework —
+pages (home, projects, research and a one-page CV), a redirect, and a branded
+not-found page, plus a shared stylesheet, two small progressive-enhancement
+scripts, and a Traditional Chinese translation pack. There is no build step and no framework —
 open the files and they work.
 
 Bilingual by design: English lives in the HTML (the source language), Chinese
@@ -12,13 +13,19 @@ follows the operating-system preference until the visitor chooses otherwise.
 
 ## Who the site is for
 
-The site serves two audiences at once, and the page order is arranged for both:
+The site is written for employers hiring graduates into financial data analysis,
+banking analytics and FinTech roles, and the page order is arranged for the two
+people who read it there:
 
 | Audience | What they need first | Where they find it |
 | --- | --- | --- |
-| Recruiters | The credential, then a CV file, within the first screen | The hero credentials strip, the `Download CV (PDF)` button, the home page (which is the CV), `cv-onepage.html`, and the files in `assets/pdf/` |
-| Admissions committees | The written work and the direction of future research | `research.html` (the graduate research only), especially the Research agenda section, plus the public research report in the code repository |
-| Either | What the author is looking for | The CV profile (`index.html#profile`), and the "Next: master's" end of the overview timeline in it |
+| Recruiters | The credential, then a CV file, within the first screen | The degree line in the hero, the `Download CV (PDF)` button, the "Start with" links to the research, the Tableau story and the internship, the home page (which is the CV), `cv-onepage.html`, and the files in `assets/pdf/` |
+| Hiring managers | Evidence of analytical and technical work they can check | `research.html` (the graduate research only) with the public research report in the code repository, and `projects.html` |
+| Either | What the author is looking for | The CV profile (`index.html#profile`) |
+
+Graduate-study plans were taken off the site on 23 November 2026 (the owner's
+decision, for now). The research agenda section that framed the research as
+preparation for a master's degree is in the git history if it is wanted back.
 
 Two consequences are deliberate, and both should stay in mind when editing:
 
@@ -44,15 +51,18 @@ plainly as results.
    inventory lives in the CV's Technical skills section, which is fine for keyword
    matching, but a reader should not have to infer what the author can do from a
    list of libraries.
-2. **Every number is traceable.** The credentials strip carries a note saying
-   where its figures come from, and the class-relative figures behind the two
-   marks are shown next to the project each belongs to rather than asserted in
-   the hero. If a number cannot be traced to a file or a documented result, it
+2. **Every number is traceable.** Marks sit where they can be checked: the
+   GPA and the overall mark in the Education entry, and the two module marks
+   with their class-relative figures next to the project each belongs to. Since
+   23 November 2026 the hero carries no marks at all (a decision from a
+   three-agent review with evidence: employers weigh skills and internships more
+   than GPA, and a single module mark must never read as a First-class degree).
+   No module mark is called "First-class". If a number cannot be traced to a file or a documented result, it
    does not go on the site.
 3. **Limits get the same space as results.** Both projects say in writing what
    the evidence cannot support. This is a differentiator, not a weakness to
-   soften, and it is the reason the research agenda section reads as a plan
-   rather than a set of findings.
+   soften, and it is why the limitations section is written as carefully as
+   the results.
 4. **Each fact has one home.** The CV holds the record (dates, marks, bullets,
    the internship, skills); `research.html` holds the evidence for the graduate research and
    `projects.html` the other projects; the home page says each project once, in a
@@ -70,11 +80,17 @@ sites are useful for structure, not for claims.
 ## Layout
 
 ```text
-index.html                     Home and CV: hero (name, positioning line and degree line, then the download buttons with a small Research link, then the contact line; portrait beside; credentials strip below), the "What I bring" capability matrix (each dot linked to its evidence), a two-minute tour, the complete record with an overview timeline and an evidence index above Skills, contact; the internship certificate opens on request
-projects.html                  Projects: TechStarterWeb (#techstarterweb), the Tableau coursework project (#tableau) and layered-ai-dev-workflow (#workflow), each a short step-through deck with its own figures and a link to the full write-up on GitHub, then summary cards for the research (#research-summary) and a personal GitHub toolbox project (#github-toolbox, private repository, no public write-up)
-research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, agenda, reproducibility, sources); data, method and reproducibility details open on request
+index.html                     Home and CV: hero (name, positioning line and degree line, then the Download CV and Read the research buttons with the full CV and print as small links, then a "Start with" line linking the research, the Tableau story and the internship, then the contact line; portrait beside), the "What I bring" capability matrix (each dot linked to its evidence), the complete record (profile with an overview timeline, education, professional experience with the internship first, projects, research, skills with an evidence index), the two-minute tour in five steps as a presentation version after the record, contact; the internship certificate opens on request
+projects.html                  Projects: final-year research summary (#research-summary), the Tableau coursework project (#tableau), the personal ETF investment tool (#investment-tool), TechStarterWeb (#techstarterweb), layered-ai-dev-workflow (#workflow), and the GitHub toolbox (#github-toolbox)
+research.html                  Research: the final-year research only (six steps, question, data, method, results, limitations, reproducibility, sources); data, method and reproducibility details open on request
 cv.html                        Redirect to the home page (keeps old links, including hashes, working); not indexed
 cv-onepage.html                One-page CV for applications, built to print on a single A4 sheet
+404.html                       Branded not-found page; absolute asset paths (see "Search engines")
+robots.txt                     Crawl rules and the sitemap pointer (see "Search engines")
+sitemap.xml                    Sitemap of the content pages (see "Search engines")
+.nojekyll                      Keeps GitHub Pages from running Jekyll (see "Publishing")
+spec-sync.json                 Spec version checked by the "spec-sync" job (see "Version management")
+AGENTS.md, CLAUDE.md           Rules for coding agents (see "Version management")
 assets/css/styles.css          Main stylesheet: light and dark themes, motion tokens, the project-deck figures, print styles
 assets/css/motion.css          Page transitions, scroll entrance and hover states (see "Motion"); not linked from cv-onepage.html
 assets/css/cv-print.css        Document layout and print geometry for cv-onepage.html
@@ -84,7 +100,8 @@ assets/js/i18n.js              Chinese strings (see "Editing copy" below)
 assets/img/                    Favicon, the research-design diagram, social share card, and the CV portrait
 assets/pdf/                    Generated CVs for download; the pages link to these (see "Downloadable PDFs")
 tools/                         Maintenance, validation, and PDF build scripts (published, but kept out of search results)
-.github/workflows/             Site checks on every push, and the CV PDF build (see "Publishing")
+.github/workflows/             Site checks on pushes to main and pull requests, and the CV PDF build (see "Publishing")
+.claude/hooks/                 Claude Code hook that refuses a `git push` to main (see "Version management")
 ```
 
 ## Where the site lives
@@ -166,21 +183,34 @@ Rules for `assets/js/i18n.js`:
 ## Validation
 
 ```powershell
+python tools/_extract_en.py    # refresh the English key list
+git diff --exit-code tools/_en_keys.json
 python tools/_verify_html.py   # UTF-8, tag balance, local files, external links, share cards, sitemap.xml (each <loc> = that page's canonical, no noindex pages, every indexable page listed, valid <lastmod> not after today)
 python tools/_check_keys.py    # page keys vs the English source list
 python tools/_check_i18n.py    # Chinese coverage and hazards
 python tools/_check_public.py  # every tracked file is meant to be public, and none is missing
-python tools/_check_stale.py <rev>  # Chinese left behind by a copy rewrite
-python tools/_list_i18n.py     # every key in document order
-python tools/_build_cv_pdfs.py # rebuild assets/pdf/ with headless Chrome or Edge
+node --test "tools/tests/*.test.js"
+node tools/_check_spec_sync.mjs <base>
 ```
 
-Each check exits non-zero when something needs attention, which is what lets
-the "Site checks" workflow (`.github/workflows/checks.yml`) run all of them on
-every push to `main`. `_check_i18n.py`, `_preview_zh.py` and `_check_stale.py`
-also write reports into `tools/`, which `.gitignore` keeps out of the site.
+`node --test "tools/tests/*.test.js"` runs the version-management script tests.
+`node tools/_check_spec_sync.mjs <base>` checks whether committed code changes
+have a spec version bump or a documented exemption. Replace `<base>` with the
+PR's target branch ref, such as `origin/main`. In CI, the script also reads the
+PR description for an exemption. For push and manual runs, CI passes `HEAD^1`.
 
-Plain `python` is enough: the scripts use the standard library only.
+The Python validation scripts use only the standard library. Install Node.js
+to run the tests and spec-sync check locally. The workflow uses Node.js 24.
+
+The workflow runs `python tools/_check_stale.py <rev>` only on pushes to
+`main`, using the pre-push commit when available and `HEAD~1` otherwise.
+This checks for Chinese translations left behind by English edits.
+`_check_i18n.py`, `_preview_zh.py` and `_check_stale.py` write reports into
+`tools/`, where `.gitignore` keeps them out of the site.
+
+For maintenance, run `python tools/_list_i18n.py` to list every key in document
+order or `python tools/_build_cv_pdfs.py` to rebuild `assets/pdf/` with headless
+Chrome or Edge.
 
 ## Personal details
 
@@ -195,6 +225,22 @@ than a proper noun is wired into the translation workflow:
 | Phone: printed only. It is on the PDFs and on a printed page, and is not shown on screen | `.cv-phone` in `assets/css/styles.css` prints it in the contact line of `index.html` and `cv-onepage.html`; the HTML holds only an empty `<span class="cv-phone">`, so the number is not in the markup |
 | Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippine BOI tax incentive applications (BOI Form 501 schedules, review of long-term financial projections, list of missing statements) and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
+
+External links used in the page markup (copied verbatim from the `href`
+values; the reference for any later link change or link check). Whether this
+is still the set the owner wants to show is pending the owner's confirmation:
+
+| Link | URL | Pages |
+| --- | --- | --- |
+| LinkedIn profile | `https://www.linkedin.com/in/yu-chen-chao/` | `index.html`, `projects.html`, `research.html`, `cv-onepage.html` |
+| GitHub account | `https://github.com/chaoglay1101-del` | `index.html`, `projects.html`, `research.html`, `cv-onepage.html` |
+| Repo: digital payment pressure and bank margins | `https://github.com/chaoglay1101-del/digital-payment-pressure-bank-margins` | `index.html`, `research.html` |
+| Repo: mobile money adoption (Tableau) | `https://github.com/chaoglay1101-del/mobile-money-adoption-tableau` | `index.html`, `projects.html` |
+| Repo: layered AI dev workflow | `https://github.com/chaoglay1101-del/layered-ai-dev-workflow` | `index.html`, `projects.html` |
+| Tableau Public story | `https://public.tableau.com/views/BANALAssignment2/STORY` | `index.html`, `projects.html`, `research.html` |
+
+Deep links into those repos (for example `docs/public-research-report.md` on
+`research.html`, `docs/case-study.md` on `projects.html`) are not listed here.
 
 Every placeholder has been filled, so the `.todo` marker class and its CSS have
 been removed. The firm's office location was not supplied, so both pages list the
@@ -287,9 +333,14 @@ The constraints are deliberate:
   cannot produce a dark CV.
 - **Send the PDF file, not the URL.** The files in `assets/pdf/` are what an
   application actually sends; see "Downloadable PDFs" below.
-- **Portrait included.** `assets/img/profile.jpg` is a 4:5 crop (640×800) shown
-  at 27 mm wide on the printed sheet and beside the name block. It is a local
-  file, never a stock image or a placeholder.
+- **No portrait for now.** The casual photo was taken down on 23 November 2026
+  (the owner's decision after the HR review) until a formal head-and-shoulders
+  photo replaces it. To bring a photo back, add `assets/img/profile.jpg` (a 4:5
+  crop, 640×800) and restore the `<img class="cv-photo-page">` in the
+  `index.html` hero and the `<img class="cv-photo">` in the `cv-onepage.html`
+  header, each with `data-i18n-attr="alt:cv.photoAlt"` and the `cv.photoAlt`
+  key back in `i18n.js`; the layout rules are still in place. English pages
+  print without a photo either way.
 
 ### Downloadable PDFs
 
@@ -374,9 +425,14 @@ Photographs are expected in Taiwan, most of Asia, the Middle East and continenta
 Europe, but recruiters in the United Kingdom and the United States frequently
 treat them as a red flag: many employers discard CVs with photos outright to
 comply with anti-discrimination rules, and applicant tracking systems do not
-expect them. The photo is easy to drop for those markets, either delete the
-`<img class="cv-photo" …>` element in `cv-onepage.html` or print without it, and
-the layout closes up on its own.
+expect them. Singapore's Tripartite guidelines also tell employers not to ask
+for a photograph on application forms. Since 23 November 2026 the English
+pages print without the photo (`html[lang="en"]` rules in `cv-print.css` and the
+print styles), so both English PDFs have none. The casual photo itself was
+taken down from every page the same day, so for now no page and no PDF has a
+photo. Taiwanese employers do expect one on a Chinese CV, so a formal
+head-and-shoulders photo for the Chinese pages is on the owner's list (see
+"Portrait" above for how to put it back).
 
 ### The name
 
@@ -408,8 +464,9 @@ in "Step-through stories" below.
 
 ## Step-through stories
 
-`research.html` opens with the findings in six steps, and `index.html` with the CV
-told in six steps, both driven by `assets/js/story.js`. The techniques come from
+`research.html` opens with the findings in six steps, and `index.html` ends its
+record with the CV told in five steps (the sixth, a master's plan, was removed on
+23 November 2026), both driven by `assets/js/story.js`. The techniques come from
 Slidev slide decks: a step reveals its annotations one click at a time, a
 hand-drawn mark on the chart follows each click, a presentation mode advances
 one click per key press, and any step and click can be linked to.
@@ -419,7 +476,7 @@ one click per key press, and any step and click can be linked to.
 | Six-step findings | `research.html#story` | Read by scrolling, or press **P** (the Present button) for one annotation per key press: → or Space forward, ← back, Home and End, **F** full screen, Esc to leave. Each step links to the table rows its numbers come from (tagged `data-cite-id`) and a bar brings the reader back. |
 | Two-minute tour | `index.html#intro` | The same engine over the CV, with a timeline whose marks follow the steps and a presenter timer (**T**) whose per-step budget, in seconds, is `data-deck-timer` on the deck. |
 | Project decks | `projects.html#techstarterweb`, `#tableau`, `#workflow` | One deck per project, four or five steps of one or two sentences each (problem, approach, how it works, result, limits). The figures are plain HTML written in the page, not drawn by `story.js`: a mark in the step's sentence lights the part of the figure it is about (`data-mark="n"` on the figure's items), and the lines between the parts are drawn as they light. A step with no figure of its own keeps the previous one on the stage, fully lit. The last step of the TechStarterWeb and layered-ai-dev-workflow decks links to the write-up in the layered-ai-dev-workflow repository, where the detail lives; the page keeps only the key sentence. Deep links are `#tsw-2.1`, `#tableau-3` and `#workflow-1`. |
-| Overview timeline | `index.html`, Profile | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the overview and the tour cannot disagree about dates. An item marked `overviewOnly` (TechStarterWeb) appears in the overview but not in the six-step tour, which stays as told. |
+| Overview timeline | `index.html`, Profile | The CV timeline with every item labelled and no step marks: an element with `data-timeline` is drawn by `story.js` from the same `TIMELINE` data, so the overview and the tour cannot disagree about dates. An item marked `overviewOnly` (TechStarterWeb) appears in the overview but not in the five-step tour, which stays as told. |
 | Cohort strips | `index.html`, under the two assessed marks | The mark beside the class mean, upper quartile and maximum already stated in `cv.research.grade1` and `cv.research.grade2`. |
 | Evidence index | `index.html`, above Skills | One button per capability marks the CV lines that show it (`data-ev="key"` on those lines); pressing again moves to the next line. |
 
@@ -471,9 +528,11 @@ Publishing is therefore merging into `main`, through a pull request (see
 1. Edit on a branch (in the browser choose "Create a new branch for this commit
    and start a pull request"; in github.dev or a clone, push a branch) and open a
    pull request.
-2. "Site checks" runs on the pull request. Merge once both of its jobs, `checks`
-   and `spec-sync`, are green; Pages does not wait for them, so a red cross after
-   merging would already be live.
+2. Wait for both "Site checks" jobs, `checks` and `spec-sync`, to pass before
+   merging. The workflow runs when a pull request is opened, updated with
+   commits, reopened, or edited. It also runs on pushes to `main` and can be
+   started manually from the Actions tab. See [Validation](#validation) for
+   the local commands.
 3. Pages deploys on its own; the "pages build and deployment" run in the Actions
    tab shows when it is live, usually within two minutes.
 
