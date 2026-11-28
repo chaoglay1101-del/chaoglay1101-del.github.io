@@ -16,6 +16,7 @@ import html.parser
 import pathlib
 import re
 import sys
+import xml.etree.ElementTree as ET
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
 PAGES = ("index.html", "projects.html", "research.html", "cv-onepage.html", "404.html")
@@ -97,8 +98,16 @@ class Checker(html.parser.HTMLParser):
         self.stack = []
         self.errors = []
         self.headings = []  # [(tag, level, lineno), ...] in document order
+        self.canonical = None
+        self.noindex = False
 
     def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag == "link" and "canonical" in (attributes.get("rel") or "").lower().split():
+            self.canonical = attributes.get("href")
+        if tag == "meta" and (attributes.get("name") or "").strip().lower() == "robots":
+            directives = re.split(r"[,\s]+", (attributes.get("content") or "").lower())
+            self.noindex |= "noindex" in directives or "none" in directives
         if tag not in VOID:
             self.stack.append(tag)
         match = HEADING_TAG_RE.match(tag)
@@ -117,65 +126,60 @@ class Checker(html.parser.HTMLParser):
             self.errors.append(f"</{tag}> closes <{self.stack[-1]}>")
 
 
-CANONICAL_RE = re.compile(r'<link\b[^>]*\brel="canonical"[^>]*>')
-ROBOTS_RE = re.compile(r'<meta\b[^>]*\bname="robots"[^>]*>')
-LOC_RE = re.compile(r"<loc>\s*([^<]*?)\s*</loc>")
-URL_BLOCK_RE = re.compile(r"<url>(.*?)</url>", re.S)
-LASTMOD_RE = re.compile(r"<lastmod>\s*([^<]*?)\s*</lastmod>")
-DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+SITEMAP_NS = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+DATE_RE = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}")
 
 
 def page_seo(text: str) -> tuple[str | None, bool]:
     """Return (canonical URL or None, whether the page is noindex)."""
-    canonical = None
-    tag = CANONICAL_RE.search(text)
-    if tag:
-        href = HREF_RE.search(tag.group(0))
-        canonical = href.group(1) if href else None
-    noindex = any(
-        "noindex" in (CONTENT_RE.search(t).group(1).lower() if CONTENT_RE.search(t) else "")
-        for t in ROBOTS_RE.findall(text)
-    )
-    return canonical, noindex
+    parser = Checker()
+    parser.feed(text)
+    return parser.canonical, parser.noindex
 
 
 def sitemap_problems(sitemap_text: str, pages: dict[str, str], today: datetime.date) -> list[str]:
     """sitemap.xml must match the pages: right URLs, no noindex pages, valid dates."""
     found = []
     seo = {name: page_seo(text) for name, text in pages.items()}
-    entries = URL_BLOCK_RE.findall(sitemap_text)
+    try:
+        root = ET.fromstring(sitemap_text)
+    except ET.ParseError as error:
+        return [f"sitemap.xml is not well-formed XML: {error}"]
+    if root.tag != f"{{{SITEMAP_NS['s']}}}urlset":
+        return ["sitemap.xml must have a sitemap <urlset> root"]
+    entries = root.findall("s:url", SITEMAP_NS)
     if not entries:
         return ["sitemap.xml has no <url> entries"]
-    listed = []
-    for block in entries:
-        locs = LOC_RE.findall(block)
-        if len(locs) != 1:
-            found.append(f"<url> entry with {len(locs)} <loc> tags")
+    listed = set()
+    for entry in entries:
+        locs = entry.findall("s:loc", SITEMAP_NS)
+        if len(locs) != 1 or len(locs[0]):
+            found.append("<url> entry must have exactly one plain-text <loc>")
             continue
-        loc = locs[0]
+        loc = (locs[0].text or "").strip()
         if loc in listed:
             found.append(f"duplicate <loc>: {loc}")
-        listed.append(loc)
+        listed.add(loc)
         if not loc.startswith(SITE_ORIGIN):
             found.append(f"<loc> not on this site: {loc}")
             continue
         rel = loc[len(SITE_ORIGIN):]
-        name = rel or "index.html"
+        name = rel + "index.html" if not rel or rel.endswith("/") else rel
         if name not in pages:
-            found.append(f"<loc> does not match a root HTML file: {loc}")
+            found.append(f"<loc> does not match an HTML file: {loc}")
             continue
         canonical, noindex = seo[name]
         if noindex:
             found.append(f"<loc> lists a noindex page: {loc}")
         if canonical != loc:
             found.append(f"<loc> differs from the canonical of {name}: {loc} vs {canonical}")
-        stamps = LASTMOD_RE.findall(block)
-        if len(stamps) != 1:
-            found.append(f"<lastmod> missing or repeated for {loc}")
+        stamps = entry.findall("s:lastmod", SITEMAP_NS)
+        if len(stamps) != 1 or len(stamps[0]):
+            found.append(f"expected one plain-text <lastmod> for {loc}")
             continue
-        stamp = stamps[0]
+        stamp = (stamps[0].text or "").strip()
         try:
-            if not DATE_RE.match(stamp):
+            if not DATE_RE.fullmatch(stamp):
                 raise ValueError(stamp)
             when = datetime.date.fromisoformat(stamp)
         except ValueError:
@@ -260,9 +264,13 @@ for name in PAGES:
     ):
         problems += 1
 
-root_pages = {p.name: p.read_text(encoding="utf-8") for p in sorted(SITE.glob("*.html"))}
+pages = {}
+for path in sorted(SITE.rglob("*.html")):
+    relative = path.relative_to(SITE)
+    if not any(part.startswith((".", "_")) for part in relative.parts) and path.is_file():
+        pages[relative.as_posix()] = path.read_text(encoding="utf-8")
 sitemap_found = sitemap_problems(
-    (SITE / "sitemap.xml").read_text(encoding="utf-8"), root_pages, datetime.date.today()
+    (SITE / "sitemap.xml").read_text(encoding="utf-8"), pages, datetime.date.today()
 )
 print("=" * 60, "sitemap.xml")
 print("  sitemap problems:", sitemap_found or "none")
