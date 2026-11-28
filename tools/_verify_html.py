@@ -11,6 +11,7 @@ Checks that matter for this site:
   present on pages that actually have a navigation menu.
 """
 
+import datetime
 import html.parser
 import pathlib
 import re
@@ -116,6 +117,78 @@ class Checker(html.parser.HTMLParser):
             self.errors.append(f"</{tag}> closes <{self.stack[-1]}>")
 
 
+CANONICAL_RE = re.compile(r'<link\b[^>]*\brel="canonical"[^>]*>')
+ROBOTS_RE = re.compile(r'<meta\b[^>]*\bname="robots"[^>]*>')
+LOC_RE = re.compile(r"<loc>\s*([^<]*?)\s*</loc>")
+URL_BLOCK_RE = re.compile(r"<url>(.*?)</url>", re.S)
+LASTMOD_RE = re.compile(r"<lastmod>\s*([^<]*?)\s*</lastmod>")
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def page_seo(text: str) -> tuple[str | None, bool]:
+    """Return (canonical URL or None, whether the page is noindex)."""
+    canonical = None
+    tag = CANONICAL_RE.search(text)
+    if tag:
+        href = HREF_RE.search(tag.group(0))
+        canonical = href.group(1) if href else None
+    noindex = any(
+        "noindex" in (CONTENT_RE.search(t).group(1).lower() if CONTENT_RE.search(t) else "")
+        for t in ROBOTS_RE.findall(text)
+    )
+    return canonical, noindex
+
+
+def sitemap_problems(sitemap_text: str, pages: dict[str, str], today: datetime.date) -> list[str]:
+    """sitemap.xml must match the pages: right URLs, no noindex pages, valid dates."""
+    found = []
+    seo = {name: page_seo(text) for name, text in pages.items()}
+    entries = URL_BLOCK_RE.findall(sitemap_text)
+    if not entries:
+        return ["sitemap.xml has no <url> entries"]
+    listed = []
+    for block in entries:
+        locs = LOC_RE.findall(block)
+        if len(locs) != 1:
+            found.append(f"<url> entry with {len(locs)} <loc> tags")
+            continue
+        loc = locs[0]
+        if loc in listed:
+            found.append(f"duplicate <loc>: {loc}")
+        listed.append(loc)
+        if not loc.startswith(SITE_ORIGIN):
+            found.append(f"<loc> not on this site: {loc}")
+            continue
+        rel = loc[len(SITE_ORIGIN):]
+        name = rel or "index.html"
+        if name not in pages:
+            found.append(f"<loc> does not match a root HTML file: {loc}")
+            continue
+        canonical, noindex = seo[name]
+        if noindex:
+            found.append(f"<loc> lists a noindex page: {loc}")
+        if canonical != loc:
+            found.append(f"<loc> differs from the canonical of {name}: {loc} vs {canonical}")
+        stamps = LASTMOD_RE.findall(block)
+        if len(stamps) != 1:
+            found.append(f"<lastmod> missing or repeated for {loc}")
+            continue
+        stamp = stamps[0]
+        try:
+            if not DATE_RE.match(stamp):
+                raise ValueError(stamp)
+            when = datetime.date.fromisoformat(stamp)
+        except ValueError:
+            found.append(f"<lastmod> is not a valid YYYY-MM-DD date: {stamp} ({loc})")
+            continue
+        if when > today:
+            found.append(f"<lastmod> is later than today: {stamp} ({loc})")
+    for name, (canonical, noindex) in seo.items():
+        if canonical and not noindex and canonical not in listed:
+            found.append(f"{name} has a canonical and is indexable but is not in sitemap.xml: {canonical}")
+    return found
+
+
 problems = 0
 for name in PAGES:
     path = SITE / name
@@ -186,6 +259,15 @@ for name in PAGES:
         or heading_problems
     ):
         problems += 1
+
+root_pages = {p.name: p.read_text(encoding="utf-8") for p in sorted(SITE.glob("*.html"))}
+sitemap_found = sitemap_problems(
+    (SITE / "sitemap.xml").read_text(encoding="utf-8"), root_pages, datetime.date.today()
+)
+print("=" * 60, "sitemap.xml")
+print("  sitemap problems:", sitemap_found or "none")
+if sitemap_found:
+    problems += 1
 
 print("\nRESULT:", "ALL GOOD" if problems == 0 else f"{problems} page(s) with issues")
 sys.exit(1 if problems else 0)

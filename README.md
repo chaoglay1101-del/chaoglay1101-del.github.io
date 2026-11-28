@@ -166,7 +166,7 @@ Rules for `assets/js/i18n.js`:
 ## Validation
 
 ```powershell
-python tools/_verify_html.py   # UTF-8, tag balance, local files, external links, share cards
+python tools/_verify_html.py   # UTF-8, tag balance, local files, external links, share cards, sitemap.xml (each <loc> = that page's canonical, no noindex pages, every indexable page listed, valid <lastmod> not after today)
 python tools/_check_keys.py    # page keys vs the English source list
 python tools/_check_i18n.py    # Chinese coverage and hazards
 python tools/_check_public.py  # every tracked file is meant to be public, and none is missing
