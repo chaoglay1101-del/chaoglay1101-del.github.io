@@ -225,6 +225,7 @@ than a proper noun is wired into the translation workflow:
 | Phone: printed only. It is on the PDFs and on a printed page, and is not shown on screen | `.cv-phone` in `assets/css/styles.css` prints it in the contact line of `index.html` and `cv-onepage.html`; the HTML holds only an empty `<span class="cv-phone">`, so the number is not in the markup |
 | Internship: Intern, tax advisory team, Evershine CPAs Firm (永輝啟佳聯合會計師事務所), July – September 2025, Philippine BOI tax incentive applications (BOI Form 501 schedules, review of long-term financial projections, list of missing statements) and SOP flowcharts | `index.html` (`cv.exp.*`) |
 | Public proof: `assets/pdf/Internship_Certificate_Redacted.pdf`, on the CV behind a "View the internship certificate" toggle | Retains name, employer, role, and dates; removes sex, date of birth, passport and ID numbers, certificate number, company tax ID, director name, and address |
+| Technical lead and co-founder, TechStarterWeb Consulting · October 2026 – present. Its site went live on 23 October 2026, and the order back office is live. Client delivery has been tested internally only, with no paying clients yet. | `index.html` (`cv.exp.*`), `cv-onepage.html` (`op.exp2*`), and `projects.html` (`research.tsw.lede`) |
 
 External links used in the page markup (copied verbatim from the `href`
 values; the reference for any later link change or link check). Whether this
