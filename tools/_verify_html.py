@@ -151,6 +151,7 @@ def sitemap_problems(sitemap_text: str, pages: dict[str, str], today: datetime.d
     if not entries:
         return ["sitemap.xml has no <url> entries"]
     listed = set()
+    covered_pages = set()
     for entry in entries:
         locs = entry.findall("s:loc", SITEMAP_NS)
         if len(locs) != 1 or len(locs[0]):
@@ -173,6 +174,8 @@ def sitemap_problems(sitemap_text: str, pages: dict[str, str], today: datetime.d
             found.append(f"<loc> lists a noindex page: {loc}")
         if canonical != loc:
             found.append(f"<loc> differs from the canonical of {name}: {loc} vs {canonical}")
+        else:
+            covered_pages.add(name)
         stamps = entry.findall("s:lastmod", SITEMAP_NS)
         if len(stamps) != 1 or len(stamps[0]):
             found.append(f"expected one plain-text <lastmod> for {loc}")
@@ -188,7 +191,7 @@ def sitemap_problems(sitemap_text: str, pages: dict[str, str], today: datetime.d
         if when > today:
             found.append(f"<lastmod> is later than today: {stamp} ({loc})")
     for name, (canonical, noindex) in seo.items():
-        if canonical and not noindex and canonical not in listed:
+        if canonical and not noindex and name not in covered_pages:
             found.append(f"{name} has a canonical and is indexable but is not in sitemap.xml: {canonical}")
     return found
 
