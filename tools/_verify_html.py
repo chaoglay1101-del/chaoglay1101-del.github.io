@@ -11,10 +11,12 @@ Checks that matter for this site:
   present on pages that actually have a navigation menu.
 """
 
+import datetime
 import html.parser
 import pathlib
 import re
 import sys
+import xml.etree.ElementTree as ET
 
 SITE = pathlib.Path(__file__).resolve().parents[1]
 PAGES = ("index.html", "projects.html", "research.html", "cv-onepage.html", "404.html")
@@ -96,8 +98,16 @@ class Checker(html.parser.HTMLParser):
         self.stack = []
         self.errors = []
         self.headings = []  # [(tag, level, lineno), ...] in document order
+        self.canonical = None
+        self.noindex = False
 
     def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag == "link" and "canonical" in (attributes.get("rel") or "").lower().split():
+            self.canonical = attributes.get("href")
+        if tag == "meta" and (attributes.get("name") or "").strip().lower() == "robots":
+            directives = re.split(r"[,\s]+", (attributes.get("content") or "").lower())
+            self.noindex |= "noindex" in directives or "none" in directives
         if tag not in VOID:
             self.stack.append(tag)
         match = HEADING_TAG_RE.match(tag)
@@ -114,6 +124,76 @@ class Checker(html.parser.HTMLParser):
             self.stack.pop()
         else:
             self.errors.append(f"</{tag}> closes <{self.stack[-1]}>")
+
+
+SITEMAP_NS = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+DATE_RE = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}")
+
+
+def page_seo(text: str) -> tuple[str | None, bool]:
+    """Return (canonical URL or None, whether the page is noindex)."""
+    parser = Checker()
+    parser.feed(text)
+    return parser.canonical, parser.noindex
+
+
+def sitemap_problems(sitemap_text: str, pages: dict[str, str], today: datetime.date) -> list[str]:
+    """sitemap.xml must match the pages: right URLs, no noindex pages, valid dates."""
+    found = []
+    seo = {name: page_seo(text) for name, text in pages.items()}
+    try:
+        root = ET.fromstring(sitemap_text)
+    except ET.ParseError as error:
+        return [f"sitemap.xml is not well-formed XML: {error}"]
+    if root.tag != f"{{{SITEMAP_NS['s']}}}urlset":
+        return ["sitemap.xml must have a sitemap <urlset> root"]
+    entries = root.findall("s:url", SITEMAP_NS)
+    if not entries:
+        return ["sitemap.xml has no <url> entries"]
+    listed = set()
+    covered_pages = set()
+    for entry in entries:
+        locs = entry.findall("s:loc", SITEMAP_NS)
+        if len(locs) != 1 or len(locs[0]):
+            found.append("<url> entry must have exactly one plain-text <loc>")
+            continue
+        loc = (locs[0].text or "").strip()
+        if loc in listed:
+            found.append(f"duplicate <loc>: {loc}")
+        listed.add(loc)
+        if not loc.startswith(SITE_ORIGIN):
+            found.append(f"<loc> not on this site: {loc}")
+            continue
+        rel = loc[len(SITE_ORIGIN):]
+        name = rel + "index.html" if not rel or rel.endswith("/") else rel
+        if name not in pages:
+            found.append(f"<loc> does not match an HTML file: {loc}")
+            continue
+        canonical, noindex = seo[name]
+        if noindex:
+            found.append(f"<loc> lists a noindex page: {loc}")
+        if canonical != loc:
+            found.append(f"<loc> differs from the canonical of {name}: {loc} vs {canonical}")
+        else:
+            covered_pages.add(name)
+        stamps = entry.findall("s:lastmod", SITEMAP_NS)
+        if len(stamps) != 1 or len(stamps[0]):
+            found.append(f"expected one plain-text <lastmod> for {loc}")
+            continue
+        stamp = (stamps[0].text or "").strip()
+        try:
+            if not DATE_RE.fullmatch(stamp):
+                raise ValueError(stamp)
+            when = datetime.date.fromisoformat(stamp)
+        except ValueError:
+            found.append(f"<lastmod> is not a valid YYYY-MM-DD date: {stamp} ({loc})")
+            continue
+        if when > today:
+            found.append(f"<lastmod> is later than today: {stamp} ({loc})")
+    for name, (canonical, noindex) in seo.items():
+        if canonical and not noindex and name not in covered_pages:
+            found.append(f"{name} has a canonical and is indexable but is not in sitemap.xml: {canonical}")
+    return found
 
 
 problems = 0
@@ -186,6 +266,19 @@ for name in PAGES:
         or heading_problems
     ):
         problems += 1
+
+pages = {}
+for path in sorted(SITE.rglob("*.html")):
+    relative = path.relative_to(SITE)
+    if not any(part.startswith((".", "_")) for part in relative.parts) and path.is_file():
+        pages[relative.as_posix()] = path.read_text(encoding="utf-8")
+sitemap_found = sitemap_problems(
+    (SITE / "sitemap.xml").read_text(encoding="utf-8"), pages, datetime.date.today()
+)
+print("=" * 60, "sitemap.xml")
+print("  sitemap problems:", sitemap_found or "none")
+if sitemap_found:
+    problems += 1
 
 print("\nRESULT:", "ALL GOOD" if problems == 0 else f"{problems} page(s) with issues")
 sys.exit(1 if problems else 0)
